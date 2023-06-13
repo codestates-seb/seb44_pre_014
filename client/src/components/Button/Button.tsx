@@ -4,7 +4,7 @@ import styled from 'styled-components';
 type TProps = {
   children: React.ReactNode;
   bgColor: string;
-  onClick: (event) => void;
+  onClick: React.MouseEventHandler<HTMLDivElement>;
 };
 
 const ButtonTest: React.FC<TProps> = ({ children, bgColor, onClick }) => {
