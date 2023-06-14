@@ -1,4 +1,6 @@
+import { isTestEnvironment } from 'utils/isTestEnvironment';
 import create from 'zustand';
+import { devtools } from 'zustand/middleware';
 
 interface TStoreCount {
   count: number;
@@ -6,9 +8,10 @@ interface TStoreCount {
   minusCount: () => void;
 }
 
-// const {count, plusCount, minusCount} = useStoreCount();
+// 사용방법
+// const { count, plusCount, minusCount } = useStoreCount();
 
-export const useStoreCount = create<TStoreCount>((set) => ({
+const store = (set) => ({
   count: 0,
 
   plusCount: () => {
@@ -22,7 +25,11 @@ export const useStoreCount = create<TStoreCount>((set) => ({
       count: count - 1,
     }));
   },
-}));
+});
+
+export const useStoreCount = create<TStoreCount>()(
+  isTestEnvironment ? devtools(store) : store
+);
 
 export const useGetCount = () => {
   return useStoreCount((state) => state.count);
