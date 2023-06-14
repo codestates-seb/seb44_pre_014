@@ -6,6 +6,8 @@ interface TStoreCount {
   minusCount: () => void;
 }
 
+// const {count, plusCount, minusCount} = useStoreCount();
+
 export const useStoreCount = create<TStoreCount>((set) => ({
   count: 0,
 

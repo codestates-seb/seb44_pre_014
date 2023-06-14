@@ -9,9 +9,9 @@ type TProps = {
 
 const ButtonTest: React.FC<TProps> = ({ children, bgColor, onClick }) => {
   return (
-    <SButtonTest bgColor={bgColor} onClick={onClick}>
+    <StyledButtonTest bgColor={bgColor} onClick={onClick}>
       {children}
-    </SButtonTest>
+    </StyledButtonTest>
   );
 };
 
@@ -21,6 +21,6 @@ type ButtonTestProps = {
   bgColor: string;
 };
 
-const SButtonTest = styled.div<ButtonTestProps>`
+const StyledButtonTest = styled.div<ButtonTestProps>`
   background-color: ${({ bgColor }) => bgColor};
 `;
