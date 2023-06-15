@@ -14,7 +14,7 @@ public class KakaoAuth {
 				.body(BodyInserters
 						.fromFormData("grant_type", "authorization_code")
 						.with("client_id", "0454767c5440ffe39451b5e9a84c732e")
-						.with("redirect_url", "http://teamdev.shop:8080/kakao")
+						.with("redirect_url", "http://teamdev.shop/kakao")
 						.with("code", code))
 				.retrieve()
 				.bodyToMono(String.class)
