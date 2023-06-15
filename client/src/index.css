@@ -19,4 +19,12 @@ code {
 :root {
   --color-black: #000000;
   --color-white: #ffffff;
+  --color-gray-10: #6a737c;
+  --color-gray-20: hsl(210, 8%, 90%);
+  --color-blue-10: #0a95ff;
+  --color-blue-20: hsl(206, 100%, 40%);
+  --color-blue-30: #e1ecf4;
+  --color-blue-40: #39739d;
+  --color-blue-50: #d0e3f1;
+  --color-blue-60: #2c5877;
 }
