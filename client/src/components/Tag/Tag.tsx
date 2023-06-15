@@ -19,6 +19,7 @@ const StyledTag = styled.a`
   border-radius: 3px;
   font-size: 12px;
   text-decoration: none;
+  line-height: 1;
 
   &:hover {
     background-color: var(--color-blue-50);
