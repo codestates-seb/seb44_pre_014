@@ -19,4 +19,10 @@ code {
 :root {
   --color-black: #000000;
   --color-white: #ffffff;
+  --color-orange: #f48225;
+  --color-gray-header: #c9c9c9;
+  --color-gray-header-line: #e0e0e0;
+  --color-gray-header-text: #525960;
+  --color-gray-header-search:#999;
+  --color-gray-header-icon: hsl(210, 8%, 35%);
 }
