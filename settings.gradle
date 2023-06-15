@@ -1,0 +1,3 @@
+rootProject.name = 'seb44_pre_014'
+
+include 'server'
