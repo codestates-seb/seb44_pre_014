@@ -1,5 +1,6 @@
 package com.server.kakao.auth;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.BodyInserters;
@@ -7,14 +8,23 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 @Component
 public class KakaoAuth {
+	@Value("${kakao.redirect-url}")
+	private String redirecUrl;
+
+	@Value("${kakao.api-key}")
+	private String apiKey;
+
+	private String tokenApiUrl = "https://kauth.kakao.com/oauth/token";
+	private String messageApiUrl = "https://kapi.kakao.com/v2/api/talk/memo/default/send";
+
 	public String getTokens(String code) {
-		String tokens = WebClient.create("https://kauth.kakao.com/oauth/token")
+		String tokens = WebClient.create(tokenApiUrl)
 				.post()
 				.contentType(MediaType.APPLICATION_FORM_URLENCODED)
 				.body(BodyInserters
 						.fromFormData("grant_type", "authorization_code")
-						.with("client_id", "0454767c5440ffe39451b5e9a84c732e")
-						.with("redirect_url", "http://teamdev.shop/kakao")
+						.with("client_id", apiKey)
+						.with("redirect_url", redirecUrl)
 						.with("code", code))
 				.retrieve()
 				.bodyToMono(String.class)
@@ -25,8 +35,7 @@ public class KakaoAuth {
 
 	public String sendMessage(String accessToken, String message) {
 		String body = "{\"object_type\": \"text\", \"text\": \"" + message + "\", \"link\": {}}";
-
-		String result_code = WebClient.create("https://kapi.kakao.com/v2/api/talk/memo/default/send")
+		String result = WebClient.create(messageApiUrl)
 				.post()
 				.accept(MediaType.APPLICATION_JSON)
 				.contentType(MediaType.APPLICATION_FORM_URLENCODED)

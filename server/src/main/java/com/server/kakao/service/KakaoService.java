@@ -23,6 +23,8 @@ public class KakaoService {
 	}
 
 	public String getTokens(String code) {
+		// 토큰이 있을때, 없을때, 유효하지않을떄
+		
 		return kakaoAuth.getTokens(code);
 	}
 }

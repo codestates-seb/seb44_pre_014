@@ -10,3 +10,7 @@ spring:
         url: jdbc:h2:mem:test
         username: sa
         password:
+kakao:
+    # redirect-url: http://teamdev.shop
+    redirect-url: http://localhost:8080
+    api-key: 0454767c5440ffe39451b5e9a84c732e
