@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,7 +24,7 @@ import com.server.question.entity.Question;
 
 @RestController
 @RequestMapping
-public class Controller {
+public class StubController {
 	static LocalDateTime time = LocalDateTime.now().withNano(0);
 	static String writer = "작성자";
 
@@ -31,15 +33,14 @@ public class Controller {
 	static String contentA = "에 달린 답변 내용입니다.\n";
 	static String contentC = "에 달린 댓글 내용입니다.\n";
 
-	// Question
+	static List<Question> listQ = new ArrayList<>();
+	static List<Answer> listA = new ArrayList<>();
+	static List<Member> listM = new ArrayList<>();
 
-	// 질문 전체 목록 조회
-	@GetMapping("/questions")
-	public ResponseEntity Q1() {
-		List<Question> list = new ArrayList<>();
-
-		for (int i = 1; i <= 100; i++) {
-			list.add(new Question(
+	@PostConstruct
+	public void init() {
+		for (int i = 1; i <= 50; i++) {
+			listQ.add(new Question(
 				i,
 				writer + i,
 				titleQ + i,
@@ -47,11 +48,31 @@ public class Controller {
 				time,
 				time));
 		}
-
-		return new ResponseEntity<>(list, HttpStatus.OK);
+		for (int i = 1; i <= 50; i++) {
+			listA.add(new Answer(
+				i,
+				50 - i,
+				writer + i,
+				("질문" + (50 - i) + contentA).repeat(10),
+				time,
+				time));
+		}
+		for (int i = 1; i <= 50; i++) {
+			listM.add(new Member(
+				i,
+				String.format("mail%d@naver.com", i),
+				"닉네임" + i,
+				Integer.toString(i).repeat(5),
+				"실명" + i));
+		}
 	}
 
-	// 질문 검색
+	// Question
+	@GetMapping("/questions")
+	public ResponseEntity Q1() {
+		return new ResponseEntity<>(listQ, HttpStatus.OK);
+	}
+
 	@GetMapping("/questions/search")
 	public ResponseEntity Q2(@RequestParam("keyword") String keyword) {
 		List<Question> list = new ArrayList<>();
@@ -69,7 +90,6 @@ public class Controller {
 		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
 
-	// 질문 조회
 	@GetMapping("/questions/{questionId}")
 	public ResponseEntity Q3(@PathVariable("questionId") long id) {
 		Question question = new Question(id, writer + id, titleQ + id, contentQ, time, time);
@@ -92,22 +112,10 @@ public class Controller {
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
-	// answer
+	// Answer
 	@GetMapping("/answers")
 	public ResponseEntity A1() {
-		List<Answer> list = new ArrayList<>();
-
-		for (int i = 1; i <= 100; i++) {
-			list.add(new Answer(
-				i,
-				100 - i,
-				writer + i,
-				("질문" + (100 - i) + contentA).repeat(10),
-				time,
-				time));
-		}
-
-		return new ResponseEntity<>(list, HttpStatus.OK);
+		return new ResponseEntity<>(listA, HttpStatus.OK);
 	}
 
 	@GetMapping("/answers/search")
@@ -117,9 +125,9 @@ public class Controller {
 		for (int i = 1; i <= 50; i++) {
 			list.add(new Answer(
 				i,
-				100 - i,
+				50 - i,
 				writer + i,
-				("질문" + (100 - i) + "에 달린 " + keyword + "에 관련된 답변 내용입니다.\n").repeat(10),
+				("질문" + (50 - i) + "에 달린 " + keyword + "에 관련된 답변 내용입니다.\n").repeat(10),
 				time,
 				time));
 		}
@@ -131,9 +139,9 @@ public class Controller {
 	public ResponseEntity A3(@PathVariable("answerId") long id) {
 		Answer answer = new Answer(
 			id,
-			100 - id,
+			50 - id,
 			writer + id,
-			("질문" + (100 - id) + contentA).repeat(10),
+			("질문" + (50 - id) + contentA).repeat(10),
 			time,
 			time);
 
@@ -155,20 +163,10 @@ public class Controller {
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
+	// Member
 	@GetMapping("/members")
 	public ResponseEntity M1() {
-		List<Member> list = new ArrayList<>();
-
-		for (int i = 1; i <= 100; i++) {
-			list.add(new Member(
-				i,
-				String.format("mail%d@naver.com", i),
-				"닉네임" + i,
-				Integer.toString(i).repeat(5),
-				"실명" + i));
-		}
-
-		return new ResponseEntity<>(list, HttpStatus.OK);
+		return new ResponseEntity<>(listM, HttpStatus.OK);
 	}
 
 	@GetMapping("/members/{memberId}")
@@ -208,12 +206,14 @@ public class Controller {
 		return new ResponseEntity<>("회원 정보 수정 미구현", HttpStatus.BAD_REQUEST);
 	}
 
+	// Comment
 	@GetMapping("/comments")
 	public ResponseEntity C1(@RequestParam(value = "questionId", required = false) Long questionId,
 			@RequestParam(value = "answerId", required = false) Long answerId) {
 		if (questionId == null && answerId == null) {
 			return new ResponseEntity<>("댓글을 조회하고자 하는 글의 아이디를 입력하세요.\n"
-					+ "예시) ?questionId=5 또는 ?answerId=5", HttpStatus.BAD_REQUEST);
+					+ "예시) ?questionId=5 또는 ?answerId=5",
+				HttpStatus.BAD_REQUEST);
 		}
 		List<Comment> list = new ArrayList<>();
 
