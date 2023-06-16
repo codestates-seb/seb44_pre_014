@@ -48,8 +48,8 @@ const StyledWrapper = styled.div`
   align-items: center;
   justify-content: center;
   background-color: white;
-  border-top: 3px solid var(--color-orange);
-  border-bottom: 1px solid var(--color-gray-header-line);
+  border-top: 3px solid var(--orange-400);
+  border-bottom: 1px solid var(--black-100);
 `;
 const HeaderContainer = styled.div`
   position: relative;
@@ -87,7 +87,7 @@ const ProductWrapper = styled.div`
   margin-top: 1.3rem;
   padding: 5px;
   a {
-    color: var(--color-gray-header-text);
+    color: var(--black-100);
     text-decoration: none;
   }
   :hover {
@@ -104,7 +104,7 @@ const SerachWrapper = styled.div`
     left: 10px;
     top: 50%;
     transform: translateY(-50%);
-    color: var(--color-gray-header-search);
+    color: var(--black-500);
   }
 `;
 
@@ -121,7 +121,7 @@ const MyPageIcon = styled.div``;
 
 const IconWrapper = styled.div`
   display: flex;
-  color: var(--color-gray-header-icon);
+  color: var(--black-600);
   margin-left: 1rem;
   padding-bottom: 13px;
 `;
