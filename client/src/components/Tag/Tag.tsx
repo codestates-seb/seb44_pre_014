@@ -13,8 +13,8 @@ const Tag: React.FC<TProps> = ({ children, link }) => {
 export default Tag;
 
 const StyledTag = styled.a`
-  background-color: var(--color-blue-30);
-  color: var(--color-blue-40);
+  background-color: var(--powder-100);
+  color: var(--powder-700);
   padding: 4.8px 6px;
   border-radius: 3px;
   font-size: 12px;
@@ -22,7 +22,7 @@ const StyledTag = styled.a`
   line-height: 1;
 
   &:hover {
-    background-color: var(--color-blue-50);
-    color: var(--color-blue-60);
+    background-color: var(--powder-200);
+    color: var(--powder-800);
   }
 `;

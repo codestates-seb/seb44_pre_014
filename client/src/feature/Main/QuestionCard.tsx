@@ -72,10 +72,10 @@ export default QuestionCard;
 
 const StyledQuestionCard = styled.div`
   padding: 16px;
-  border-bottom: 1px solid var(--color-gray-20);
+  border-bottom: 1px solid var(--black-075);
 
   &:first-child {
-    border-top: 1px solid var(--color-gray-20);
+    border-top: 1px solid var(--black-075);
   }
 `;
 
@@ -92,11 +92,11 @@ const PostSummary = styled.div`
     font-size: 13px;
 
     &.black {
-      color: var(--color-black);
+      color: var(--black);
     }
 
     &.gray {
-      color: var(--color-gray-10);
+      color: var(--black-500);
     }
   }
 `;
@@ -107,14 +107,14 @@ const Title = styled.div`
   margin-bottom: 6px;
 
   .title-link {
-    color: var(--color-blue-20);
+    color: var(--blue-600);
     font-size: 17px;
     word-break: break-word;
     overflow-wrap: break-word;
     text-decoration: none;
 
     &:hover {
-      color: var(--color-blue-10);
+      color: var(--blue-500);
     }
   }
 `;
@@ -167,20 +167,20 @@ const UserCard = styled.div`
     }
 
     .user-card-link--name {
-      color: var(--color-blue-20);
+      color: var(--blue-600);
 
       &:hover {
-        color: var(--color-blue-10);
+        color: var(--blue-500);
       }
     }
   }
 
   .user-card-awards {
     font-weight: 800;
-    color: var(--color-gray-10);
+    color: var(--black-600);
   }
 
   .user-card-time {
-    color: var(--color-gray-10);
+    color: var(--black-600);
   }
 `;

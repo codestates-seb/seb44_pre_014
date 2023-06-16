@@ -12,10 +12,10 @@ type TProps = {
 
 const Button: React.FC<TProps> = ({
   children,
-  color = 'var(--color-white)',
-  bgColor = 'var(--color-blue-70)',
-  hoverColor = 'var(--color-white)',
-  hoverBgColor = 'var(--color-blue-80)',
+  color = 'var(--white)',
+  bgColor = 'var(--blue-500)',
+  hoverColor = 'var(--white)',
+  hoverBgColor = 'var(--blue-600);',
   onClick,
 }) => {
   return (
