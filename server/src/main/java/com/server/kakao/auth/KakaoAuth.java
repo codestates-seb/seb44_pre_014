@@ -17,8 +17,8 @@ public class KakaoAuth {
 	private String tokenApiUrl = "https://kauth.kakao.com/oauth/token";
 	private String messageApiUrl = "https://kapi.kakao.com/v2/api/talk/memo/default/send";
 
-	public String getTokens(String code) {
-		String tokens = WebClient.create(tokenApiUrl)
+	public Token requestTokens(String code) {
+		Token tokens = WebClient.create(tokenApiUrl)
 				.post()
 				.contentType(MediaType.APPLICATION_FORM_URLENCODED)
 				.body(BodyInserters
@@ -27,11 +27,17 @@ public class KakaoAuth {
 						.with("redirect_url", redirecUrl)
 						.with("code", code))
 				.retrieve()
-				.bodyToMono(String.class)
+				.bodyToMono(Token.class)
 				.block();
 
 		return tokens;
 	}
+
+	public Token refreshTokens() {
+
+		return null;
+	}
+
 
 	public String sendMessage(String accessToken, String message) {
 		String body = "{\"object_type\": \"text\", \"text\": \"" + message + "\", \"link\": {}}";

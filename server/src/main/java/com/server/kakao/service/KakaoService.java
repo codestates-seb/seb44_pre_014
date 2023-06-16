@@ -3,6 +3,7 @@ package com.server.kakao.service;
 import org.springframework.stereotype.Service;
 
 import com.server.kakao.auth.KakaoAuth;
+import com.server.kakao.auth.Token;
 
 @Service
 public class KakaoService {
@@ -22,9 +23,14 @@ public class KakaoService {
 		return "메시지 전송 성공: " + message;
 	}
 
-	public String getTokens(String code) {
-		// 토큰이 있을때, 없을때, 유효하지않을떄
-		
-		return kakaoAuth.getTokens(code);
+	public Token getTokens(String code, Token tokens) {
+		tokens = kakaoAuth.requestTokens(code);
+		// tokens = kakaoAuth.refreshTokens();
+
+		return tokens;
+	}
+
+	public boolean isValid(Token tokens) {
+		return true;
 	}
 }
