@@ -11,7 +11,9 @@ env:
   S3_BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }}
   CODEDEPLOY_APP_NAME: ${{ secrets.CODEDEPLOY_APP_NAME }}
   CODEDEPLOY_GROUP_NAME: ${{ secrets.CODEDEPLOY_GROUP_NAME }}
-
+  API_KEY: ${{ secrets.API_KEY }}
+  REDIRECT_URL: ${{ secrets.REDIRECT_URL }}
+  
 jobs:
   build:
 
