@@ -20,5 +20,6 @@ else
 fi
 
 DEPLOY_JAR=$DEPLOY_PATH$JAR_NAME
+source ~/.bashrc
 echo "> DEPLOY_JAR 배포"    >> /home/ec2-user/action/team-014/server/deploy.log
 nohup java -jar $DEPLOY_JAR >> /home/ec2-user/action/team-014/server/deploy.log 2>/home/ec2-user/action/team-014/server/deploy_err.log &
