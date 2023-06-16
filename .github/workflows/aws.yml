@@ -11,6 +11,8 @@ env:
   S3_BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }}
   CODEDEPLOY_APP_NAME: ${{ secrets.CODEDEPLOY_APP_NAME }}
   CODEDEPLOY_GROUP_NAME: ${{ secrets.CODEDEPLOY_GROUP_NAME }}
+  API_KEY: ${{ secrets.API_KEY }}
+  REDIRECT_URL: ${{ secrets.REDIRECT_URL }}
 
 jobs:
   build:
@@ -27,9 +29,6 @@ jobs:
     - name: Add permission
       run: chmod +x server/gradlew
     - name: Build with Gradle
-      env:
-        API_KEY: ${{ secrets.API_KEY }}
-        REDIRECT_URL: ${{ secrets.REDIRECT_URL }}
       uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
       with:
         arguments: build
