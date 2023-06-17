@@ -142,9 +142,9 @@ public class StubController {
 		for (int i = 1; i <= 50; i++) {
 			list.add(new Answer(
 				i,
-				50 - i,
+				51 - i,
 				writer + i,
-				("질문" + (50 - i) + "에 달린 " + keyword + "에 관련된 답변 내용입니다.\n").repeat(10),
+				("질문" + (51 - i) + "에 달린 " + keyword + "에 관련된 답변 내용입니다.\n").repeat(10),
 				time,
 				time));
 		}
@@ -156,9 +156,9 @@ public class StubController {
 	public ResponseEntity A3(@PathVariable("answerId") long id) {
 		Answer answer = new Answer(
 			id,
-			50 - id,
+			id + 25,
 			writer + id,
-			("질문" + (50 - id) + contentA).repeat(10),
+			("질문" + (id + 25) + contentA).repeat(10),
 			time,
 			time);
 

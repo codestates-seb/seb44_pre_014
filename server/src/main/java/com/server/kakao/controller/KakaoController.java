@@ -54,6 +54,7 @@ public class KakaoController {
 	}
 
 	@GetMapping("/{message}")
+	// 나중에 입력창을 구현하고 Post요청으로 메시지 정보를 받으려고 한다.
 	public String postMessage(@PathVariable("message") String message,
 			HttpServletResponse response) throws IOException {
 		if (tokens == null) {
