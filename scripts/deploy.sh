@@ -20,7 +20,7 @@ else
 fi
 
 JAVA_OPTS="${JAVA_OPTS} -Dserver.tomcat.accesslog.enabled=true"
-JAVA_OPTS="${JAVA_OPTS} -Dserver.tomcat.basedir=."
+JAVA_OPTS="${JAVA_OPTS} -Dserver.tomcat.basedir=/home/ec2-user"
 
 DEPLOY_JAR=$DEPLOY_PATH$JAR_NAME
 source ~/.bashrc
