@@ -19,8 +19,11 @@ else
   sleep 5
 fi
 
+JAVA_OPTS="${JAVA_OPTS} -Dserver.tomcat.accesslog.enabled=true"
+JAVA_OPTS="${JAVA_OPTS} -Dserver.tomcat.basedir=."
+
 DEPLOY_JAR=$DEPLOY_PATH$JAR_NAME
 source ~/.bashrc
 echo "> DEPLOY_JAR 배포"    >> /home/ec2-user/action/team-014/server/deploy.log
 # nohup java -jar $DEPLOY_JAR >> /home/ec2-user/action/team-014/server/deploy.log 2>/home/ec2-user/action/team-014/server/deploy_err.log &
-nohup java -jar $DEPLOY_JAR --logging.file.path=/home/ec2-user/ --logging.level.org.hibernate.SQL=DEBUG >> /home/ec2-user/action/team-014/server/deploy.log 2>/home/ec2-user/action/team-014/server/deploy_err.log &
+nohup java ${JAVA_OPTS} -jar $DEPLOY_JAR --logging.file.path=/home/ec2-user/ --logging.level.org.hibernate.SQL=DEBUG >> /home/ec2-user/action/team-014/server/deploy.log 2>/home/ec2-user/action/team-014/server/deploy_err.log &
