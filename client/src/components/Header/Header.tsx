@@ -40,10 +40,11 @@ const Header: React.FC = () => {
 export default Header;
 
 const StyledWrapper = styled.div`
+  top: 0;
   width: 100vw;
+  position: fixed;
   height: 3.5rem;
   display: flex;
-  position: fixed;
   padding: 0;
   align-items: center;
   justify-content: center;
@@ -52,7 +53,7 @@ const StyledWrapper = styled.div`
   border-bottom: 1px solid var(--black-100);
 `;
 const HeaderContainer = styled.div`
-  position: relative;
+  position: sticky;
   width: 1250px;
   height: 100%;
   display: flex;
