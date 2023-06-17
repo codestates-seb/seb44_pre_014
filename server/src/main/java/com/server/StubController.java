@@ -48,15 +48,15 @@ public class StubController {
 				time,
 				time));
 		}
-		for (int i = 1; i <= 50; i++) {
-			listA.add(new Answer(
-				i,
-				50 - i,
-				writer + i,
-				("질문" + (50 - i) + contentA).repeat(10),
-				time,
-				time));
-		}
+		// for (int i = 1; i <= 50; i++) {
+		// 	listA.add(new Answer(
+		// 		i,
+		// 		50 - i,
+		// 		writer + i,
+		// 		("질문" + (50 - i) + contentA).repeat(10),
+		// 		time,
+		// 		time));
+		// }
 		for (int i = 1; i <= 50; i++) {
 			listM.add(new Member(
 				i,
@@ -114,8 +114,25 @@ public class StubController {
 
 	// Answer
 	@GetMapping("/answers")
-	public ResponseEntity A1() {
-		return new ResponseEntity<>(listA, HttpStatus.OK);
+	public ResponseEntity A7(@RequestParam(value = "questionId", required = false) Long questionId) {
+		if (questionId == null) {
+			return new ResponseEntity<>("답변을 조회하고자 하는 질문글의 아이디를 입력하세요.\n"
+					+ "예시) ?questionId=5",
+				HttpStatus.BAD_REQUEST);
+		}
+		List<Answer> list = new ArrayList<>();
+
+		for (int i = 1; i <= 5; i++) {
+			list.add(new Answer(
+				i,
+				questionId,
+				writer + i,
+				("질문" + questionId + contentA).repeat(10),
+				time,
+				time));
+		}
+
+		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
 
 	@GetMapping("/answers/search")
@@ -218,7 +235,7 @@ public class StubController {
 		List<Comment> list = new ArrayList<>();
 
 		if (answerId == null) {
-			for (int i = 1; i <= 10; i++) {
+			for (int i = 1; i <= 5; i++) {
 				list.add(new Comment(
 					i,
 					questionId,
@@ -230,7 +247,7 @@ public class StubController {
 			}
 			return new ResponseEntity<>(list, HttpStatus.OK);
 		}
-		for (int i = 1; i <= 10; i++) {
+		for (int i = 1; i <= 5; i++) {
 			list.add(new Comment(
 				i,
 				0,
