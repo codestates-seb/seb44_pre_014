@@ -141,7 +141,7 @@ const SignupForm = () => {
 export default SignupForm;
 
 const StyledSignupForm = styled.div`
-  width: 288px;
+  width: 316px;
   height: 692px;
   margin-bottom: 24px;
   padding: 24px;
