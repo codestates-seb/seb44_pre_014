@@ -1,0 +1,8 @@
+--CREATE TABLE IF NOT EXISTS MEMBER (
+--    member_id bigint NOT NULL AUTO_INCREMENT,
+--    name varchar(20) NOT NULL,
+--    password varchar(20) NOT NULL,
+--    username varchar(20) NOT NULL UNIQUE,
+--    email varchar(40) NOT NULL UNIQUE,
+--    PRIMARY KEY (member_id)
+--);
