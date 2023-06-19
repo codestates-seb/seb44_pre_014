@@ -31,110 +31,117 @@ const SignupForm = () => {
   };
 
   return (
-    <StyledSignupForm>
-      <SignupSection>
-        <LabelInputSection>
-          <Label htmlFor="username">Display name</Label>
+    <div>
+      <StyledSignupForm>
+        <form>
+          <LabelInputSection>
+            <Label htmlFor="username">Display name</Label>
+            <div>
+              <Input
+                type="text"
+                name="username"
+                value={formData.username}
+                onChange={handleInputChange}
+              />
+            </div>
+          </LabelInputSection>
+
+          <LabelInputSection>
+            <Label htmlFor="email">Email</Label>
+            <div>
+              <Input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleInputChange}
+              />
+            </div>
+          </LabelInputSection>
+
+          <LabelInputSection>
+            <Label htmlFor="password">Password</Label>
+            <div>
+              <Input
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleInputChange}
+              />
+            </div>
+            <Explanation>
+              Passwords must contain at least eight characters, including at
+              least 1 letter and 1 number.
+            </Explanation>
+          </LabelInputSection>
+
+          <NotRobotCheckBoxSection>
+            <NoCapchaHereSection>
+              <NoCapchaHereTop>
+                <div>
+                  <NoCapchaHereCheckBoxInput
+                    type="checkbox"
+                    name="concent"
+                    value="false"
+                  />
+                </div>
+                <RobotLabel>I'm not a robot</RobotLabel>
+              </NoCapchaHereTop>
+              <NoCapchaHereLogo>
+                <Logo src={reCaptchaLogo}></Logo>
+                <div>reCAPTCHA</div>
+              </NoCapchaHereLogo>
+              <NoCapchaHereBottom>
+                <PrivacyTerms>
+                  <PrivacySection href="https://policies.google.com/privacy?hl=en">
+                    Privacy
+                  </PrivacySection>
+                  <div>-</div>
+                  <TermsSection href="https://policies.google.com/terms?hl=en">
+                    Terms
+                  </TermsSection>
+                </PrivacyTerms>
+              </NoCapchaHereBottom>
+            </NoCapchaHereSection>
+          </NotRobotCheckBoxSection>
+
+          <CheckBoxSection>
+            <CheckBoxDiv>
+              <CheckBoxInput type="checkbox" name="concent" value="false" />
+            </CheckBoxDiv>
+            <div>
+              <LabelExplanation>
+                Opt-in to receive occasional product updates, user research
+                invitations, company announcements, and digests.
+              </LabelExplanation>
+            </div>
+          </CheckBoxSection>
+
           <div>
-            <Input
-              type="text"
-              name="username"
-              value={formData.username}
-              onChange={handleInputChange}
-            />
+            <SubmitButton type="submit">Sign up</SubmitButton>
           </div>
-        </LabelInputSection>
 
-        <LabelInputSection>
-          <Label htmlFor="email">Email</Label>
-          <div>
-            <Input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleInputChange}
-            />
-          </div>
-        </LabelInputSection>
+          <SignupExplanation>
+            By clicking “Sign up”, you agree to our{' '}
+            <Terms href="https://stackoverflow.com/legal/terms-of-service/public">
+              terms of service
+            </Terms>{' '}
+            and acknowledge that you have read and understand our{' '}
+            <Terms href="https://stackoverflow.com/legal/privacy-policy">
+              privacy policy
+            </Terms>
+            and{' '}
+            <Terms href="https://stackoverflow.com/conduct">
+              code of conduct.
+            </Terms>
+          </SignupExplanation>
+        </form>
+      </StyledSignupForm>
 
-        <LabelInputSection>
-          <Label htmlFor="password">Password</Label>
-          <div>
-            <Input
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleInputChange}
-            />
-          </div>
-          <Explanation>
-            Passwords must contain at least eight characters, including at least
-            1 letter and 1 number.
-          </Explanation>
-        </LabelInputSection>
-
-        <NotRobotCheckBoxSection>
-          <NoCapchaHereSection>
-            <NoCapchaHereTop>
-              <div>
-                <NoCapchaHereCheckBoxInput
-                  type="checkbox"
-                  name="concent"
-                  value="false"
-                />
-              </div>
-              <RobotLabel>I'm not a robot</RobotLabel>
-            </NoCapchaHereTop>
-            <NoCapchaHereLogo>
-              <Logo src={reCaptchaLogo}></Logo>
-              <div>reCAPTCHA</div>
-            </NoCapchaHereLogo>
-            <NoCapchaHereBottom>
-              <PrivacyTerms>
-                <PrivacySection href="https://policies.google.com/privacy?hl=en">
-                  Privacy
-                </PrivacySection>
-                <div>-</div>
-                <TermsSection href="https://policies.google.com/terms?hl=en">
-                  Terms
-                </TermsSection>
-              </PrivacyTerms>
-            </NoCapchaHereBottom>
-          </NoCapchaHereSection>
-        </NotRobotCheckBoxSection>
-
-        <CheckBoxSection>
-          <CheckBoxDiv>
-            <CheckBoxInput type="checkbox" name="concent" value="false" />
-          </CheckBoxDiv>
-          <div>
-            <LabelExplanation>
-              Opt-in to receive occasional product updates, user research
-              invitations, company announcements, and digests.
-            </LabelExplanation>
-          </div>
-        </CheckBoxSection>
-
-        <div>
-          <SubmitButton type="submit">Sign up</SubmitButton>
-        </div>
-
-        <SignupExplanation>
-          By clicking “Sign up”, you agree to our{' '}
-          <Terms href="https://stackoverflow.com/legal/terms-of-service/public">
-            terms of service
-          </Terms>{' '}
-          and acknowledge that you have read and understand our{' '}
-          <Terms href="https://stackoverflow.com/legal/privacy-policy">
-            privacy policy
-          </Terms>
-          and{' '}
-          <Terms href="https://stackoverflow.com/conduct">
-            code of conduct.
-          </Terms>
-        </SignupExplanation>
-      </SignupSection>
-    </StyledSignupForm>
+      <StyledLoginTextSection>
+        Are you an employer?{' '}
+        <LogInClickSection href="">Log in</LogInClickSection>
+      </StyledLoginTextSection>
+    </div>
   );
 };
 
@@ -150,8 +157,6 @@ const StyledSignupForm = styled.div`
   box-shadow: 0 10px 24px hsla(0, 0%, 0%, 0.05),
     0 20px 48px hsla(0, 0%, 0%, 0.05), 0 1px 4px hsla(0, 0%, 0%, 0.1);
 `;
-
-const SignupSection = styled.form``;
 
 const LabelInputSection = styled.div`
   margin: 6px 0px;
@@ -182,6 +187,10 @@ const SubmitButton = styled.button`
   cursor: pointer;
   font-size: 13px;
   border-radius: 5px;
+
+  &:hover {
+    background-color: var(--blue-600);
+  }
 `;
 
 const Label = styled.label`
@@ -225,8 +234,12 @@ const SignupExplanation = styled.div`
   font-size: 12px;
 `;
 const Terms = styled.a`
-  color: var(--blue-500);
+  color: var(--blue-600);
   text-decoration-line: none;
+
+  &:hover {
+    color: var(--blue-500);
+  }
 `;
 
 const NotRobotCheckBoxSection = styled.div`
@@ -299,4 +312,18 @@ const TermsSection = styled.a`
     cursor: pointer;
     text-decoration-line: underline;
   }
+`;
+
+const StyledLoginTextSection = styled.div`
+  width: 316px;
+  height: 78px;
+  margin: 0px 0px 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const LogInClickSection = styled.a`
+  text-decoration-line: none;
+  color: var(--blue-500);
 `;

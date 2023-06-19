@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const Oauth = () => {
   return (
-    <StyledOauth>
+    <StyledOauthSection>
       <div>
         <Button
           bgColor="var(--white)"
@@ -83,13 +83,13 @@ const Oauth = () => {
           Sign up with Facebook
         </Button>
       </div>
-    </StyledOauth>
+    </StyledOauthSection>
   );
 };
 
 export default Oauth;
 
-const StyledOauth = styled.div`
+const StyledOauthSection = styled.div`
   width: 316px;
   margin-bottom: 16px;
 `;
