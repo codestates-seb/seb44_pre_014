@@ -65,6 +65,7 @@ const StyledWrapper = styled.div`
   float: left;
   display: flex;
   height: auto;
+  overflow: hidden;
   border-right: 1px solid var(--black-100);
   @media screen and (max-width: 800px) {
     display: none;
@@ -83,7 +84,7 @@ const ListContainer = styled.div`
   .category {
     width: 100%;
     text-align: start;
-    padding: 10px 30px 20px 10px;
+    padding: 8px 30px 20px 10px;
   }
 `;
 const TextWrapper = styled.div`
@@ -95,7 +96,7 @@ const TextWrapper = styled.div`
 `;
 const StickyContainer = styled.div`
   position: fixed;
-  top: 72px;
+  top: 65px;
   width: auto;
 `;
 const HomeContainer = styled.div`
@@ -110,7 +111,7 @@ const HomeContainer = styled.div`
 const PublicContainer = styled.div`
   ul {
     list-style: none;
-    padding: 8px 6px 8px 0;
+    padding: 8px 5px 8px 0;
 
     .list-li {
       padding-left: 33px;
@@ -118,7 +119,7 @@ const PublicContainer = styled.div`
   }
 
   li {
-    padding: 7px 0px;
+    padding: 6px 0px;
     padding-left: 15px;
     font-size: 13px;
     :hover {
@@ -129,7 +130,7 @@ const PublicContainer = styled.div`
 
 const CollectiveContainer = styled.div`
   .menu {
-    padding: 9px 0;
+    padding: 6px 0;
     font-size: 13px;
     display: flex;
   }
@@ -137,7 +138,7 @@ const CollectiveContainer = styled.div`
 
 const TeamsContainer = styled.div`
   .menu {
-    padding: 9px 0;
+    padding: 5px 0;
     font-size: 13px;
     display: flex;
   }

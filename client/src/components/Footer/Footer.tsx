@@ -112,12 +112,12 @@ const Footer: React.FC = () => {
 };
 
 const Footerbox = styled.div`
-  z-index: 5;
   background-color: #232629;
   display: flex;
   gap: 10px;
   bottom: 0;
   width: 100%;
+  height: 250px;
   color: whitesmoke;
   justify-content: center;
   img {
