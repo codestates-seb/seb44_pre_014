@@ -1,6 +1,7 @@
 import Footer from 'components/Footer/Footer';
 import Header from 'components/Header/Header';
 import Sidebar from 'components/Sidebar/Sidebar';
+import AskQuestion from 'feature/Main/AskQuestion/AskQuestion';
 import styled from 'styled-components';
 
 /*ContentContainer안에 컴포넌트 넣어서 페이지 구성 */
@@ -13,6 +14,7 @@ const TestPageh = () => {
         <Sidebar />
         <ContentContainer>
           <div>contents</div>
+          <AskQuestion />
         </ContentContainer>
       </DivContainer>
       <Footer />
