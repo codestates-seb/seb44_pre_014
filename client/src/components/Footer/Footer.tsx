@@ -14,6 +14,8 @@ export default Footer;
 const StyledWrapper = styled.div``;
 
 const FooterContainer = styled.div`
+  width: 100%;
+  display: flex;
   background-color: black;
   color: var(--white);
 `;
