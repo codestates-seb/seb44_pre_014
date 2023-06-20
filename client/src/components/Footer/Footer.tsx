@@ -117,7 +117,7 @@ const Footerbox = styled.div`
   gap: 10px;
   bottom: 0;
   width: 100%;
-  height: 250px;
+  height: 8%;
   color: whitesmoke;
   justify-content: center;
   img {
