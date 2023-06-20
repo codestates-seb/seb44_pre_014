@@ -26,6 +26,9 @@ const DivContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
-  background-color: var(--black-050);
 `;
-const ContentContainer = styled.div``;
+const ContentContainer = styled.div`
+  margin: 70px 0px 0px 0px;
+  width: calc(100%-164px);
+  width: 1100px;
+`;
