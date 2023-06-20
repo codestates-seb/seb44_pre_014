@@ -35,6 +35,10 @@ public class AnswerService {
     public Answer updateAnswer(Answer answer) {
         Answer findAnswer = findAnswer(answer.getAnswerId());
         findAnswer.setContent(answer.getContent());
+        Optional.ofNullable(answer.getContent())
+                .ifPresent(content -> findAnswer.setContent(content));
+        Optional.ofNullable(answer.getChoose())
+                .ifPresent(choose -> findAnswer.setChoose(choose));
 
         Answer savedAnswer = answerRepository.save(findAnswer);
 

@@ -48,7 +48,7 @@ public class CommentController {
 
         commentService.saveComment(comment);
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PatchMapping("/{commentId}/edit")

@@ -33,6 +33,8 @@ dependencies {
 	implementation 'org.mapstruct:mapstruct:1.5.5.Final'
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
 	implementation 'org.springframework.boot:spring-boot-starter-validation:2.6.15'
+
+	implementation 'commons-io:commons-io:2.13.0'
 }
 
 tasks.named('test') {

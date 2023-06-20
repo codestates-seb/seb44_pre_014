@@ -20,8 +20,9 @@ public class AnswerDto {
 
     @Getter
     public static class Patch {
-        @NotBlank
         private String content;
+
+        private Boolean choose;
     }
 
 }

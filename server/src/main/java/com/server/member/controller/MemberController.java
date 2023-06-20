@@ -1,11 +1,14 @@
 package com.server.member.controller;
 
+import java.io.IOException;
 import java.net.URI;
+import java.util.List;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 //import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
@@ -16,9 +19,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.server.file.FileManager;
 import com.server.member.dto.MemberDto;
 import com.server.member.entity.Member;
 import com.server.member.mapper.MemberMapper;
@@ -33,11 +39,14 @@ import lombok.extern.slf4j.Slf4j;
 public class MemberController {
     private final MemberService memberService;
     private final MemberMapper memberMapper;
-    private final static String MEMBER_DEFAULT_URL = "/members";
+    private FileManager fileManager;
 
-    public MemberController(MemberService memberService, MemberMapper memberMapper) {
+    public MemberController(MemberService memberService,
+            MemberMapper memberMapper,
+            FileManager fileManager) {
         this.memberService = memberService;
         this.memberMapper = memberMapper;
+        this.fileManager = fileManager;
     }
 
     // 회원가입
@@ -48,7 +57,7 @@ public class MemberController {
         Member createMember = memberService.createMember(member);
         URI location = UriComponentsBuilder
                 .newInstance()
-                .path(MEMBER_DEFAULT_URL + "{member-id}")
+                .path("/members/{member-id}")
                 .buildAndExpand(createMember.getMemberId())
                 .toUri();
 
@@ -81,5 +90,25 @@ public class MemberController {
         memberService.deleteMember(memberId);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PostMapping("/{memberId}/files")
+    public ResponseEntity postFile(@PathVariable("memberId") long memberId,
+            @RequestPart("files") List<MultipartFile> files) throws Exception {
+        if (files.size() != 1) {
+            return new ResponseEntity<>("프로필 사진은 1장이어야 합니다.",
+                HttpStatus.BAD_REQUEST);
+        }
+        fileManager.saveFiles(memberId, "members", files);
+
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{memberId}/files")
+    public ResponseEntity getFile(@PathVariable long memberId) throws IOException {
+        List<byte[]> files = fileManager.getFiles(1, memberId, "members");
+
+        // return new ResponseEntity<>(files.get(0), HttpStatus.OK);
+        return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(files.get(0));
     }
 }

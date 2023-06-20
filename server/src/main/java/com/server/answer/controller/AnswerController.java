@@ -1,9 +1,11 @@
 package com.server.answer.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,19 +16,25 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.server.Response.Response;
 import com.server.answer.dto.AnswerDto;
 import com.server.answer.entity.Answer;
 import com.server.answer.mapper.AnswerMapper;
 import com.server.answer.service.AnswerService;
+import com.server.file.FileManager;
 
 @RestController
 @RequestMapping("/answers")
 public class AnswerController {
     private AnswerService answerService;
     private AnswerMapper answerMapper;
+
+    @Autowired
+    private FileManager fileManager;
 
     public AnswerController(AnswerService answerService,
             AnswerMapper answerMapper) {
@@ -39,7 +47,7 @@ public class AnswerController {
         Answer answer = answerMapper.postDtoToAnswer(postDto);
         answerService.saveAnswer(answer);
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @GetMapping
@@ -80,5 +88,22 @@ public class AnswerController {
         answerService.deleteAnswer(answerId);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PostMapping("/{answerId}/files")
+    public ResponseEntity postFile(@PathVariable("answerId") long answerId,
+            @RequestPart("files") List<MultipartFile> files) throws Exception {
+        fileManager.saveFiles(answerId, "answers", files);
+
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{answerId}/files")
+    public ResponseEntity getFile(@PathVariable long answerId,
+            @RequestParam("size") int size) throws IOException {
+        List<byte[]> files = fileManager.getFiles(size, answerId, "answers");
+
+        return new ResponseEntity<>(files, HttpStatus.OK);
+        // return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(files.get(0));
     }
 }

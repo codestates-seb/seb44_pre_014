@@ -41,4 +41,6 @@ public class Answer extends BaseEntity {
 
     @OneToMany(mappedBy = "answer")
     private List<Comment> comments;
+
+    private Boolean choose;
 }

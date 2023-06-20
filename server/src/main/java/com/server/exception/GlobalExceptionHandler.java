@@ -16,6 +16,6 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler
     public ResponseEntity test(Exception e) {
-        return new ResponseEntity<>("예외 발생", HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
