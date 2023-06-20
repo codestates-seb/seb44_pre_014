@@ -35,63 +35,117 @@ public class Init {
         Member member = new Member();
         member.setContent("자기소개");
         member.setEmail("email1@naver.com");
-        member.setName("희창님");
-        member.setUsername("아가 팀장님");
-        member.setPassword("babyteamleader1!");
-
-        memberService.createMember(member);
-
-        member.setMemberId(null);
-        member.setContent("자기소개");
-        member.setEmail("email2@naver.com");
         member.setName("실명");
         member.setUsername("닉네임");
         member.setPassword("비밀번호1234!");
 
         memberService.createMember(member);
 
-        member = new Member();
-        member.setMemberId(1L);
+        member.setMemberId(null);
+        member.setContent("자기소개");
+        member.setEmail("email2@naver.com");
+        member.setName("희창님");
+        member.setUsername("아가팀장님");
+        member.setPassword("babyteamleader1!");
 
-        Question question = new Question();
-        question.setMember(member);
-        question.setTitle("질문");
-        question.setContent("질문 내용입니다.");
+        memberService.createMember(member);
 
-        questionService.saveQuestion(question);
+        member.setMemberId(null);
+        member.setContent("자기소개");
+        member.setEmail("email3@naver.com");
+        member.setName("승효님");
+        member.setUsername("승효짱123");
+        member.setPassword("비밀번호1234!");
 
-        member = new Member();
-        member.setMemberId(2L);
+        memberService.createMember(member);
 
-        question = new Question();
-        question.setQuestionId(1L);
+        member.setMemberId(null);
+        member.setContent("자기소개");
+        member.setEmail("email4@naver.com");
+        member.setName("채은님");
+        member.setUsername("채은짱123");
+        member.setPassword("비밀번호1234!");
 
-        Answer answer = new Answer();
-        answer.setMember(member);
-        answer.setQuestion(question);
-        answer.setContent("답변 내용입니다.");
+        memberService.createMember(member);
 
-        answerService.saveAnswer(answer);
+        member.setMemberId(null);
+        member.setContent("자기소개");
+        member.setEmail("email5@naver.com");
+        member.setName("진아님");
+        member.setUsername("진아짱123");
+        member.setPassword("비밀번호1234!");
 
-        // answer.setAnswerId(5L);
-        // answer.setMember(member);
-        // answer.setQuestion(question);
-        // answer.setContent("답변 내용입니다.");
+        memberService.createMember(member);
 
-        // answerService.saveAnswer(answer);
-        member = new Member();
-        member.setMemberId(1L);
+        member.setMemberId(null);
+        member.setContent("자기소개");
+        member.setEmail("email6@naver.com");
+        member.setName("수현님");
+        member.setUsername("수현짱123");
+        member.setPassword("비밀번호1234!");
 
-        // question = new Question();
-        answer = new Answer();
-        answer.setAnswerId(1L);
+        memberService.createMember(member);
 
-        Comment comment = new Comment();
-        comment.setMember(member);
-        comment.setAnswer(answer);
-        comment.setContent("댓글 내용입니다.");
+        member.setMemberId(null);
+        member.setContent("자기소개");
+        member.setEmail("email7@naver.com");
+        member.setName("세빈님");
+        member.setUsername("세빈짱123");
+        member.setPassword("비밀번호1234!");
 
-        commentService.saveComment(comment);
+        memberService.createMember(member);
+
+        member.setMemberId(null);
+        member.setContent("자기소개");
+        member.setEmail("email8@naver.com");
+        member.setName("수희님");
+        member.setUsername("수희짱123");
+        member.setPassword("비밀번호1234!");
+
+        memberService.createMember(member);
+
+        for (int i = 1; i <= 50; i++) {
+            member = new Member();
+            member.setMemberId(1L);
+            Question question = new Question();
+            question.setMember(member);
+            question.setTitle("질문" + i);
+            question.setContent("질문 내용입니다.");
+            questionService.saveQuestion(question);
+        }
+        for (long i = 1; i <= 50; i++) {
+            member = new Member();
+            member.setMemberId(1L);
+            Question question = new Question();
+            question.setQuestionId(i);
+            Answer answer = new Answer();
+            answer.setMember(member);
+            answer.setQuestion(question);
+            answer.setContent("답변 내용입니다.");
+            answerService.saveAnswer(answer);
+        }
+        for (long i = 1; i <= 50; i++) {
+            member = new Member();
+            member.setMemberId(1L);
+            Question question = new Question();
+            question.setQuestionId(i);
+            Comment comment = new Comment();
+            comment.setMember(member);
+            comment.setQuestion(question);
+            comment.setContent("댓글 내용입니다.");
+            commentService.saveComment(comment);
+        }
+        for (long i = 1; i <= 50; i++) {
+            member = new Member();
+            member.setMemberId(1L);
+            Answer answer = new Answer();
+            answer.setAnswerId(i);
+            Comment comment = new Comment();
+            comment.setMember(member);
+            comment.setAnswer(answer);
+            comment.setContent("댓글 내용입니다.");
+            commentService.saveComment(comment);
+        }
+
     }
-
 }
