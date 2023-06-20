@@ -1,17 +1,40 @@
 import { InputItem, TextareaItem } from 'components/AskQuestion/CreateAsk';
 import HelpItem from 'components/AskQuestion/SelectHelp';
 import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-const AskQuestion = () => {
+const AskQuestion: React.FC = () => {
+  const navigate = useNavigate();
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
   const [isReady, setIsReady] = useState(false);
-  const [selectHelp, setSelectHelp] = useState(0);
+  const [selectHelp, setSelectHelp] = useState('0');
 
+  const url = 'http://teamdev.shop/questions/write';
   useEffect(() => {
     body.length > 20 ? setIsReady(true) : setIsReady(false);
   }, [body]);
+
+  const postData = () => {
+    const newData = {
+      title: title,
+      contents: body,
+    };
+    axios
+      .post(url, newData, {
+        headers: {
+          Authorization: localStorage.getItem('accessToken'), //로그인 토큰..?
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        navigate('/main');
+        window.location.reload();
+      })
+      .catch((err) => console.log(err));
+  };
 
   const helpTitle = [
     ['Title'],
@@ -56,26 +79,26 @@ const AskQuestion = () => {
         </HeaderHelp>
       </HeadContainer>
       <ItemContainer>
-        <SingleWrapper onClick={() => setSelectHelp(0)}>
+        <SingleWrapper onClick={() => setSelectHelp('0')}>
           <InputItem
             setTitle={setTitle}
             title={helpTitle[0]}
             help={helpSentances[0]}
           ></InputItem>
-          {selectHelp === 0 ? (
+          {selectHelp === '0' ? (
             <HelpItem
               title={bannerTitle[0]}
               help={bannerContents[0]}
             ></HelpItem>
           ) : null}
         </SingleWrapper>
-        <SingleWrapper onClick={() => setSelectHelp(1)}>
+        <SingleWrapper onClick={() => setSelectHelp('1')}>
           <TextareaItem
             setBody={setBody}
             title={helpTitle[1]}
             help={helpSentances[1]}
           ></TextareaItem>
-          {selectHelp === 1 ? (
+          {selectHelp === '1' ? (
             <HelpItem
               title={bannerTitle[1]}
               help={bannerContents[1]}
