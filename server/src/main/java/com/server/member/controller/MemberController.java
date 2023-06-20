@@ -7,6 +7,7 @@ import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -39,14 +40,14 @@ import lombok.extern.slf4j.Slf4j;
 public class MemberController {
     private final MemberService memberService;
     private final MemberMapper memberMapper;
+
+    @Autowired
     private FileManager fileManager;
 
     public MemberController(MemberService memberService,
-            MemberMapper memberMapper,
-            FileManager fileManager) {
+            MemberMapper memberMapper) {
         this.memberService = memberService;
         this.memberMapper = memberMapper;
-        this.fileManager = fileManager;
     }
 
     // 회원가입

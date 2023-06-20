@@ -13,6 +13,7 @@ env:
   CODEDEPLOY_GROUP_NAME: ${{ secrets.CODEDEPLOY_GROUP_NAME }}
   API_KEY: ${{ secrets.API_KEY }}
   REDIRECT_URL: ${{ secrets.REDIRECT_URL }}
+  SAVE_PATH: ${{ secrets.SAVE_PATH }}
 
 jobs:
   build:
