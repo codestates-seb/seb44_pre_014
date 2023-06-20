@@ -1,17 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { GoTriangleUp, GoTriangleDown } from 'react-icons/go';
 import { FiBookmark } from 'react-icons/fi';
 import { BiHistory } from 'react-icons/bi';
 import styled from 'styled-components';
-import { useStoreCount } from 'store/count/store.count';
 
 const VoteContainer: React.FC = () => {
-  const { count, plusCount, minusCount } = useStoreCount((state) => state);
+  const [vote, SetVote] = useState(0);
+
+  const onIncrease = () => {
+    SetVote(vote + 1);
+  };
+
+  const onDecrease = () => {
+    SetVote(vote - 1);
+  };
+
   return (
     <VoteCompo>
-      <GoTriangleUp className="vote" onClick={plusCount} />
-      <p>{count}</p>
-      <GoTriangleDown className="vote" onClick={minusCount} />
+      <GoTriangleUp className="vote" onClick={onIncrease} />
+      <p>{vote}</p>
+      <GoTriangleDown className="vote" onClick={onDecrease} />
       <FiBookmark className="icons" />
       <BiHistory className="icons" />
     </VoteCompo>
