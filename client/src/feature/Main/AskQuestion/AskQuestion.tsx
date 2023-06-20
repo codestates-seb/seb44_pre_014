@@ -49,7 +49,7 @@ const AskQuestion = () => {
   return (
     <MainWrapper>
       <HeadContainer>
-        <div>Ask a public question</div>
+        <div className="ask-header-title">Ask a public question</div>
         <HeaderHelp>
           <div className="head">Writing a good question</div>
           <div className="contents">{HeaderSentence[0]}</div>
@@ -83,10 +83,10 @@ const AskQuestion = () => {
           ) : null}
         </SingleWrapper>
       </ItemContainer>
-      <div className="button">
-        <BtnContainer>Register</BtnContainer>
+      <BtnWrapper>
+        <BtnContainer className={!isReady && 'invalid'}>Register</BtnContainer>
         <CancelBtn>Cancel</CancelBtn>
-      </div>
+      </BtnWrapper>
     </MainWrapper>
   );
 };
@@ -97,11 +97,9 @@ const MainWrapper = styled.div`
   display: flex;
   background-color: var(--black-050);
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   margin: 0px 30px;
-  .button {
-    display: flex;
-    padding-bottom: 30px;
-  }
 `;
 
 const HeadContainer = styled.section`
@@ -109,14 +107,21 @@ const HeadContainer = styled.section`
     font-size: 30px;
     font-weight: 700;
   }
+  margin-left: 30%;
   padding-top: 40px;
   padding-bottom: 30px;
+  width: 100%;
+  @media screen and (min-width: 1050px) {
+    background-image: url(https://cdn.sstatic.net/Img/ask/background.svg?v=2e9a8205b368);
+    background-repeat: no-repeat;
+  }
 `;
 
 const HeaderHelp = styled.section`
   width: 70%;
   background-color: var(--blue-050);
   padding: 50px 0px;
+  border-radius: 3px;
   margin-top: 30px;
   color: var(--fc-medium);
   border: 1px solid var(--powder-200);
@@ -133,6 +138,7 @@ const HeaderHelp = styled.section`
     padding: 10px 30px;
   }
 `;
+
 const ItemContainer = styled.div`
   width: 70%;
   display: grid;
@@ -147,7 +153,16 @@ const SingleWrapper = styled.section`
   grid-template-columns: 1fr;
 `;
 
-const BtnContainer = styled.div`
+const BtnWrapper = styled.div`
+  display: flex;
+  padding-bottom: 30px;
+  height: 60px;
+  .invalid {
+    background-color: var(--blue-100);
+  }
+`;
+
+const BtnContainer = styled.button`
   margin-top: 5px;
   display: flex;
   justify-content: center;
@@ -157,8 +172,9 @@ const BtnContainer = styled.div`
   width: 75px;
   font-size: 13px;
   font-weight: 600;
+  border: none;
   color: white;
-  background-color: var(--blue-100);
+  background-color: var(--blue-300);
   :hover {
     background-color: var(--blue-500);
   }
