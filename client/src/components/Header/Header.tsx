@@ -32,6 +32,10 @@ const Header: React.FC = () => {
             <FaStackExchange size={20} />
           </Icon>
         </IconWrapper>
+        <LoginWrapper>
+          <LoginLinkButton>Login</LoginLinkButton>
+          <LogoutLinkButton>Log out</LogoutLinkButton>
+        </LoginWrapper>
       </HeaderContainer>
     </StyledWrapper>
   );
@@ -118,7 +122,10 @@ const SerachBar = styled.input`
   padding: 5px 30px;
 `;
 
-const MyPageIcon = styled.div``;
+const MyPageIcon = styled.div`
+  display: flex;
+  font-size: 11px;
+`;
 
 const IconWrapper = styled.div`
   display: flex;
@@ -137,5 +144,51 @@ const Icon = styled.div`
   padding-top: 6px;
   :hover {
     background-color: rgba(0, 0, 0, 0.1);
+  }
+`;
+
+const LoginWrapper = styled.div`
+  display: flex;
+  margin: 0px 10px;
+  font-size: 13px;
+  width: 150px;
+`;
+
+const LoginLinkButton = styled.button`
+  width: 50px;
+  height: 30px;
+  border: 1px solid var(--powder-700);
+  border-radius: 4px;
+  background-color: var(--blue-100);
+  padding-left: 3px;
+  padding-right: 3px;
+  color: var(--powder-700);
+  margin: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  :hover {
+    background-color: var(--blue-200);
+  }
+`;
+
+const LogoutLinkButton = styled.button`
+  width: 70px;
+  height: 30px;
+  font-weight: bold;
+  border: 1px solid skyblue;
+  border-radius: 4px;
+  box-shadow: 0px 0.5px 1px#dadce0 inset;
+  border: 1px solid skyblue;
+  background-color: var(--blue-500);
+  margin: 5px;
+  padding-left: 7px;
+  padding-right: 7px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  :hover {
+    background-color: var(--blue-600);
   }
 `;
