@@ -68,7 +68,7 @@ const StyledWrapper = styled.div`
   height: auto;
   overflow: hidden;
   border-right: 1px solid var(--black-100);
-  @media screen and (max-width: 800px) {
+  @media screen and (max-width: 1200px) {
     display: none;
   }
 `;
