@@ -1,53 +1,46 @@
-// package com.server;
+package com.server;
 
-// import java.time.LocalDateTime;
-// import java.util.ArrayList;
-// import java.util.List;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
-// import javax.annotation.PostConstruct;
+import javax.annotation.PostConstruct;
 
-// import org.springframework.http.HttpStatus;
-// import org.springframework.http.ResponseEntity;
-// import org.springframework.web.bind.annotation.DeleteMapping;
-// import org.springframework.web.bind.annotation.GetMapping;
-// import org.springframework.web.bind.annotation.PatchMapping;
-// import org.springframework.web.bind.annotation.PathVariable;
-// import org.springframework.web.bind.annotation.PostMapping;
-// import org.springframework.web.bind.annotation.RequestMapping;
-// import org.springframework.web.bind.annotation.RequestParam;
-// import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-// import com.server.answer.entity.Answer;
-// import com.server.comment.entity.Comment;
-// import com.server.member.entity.Member;
-// import com.server.question.entity.Question;
+import com.server.answer.entity.Answer;
+import com.server.member.entity.Member;
+import com.server.question.entity.Question;
 
-// @RestController
-// @RequestMapping
-// public class StubController {
-//     static LocalDateTime time = LocalDateTime.now().withNano(0);
-//     static String writer = "작성자";
+@RestController
+@RequestMapping
+public class StubController {
+    static LocalDateTime time = LocalDateTime.now().withNano(0);
+    static String writer = "작성자";
 
-//     static String titleQ = "질문 제목";
-//     static String contentQ = "질문 내용입니다.\n".repeat(10);
-//     static String contentA = "에 달린 답변 내용입니다.\n";
-//     static String contentC = "에 달린 댓글 내용입니다.\n";
+    static String titleQ = "질문 제목";
+    static String contentQ = "질문 내용입니다.\n".repeat(10);
+    static String contentA = "에 달린 답변 내용입니다.\n";
+    static String contentC = "에 달린 댓글 내용입니다.\n";
 
-//     static List<Question> listQ = new ArrayList<>();
-//     static List<Answer> listA = new ArrayList<>();
-//     static List<Member> listM = new ArrayList<>();
+    static List<Question> listQ = new ArrayList<>();
+    static List<Answer> listA = new ArrayList<>();
+    static List<Member> listM = new ArrayList<>();
 
-//     @PostConstruct
-//     public void init() {
-//         for (int i = 1; i <= 50; i++) {
-//             listQ.add(new Question(
-//                 i,
-//                 writer + i,
-//                 titleQ + i,
-//                 contentQ,
-//                 time,
-//                 time));
-//         }
+    @PostConstruct
+    public void init() {
+        for (long i = 1; i <= 50; i++) {
+            listQ.add(new Question(i, titleQ + i, null));
+        }
 //         // for (int i = 1; i <= 50; i++) {
 //         //     listA.add(new Answer(
 //         //         i,
@@ -65,52 +58,49 @@
 //                 Integer.toString(i).repeat(5),
 //                 "실명" + i));
 //         }
-//     }
+    }
 
-//     // Question
-//     @GetMapping("/questions")
-//     public ResponseEntity Q1() {
-//         return new ResponseEntity<>(listQ, HttpStatus.OK);
-//     }
+    // Question
+    @GetMapping("/questions")
+    public ResponseEntity Q1() {
+        return new ResponseEntity<>(listQ, HttpStatus.OK);
+    }
 
-//     @GetMapping("/questions/search")
-//     public ResponseEntity Q2(@RequestParam("keyword") String keyword) {
-//         List<Question> list = new ArrayList<>();
+    @GetMapping("/questions/search")
+    public ResponseEntity Q2(@RequestParam("keyword") String keyword) {
+        List<Question> list = new ArrayList<>();
 
-//         for (int i = 1; i <= 50; i++) {
-//             list.add(new Question(
-//                 i,
-//                 writer + i,
-//                 keyword + "에 관련된 질문" + i,
-//                 (keyword + "에 관련된 질문 내용입니다.\n").repeat(10),
-//                 time,
-//                 time));
-//         }
+        for (long i = 1; i <= 50; i++) {
+            list.add(new Question(
+                i,
+                keyword + "에 관련된 질문" + i,
+                null));
+        }
 
-//         return new ResponseEntity<>(list, HttpStatus.OK);
-//     }
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
 
-//     @GetMapping("/questions/{questionId}")
-//     public ResponseEntity Q3(@PathVariable("questionId") long id) {
-//         Question question = new Question(id, writer + id, titleQ + id, contentQ, time, time);
+    @GetMapping("/questions/{questionId}")
+    public ResponseEntity Q3(@PathVariable("questionId") long id) {
+        Question question = new Question(id, titleQ + id, null);
 
-//         return new ResponseEntity<>(question, HttpStatus.OK);
-//     }
+        return new ResponseEntity<>(question, HttpStatus.OK);
+    }
 
-//     @PostMapping("/questions/write")
-//     public ResponseEntity Q4() {
-//         return new ResponseEntity<>(HttpStatus.OK);
-//     }
+    @PostMapping("/questions/write")
+    public ResponseEntity Q4() {
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
-//     @PatchMapping("/questions/{questionId}/edit")
-//     public ResponseEntity Q5(@PathVariable("questionId") long id) {
-//         return new ResponseEntity<>(HttpStatus.OK);
-//     }
+    @PatchMapping("/questions/{questionId}/edit")
+    public ResponseEntity Q5(@PathVariable("questionId") long id) {
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
-//     @DeleteMapping("/questions/{questionId}")
-//     public ResponseEntity Q6(@PathVariable("questionId") long id) {
-//         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//     }
+    @DeleteMapping("/questions/{questionId}")
+    public ResponseEntity Q6(@PathVariable("questionId") long id) {
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 
 //     // Answer
 //     @GetMapping("/answers")
@@ -276,4 +266,4 @@
 //     public ResponseEntity C4(@PathVariable("commentId") long id) {
 //         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 //     }
-// }
+}
