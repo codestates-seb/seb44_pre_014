@@ -8,53 +8,51 @@ const Sidebar: React.FC = () => {
   return (
     <StyledWrapper>
       <ListContainer>
-        <StickyContainer>
-          <HomeContainer className="category">Home</HomeContainer>
-          <PublicContainer className="category">
-            PUBLIC
-            <ul>
-              <li>
-                <FaGlobeAmericas size={15} /> Questions
-              </li>
-              <li className="list-li"> Tags</li>
-              <li className="list-li"> Users</li>
-              <li className="list-li"> Companies</li>
-            </ul>
-          </PublicContainer>
-          <CollectiveContainer className="category">
-            Collective
-            <AiFillInfoCircle />
-            <div className="menu">
-              {' '}
-              <svg
-                aria-hidden="true"
-                width="18"
-                height="18"
-                viewBox="0 0 18 18"
-                fill="rgb(242, 116, 13)"
-              >
-                <path d={svgstar}></path>
-              </svg>
-              <TextWrapper> Explore Collectives</TextWrapper>
-            </div>
-          </CollectiveContainer>
-          <TeamsContainer className="category">
-            Teams
-            <AiFillInfoCircle />
-            <div className="menu">
-              <svg
-                aria-hidden="true"
-                width="16"
-                height="16"
-                viewBox="0 0 14 14"
-                fill="rgb(242, 116, 13)"
-              >
-                <path d={svgbag}></path>
-              </svg>
-              <TextWrapper>Create free Team</TextWrapper>
-            </div>
-          </TeamsContainer>
-        </StickyContainer>
+        <HomeContainer className="category">Home</HomeContainer>
+        <PublicContainer className="category">
+          PUBLIC
+          <ul>
+            <li>
+              <FaGlobeAmericas size={15} /> Questions
+            </li>
+            <li className="list-li"> Tags</li>
+            <li className="list-li"> Users</li>
+            <li className="list-li"> Companies</li>
+          </ul>
+        </PublicContainer>
+        <CollectiveContainer className="category">
+          Collective
+          <AiFillInfoCircle />
+          <div className="menu">
+            {' '}
+            <svg
+              aria-hidden="true"
+              width="18"
+              height="18"
+              viewBox="0 0 18 18"
+              fill="rgb(242, 116, 13)"
+            >
+              <path d={svgstar}></path>
+            </svg>
+            <TextWrapper> Explore Collectives</TextWrapper>
+          </div>
+        </CollectiveContainer>
+        <TeamsContainer className="category">
+          Teams
+          <AiFillInfoCircle />
+          <div className="menu">
+            <svg
+              aria-hidden="true"
+              width="16"
+              height="16"
+              viewBox="0 0 14 14"
+              fill="rgb(242, 116, 13)"
+            >
+              <path d={svgbag}></path>
+            </svg>
+            <TextWrapper>Create free Team</TextWrapper>
+          </div>
+        </TeamsContainer>
       </ListContainer>
     </StyledWrapper>
   );
@@ -95,11 +93,7 @@ const TextWrapper = styled.div`
     color: var(--fc-dark);
   }
 `;
-const StickyContainer = styled.div`
-  position: fixed;
-  top: 65px;
-  width: auto;
-`;
+
 const HomeContainer = styled.div`
   align-items: left;
   font-size: 13px;
