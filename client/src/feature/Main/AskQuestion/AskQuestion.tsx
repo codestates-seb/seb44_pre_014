@@ -14,12 +14,12 @@ const AskQuestion = () => {
   }, [body]);
 
   const helpTitle = [
-    ['Title', 'questionTitle'],
+    ['Title'],
     [
       'What are the details of your problem and what did you try to solve it ?',
       'questionContent',
     ],
-    ['Tags', 'tagName'],
+    ['Tags'],
   ];
 
   const HeaderSentence = [
@@ -159,6 +159,9 @@ const BtnWrapper = styled.div`
   height: 60px;
   .invalid {
     background-color: var(--blue-100);
+    :hover {
+      background-color: var(--blue-100);
+    }
   }
 `;
 
