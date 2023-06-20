@@ -2,9 +2,9 @@ import styled from 'styled-components';
 import VoteContainer from 'components/QuestionDetail/VoteContainer';
 import DetailTitle from 'components/QuestionDetail/DetailTitle';
 import DetailMainText from 'components/QuestionDetail/DetailMainText';
-import { DetailButton } from 'components/Button/Button';
-import { useNavigate } from 'react-router-dom';
+import DetailAnswerInput from 'components/QuestionDetail/DetailAnswerInput';
 import DetailAnswer from 'components/QuestionDetail/DetailAnswer';
+import LabelContainer from 'components/QuestionDetail/LabellContainer';
 
 const StyledDetailPage = styled.div`
   max-width: 1100px;
@@ -16,27 +16,24 @@ const DetailMain = styled.div`
   display: flex;
 `;
 
-const ButtonContainer = styled.div`
+const MainContainer = styled.div`
   display: flex;
-  margin-left: 60px;
+  flex-direction: column;
 `;
 
 export default function DetailQuestion() {
-  const navigate = useNavigate();
-  const onClickButton = () => navigate('/button');
   return (
     <StyledDetailPage>
       <DetailTitle />
       <DetailMain>
         <VoteContainer />
-        <DetailMainText />
+        <MainContainer>
+          <DetailMainText />
+          <LabelContainer />
+        </MainContainer>
       </DetailMain>
-      <ButtonContainer>
-        <DetailButton onClick={onClickButton}>Share</DetailButton>
-        <DetailButton onClick={onClickButton}>Edit</DetailButton>
-        <DetailButton onClick={onClickButton}>Delete</DetailButton>
-      </ButtonContainer>
       <DetailAnswer />
+      <DetailAnswerInput />
     </StyledDetailPage>
   );
 }

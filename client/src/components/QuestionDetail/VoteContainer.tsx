@@ -3,13 +3,15 @@ import { GoTriangleUp, GoTriangleDown } from 'react-icons/go';
 import { FiBookmark } from 'react-icons/fi';
 import { BiHistory } from 'react-icons/bi';
 import styled from 'styled-components';
+import { useStoreCount } from 'store/count/store.count';
 
 const VoteContainer: React.FC = () => {
+  const { count, plusCount, minusCount } = useStoreCount((state) => state);
   return (
     <VoteCompo>
-      <GoTriangleUp className="vote" />
-      <p>3</p>
-      <GoTriangleDown className="vote" />
+      <GoTriangleUp className="vote" onClick={plusCount} />
+      <p>{count}</p>
+      <GoTriangleDown className="vote" onClick={minusCount} />
       <FiBookmark className="icons" />
       <BiHistory className="icons" />
     </VoteCompo>
