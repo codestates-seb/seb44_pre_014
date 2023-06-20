@@ -10,7 +10,13 @@ spring:
         url: jdbc:h2:mem:test
         username: sa
         password:
-kakao:
-    redirect-url: ${REDIRECT_URL}
-    api-key: ${API_KEY}
-    
+#kakao:
+#    redirect-url: ${REDIRECT_URL}
+#    api-key: ${API_KEY}
+
+jwt:
+    key: ${JWT_SECRET_KEY}
+    #환경변수 이름 : JWT_SECRET_KEY
+    #key : team014team014team014team014team014team014team014team014
+    access-token-expiration-seconds: 86400000
+    refresh-token-expiration-seconds: 86400000

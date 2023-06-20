@@ -1,6 +1,7 @@
 package com.server.member.entity;
 
 import java.util.List;
+import java.util.ArrayList;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.ElementCollection;
+import javax.persistence.FetchType;
 
 import com.server.answer.entity.Answer;
 import com.server.audit.BaseEntity;
@@ -32,14 +35,17 @@ public class Member extends BaseEntity {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false, unique = true)
-    private String username;
-
-    @Column(nullable = false, length = 20)
+    @Column(nullable = false, length = 100)
     private String password;
 
-    @Column(nullable = false, updatable = false)
-    private String name;
+//    @Column(nullable = false, updatable = false)
+//    private String name;
+
+    @Column(nullable = false, unique = true)
+    private String displayName;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> roles = new ArrayList<>();
 
     @OneToMany(mappedBy = "member")
     private List<Question> questions;

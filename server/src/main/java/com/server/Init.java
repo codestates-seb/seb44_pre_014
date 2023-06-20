@@ -35,8 +35,8 @@ public class Init {
         Member member = new Member();
         member.setContent("자기소개");
         member.setEmail("email1@naver.com");
-        member.setName("실명");
-        member.setUsername("닉네임");
+        //member.setName("실명");
+        member.setDisplayName("닉네임");
         member.setPassword("비밀번호1234!");
 
         memberService.createMember(member);
@@ -44,8 +44,8 @@ public class Init {
         member.setMemberId(null);
         member.setContent("자기소개");
         member.setEmail("email2@naver.com");
-        member.setName("희창님");
-        member.setUsername("아가팀장님");
+        //member.setName("희창님");
+        member.setDisplayName("아가팀장님");
         member.setPassword("babyteamleader1!");
 
         memberService.createMember(member);
@@ -53,8 +53,8 @@ public class Init {
         member.setMemberId(null);
         member.setContent("자기소개");
         member.setEmail("email3@naver.com");
-        member.setName("승효님");
-        member.setUsername("승효짱123");
+        //member.setName("승효님");
+        member.setDisplayName("승효짱123");
         member.setPassword("비밀번호1234!");
 
         memberService.createMember(member);
@@ -62,8 +62,8 @@ public class Init {
         member.setMemberId(null);
         member.setContent("자기소개");
         member.setEmail("email4@naver.com");
-        member.setName("채은님");
-        member.setUsername("채은짱123");
+        //member.setName("채은님");
+        member.setDisplayName("채은짱123");
         member.setPassword("비밀번호1234!");
 
         memberService.createMember(member);
@@ -71,8 +71,8 @@ public class Init {
         member.setMemberId(null);
         member.setContent("자기소개");
         member.setEmail("email5@naver.com");
-        member.setName("진아님");
-        member.setUsername("진아짱123");
+        //member.setName("진아님");
+        member.setDisplayName("진아짱123");
         member.setPassword("비밀번호1234!");
 
         memberService.createMember(member);
@@ -80,8 +80,8 @@ public class Init {
         member.setMemberId(null);
         member.setContent("자기소개");
         member.setEmail("email6@naver.com");
-        member.setName("수현님");
-        member.setUsername("수현짱123");
+        //member.setName("수현님");
+        member.setDisplayName("수현짱123");
         member.setPassword("비밀번호1234!");
 
         memberService.createMember(member);
@@ -89,8 +89,8 @@ public class Init {
         member.setMemberId(null);
         member.setContent("자기소개");
         member.setEmail("email7@naver.com");
-        member.setName("세빈님");
-        member.setUsername("세빈짱123");
+        //member.setName("세빈님");
+        member.setDisplayName("세빈짱123");
         member.setPassword("비밀번호1234!");
 
         memberService.createMember(member);
@@ -98,8 +98,8 @@ public class Init {
         member.setMemberId(null);
         member.setContent("자기소개");
         member.setEmail("email8@naver.com");
-        member.setName("수희님");
-        member.setUsername("수희짱123");
+        //member.setName("수희님");
+        member.setDisplayName("수희짱123");
         member.setPassword("비밀번호1234!");
 
         memberService.createMember(member);

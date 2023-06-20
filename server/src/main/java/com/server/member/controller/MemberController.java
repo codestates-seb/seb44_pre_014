@@ -7,7 +7,6 @@ import javax.validation.constraints.Positive;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-//import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -54,6 +53,9 @@ public class MemberController {
 
         return ResponseEntity.created(location).build();
     }
+
+    // 회원 로그인
+    // @PostMapping("/login")
 
     // 회원정보 수정
     @PatchMapping("/{member-id}/edit")

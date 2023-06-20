@@ -19,7 +19,7 @@ public interface AnswerMapper {
     Answer patchDtoToAnswer(AnswerDto.Patch patchDto);
 
     @Mapping(source = "member.memberId", target = "memberId")
-    @Mapping(source = "member.username", target = "writer")
+    @Mapping(source = "member.displayName", target = "writer")
     @Mapping(source = "question.questionId", target = "questionId")
     Response answerToResponse(Answer answer);
 

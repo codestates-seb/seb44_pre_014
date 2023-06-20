@@ -30,8 +30,8 @@ public class Response {
 
     // column
     private String email;
-    private String username;
-    private String name;
+    private String displayName;
+    //private String name;
     private String title;
     private String content;
     private LocalDateTime createdAt;
