@@ -109,8 +109,8 @@ public class Init {
             member.setMemberId(1L);
             Question question = new Question();
             question.setMember(member);
-            question.setTitle("질문" + i);
-            question.setContent("질문 내용입니다.");
+            question.setTitle("질문 제목" + i);
+            question.setContent("질문 내용입니다.\n".repeat(20));
             questionService.saveQuestion(question);
         }
         for (long i = 1; i <= 50; i++) {
@@ -121,7 +121,7 @@ public class Init {
             Answer answer = new Answer();
             answer.setMember(member);
             answer.setQuestion(question);
-            answer.setContent("답변 내용입니다.");
+            answer.setContent("답변 내용입니다.\n".repeat(10));
             answerService.saveAnswer(answer);
         }
         for (long i = 1; i <= 50; i++) {
@@ -132,7 +132,7 @@ public class Init {
             Comment comment = new Comment();
             comment.setMember(member);
             comment.setQuestion(question);
-            comment.setContent("댓글 내용입니다.");
+            comment.setContent("댓글 내용입니다.\n".repeat(2));
             commentService.saveComment(comment);
         }
         for (long i = 1; i <= 50; i++) {
@@ -143,7 +143,7 @@ public class Init {
             Comment comment = new Comment();
             comment.setMember(member);
             comment.setAnswer(answer);
-            comment.setContent("댓글 내용입니다.");
+            comment.setContent("댓글 내용입니다.\n".repeat(2));
             commentService.saveComment(comment);
         }
 
