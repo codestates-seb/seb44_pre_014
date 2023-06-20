@@ -3,11 +3,29 @@ import { useNavigate } from 'react-router-dom';
 import Button from 'components/Button/Button';
 import QuestionList from 'feature/Main/QuestionList';
 import { questionList } from 'feature/Main/mockData';
+import { useEffect, useState } from 'react';
+import API from 'services/api/index';
+import { API_QUESTIONS } from 'services/api/key';
 
 const MainPage = () => {
+  const [questionLists, setQuestionList] = useState([]);
+
   const navigate = useNavigate();
 
   const onClickButton = () => navigate('/ask');
+
+  const requestQuestionList = async () => {
+    try {
+      const res = await API.GET(API_QUESTIONS);
+      setQuestionList(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    requestQuestionList();
+  }, []);
 
   return (
     <StyledMainPage>
@@ -35,7 +53,6 @@ const MainTop = styled.div`
 
 const Title = styled.div`
   display: flex;
-  align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
   margin-bottom: 12px;

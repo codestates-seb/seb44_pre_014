@@ -43,6 +43,7 @@ type ButtonProps = {
 const StyledButton = styled.div<ButtonProps>`
   background-color: ${({ bgColor }) => bgColor};
   color: ${({ color }) => color};
+  height: min-content;
   cursor: pointer;
   font-size: 13px;
   padding: 10px;
