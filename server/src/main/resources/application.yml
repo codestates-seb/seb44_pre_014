@@ -13,3 +13,4 @@ spring:
 kakao:
     redirect-url: ${REDIRECT_URL}
     api-key: ${API_KEY}
+    

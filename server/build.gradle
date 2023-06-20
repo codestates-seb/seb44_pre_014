@@ -29,6 +29,10 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux:2.6.15'
 	implementation 'com.google.code.gson:gson:2.10.1'
+
+	implementation 'org.mapstruct:mapstruct:1.5.5.Final'
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
+	implementation 'org.springframework.boot:spring-boot-starter-validation:2.6.15'
 }
 
 tasks.named('test') {
