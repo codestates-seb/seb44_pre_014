@@ -1,47 +1,107 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import reCaptchaLogo from '../../assets/reCaptchaLogo.png';
+import API from 'services/api/index';
+import { API_SIGNUP } from 'services/api/key';
+import { useNavigate } from 'react-router-dom';
 
 interface SignupFormData {
   username: string;
   email: string;
   password: string;
+  name: string;
 }
 
 const SignupForm = () => {
-  const [formData, setFormData] = useState<SignupFormData>({
+  const [emailValid, setEmailValid] = useState<boolean>(true);
+  const [emailErrorMsg, setEmailErrorMsg] = useState<string>('');
+  const [passwordValid, setPasswordValid] = useState<boolean>(true);
+  const [passwordErrorMsg, setPasswordErrorMsg] = useState<string>('');
+
+  // 회원가입을 완료했으면 로그인 페이지로 이동
+  const navigate = useNavigate();
+
+  const [signupFormData, setSignupFormData] = useState<SignupFormData>({
     username: '',
     email: '',
     password: '',
+    name: 'honghwang',
   });
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
+  // 이메일 유효성 검사
+  const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  // 비밀번호 유효성 검사
+  const regexPw =
+    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%#?&])[A-Za-z\d$@$!%*#?&]{8,20}$/;
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(formData);
+    try {
+      const response = await API.POST({
+        url: API_SIGNUP,
+        data: signupFormData,
+      });
+      console.log(response);
+      alert('Success Signed up!!');
+      setSignupFormData({
+        username: '',
+        email: '',
+        password: '',
+        name: '',
+      });
+    } catch (error) {
+      alert('failed to signup!!');
+      console.error(error);
+    }
   };
 
   const handleInputChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ): void => {
     const { name, value } = event.target;
-    setFormData((prevFormData) => ({
+    setSignupFormData((prevFormData) => ({
       ...prevFormData,
       [name]: value,
     }));
   };
 
+  const handleEmailBlur = () => {
+    const { email } = signupFormData;
+    if (!regexEmail.test(email)) {
+      setEmailValid(false);
+      setEmailErrorMsg('Invalid email address');
+    } else {
+      setEmailValid(true);
+      setEmailErrorMsg('');
+    }
+  };
+
+  const handlePasswordBlur = () => {
+    const { password } = signupFormData;
+    if (!regexPw.test(password)) {
+      setPasswordValid(false);
+      setPasswordErrorMsg(
+        'Passwords must contain at least eight characters, including at least 1 letter, 1 number, and 1 special character.'
+      );
+    } else {
+      setPasswordValid(true);
+      setPasswordErrorMsg('');
+    }
+  };
+
   return (
     <div>
       <StyledSignupForm>
-        <form>
+        <form onSubmit={handleSubmit}>
           <LabelInputSection>
             <Label htmlFor="username">Display name</Label>
             <div>
               <Input
                 type="text"
                 name="username"
-                value={formData.username}
+                value={signupFormData.username}
                 onChange={handleInputChange}
+                required
               />
             </div>
           </LabelInputSection>
@@ -52,9 +112,12 @@ const SignupForm = () => {
               <Input
                 type="email"
                 name="email"
-                value={formData.email}
+                value={signupFormData.email}
                 onChange={handleInputChange}
+                onBlur={handleEmailBlur}
+                required
               />
+              {!emailValid && <ErrorMessage>{emailErrorMsg}</ErrorMessage>}
             </div>
           </LabelInputSection>
 
@@ -64,9 +127,14 @@ const SignupForm = () => {
               <Input
                 type="password"
                 name="password"
-                value={formData.password}
+                value={signupFormData.password}
                 onChange={handleInputChange}
+                onBlur={handlePasswordBlur}
+                required
               />
+              {!passwordValid && (
+                <ErrorMessage>{passwordErrorMsg}</ErrorMessage>
+              )}
             </div>
             <Explanation>
               Passwords must contain at least eight characters, including at
@@ -327,3 +395,12 @@ const LogInClickSection = styled.a`
   text-decoration-line: none;
   color: var(--blue-500);
 `;
+
+const ErrorContainer = styled.div`
+  color: red;
+  margin-top: 5px;
+`;
+
+const ErrorMessage = ({ children }) => {
+  return <ErrorContainer>{children}</ErrorContainer>;
+};

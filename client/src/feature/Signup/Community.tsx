@@ -119,7 +119,6 @@ const LeftDiv = styled.div`
   height: 400px;
 
   @media (max-width: 816px) {
-    background-color: red;
     display: none;
   }
   > h1 {
@@ -143,14 +142,6 @@ const LeftDiv = styled.div`
   > div:last-child {
     font-size: 13px;
     color: #6a737c;
-    > div:last-child {
-      color: #0074cc;
-      cursor: pointer;
-
-      :hover {
-        color: #0a95ff;
-      }
-    }
   }
 `;
 
