@@ -9,13 +9,19 @@ const AskQuestion: React.FC = () => {
   const navigate = useNavigate();
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
-  const [isReady, setIsReady] = useState(false);
-  const [selectHelp, setSelectHelp] = useState('0');
+  const [isbReady, setIsbReady] = useState(false);
+  const [istReady, setIstReady] = useState(false);
+  const [selectHelp, setSelectHelp] = useState('4');
 
   const url = 'http://teamdev.shop/questions/write';
+
   useEffect(() => {
-    body.length > 20 ? setIsReady(true) : setIsReady(false);
+    body.length > 20 ? setIsbReady(true) : setIsbReady(false);
   }, [body]);
+
+  useEffect(() => {
+    title.length > 0 ? setIstReady(true) : setIstReady(false);
+  }, [title]);
 
   const postData = () => {
     const newData = {
@@ -107,7 +113,9 @@ const AskQuestion: React.FC = () => {
         </SingleWrapper>
       </ItemContainer>
       <BtnWrapper>
-        <BtnContainer className={!isReady && 'invalid'}>Register</BtnContainer>
+        <BtnContainer className={!(istReady && isbReady) && 'invalid'}>
+          Register
+        </BtnContainer>
         <CancelBtn>Cancel</CancelBtn>
       </BtnWrapper>
     </MainWrapper>
