@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.server.answer.entity.Answer;
@@ -33,8 +36,13 @@ public class QuestionService {
         return savedQuestion;
     }
 
-    public List<Question> findQuestions() {
-        return questionRepository.findAll();
+    public Page<Question> findQuestions(int size, int page) {
+        Sort sort1 = Sort.by("createdAt").descending();
+        Sort sort2 = Sort.by("questionId").descending();
+        Sort sort3 = sort1.and(sort2);
+
+        return questionRepository.findAll(PageRequest.of(page, size, sort3));
+        // return questionRepository.findAll();
     }
 
     public Question findQuestion(long questionId) {

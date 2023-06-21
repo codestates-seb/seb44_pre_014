@@ -6,6 +6,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -53,8 +54,11 @@ public class QuestionController {
     }
 
     @GetMapping
-    public ResponseEntity getQuestions() {
-        List<Question> questions = questionService.findQuestions();
+    public ResponseEntity getQuestions(@RequestParam("page") int page,
+            @RequestParam("size") int size) {
+        Page<Question> pageQuestions = questionService.findQuestions(size, page - 1);
+        List<Question> questions = pageQuestions.getContent();
+        // List<Question> questions = questionService.findQuestions();
         List<Response> responses = questionMapper.questionsToResponses(questions);
 
         return new ResponseEntity<>(responses, HttpStatus.OK);
