@@ -2,6 +2,7 @@ import { InputItem, TextareaItem } from 'components/AskQuestion/CreateAsk';
 import HelpItem from 'components/AskQuestion/SelectHelp';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import API from '../../../services/api/index';
 import {
   HeaderSentence,
   helpTitle,
@@ -21,8 +22,6 @@ const AskQuestion: React.FC = () => {
   const [istReady, setIstReady] = useState(false);
   const [selectHelp, setSelectHelp] = useState('4');
 
-  const url = 'questions/write';
-
   useEffect(() => {
     body.length > 20 ? setIsbReady(true) : setIsbReady(false);
   }, [body]);
@@ -31,20 +30,19 @@ const AskQuestion: React.FC = () => {
     title.length > 0 ? setIstReady(true) : setIstReady(false);
   }, [title]);
 
-  const postData = () => {
-    const newData = {
-      title: title,
-      contents: body,
-      member: 'null',
-    };
-    axios
-      .post(url, newData)
-      .then((res) => {
-        console.log(res);
-        navigate('/main');
-        window.location.reload();
-      })
-      .catch((err) => console.log(err));
+  const url = '/questions/write';
+  const newData = {
+    title: title,
+    content: body,
+    memberId: 3,
+  };
+  const newPost = async () => {
+    try {
+      const res = await API.POST({ url: url, data: newData });
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -90,7 +88,7 @@ const AskQuestion: React.FC = () => {
       <BtnWrapper>
         <BtnContainer
           className={!(istReady && isbReady) && 'invalid'}
-          onClick={postData}
+          onClick={newPost}
         >
           Register
         </BtnContainer>
