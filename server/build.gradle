@@ -19,20 +19,29 @@ repositories {
 }
 
 dependencies {
+<<<<<<< HEAD
 	// implementation 'org.springframework.boot:spring-boot-starter-security'
 	// testImplementation 'org.springframework.security:spring-security-test'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+=======
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+>>>>>>> a97915debb8a99707238f20b827d52949a80d0e3
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.h2database:h2'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+<<<<<<< HEAD
 	implementation 'org.springframework.boot:spring-boot-starter-webflux:2.6.15'
 	implementation 'com.google.code.gson:gson:2.10.1'
 
 	implementation 'org.mapstruct:mapstruct:1.5.5.Final'
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
 	implementation 'org.springframework.boot:spring-boot-starter-validation:2.6.15'
+=======
+	testImplementation 'org.springframework.security:spring-security-test'
+>>>>>>> a97915debb8a99707238f20b827d52949a80d0e3
 }
 
 tasks.named('test') {

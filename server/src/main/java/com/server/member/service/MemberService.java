@@ -57,7 +57,7 @@ public class MemberService {
         try {
             memberRepository.deleteById(memberId);
         } catch (Exception e) {
-            throw new BusinessLogicException(ExceptionCode.POST_EXIST);
+            throw new BusinessLogicException(ExceptionCode.QUESTION_EXIST);
         }
 
     }
