@@ -8,6 +8,7 @@ import { API_QUESTIONS } from 'services/api/key';
 import useIntersectionObserver from 'hooks/useIntersectionObserver';
 
 const MainPage = () => {
+  const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [questionList, setQuestionList] = useState([]);
   const [pageInfo, setPageInfo] = useState({
@@ -31,6 +32,7 @@ const MainPage = () => {
       setPageInfo(res.data.info);
     } catch (err) {
       console.log(err);
+      setIsError(true);
       setQuestionList([]);
     } finally {
       setIsLoading(false);
@@ -44,7 +46,7 @@ const MainPage = () => {
   useIntersectionObserver({
     root: null,
     target: lastCardRef,
-    enabled: pageInfo.totalPage != pageInfo.currentPage,
+    enabled: !isError && pageInfo.totalPage != pageInfo.currentPage,
     onIntersect: requestQuestionList,
   });
 
