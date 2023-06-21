@@ -11,6 +11,7 @@ import {
 } from './Banner';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import TagBar from 'components/AskQuestion/CreateTag';
 
 const AskQuestion: React.FC = () => {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ const AskQuestion: React.FC = () => {
   const [istReady, setIstReady] = useState(false);
   const [selectHelp, setSelectHelp] = useState('4');
 
-  const url = 'http://teamdev.shop/questions/write';
+  const url = 'questions/write';
 
   useEffect(() => {
     body.length > 20 ? setIsbReady(true) : setIsbReady(false);
@@ -34,13 +35,10 @@ const AskQuestion: React.FC = () => {
     const newData = {
       title: title,
       contents: body,
+      member: 'null',
     };
     axios
-      .post(url, newData, {
-        headers: {
-          Authorization: localStorage.getItem('accessToken'), //로그인 토큰..?
-        },
-      })
+      .post(url, newData)
       .then((res) => {
         console.log(res);
         navigate('/main');
@@ -85,9 +83,15 @@ const AskQuestion: React.FC = () => {
             ></HelpItem>
           ) : null}
         </SingleWrapper>
+        <SingleWrapper>
+          <TagBar />
+        </SingleWrapper>
       </ItemContainer>
       <BtnWrapper>
-        <BtnContainer className={!(istReady && isbReady) && 'invalid'}>
+        <BtnContainer
+          className={!(istReady && isbReady) && 'invalid'}
+          onClick={postData}
+        >
           Register
         </BtnContainer>
         <CancelBtn>Cancel</CancelBtn>
