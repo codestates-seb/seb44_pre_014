@@ -4,19 +4,27 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import UserInfo from './UserInfo';
 import cat from '../../assets/images/cat.jpg';
+import { TQuestion } from 'utils/type';
 
-const LabelContainer: React.FC = () => {
+type Tprops = {
+  quData: TQuestion;
+};
+
+const LabelContainer: React.FC<Tprops> = ({ quData }) => {
   const navigate = useNavigate();
   const onClickButton = () => navigate('/button');
+  console.log(quData);
   return (
-    <Label>
-      <ButtonContainer>
-        <DetailButton onClick={onClickButton}>Share</DetailButton>
-        <DetailButton onClick={onClickButton}>Edit</DetailButton>
-        <DetailButton onClick={onClickButton}>Delete</DetailButton>
-      </ButtonContainer>
-      <UserInfo img={cat} site="userinfo" name="carama" />
-    </Label>
+    quData && (
+      <Label>
+        <ButtonContainer>
+          <DetailButton onClick={onClickButton}>Share</DetailButton>
+          <DetailButton onClick={onClickButton}>Edit</DetailButton>
+          <DetailButton onClick={onClickButton}>Delete</DetailButton>
+        </ButtonContainer>
+        <UserInfo img={cat} site="userinfo" name={quData.writer} />
+      </Label>
+    )
   );
 };
 

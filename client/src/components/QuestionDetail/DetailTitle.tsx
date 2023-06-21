@@ -2,17 +2,19 @@ import React from 'react';
 import styled from 'styled-components';
 import { Button } from 'components/Button/Button';
 import { useNavigate } from 'react-router-dom';
+import { TQuestion } from 'utils/type';
 
-const DetailTitle: React.FC = () => {
+type Tprops = {
+  quData: TQuestion;
+};
+
+const DetailTitle: React.FC<Tprops> = ({ quData }) => {
   const navigate = useNavigate();
   const onClickButton = () => navigate('/ask');
   return (
     <>
       <DetailPost>
-        <Title>
-          I am having a problem with lists in Python in a simple program. I
-          can't seem to fix this and it seems like it should be a quick fix
-        </Title>
+        <Title>{quData.title}</Title>
         <Button onClick={onClickButton}>Ask Question</Button>
       </DetailPost>
       <DetailInfo>

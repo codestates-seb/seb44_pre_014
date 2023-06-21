@@ -2,8 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import VoteContainer from './VoteContainer';
 import LabelContainer from './LabellContainer';
+import { TQuestion } from 'utils/type';
 
-const DetailAnswer: React.FC = () => {
+type Tprops = {
+  quData: TQuestion;
+};
+
+const DetailAnswer: React.FC<Tprops> = ({ quData }) => {
   return (
     <>
       <h3>2 Answer</h3>
@@ -11,9 +16,11 @@ const DetailAnswer: React.FC = () => {
         <VoteContainer />
         <AnswerMain>
           <AnswerText>
-            <p>maybe you can use eval(replace) to get the result of library</p>
+            {quData.answers.map(({ answerId, content }) => (
+              <p key={answerId}>{content}</p>
+            ))}
           </AnswerText>
-          <LabelContainer />
+          <LabelContainer quData={quData} />
         </AnswerMain>
       </AnswerContainer>
     </>
