@@ -136,10 +136,6 @@ const SignupForm = () => {
                 <ErrorMessage>{passwordErrorMsg}</ErrorMessage>
               )}
             </div>
-            <Explanation>
-              Passwords must contain at least eight characters, including at
-              least 1 letter and 1 number.
-            </Explanation>
           </LabelInputSection>
 
           <NotRobotCheckBoxSection>
@@ -231,6 +227,7 @@ const LabelInputSection = styled.div`
 `;
 
 const Input = styled.input`
+  border: 1px solid var(--black-200);
   border-radius: 3px;
   cursor: unset;
   margin: 0;
@@ -267,15 +264,6 @@ const Label = styled.label`
   margin: 2px 0px;
   padding: 0px 2px;
   font-size: 15px;
-`;
-
-const Explanation = styled.p`
-  margin: 4px 0px;
-  padding: 0;
-  border: 0;
-  vertical-align: baseline;
-  font-size: 12px;
-  width: 100%;
 `;
 
 const CheckBoxSection = styled.div`
