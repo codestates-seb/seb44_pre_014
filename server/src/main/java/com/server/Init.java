@@ -35,7 +35,6 @@ public class Init {
         Member member = new Member();
         member.setContent("자기소개");
         member.setEmail("email1@naver.com");
-        member.setName("실명");
         member.setUsername("닉네임");
         member.setPassword("비밀번호1234!");
 
@@ -44,7 +43,6 @@ public class Init {
         member.setMemberId(null);
         member.setContent("자기소개");
         member.setEmail("email2@naver.com");
-        member.setName("희창님");
         member.setUsername("아가팀장님");
         member.setPassword("babyteamleader1!");
 
@@ -53,7 +51,6 @@ public class Init {
         member.setMemberId(null);
         member.setContent("자기소개");
         member.setEmail("email3@naver.com");
-        member.setName("승효님");
         member.setUsername("승효짱123");
         member.setPassword("비밀번호1234!");
 
@@ -62,7 +59,6 @@ public class Init {
         member.setMemberId(null);
         member.setContent("자기소개");
         member.setEmail("email4@naver.com");
-        member.setName("채은님");
         member.setUsername("채은짱123");
         member.setPassword("비밀번호1234!");
 
@@ -71,7 +67,6 @@ public class Init {
         member.setMemberId(null);
         member.setContent("자기소개");
         member.setEmail("email5@naver.com");
-        member.setName("진아님");
         member.setUsername("진아짱123");
         member.setPassword("비밀번호1234!");
 
@@ -80,7 +75,6 @@ public class Init {
         member.setMemberId(null);
         member.setContent("자기소개");
         member.setEmail("email6@naver.com");
-        member.setName("수현님");
         member.setUsername("수현짱123");
         member.setPassword("비밀번호1234!");
 
@@ -89,7 +83,6 @@ public class Init {
         member.setMemberId(null);
         member.setContent("자기소개");
         member.setEmail("email7@naver.com");
-        member.setName("세빈님");
         member.setUsername("세빈짱123");
         member.setPassword("비밀번호1234!");
 
@@ -98,19 +91,20 @@ public class Init {
         member.setMemberId(null);
         member.setContent("자기소개");
         member.setEmail("email8@naver.com");
-        member.setName("수희님");
         member.setUsername("수희짱123");
         member.setPassword("비밀번호1234!");
 
         memberService.createMember(member);
 
-        for (int i = 1; i <= 50; i++) {
+        for (long i = 1; i <= 50; i++) {
             member = new Member();
             member.setMemberId(1L);
             Question question = new Question();
             question.setMember(member);
+            question.setQuestionId(i);
             question.setTitle("질문 제목" + i);
             question.setContent("질문 내용입니다.\n".repeat(20));
+            question.setSolve(false);
             questionService.saveQuestion(question);
         }
         for (long i = 1; i <= 50; i++) {
@@ -122,6 +116,7 @@ public class Init {
             answer.setMember(member);
             answer.setQuestion(question);
             answer.setContent("답변 내용입니다.\n".repeat(10));
+            answer.setChoose(false);
             answerService.saveAnswer(answer);
         }
         for (long i = 1; i <= 50; i++) {

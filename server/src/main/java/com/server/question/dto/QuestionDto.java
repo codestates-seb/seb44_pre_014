@@ -1,18 +1,17 @@
-package com.server.answer.dto;
+package com.server.question.dto;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
 import lombok.Getter;
 
-public class AnswerDto {
+public class QuestionDto {
     @Getter
     public static class Post {
-        @Min(1)
-        private long memberId;
+        private String title;
 
         @Min(1)
-        private long questionId;
+        private long memberId;
 
         @NotBlank
         private String content;
@@ -20,8 +19,10 @@ public class AnswerDto {
 
     @Getter
     public static class Patch {
+        private String title;
+
         private String content;
 
-        private Boolean choose;
+        private Boolean solve;
     }
 }

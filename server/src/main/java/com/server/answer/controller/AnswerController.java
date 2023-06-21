@@ -45,6 +45,8 @@ public class AnswerController {
     @PostMapping("/write")
     public ResponseEntity postAnswer(@Valid @RequestBody AnswerDto.Post postDto) {
         Answer answer = answerMapper.postDtoToAnswer(postDto);
+        answer.setChoose(false);
+
         answerService.saveAnswer(answer);
 
         return new ResponseEntity<>(HttpStatus.CREATED);

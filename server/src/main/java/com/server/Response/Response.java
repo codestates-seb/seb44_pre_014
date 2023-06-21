@@ -34,7 +34,8 @@ public class Response {
     private String name;
     private String title;
     private String content;
-    private boolean choose;
+    private Boolean solve;
+    private Boolean choose;
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
 }

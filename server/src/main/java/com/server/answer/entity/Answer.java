@@ -31,6 +31,8 @@ public class Answer extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long answerId;
 
+    private Boolean choose;
+
     @ManyToOne
     @JoinColumn(name = "memberId")
     private Member member;
@@ -41,6 +43,4 @@ public class Answer extends BaseEntity {
 
     @OneToMany(mappedBy = "answer")
     private List<Comment> comments;
-
-    private Boolean choose;
 }

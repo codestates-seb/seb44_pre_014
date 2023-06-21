@@ -4,9 +4,8 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
-
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -18,10 +17,22 @@ import lombok.Setter;
 public abstract class BaseEntity {
     private String content;
 
-    @CreatedDate
+    // @CreatedDate
     @Column(updatable = false)
-    private LocalDateTime createdAt = LocalDateTime.now().withNano(0);
+    private LocalDateTime createdAt;
 
-    @LastModifiedDate
-    private LocalDateTime modifiedAt = LocalDateTime.now().withNano(0);
+    // @LastModifiedDate
+    private LocalDateTime modifiedAt;
+
+    @PrePersist
+    public void prePersist() {
+        LocalDateTime now = LocalDateTime.now().withNano(0);
+        createdAt = now;
+        modifiedAt = now;
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        modifiedAt = LocalDateTime.now().withNano(0);
+    }
 }

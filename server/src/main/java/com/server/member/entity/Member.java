@@ -38,9 +38,6 @@ public class Member extends BaseEntity {
     @Column(nullable = false, length = 20)
     private String password;
 
-    @Column(nullable = false, updatable = false)
-    private String name;
-
     @OneToMany(mappedBy = "member")
     private List<Question> questions;
 

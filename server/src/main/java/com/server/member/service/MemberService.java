@@ -1,19 +1,36 @@
 package com.server.member.service;
 
+import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.server.answer.entity.Answer;
+import com.server.answer.service.AnswerService;
+import com.server.comment.entity.Comment;
+import com.server.comment.service.CommentService;
 import com.server.exception.BusinessLogicException;
 import com.server.exception.ExceptionCode;
 //import org.springframework.security.crypto.password.PasswordEncoder;
 import com.server.member.entity.Member;
 import com.server.member.repository.MemberRepository;
+import com.server.question.entity.Question;
+import com.server.question.service.QuestionService;
 
 @Service
 public class MemberService {
     private final MemberRepository memberRepository;
     //private final PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private QuestionService questionService;
+
+    @Autowired
+    private AnswerService answerService;
+
+    @Autowired
+    private CommentService commentService;
 
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
@@ -56,12 +73,20 @@ public class MemberService {
     // 회원 탈퇴
     public void deleteMember(Long memberId) {
         Member member = findVerifiedMember(memberId);
-        try {
-            memberRepository.deleteById(memberId);
-        } catch (Exception e) {
-            throw new BusinessLogicException(ExceptionCode.POST_EXIST);
-        }
+        List<Question> questions = member.getQuestions();
+        List<Answer> answers = member.getAnswers();
+        List<Comment> comments = member.getComments();
 
+        for (Comment comment : comments) {
+            commentService.deleteComment(comment.getCommentId());
+        }
+        for (Answer answer : answers) {
+            answerService.deleteAnswer(answer.getAnswerId());
+        }
+        for (Question question : questions) {
+            questionService.deleteQuestion(question.getQuestionId());
+        }
+        memberRepository.deleteById(memberId);
     }
 
     // 중복된 이메일인지 확인

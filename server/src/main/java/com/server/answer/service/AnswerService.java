@@ -3,14 +3,20 @@ package com.server.answer.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.server.answer.entity.Answer;
 import com.server.answer.repository.AnswerRepository;
+import com.server.comment.entity.Comment;
+import com.server.comment.service.CommentService;
 
 @Service
 public class AnswerService {
     private AnswerRepository answerRepository;
+
+    @Autowired
+    private CommentService commentService;
 
     public AnswerService(AnswerRepository answerRepository) {
         this.answerRepository = answerRepository;
@@ -34,7 +40,6 @@ public class AnswerService {
 
     public Answer updateAnswer(Answer answer) {
         Answer findAnswer = findAnswer(answer.getAnswerId());
-        findAnswer.setContent(answer.getContent());
         Optional.ofNullable(answer.getContent())
                 .ifPresent(content -> findAnswer.setContent(content));
         Optional.ofNullable(answer.getChoose())
@@ -46,7 +51,12 @@ public class AnswerService {
     }
 
     public void deleteAnswer(long answerId) {
-        findAnswer(answerId);
+        Answer answer = findAnswer(answerId);
+        List<Comment> comments = answer.getComments();
+
+        for (Comment comment : comments) {
+            commentService.deleteComment(comment.getCommentId());
+        }
         answerRepository.deleteById(answerId);
     }
 }

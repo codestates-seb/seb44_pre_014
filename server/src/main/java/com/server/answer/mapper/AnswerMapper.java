@@ -11,7 +11,6 @@ import com.server.answer.entity.Answer;
 
 @Mapper(componentModel = "spring")
 public interface AnswerMapper {
-    // @Mapping(source = "memberId", target = "member.memberId")
     @Mapping(source = "memberId", target = "member.memberId")
     @Mapping(source = "questionId", target = "question.questionId")
     Answer postDtoToAnswer(AnswerDto.Post postDto);
