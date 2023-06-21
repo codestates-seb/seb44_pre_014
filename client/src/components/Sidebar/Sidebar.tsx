@@ -66,7 +66,9 @@ const StyledWrapper = styled.div`
   height: auto;
   overflow: hidden;
   border-right: 1px solid var(--black-100);
-  @media screen and (max-width: 1200px) {
+  min-width: 164px;
+
+  @media screen and (max-width: 800px) {
     display: none;
   }
 `;
@@ -80,12 +82,14 @@ const ListContainer = styled.div`
   color: var(--fc-light);
   flex-direction: column;
   margin-left: auto;
+
   .category {
     width: 100%;
     text-align: start;
     padding: 8px 30px 20px 10px;
   }
 `;
+
 const TextWrapper = styled.div`
   display: flex;
   padding-left: 3px;

@@ -8,10 +8,14 @@ import { API_QUESTIONS } from 'services/api/key';
 import useIntersectionObserver from 'hooks/useIntersectionObserver';
 
 const MainPage = () => {
-  const [page, setPage] = useState(1);
-  const [isLast, setIsLast] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [questionList, setQuestionList] = useState([]);
+  const [pageInfo, setPageInfo] = useState({
+    totalCount: 0,
+    remainCount: 0,
+    totalPage: -1,
+    currentPage: 0,
+  });
 
   const lastCardRef = useRef();
 
@@ -22,10 +26,9 @@ const MainPage = () => {
   const requestQuestionList = async () => {
     try {
       setIsLoading(true);
-      const res = await API.GET(API_QUESTIONS(page));
-      if (res.data.length == 0) setIsLast(true);
-      setQuestionList([...questionList, ...res.data]);
-      setPage(page + 1);
+      const res = await API.GET(API_QUESTIONS(pageInfo.currentPage + 1));
+      setQuestionList([...questionList, ...res.data.contents]);
+      setPageInfo(res.data.info);
     } catch (err) {
       console.log(err);
       setQuestionList([]);
@@ -41,7 +44,7 @@ const MainPage = () => {
   useIntersectionObserver({
     root: null,
     target: lastCardRef,
-    enabled: !isLast,
+    enabled: pageInfo.totalPage != pageInfo.currentPage,
     onIntersect: requestQuestionList,
   });
 
@@ -52,9 +55,7 @@ const MainPage = () => {
           <TitleText>All Questions</TitleText>
           <Button onClick={onClickButton}>Ask Question</Button>
         </Title>
-        <QuestionCount>
-          {questionList.length.toLocaleString()} questions
-        </QuestionCount>
+        <QuestionCount>{pageInfo.totalCount} questions</QuestionCount>
       </MainTop>
       <QuestionList questionList={questionList} />
       <LastItemFlag ref={lastCardRef} />
@@ -63,7 +64,7 @@ const MainPage = () => {
 };
 
 const StyledMainPage = styled.div`
-  max-width: 728px;
+  max-width: 800px;
   position: relative;
 `;
 
