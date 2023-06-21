@@ -4,8 +4,13 @@
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended"
   ],
-  "plugins": ["@typescript-eslint", "prettier"],
-  "ignorePatterns": ["node_modules/"],
+  "plugins": [
+    "@typescript-eslint",
+    "prettier"
+  ],
+  "ignorePatterns": [
+    "node_modules/"
+  ],
   "env": {
     "browser": true,
     "node": true
