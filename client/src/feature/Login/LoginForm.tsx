@@ -1,14 +1,69 @@
 import styled from 'styled-components';
+import { useState } from 'react';
+import API from 'services/api/index';
+import { API_LOGIN } from 'services/api/key';
+interface LoginFormData {
+  email: string;
+  password: string;
+}
 
 const LoginForm = () => {
+  const [loginFormData, setLoginFormData] = useState<LoginFormData>({
+    email: '',
+    password: '',
+  });
+
+  const handleInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void => {
+    const { name, value } = event.target;
+    setLoginFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+  };
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    try {
+      // 로그인 요청을 서버로 보내는 로직
+      const response = await API.POST({
+        url: API_LOGIN,
+        data: loginFormData,
+      }).then((res) => {
+        if (res.ok) {
+          // accessToken : 응답 헤더
+          // refreshToken : 응답 데이터
+          const accessToken = res.headers.get('Authorization');
+          const refreshToken = res.headers.get('Refresh');
+
+          // 로컬스토리지에 토큰 저장
+          localStorage.setItem('accessToken', accessToken);
+          localStorage.setItem('refreshToken', refreshToken);
+          alert('login success!');
+        }
+      });
+    } catch (error) {
+      // 로그인 실패 처리
+      alert('failed to login!');
+      console.error('Login failed:', error);
+    }
+  };
+
   return (
     <div>
       <StyledSignupForm>
-        <form>
+        <form onSubmit={handleSubmit}>
           <LabelInputSection>
             <Label htmlFor="email">Email</Label>
             <div>
-              <Input type="email" name="email" required />
+              <Input
+                type="email"
+                name="email"
+                value={loginFormData.email}
+                onChange={handleInputChange}
+                required
+              />
             </div>
           </LabelInputSection>
 
@@ -19,12 +74,18 @@ const LoginForm = () => {
             </Div>
 
             <div>
-              <Input type="password" name="password" required />
+              <Input
+                type="password"
+                name="password"
+                value={loginFormData.password}
+                onChange={handleInputChange}
+                required
+              />
             </div>
           </LabelInputSection>
 
           <div>
-            <SubmitButton type="submit">Sign up</SubmitButton>
+            <SubmitButton type="submit">Log in</SubmitButton>
           </div>
         </form>
       </StyledSignupForm>
