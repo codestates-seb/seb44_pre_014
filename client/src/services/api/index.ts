@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-export const axiosClient = axios.create({
-});
+export const axiosClient = axios.create({});
 
 axiosClient.defaults.withCredentials = true;
 
