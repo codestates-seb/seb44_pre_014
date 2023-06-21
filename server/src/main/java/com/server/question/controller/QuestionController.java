@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.server.Response.PagingResponse;
+import com.server.Response.PagingResponse.Info;
 import com.server.Response.Response;
 import com.server.file.FileManager;
 import com.server.question.dto.QuestionDto;
@@ -57,11 +59,18 @@ public class QuestionController {
     public ResponseEntity getQuestions(@RequestParam("page") int page,
             @RequestParam("size") int size) {
         Page<Question> pageQuestions = questionService.findQuestions(size, page - 1);
+
         List<Question> questions = pageQuestions.getContent();
         // List<Question> questions = questionService.findQuestions();
         List<Response> responses = questionMapper.questionsToResponses(questions);
+        Info info = new Info(pageQuestions.getTotalElements(),
+            pageQuestions.getNumberOfElements(),
+            pageQuestions.getTotalPages(),
+            pageQuestions.getNumber() + 1);
 
-        return new ResponseEntity<>(responses, HttpStatus.OK);
+        PagingResponse pagingResponse = new PagingResponse(info, responses);
+
+        return new ResponseEntity<>(pagingResponse, HttpStatus.OK);
     }
 
     @GetMapping("/{questionId}")
