@@ -45,8 +45,8 @@ const QuestionCard: React.FC<TProps> = ({ questionData }) => {
         <Excerpt>{content}</Excerpt>
         <PostContentMeta>
           <TagList>
-            {tag.map(({ title, avatar, link }) => (
-              <Tag link={link}>
+            {tag.map(({ title, avatar, link }, index) => (
+              <Tag key={`tag-${index}`} link={link}>
                 {avatar}
                 {title}
               </Tag>
