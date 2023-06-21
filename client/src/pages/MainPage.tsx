@@ -2,13 +2,18 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import Button from 'components/Button/Button';
 import QuestionList from 'feature/Main/QuestionList';
-import { questionList } from 'feature/Main/mockData';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import API from 'services/api/index';
 import { API_QUESTIONS } from 'services/api/key';
+import useIntersectionObserver from 'hooks/useIntersectionObserver';
 
 const MainPage = () => {
-  const [questionLists, setQuestionList] = useState([]);
+  const [page, setPage] = useState(1);
+  const [isLast, setIsLast] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [questionList, setQuestionList] = useState([]);
+
+  const lastCardRef = useRef();
 
   const navigate = useNavigate();
 
@@ -16,16 +21,29 @@ const MainPage = () => {
 
   const requestQuestionList = async () => {
     try {
-      const res = await API.GET(API_QUESTIONS);
-      setQuestionList(res.data);
+      setIsLoading(true);
+      const res = await API.GET(API_QUESTIONS(page));
+      if (res.data.length == 0) setIsLast(true);
+      setQuestionList([...questionList, ...res.data]);
+      setPage(page + 1);
     } catch (err) {
       console.log(err);
+      setQuestionList([]);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   useEffect(() => {
     requestQuestionList();
   }, []);
+
+  useIntersectionObserver({
+    root: null,
+    target: lastCardRef,
+    enabled: !isLast,
+    onIntersect: requestQuestionList,
+  });
 
   return (
     <StyledMainPage>
@@ -39,12 +57,14 @@ const MainPage = () => {
         </QuestionCount>
       </MainTop>
       <QuestionList questionList={questionList} />
+      <LastItemFlag ref={lastCardRef} />
     </StyledMainPage>
   );
 };
 
 const StyledMainPage = styled.div`
   max-width: 728px;
+  position: relative;
 `;
 
 const MainTop = styled.div`
@@ -70,3 +90,11 @@ const QuestionCount = styled.div`
 `;
 
 export default MainPage;
+
+const LastItemFlag = styled.div`
+  bottom: 0;
+  right: 0;
+  left: 0;
+  height: 100px;
+  position: absolute;
+`;

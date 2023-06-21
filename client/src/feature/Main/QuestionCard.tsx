@@ -8,21 +8,12 @@ type TProps = {
 };
 
 const QuestionCard: React.FC<TProps> = ({ questionData }) => {
-  const {
-    questionId,
-    voteCount,
-    answerCount,
-    viewCount,
-    title,
-    content,
-    tag,
-    user: { id, avatar, name, award },
-    createdAt,
-  } = questionData;
+  const { questionId, title, content, writer, createdAt, memberId } =
+    questionData;
 
   return (
     <StyledQuestionCard>
-      <PostSummary>
+      {/* <PostSummary>
         <div className="post-summary-item black">
           <span>{voteCount}</span>
           <span>votes</span>
@@ -35,7 +26,7 @@ const QuestionCard: React.FC<TProps> = ({ questionData }) => {
           <span>{viewCount}</span>
           <span>views</span>
         </div>
-      </PostSummary>
+      </PostSummary> */}
       <PostContent>
         <Title>
           <a className="title-link" href={`/question/${questionId}`}>
@@ -44,20 +35,24 @@ const QuestionCard: React.FC<TProps> = ({ questionData }) => {
         </Title>
         <Excerpt>{content}</Excerpt>
         <PostContentMeta>
-          <TagList>
+          {/* <TagList>
             {tag.map(({ title, avatar, link }, index) => (
               <Tag key={`tag-${index}`} link={link}>
                 {avatar}
                 {title}
               </Tag>
             ))}
-          </TagList>
+          </TagList> */}
           <UserCard>
-            <a className="user-card-link" href={`/users/${id}`}>
-              <img className="user-card-link--avatar" src={avatar} />
-              <span className="user-card-link--name">{name}</span>
+            <a className="user-card-link" href={`/users/${memberId}`}>
+              {/* <img className="user-card-link--avatar" src={avatar} /> */}
+              <img
+                className="user-card-link--avatar"
+                src={'http://teamdev.shop/members/2/files'}
+              />
+              <span className="user-card-link--name">{writer}</span>
             </a>
-            <span className="user-card-awards">{award}</span>
+            {/* <span className="user-card-awards">{award}</span> */}
             <span className="user-card-time">
               asked {moment(createdAt).fromNow()}
             </span>
