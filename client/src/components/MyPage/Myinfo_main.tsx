@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import MyList from './MyAnswerList';
+import MyAnswerList from './MyAnswerList';
 
 const Myinfo_main = () => {
   return (
@@ -8,10 +10,11 @@ const Myinfo_main = () => {
           <StatTitle>Stats</StatTitle>
           <StatBox>
             <div className="answer-count">
-              answers
-              <div>{}</div>
+              <div className="count">3</div>answers
             </div>
-            <div className="question-count">questions</div>
+            <div className="question-count">
+              <div className="count">1</div>questions
+            </div>
           </StatBox>
         </StatContainer>
       </SideContainer>
@@ -19,10 +22,7 @@ const Myinfo_main = () => {
         <QuestionsBox>
           <MyQuestion></MyQuestion>
           <MyAnswer>
-            <AnswersBox>질문 1</AnswersBox>
-            <AnswersBox>질문 2</AnswersBox>
-            <AnswersBox>질문 3</AnswersBox>
-            <AnswersBox>질문 4</AnswersBox>
+            <MyAnswerList />
           </MyAnswer>
         </QuestionsBox>
       </InfoContainer>
@@ -64,16 +64,29 @@ const StatContainer = styled.div`
 const StatTitle = styled.div`
   display: flex;
   padding: 8px;
+  margin-left: 5px;
+  @media (max-width: 900px) {
+    font-size: 17px;
+  }
 `;
 
 const StatBox = styled.div`
   display: flex;
   font-size: 17px;
-  padding: 10px;
+  color: var(--black-600);
+  padding: 5px;
   align-items: center;
   justify-content: center;
   div {
-    margin: 0px 5px;
+    margin: 0px 20px;
+    font-size: 13px;
+    @media (max-width: 900px) {
+      font-size: 13px;
+    }
+  }
+  .count {
+    font-size: 18px;
+    color: black;
   }
 `;
 
@@ -100,12 +113,6 @@ const MyQuestion = styled.div`
   margin: 12px;
   border-radius: 3px;
   min-height: 100px;
-`;
-
-const AnswersBox = styled.div`
-  width: 100%;
-  height: 6rem;
-  border: 1px solid black;
 `;
 
 const MyAnswer = styled.div`
