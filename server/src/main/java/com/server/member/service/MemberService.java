@@ -4,15 +4,16 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.server.answer.entity.Answer;
 import com.server.answer.service.AnswerService;
+import com.server.auth.utils.CustomAuthorityUtils;
 import com.server.comment.entity.Comment;
 import com.server.comment.service.CommentService;
 import com.server.exception.BusinessLogicException;
 import com.server.exception.ExceptionCode;
-//import org.springframework.security.crypto.password.PasswordEncoder;
 import com.server.member.entity.Member;
 import com.server.member.repository.MemberRepository;
 import com.server.question.entity.Question;
@@ -21,7 +22,6 @@ import com.server.question.service.QuestionService;
 @Service
 public class MemberService {
     private final MemberRepository memberRepository;
-    //private final PasswordEncoder passwordEncoder;
 
     @Autowired
     private QuestionService questionService;
@@ -32,9 +32,16 @@ public class MemberService {
     @Autowired
     private CommentService commentService;
 
-    public MemberService(MemberRepository memberRepository) {
+    private CustomAuthorityUtils customAuthorityUtils;
+
+    private final PasswordEncoder passwordEncoder;
+
+    public MemberService(MemberRepository memberRepository,
+            CustomAuthorityUtils customAuthorityUtils,
+            PasswordEncoder passwordEncoder) {
         this.memberRepository = memberRepository;
-        //this.passwordEncoder = passwordEncoder;
+        this.customAuthorityUtils = customAuthorityUtils;
+        this.passwordEncoder = passwordEncoder;
     }
 
     // 회원가입
@@ -43,11 +50,13 @@ public class MemberService {
         verifyExistsEmail(member.getEmail());
 
         // password 암호화
-        //String encryptedPassword = passwordEncoder.encode(member.getPassword());
-        //member.setPassword(encryptedPassword);
-        Member saveMember = memberRepository.save(member);
+        String encryptedPassword = passwordEncoder.encode(member.getPassword());
+        member.setPassword(encryptedPassword);
 
-        return saveMember;
+        List<String> roles = customAuthorityUtils.createRoles(member.getEmail());
+        member.setRoles(roles);
+
+        return memberRepository.save(member);
     }
 
     // 회원정보 수정

@@ -19,7 +19,7 @@ spring:
         # show-sql: true
         # generate-ddl: true
         # hibernate:
-            # ddl-auto: update
+            # ddl-auto: create-drop
         # properties:
                 # hibernate:
                     # show_sql: true
@@ -30,6 +30,34 @@ spring:
     # sql:
         # init:
             # mode: always
+    security:
+        oauth2:
+            client:
+                registration:
+                    google:
+                        clientId: 665056397916-c7bf8852rg8tpsrssnf5nbqv8q5v10va.apps.googleusercontent.com
+                        clientSecret: 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
+                        scope:
+                            - email
+                            - profile
+                    github:
+                        client-id: 3b218709b42b9884ccb4
+                        client-secret: f3c5fdf75b4fa5ac4efd2f1c2347be85411bae24
+                        scope:
+                            - email
+                            - profile
+                    facebook:
+                        client-id: 598703078760141
+                        client-secret: 8016796228f00b0ba18d9bf98cfa208f
+                        scope:
+                            - email
+                            - public_profile
+jwt:
+    key: ${JWT_SECRET_KEY}
+    #환경변수 이름 : JWT_SECRET_KEY
+    #key: team014team014team014team014team014team014team014team014
+    access-token-expiration-seconds: 86400000
+    refresh-token-expiration-seconds: 86400000
 kakao:
     redirect-url: ${REDIRECT_URL}
     api-key: ${API_KEY}
