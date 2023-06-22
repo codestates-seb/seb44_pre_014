@@ -15,13 +15,18 @@ import styled from 'styled-components';
 import TagBar from 'components/AskQuestion/CreateTag';
 
 const AskQuestion: React.FC = () => {
+  //memebersId 받아와야하는데..? store나 localstoraged에서 불러와야해야
+  const member = 3; //일단 임의로 넣기
   const navigate = useNavigate();
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
   const [isbReady, setIsbReady] = useState(false);
   const [istReady, setIstReady] = useState(false);
   const [selectHelp, setSelectHelp] = useState('4');
-
+  const postok = istReady && isbReady;
+  const warningpost = () => {
+    console.log('cannot post');
+  };
   useEffect(() => {
     body.length > 20 ? setIsbReady(true) : setIsbReady(false);
   }, [body]);
@@ -34,7 +39,7 @@ const AskQuestion: React.FC = () => {
   const newData = {
     title: title,
     content: body,
-    memberId: 3,
+    memberId: member,
   };
   const newPost = async () => {
     try {
@@ -87,8 +92,8 @@ const AskQuestion: React.FC = () => {
       </ItemContainer>
       <BtnWrapper>
         <BtnContainer
-          className={!(istReady && isbReady) && 'invalid'}
-          onClick={newPost}
+          className={!postok && 'invalid'}
+          onClick={postok ? newPost : warningpost}
         >
           Register
         </BtnContainer>
