@@ -53,11 +53,11 @@ spring:
                             - email
                             - public_profile
 server:
+    port: 443
     ssl:
         key-store: classpath:aws.p12
         key-store-type: PKCS12
         key-store-password: ${KEY_STORE_PASSWORD}
-        key-alias: aws
 jwt:
     key: ${JWT_SECRET_KEY}
     #환경변수 이름 : JWT_SECRET_KEY
