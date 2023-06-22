@@ -31,9 +31,9 @@ public class Response {
     // column
     private String email;
     private String username;
-    private String name;
     private String title;
     private String content;
+    private Long view;
     private Boolean solve;
     private Boolean choose;
     private LocalDateTime createdAt;

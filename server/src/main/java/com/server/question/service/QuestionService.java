@@ -48,7 +48,19 @@ public class QuestionService {
     public Question findQuestion(long questionId) {
         Optional<Question> optional = questionRepository.findById(questionId);
 
-        return optional.orElseThrow(() -> new RuntimeException("찾는 답변이 없습니다."));
+        return optional.orElseThrow(
+            () -> new RuntimeException("찾는 답변이 없습니다."));
+    }
+
+    public Page<Question> findQuestionsByKeyword(int size, int page, String keyword) {
+        Sort sort1 = Sort.by("createdAt").descending();
+        Sort sort2 = Sort.by("questionId").descending();
+        Sort sort3 = sort1.and(sort2);
+
+        return questionRepository
+                .findByTitleContainingIgnoreCaseOrContentContainingIgnoreCase(keyword,
+                    keyword,
+                    PageRequest.of(page, size, sort3));
     }
 
     public Question updateQuestion(Question question) {

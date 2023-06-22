@@ -105,6 +105,7 @@ public class Init {
             question.setTitle("질문 제목" + i);
             question.setContent("질문 내용입니다.\n".repeat(20));
             question.setSolve(false);
+            question.setView(0L);
             questionService.saveQuestion(question);
         }
         for (long i = 1; i <= 50; i++) {

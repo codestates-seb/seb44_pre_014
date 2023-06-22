@@ -16,8 +16,8 @@ public class PagingResponse {
     @AllArgsConstructor
     public static class Info {
         private Long totalCount;
-        private Integer remainCount;
         private Integer totalPage;
         private Integer currentPage;
+        private Integer count;
     }
 }

@@ -1,5 +1,6 @@
 package com.server.question.entity;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -9,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PreUpdate;
+import javax.persistence.Transient;
 
 import com.server.answer.entity.Answer;
 import com.server.audit.BaseEntity;
@@ -32,7 +35,11 @@ public class Question extends BaseEntity {
 
     private String title;
 
+    private Long view;
+
     private Boolean solve;
+
+    // private Long like;
 
     @ManyToOne
     @JoinColumn(name = "memberId")
@@ -43,4 +50,16 @@ public class Question extends BaseEntity {
 
     @OneToMany(mappedBy = "question")
     private List<Comment> comments;
+
+    @Transient
+    private boolean canUpdate = true;
+
+    @Override
+    @PreUpdate
+    public void preUpdate() {
+        if (canUpdate) {
+            LocalDateTime now = LocalDateTime.now().withNano(0);
+            setModifiedAt(now);
+        }
+    }
 }

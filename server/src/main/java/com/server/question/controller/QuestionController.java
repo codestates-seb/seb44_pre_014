@@ -25,6 +25,7 @@ import com.server.Response.PagingResponse;
 import com.server.Response.PagingResponse.Info;
 import com.server.Response.Response;
 import com.server.file.FileManager;
+import com.server.question.dto.LikeDto;
 import com.server.question.dto.QuestionDto;
 import com.server.question.entity.Question;
 import com.server.question.mapper.QuestionMapper;
@@ -56,10 +57,9 @@ public class QuestionController {
     }
 
     @GetMapping
-    public ResponseEntity getQuestions(@RequestParam("page") int page,
-            @RequestParam("size") int size) {
+    public ResponseEntity getQuestions(@RequestParam("size") int size,
+            @RequestParam("page") int page) {
         Page<Question> pageQuestions = questionService.findQuestions(size, page - 1);
-
         List<Question> questions = pageQuestions.getContent();
         // List<Question> questions = questionService.findQuestions();
         List<Response> responses = questionMapper.questionsToResponses(questions);
@@ -76,15 +76,30 @@ public class QuestionController {
     @GetMapping("/{questionId}")
     public ResponseEntity getQuestion(@PathVariable("questionId") long questionId) throws Exception {
         Question findQuestion = questionService.findQuestion(questionId);
+        findQuestion.setView(findQuestion.getView() + 1);
+        findQuestion.setCanUpdate(false);
+
+        questionService.saveQuestion(findQuestion);
         Response response = questionMapper.questionToResponse(findQuestion);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping("/search")
-    public ResponseEntity getQuestionsByKeyword(@RequestParam("keyword") String keyword) {
-        // 검색 기능 별도 구현 필요
-        return new ResponseEntity<>("검색 기능 별도 구현 필요", HttpStatus.BAD_REQUEST);
+    public ResponseEntity getQuestionsByKeyword(@RequestParam("size") int size,
+            @RequestParam("page") int page,
+            @RequestParam("keyword") String keyword) {
+        Page<Question> pageQuestions = questionService.findQuestionsByKeyword(size, page - 1, keyword);
+        List<Question> questions = pageQuestions.getContent();
+        List<Response> responses = questionMapper.questionsToResponses(questions);
+        Info info = new Info(pageQuestions.getTotalElements(),
+            pageQuestions.getTotalPages(),
+            pageQuestions.getNumber() + 1,
+            pageQuestions.getNumberOfElements());
+
+        PagingResponse pagingResponse = new PagingResponse(info, responses);
+
+        return new ResponseEntity<>(pagingResponse, HttpStatus.OK);
     }
 
     @PatchMapping("/{questionId}/edit")
@@ -120,5 +135,13 @@ public class QuestionController {
 
         return new ResponseEntity<>(files, HttpStatus.OK);
         // return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(files.get(0));
+    }
+
+    @PostMapping("/{questionId}/likes")
+    public ResponseEntity postLike(@PathVariable("questionId") long questionId,
+            @RequestBody LikeDto.Post postDto) {
+        // Authentication 으로 회원 정보 검증
+
+        return null;
     }
 }
