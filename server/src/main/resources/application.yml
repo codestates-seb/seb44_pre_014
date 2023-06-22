@@ -53,7 +53,6 @@ spring:
                             - email
                             - public_profile
 server:
-    port: 443
     ssl:
         key-store: classpath:aws.p12
         key-store-type: PKCS12
