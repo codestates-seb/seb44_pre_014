@@ -6,14 +6,48 @@ import API from '../../services/api/index';
 import Myinfo_top from './Myinfo_top';
 
 const Myinfo = () => {
+  const [userData, setUserData] = useState({
+    username: '',
+    email: '',
+    content: '',
+    created: '',
+    modified: '',
+    questions: [],
+    answers: [],
+  });
+  const infourl = '/members/1';
+
+  //따로 스토어 파서 저장하자.
+  const requestUserInfo = async () => {
+    try {
+      const res = await API.GET(infourl);
+      console.log(res);
+      setUserData({
+        username: res.data.username,
+        email: res.data.email,
+        content: res.data.content,
+        created: res.data.createdAt,
+        modified: res.data.modifiedAt,
+        questions: res.data.questions,
+        answers: res.data.answers,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    requestUserInfo();
+  }, []);
+
   return (
     <MyPageContainer>
-      <Myinfo_top />
+      <Myinfo_top userData={userData} />
       <MyPageBarSection>
         <Myinfo_nav></Myinfo_nav>
       </MyPageBarSection>
       <MyPageMainSection>
-        <Myinfo_main />
+        <Myinfo_main userData={userData} />
       </MyPageMainSection>
     </MyPageContainer>
   );

@@ -2,11 +2,43 @@ import styled from 'styled-components';
 import Myinfo_nav from 'components/MyPage/Myinfo_nav';
 import Myinfo_top from 'components/MyPage/Myinfo_top';
 import Edit_main from './Edit_main';
+import API from '../../services/api/index';
+import { useState, useEffect } from 'react';
 
 const MyEdit = () => {
+  const [userData, setUserData] = useState({
+    username: '',
+    email: '',
+    content: '',
+    created: '',
+    modified: '',
+  });
+  const infourl = '/members/3';
+
+  //따로 스토어 파서 저장하자.
+  const requestUserInfo = async () => {
+    try {
+      const res = await API.GET(infourl);
+      console.log(res);
+      setUserData({
+        username: res.data.username,
+        email: res.data.email,
+        content: res.data.content,
+        created: res.data.createdAt,
+        modified: res.data.modifiedAt,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    requestUserInfo();
+  }, []);
+
   return (
     <MyPageContainer>
-      <Myinfo_top></Myinfo_top>
+      <Myinfo_top userData={userData}></Myinfo_top>
       <MyPageBarSection>
         <Myinfo_nav></Myinfo_nav>
       </MyPageBarSection>

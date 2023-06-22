@@ -6,44 +6,25 @@ import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { PencilSvg } from './MyPageSvg';
 
-const Myinfo_top = () => {
+const Myinfo_top = ({ userData }) => {
   const navigate = useNavigate();
   const { myname, myemail, mycontent } = useStoreMydata();
-  const [userData, setUserData] = useState({});
-  const infourl = '/members/3';
-
-  //따로 스토어 파서 저장하자.
-  /*
-  const requestUserInfo = async () => {
-    try {
-      const res = await API.GET(infourl);
-      console.log(res);
-      setUserData({
-        ...userData,
-        username: res.data.username,
-        email: res.data.email,
-        content: res.data.content,
-        created: res.data.createdAt,
-        modified: res.data.modifiedAt,
-      });
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  useEffect(() => {
-    requestUserInfo();
-  }, []);
-  */
 
   return (
     <ProfileContainer>
       <div className="profile-top">
-        <Profile className="profile-img"></Profile>
+        <Profile className="profile-img">
+          {' '}
+          {userData ? userData.username.slice(0, 2) : null}
+        </Profile>
         <ItemContainer>
-          <div className="display-name">{myname}</div>
-          <UserContents>{mycontent}</UserContents>
-          <UserTitle className="display-intro"></UserTitle>
+          <div className="display-name">
+            {userData ? userData.username : null}
+          </div>
+          <UserContents>{userData ? userData.content : null}</UserContents>
+          <UserEmail className="display-intro">
+            {userData ? userData.email : null}
+          </UserEmail>
         </ItemContainer>
         <ProfileBtnContainer>
           <div
@@ -136,7 +117,7 @@ const ProfileBtnContainer = styled.div`
     width: 50%;
   }
 `;
-const UserTitle = styled.div`
+const UserEmail = styled.div`
   min-height: 40px;
   font-size: 13px;
   color: var(--black-500);

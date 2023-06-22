@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import MyList from './MyAnswerList';
 import MyAnswerList from './MyAnswerList';
 
-const Myinfo_main = () => {
+const Myinfo_main = ({ userData }) => {
   return (
     <MainContainer>
       <SideContainer>
@@ -10,10 +10,16 @@ const Myinfo_main = () => {
           <StatTitle>Stats</StatTitle>
           <StatBox>
             <div className="answer-count">
-              <div className="count">3</div>answers
+              <div className="count">
+                {userData ? userData.answers.length : null}
+              </div>
+              answers
             </div>
             <div className="question-count">
-              <div className="count">1</div>questions
+              <div className="count">
+                {userData ? userData.questions.length : null}
+              </div>
+              questions
             </div>
           </StatBox>
         </StatContainer>
@@ -22,7 +28,7 @@ const Myinfo_main = () => {
         <QuestionsBox>
           <MyQuestion></MyQuestion>
           <MyAnswer>
-            <MyAnswerList />
+            <MyAnswerList userData={userData} />
           </MyAnswer>
         </QuestionsBox>
       </InfoContainer>

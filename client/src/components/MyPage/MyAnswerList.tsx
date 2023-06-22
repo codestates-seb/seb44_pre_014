@@ -1,8 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const MyAnswerList = () => {
-  return <AnswersBox>answer1</AnswersBox>;
+const MyAnswerList = ({ userData }) => {
+  return (
+    <>
+      <AnswersBox>{userData.questions[0]}</AnswersBox>
+      <AnswersBox>{userData.questions[1]}</AnswersBox>
+      <AnswersBox>{userData.questions[2]}</AnswersBox>
+    </>
+  );
 };
 
 export default MyAnswerList;
