@@ -1,18 +1,36 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import API from '../../services/api/index';
 import styled from 'styled-components';
 
 const Myinfo_top = () => {
   const navigate = useNavigate();
+  const [user, setUser] = useState('');
+  const [email, setEmail] = useState('');
+  const infourl = '/members/3';
+  const requestUserInfo = async () => {
+    try {
+      const res = await API.GET(infourl);
+      console.log(res);
+      setUser(res.data.username);
+      setEmail(res.data.email);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    requestUserInfo();
+  }, []);
+
   return (
     <ProfileContainer>
       <div className="profile-top">
-        <Profile className="profile-img">승효</Profile>
+        <Profile className="profile-img">seu</Profile>
         <ItemContainer>
-          <div className="display-name">seunghyo</div>
-          <UserTitle className="display-intro">
-            Member for 9 days Last seen this week Visited 8 days, 3 consecutive
-          </UserTitle>
+          <div className="display-name">{user}</div>
+          <UserTitle className="display-intro">{email}</UserTitle>
         </ItemContainer>
         <ProfileBtnContainer>
           <div

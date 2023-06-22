@@ -9,7 +9,7 @@ const MenuContainer = styled.div`
   }
 `;
 const Menu = styled.div`
-  padding: 5px;
+  padding: 8px 10px;
   border-radius: 15px;
   margin-left: 15px;
   color: var(--black-600);
