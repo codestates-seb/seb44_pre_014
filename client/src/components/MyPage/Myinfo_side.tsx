@@ -13,7 +13,7 @@ const Menu = styled.div`
   border-radius: 15px;
   padding-left: 10px;
   font-size: 13px;
-  color: var(--black-600);
+  color: var(--black-700);
   :hover {
     background-color: var(--black-075);
   }
