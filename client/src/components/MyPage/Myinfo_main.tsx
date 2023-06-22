@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import MyList from './MyAnswerList';
 import MyAnswerList from './MyAnswerList';
+import MyQuestionList from './MyQuestionList';
 
 const Myinfo_main = ({ userData }) => {
   return (
@@ -26,7 +27,9 @@ const Myinfo_main = ({ userData }) => {
       </SideContainer>
       <InfoContainer>
         <QuestionsBox>
-          <MyQuestion></MyQuestion>
+          <MyQuestion>
+            <MyQuestionList userData={userData}></MyQuestionList>
+          </MyQuestion>
           <MyAnswer>
             <MyAnswerList userData={userData} />
           </MyAnswer>
@@ -115,16 +118,15 @@ const QuestionsBox = styled.div`
 const MyQuestion = styled.div`
   display: flex;
   border: 1px solid var(--black-075);
-  background-color: var(--black-025);
   margin: 12px;
   border-radius: 3px;
   min-height: 100px;
+  flex-direction: column;
 `;
 
 const MyAnswer = styled.div`
   display: flex;
   border: 1px solid var(--black-075);
-  background-color: var(--black-025);
   margin: 12px;
   border-radius: 3px;
   min-height: 100px;
