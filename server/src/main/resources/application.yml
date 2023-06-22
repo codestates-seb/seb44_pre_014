@@ -60,8 +60,6 @@ server:
         key-store-password: ${KEY_STORE_PASSWORD}
 jwt:
     key: ${JWT_SECRET_KEY}
-    #환경변수 이름 : JWT_SECRET_KEY
-    #key: team014team014team014team014team014team014team014team014
     access-token-expiration-seconds: 86400000
     refresh-token-expiration-seconds: 86400000
 kakao:
