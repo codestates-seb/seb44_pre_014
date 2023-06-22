@@ -4,13 +4,16 @@ import { useStoreMydata } from 'store/count/store.mydata';
 import API from '../../services/api/index';
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { PencilSvg } from './MyPageSvg';
 
 const Myinfo_top = () => {
   const navigate = useNavigate();
-  const { myname, setName } = useStoreMydata();
+  const { myname, myemail, mycontent } = useStoreMydata();
   const [userData, setUserData] = useState({});
   const infourl = '/members/3';
+
   //따로 스토어 파서 저장하자.
+  /*
   const requestUserInfo = async () => {
     try {
       const res = await API.GET(infourl);
@@ -31,13 +34,15 @@ const Myinfo_top = () => {
   useEffect(() => {
     requestUserInfo();
   }, []);
+  */
+
   return (
     <ProfileContainer>
       <div className="profile-top">
         <Profile className="profile-img"></Profile>
         <ItemContainer>
           <div className="display-name">{myname}</div>
-          <UserContents></UserContents>
+          <UserContents>{mycontent}</UserContents>
           <UserTitle className="display-intro"></UserTitle>
         </ItemContainer>
         <ProfileBtnContainer>
@@ -47,6 +52,9 @@ const Myinfo_top = () => {
               navigate('/mypage/edit');
             }}
           >
+            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18">
+              <path d={PencilSvg}></path>
+            </svg>
             Edit profile
           </div>
           <div className="profile-detail-button">Profiles</div>
@@ -75,7 +83,7 @@ const ProfileContainer = styled.section`
     border-radius: 10px;
   }
 `;
-const Profile = styled.div`
+export const Profile = styled.div`
   padding-top: 18px;
   padding-bottom: 7px;
   padding-left: 4px;
@@ -91,11 +99,10 @@ const Profile = styled.div`
   height: 120px;
   margin-top: 10px;
   @media (max-width: 612px) {
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
     font-size: 30px;
-    padding-top: 16px;
-    margin-bottom: 27px;
+    margin-bottom: 30px;
   }
 `;
 const ProfileBtnContainer = styled.div`
@@ -108,15 +115,25 @@ const ProfileBtnContainer = styled.div`
   display: flex;
   div {
     color: var(--black-500);
-    padding-top: 3px;
+    padding-top: 6px;
     align-items: center;
     text-align: center;
     justify-content: center;
-    width: 7em;
+    height: 2.5rem;
     margin: 3px;
     background-color: var(--white);
     border: 1px solid var(--black-500);
     border-radius: 3px;
+    svg {
+      margin-right: 2px;
+    }
+  }
+  .profile-detail-button {
+    padding-top: 12px;
+    width: 30%;
+  }
+  .profile-edit-button {
+    width: 50%;
   }
 `;
 const UserTitle = styled.div`
@@ -129,7 +146,6 @@ const UserTitle = styled.div`
 `;
 
 const UserContents = styled.div`
-  padding-left: 10px;
   margin: 0;
   font-size: 15px;
   color: var(--black-500);

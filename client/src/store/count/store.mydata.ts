@@ -4,17 +4,27 @@ import { devtools } from 'zustand/middleware';
 
 interface TStoreData {
   myname: string;
+  myemail: string;
+  mycontent: string;
   setName: () => void;
+  setEmail: () => void;
 }
 
 // 사용방법
 // const { count, plusCount, minusCount } = useStoreCount();
 
 const store = (set) => ({
-  myname: '기본이름',
+  myname: '승효',
+  myemail: 'email',
+  mycontent: '기본 소개입니다.',
   setName: () => {
-    set(({ myname }) => ({
-      myname: myname,
+    set(({ newName }) => ({
+      myname: newName,
+    }));
+  },
+  setEmail: () => {
+    set(({ myEmail }) => ({
+      myemail: myEmail,
     }));
   },
 });
@@ -25,4 +35,10 @@ export const useStoreMydata = create<TStoreData>()(
 
 export const useGetusername = () => {
   return useStoreMydata((state) => state.myname);
+};
+export const useGetemail = () => {
+  return useStoreMydata((state) => state.myemail);
+};
+export const useGetContent = () => {
+  return useStoreMydata((state) => state.mycontent);
 };
