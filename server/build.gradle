@@ -44,6 +44,6 @@ dependencies {
     implementation 'commons-io:commons-io:2.13.0'
 }
 
-tasks.named('test') {
-	useJUnitPlatform()
-}
+// tasks.named('test') {
+// 	useJUnitPlatform()
+// }
