@@ -17,7 +17,7 @@ env:
   SQL_URL: ${{ secrets.SQL_URL }}
   SQL_USERNAME: ${{ secrets.SQL_USERNAME }}
   SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}
-
+  JWT_SECRET_KEY: ${{ secrets.JWT_SECRET_KEY }}
 jobs:
   build:
 
