@@ -4,21 +4,21 @@ spring:
         url: ${SQL_URL}
         username: ${SQL_USERNAME}
         password: ${SQL_PASSWORD}
-    jpa:
+    # jpa:
         # show-sql: true
         # generate-ddl: true
-        hibernate:
-            ddl-auto: create-drop
+        # hibernate:
+            # ddl-auto: update
         # properties:
                 # hibernate:
                     # show_sql: true
                     # format_sql: true
                     # highlight_sql: true
                     # use_sql_comments: true
-    #     defer-datasource-initialization: true
+        # defer-datasource-initialization: true
     # sql:
-    #     init:
-    #         mode: always
+        # init:
+            # mode: always
 kakao:
     redirect-url: ${REDIRECT_URL}
     api-key: ${API_KEY}
