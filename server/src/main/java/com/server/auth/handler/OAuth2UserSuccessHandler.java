@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
@@ -24,28 +25,32 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Component
 public class OAuth2UserSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
+    @Value("${kakao.redirect-url}")
+    private String redirectUrl;
+
     private final JwtTokenizer jwtTokenizer;
+
     public OAuth2UserSuccessHandler(JwtTokenizer jwtTokenizer) {
         this.jwtTokenizer = jwtTokenizer;
     }
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request,
-                                        HttpServletResponse response,
-                                        Authentication authentication) throws IOException, ServletException {
+            HttpServletResponse response,
+            Authentication authentication) throws IOException, ServletException {
         String accessToken = delegateAccessToken(authentication);
         //String refreshToken = delegateRefreshToken(authentication);
 
         String uri = createURI(accessToken).toString();
         getRedirectStrategy().sendRedirect(request, response, uri);
 
-        response.setHeader("Authorization",  "Bearer_" + accessToken);
+        response.setHeader("Authorization", "Bearer_" + accessToken);
         //response.setHeader("Refresh", refreshToken);
     }
 
     // JWT 토큰은 delegateAccessToken 메서드를 통해 생성
     private String delegateAccessToken(Authentication authentication) {
-        PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
+        PrincipalDetails principalDetails = (PrincipalDetails)authentication.getPrincipal();
 
         Map<String, Object> claims = new HashMap<>();
         claims.put("memberId", principalDetails.getMemberId());
@@ -65,7 +70,7 @@ public class OAuth2UserSuccessHandler extends SimpleUrlAuthenticationSuccessHand
         //UriComponentsBuilder 클래스를 사용하여 URL 을 생성하고, 쿼리 스트링에 JWT 토큰을 포함함
         return UriComponentsBuilder
                 .newInstance()
-                .fromUriString("http://localhost:8080")
+                .fromUriString(redirectUrl)
                 // .path("/")
                 // .queryParam("Authorization", "Bearer_" + accessToken)
                 .build()
