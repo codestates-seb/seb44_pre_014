@@ -12,13 +12,13 @@ const Myinfo_main = ({ userData }) => {
           <StatBox>
             <div className="answer-count">
               <div className="count">
-                {userData ? userData.answers.length : null}
+                {userData ? userData.answers?.length : null}
               </div>
               answers
             </div>
             <div className="question-count">
               <div className="count">
-                {userData ? userData.questions.length : null}
+                {userData ? userData.questions?.length : null}
               </div>
               questions
             </div>

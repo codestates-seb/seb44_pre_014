@@ -15,7 +15,7 @@ const Myinfo_top = ({ userData }) => {
       <div className="profile-top">
         <Profile className="profile-img">
           {' '}
-          {userData ? userData.username.slice(0, 2) : null}
+          {userData ? userData.username?.slice(0, 2) : null}
         </Profile>
         <ItemContainer>
           <div className="display-name">

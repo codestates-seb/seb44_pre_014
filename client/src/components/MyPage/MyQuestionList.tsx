@@ -2,36 +2,42 @@ import React from 'react';
 import styled from 'styled-components';
 
 const MyQuestionList = ({ userData }) => {
-  const len = userData.questions.length;
+  const len = userData.questions?.length;
   return (
     <>
-      <QuestionsBox>
-        <div className="icon-ques">
-          {userData.questions[len - 1]?.solve ? '✅' : '👾'}
-        </div>
-        <CountBox>{userData.questions[len - 1]?.answers?.length}</CountBox>
-        <div className="userdata-answer">
-          {userData.questions[len - 1]?.title}
-        </div>
-      </QuestionsBox>
-      <QuestionsBox>
-        <div className="icon-ques">
-          {userData.questions[len - 2]?.solve ? '✅' : '👾'}
-        </div>
-        <CountBox>{userData.questions[len - 2]?.answers?.length}</CountBox>
-        <div className="userdata-answer">
-          {userData.questions[len - 2]?.title}
-        </div>
-      </QuestionsBox>
-      <QuestionsBox>
-        <div className="icon-ques">
-          {userData.questions[len - 3]?.solve ? '✅' : '👾'}
-        </div>
-        <CountBox>{userData.questions[len - 3]?.answers?.length}</CountBox>
-        <div className="userdata-answer">
-          {userData.questions[len - 3]?.title}
-        </div>
-      </QuestionsBox>
+      {len > 1 && (
+        <QuestionsBox>
+          <div className="icon-ques">
+            {userData.questions[len - 1]?.solve ? '✅' : '👾'}
+          </div>
+          <CountBox>{userData.questions[len - 1]?.answers?.length}</CountBox>
+          <div className="userdata-answer">
+            {userData.questions[len - 1]?.title}
+          </div>
+        </QuestionsBox>
+      )}
+      {len > 2 && (
+        <QuestionsBox>
+          <div className="icon-ques">
+            {userData.questions[len - 2]?.solve ? '✅' : '👾'}
+          </div>
+          <CountBox>{userData.questions[len - 2]?.answers?.length}</CountBox>
+          <div className="userdata-answer">
+            {userData.questions[len - 2]?.title}
+          </div>
+        </QuestionsBox>
+      )}
+      {len > 3 && (
+        <QuestionsBox>
+          <div className="icon-ques">
+            {userData.questions[len - 3]?.solve ? '✅' : '👾'}
+          </div>
+          <CountBox>{userData.questions[len - 3]?.answers?.length}</CountBox>
+          <div className="userdata-answer">
+            {userData.questions[len - 3]?.title}
+          </div>
+        </QuestionsBox>
+      )}
     </>
   );
 };
@@ -48,8 +54,9 @@ const QuestionsBox = styled.div`
   display: flex;
   color: var(--blue-700);
   .userdata-answer {
+    overflow: hidden;
     padding-top: 40px;
-    margin-left: 70px;
+    padding-left: 20px;
   }
   .icon-ques {
     margin-top: 40px;

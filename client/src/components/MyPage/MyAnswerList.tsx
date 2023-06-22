@@ -3,30 +3,39 @@ import styled from 'styled-components';
 import { RiMessage2Fill } from 'react-icons/ri';
 
 const MyAnswerList = ({ userData }) => {
-  const len = userData.answers.length;
+  const len = userData.answers?.length;
   return (
     <>
-      <AnswersBox>
-        <RiMessage2Fill className="icon-info"></RiMessage2Fill>
-        <CountBox>{userData.answers[len - 1]?.choose ? '💌' : '✉️'}</CountBox>
-        <div className="userdata-answer">
-          {userData.answers[len - 1]?.content.slice(0, 20)}
-        </div>
-      </AnswersBox>
-      <AnswersBox>
-        <RiMessage2Fill className="icon-info"></RiMessage2Fill>
-        <CountBox>{userData.answers[len - 2]?.choose ? '💌' : '✉️'}</CountBox>
-        <div className="userdata-answer">
-          {userData.answers[len - 2]?.content.slice(0, 20)}
-        </div>
-      </AnswersBox>
-      <AnswersBox>
-        <RiMessage2Fill className="icon-info"></RiMessage2Fill>
-        <CountBox>{userData.answers[len - 3]?.choose ? '💌' : '✉️'}</CountBox>
-        <div className="userdata-answer">
-          {userData.answers[userData.answers.length - 3]?.content.slice(0, 20)}
-        </div>
-      </AnswersBox>
+      {len > 1 && (
+        <AnswersBox>
+          <RiMessage2Fill className="icon-info"></RiMessage2Fill>
+          <CountBox>{userData.answers[len - 1]?.choose ? '💌' : '✉️'}</CountBox>
+          <div className="userdata-answer">
+            {userData.answers[len - 1]?.content.slice(0, 20)}
+          </div>
+        </AnswersBox>
+      )}
+      {len > 2 && (
+        <AnswersBox>
+          <RiMessage2Fill className="icon-info"></RiMessage2Fill>
+          <CountBox>{userData.answers[len - 2]?.choose ? '💌' : '✉️'}</CountBox>
+          <div className="userdata-answer">
+            {userData.answers[len - 2]?.content.slice(0, 20)}
+          </div>
+        </AnswersBox>
+      )}
+      {len > 3 && (
+        <AnswersBox>
+          <RiMessage2Fill className="icon-info"></RiMessage2Fill>
+          <CountBox>{userData.answers[len - 3]?.choose ? '💌' : '✉️'}</CountBox>
+          <div className="userdata-answer">
+            {userData.answers[userData.answers.length - 3]?.content.slice(
+              0,
+              20
+            )}
+          </div>
+        </AnswersBox>
+      )}
     </>
   );
 };
