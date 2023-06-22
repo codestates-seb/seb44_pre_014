@@ -1,10 +1,13 @@
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Myinfo_top = () => {
+  const navigate = useNavigate();
   return (
     <ProfileContainer>
       <div className="profile-top">
-        <Profile className="profile-img">seun</Profile>
+        <Profile className="profile-img">승효</Profile>
         <ItemContainer>
           <div className="display-name">seunghyo</div>
           <UserTitle className="display-intro">
@@ -12,8 +15,15 @@ const Myinfo_top = () => {
           </UserTitle>
         </ItemContainer>
         <ProfileBtnContainer>
-          <button className="profile-edit-button">Edit profile</button>
-          <button className="profile-detail-button">Profiles</button>
+          <div
+            className="profile-edit-button"
+            onClick={() => {
+              navigate('/mypage/edit');
+            }}
+          >
+            Edit profile
+          </div>
+          <div className="profile-detail-button">Profiles</div>
         </ProfileBtnContainer>
       </div>
     </ProfileContainer>
@@ -26,7 +36,6 @@ const ProfileContainer = styled.section`
   padding: 10px;
   margin-left: 40px;
   position: relative;
-  z-index: -9999;
   margin-bottom: 10px;
   @media (max-width: 612px) {
     width: 500px;
@@ -41,7 +50,7 @@ const ProfileContainer = styled.section`
   }
 `;
 const Profile = styled.div`
-  padding-top: 7px;
+  padding-top: 18px;
   padding-bottom: 7px;
   padding-left: 4px;
   padding-right: 4px;
@@ -49,14 +58,18 @@ const Profile = styled.div`
   margin-right: 2px;
   margin-left: 4px;
   border-radius: 4px;
+  text-align: center;
   color: white;
   font-size: 55px;
   width: 120px;
   height: 120px;
   margin-top: 10px;
   @media (max-width: 612px) {
-    width: 70px;
-    height: 70px;
+    width: 80px;
+    height: 80px;
+    font-size: 30px;
+    padding-top: 16px;
+    margin-bottom: 27px;
   }
 `;
 const ProfileBtnContainer = styled.div`
@@ -66,9 +79,14 @@ const ProfileBtnContainer = styled.div`
   height: 30px;
   width: 215px;
   font-size: 12px;
-  button {
+  display: flex;
+  div {
     color: var(--black-500);
-    padding: 5px;
+    padding-top: 3px;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    width: 7em;
     margin: 3px;
     background-color: var(--white);
     border: 1px solid var(--black-500);
