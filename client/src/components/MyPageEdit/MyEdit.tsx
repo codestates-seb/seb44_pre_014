@@ -5,7 +5,6 @@ import Myinfo_top from 'components/MyPage/Myinfo_top';
 const MyEdit = () => {
   return (
     <MyPageContainer>
-      <Myinfo_top />
       <MyPageBarSection>
         <Myinfo_nav></Myinfo_nav>
       </MyPageBarSection>

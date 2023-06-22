@@ -1,9 +1,8 @@
 import styled from 'styled-components';
-import Myinfo_side from './Myinfo_side';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Myinfo_nav from './Myinfo_nav';
 import Myinfo_main from './Myinfo_main';
-
+import API from '../../services/api/index';
 import Myinfo_top from './Myinfo_top';
 
 const Myinfo = () => {

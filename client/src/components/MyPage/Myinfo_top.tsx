@@ -1,20 +1,28 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useStoreMydata } from 'store/count/store.mydata';
 import API from '../../services/api/index';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 const Myinfo_top = () => {
   const navigate = useNavigate();
-  const [user, setUser] = useState('');
-  const [email, setEmail] = useState('');
+  const { myname, setName } = useStoreMydata();
+  const [userData, setUserData] = useState({});
   const infourl = '/members/3';
+  //따로 스토어 파서 저장하자.
   const requestUserInfo = async () => {
     try {
       const res = await API.GET(infourl);
       console.log(res);
-      setUser(res.data.username);
-      setEmail(res.data.email);
+      setUserData({
+        ...userData,
+        username: res.data.username,
+        email: res.data.email,
+        content: res.data.content,
+        created: res.data.createdAt,
+        modified: res.data.modifiedAt,
+      });
     } catch (err) {
       console.log(err);
     }
@@ -23,14 +31,14 @@ const Myinfo_top = () => {
   useEffect(() => {
     requestUserInfo();
   }, []);
-
   return (
     <ProfileContainer>
       <div className="profile-top">
-        <Profile className="profile-img">seu</Profile>
+        <Profile className="profile-img"></Profile>
         <ItemContainer>
-          <div className="display-name">{user}</div>
-          <UserTitle className="display-intro">{email}</UserTitle>
+          <div className="display-name">{myname}</div>
+          <UserContents></UserContents>
+          <UserTitle className="display-intro"></UserTitle>
         </ItemContainer>
         <ProfileBtnContainer>
           <div
@@ -114,6 +122,16 @@ const ProfileBtnContainer = styled.div`
 const UserTitle = styled.div`
   min-height: 40px;
   font-size: 13px;
+  color: var(--black-500);
+  @media (max-width: 612px) {
+    font-size: 11px;
+  }
+`;
+
+const UserContents = styled.div`
+  padding-left: 10px;
+  margin: 0;
+  font-size: 15px;
   color: var(--black-500);
   @media (max-width: 612px) {
     font-size: 11px;

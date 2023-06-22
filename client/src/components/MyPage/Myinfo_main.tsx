@@ -1,15 +1,17 @@
 import styled from 'styled-components';
 
 const Myinfo_main = () => {
-  const memberId = 3;
   return (
     <MainContainer>
       <SideContainer>
         <StatContainer>
           <StatTitle>Stats</StatTitle>
           <StatBox>
-            <div>answers</div>
-            <div>questions</div>
+            <div className="answer-count">
+              answers
+              <div>{}</div>
+            </div>
+            <div className="question-count">questions</div>
           </StatBox>
         </StatContainer>
       </SideContainer>
@@ -54,14 +56,25 @@ const SideContainer = styled.div`
 
 const StatContainer = styled.div`
   display: flex;
+  width: 100%;
+  flex-direction: column;
+  font-size: 21px;
 `;
 
 const StatTitle = styled.div`
   display: flex;
+  padding: 8px;
 `;
 
 const StatBox = styled.div`
   display: flex;
+  font-size: 17px;
+  padding: 10px;
+  align-items: center;
+  justify-content: center;
+  div {
+    margin: 0px 5px;
+  }
 `;
 
 const InfoContainer = styled.div`
