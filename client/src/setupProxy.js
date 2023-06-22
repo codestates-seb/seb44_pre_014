@@ -6,6 +6,9 @@ module.exports = function (app) {
     createProxyMiddleware({
       target: 'http://teamdev.shop',
       changeOrigin: true,
+      pathRewrite: {
+        '^/api': '',
+      },
     })
   );
 };
