@@ -20,6 +20,7 @@ const AskQuestion: React.FC = () => {
   const navigate = useNavigate();
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
+  const [writetag, setwriteTag] = useState('');
   const [isbReady, setIsbReady] = useState(false);
   const [istReady, setIstReady] = useState(false);
   const [selectHelp, setSelectHelp] = useState('4');
@@ -86,8 +87,18 @@ const AskQuestion: React.FC = () => {
             ></HelpItem>
           ) : null}
         </SingleWrapper>
-        <SingleWrapper>
-          <TagBar />
+        <SingleWrapper onClick={() => setSelectHelp('2')}>
+          <TagBar
+            setwriteTag={setwriteTag}
+            title={helpTitle[2]}
+            help={helpSentances[2]}
+          />
+          {selectHelp === '2' ? (
+            <HelpItem
+              title={bannerTitle[2]}
+              help={bannerContents[2]}
+            ></HelpItem>
+          ) : null}
         </SingleWrapper>
       </ItemContainer>
       <BtnWrapper>

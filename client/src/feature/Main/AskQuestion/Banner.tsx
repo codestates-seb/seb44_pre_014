@@ -1,9 +1,6 @@
 export const helpTitle = [
   ['Title'],
-  [
-    'What are the details of your problem and what did you try to solve it ?',
-    'questionContent',
-  ],
+  ['What are the details of your problem and what did you try to solve it ?'],
   ['Tags'],
 ];
 
