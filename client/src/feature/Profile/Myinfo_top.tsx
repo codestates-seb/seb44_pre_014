@@ -97,6 +97,7 @@ const ProfileContainer = styled.section`
 `;
 
 export const Profile = styled.div`
+  position: relative;
   background-color: var(--orange);
   border-radius: 4px;
   text-align: center;
@@ -107,7 +108,7 @@ export const Profile = styled.div`
   overflow: hidden;
 
   img {
-    object-fit: content;
+    object-fit: cover;
     width: 100%;
     height: 100%;
   }

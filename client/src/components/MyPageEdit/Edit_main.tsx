@@ -4,13 +4,17 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
 import API from '../../services/api/index';
 import styled from 'styled-components';
-import { API_MEMBER_EDIT } from 'services/api/type';
+import { API_MEMBER_EDIT, API_MEMBER_FILE } from 'services/api/type';
 
 const Edit_main = ({ userData }) => {
   const { id } = useParams();
   const [display, setDisplay] = useState(userData.username);
   const [about, setAbout] = useState(userData.content);
   const navigate = useNavigate();
+  const [imageUrl, setImageUrl] = useState(
+    `https://teamdev.shop/members/${id}/files`
+  );
+  const [imageFile, setImageFile] = useState();
 
   useEffect(() => {
     setDisplay(userData.username);
@@ -20,6 +24,17 @@ const Edit_main = ({ userData }) => {
   const onSubmitForm = async (event) => {
     try {
       event.preventDefault();
+
+      if (imageFile) {
+        const formData = new FormData();
+        formData.append('files', imageFile);
+
+        await API.POST({
+          url: API_MEMBER_FILE(id),
+          data: formData,
+          headers: { 'Content-Type': 'multipart/form-data' },
+        });
+      }
 
       const editData = {
         username: display,
@@ -38,8 +53,16 @@ const Edit_main = ({ userData }) => {
   };
 
   const onChangeForm = (event) => {
+    console.log(event.target.value);
+
     if (event.target.id === 'display') setDisplay(event.target.value);
     else if (event.target.id === 'about') setAbout(event.target.value);
+  };
+
+  const readURL = (event) => {
+    setImageFile(event.target.files[0]);
+    const res = URL.createObjectURL(event.target.files[0]);
+    setImageUrl(res);
   };
 
   return (
@@ -49,7 +72,11 @@ const Edit_main = ({ userData }) => {
         <EditBoxContainer>
           <ItemContainer>
             <Title>Profile Image</Title>
-            <Profile />
+            <AvatarEdit>
+              <label htmlFor="avatar">Change Picture</label>
+              <img id="preview" src={imageUrl} />
+              <input type="file" id="avatar" onChange={readURL} />
+            </AvatarEdit>
           </ItemContainer>
           <ItemContainer>
             <Title>Display name</Title>
@@ -87,6 +114,41 @@ const StyledEditContainer = styled.div`
     font-size: 21px;
   }
 `;
+
+const AvatarEdit = styled(Profile)`
+  width: 164px;
+  height: 164px;
+  position: relative;
+
+  img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+  }
+
+  label {
+    position: absolute;
+    color: black;
+    bottom: 0;
+    font-size: 12px;
+    text-align: center;
+    width: 164px;
+    padding: 8px 0;
+    color: var(--white);
+    background: var(--black-600);
+    cursor: pointer;
+
+    &:hover {
+      background: var(--black-700);
+    }
+  }
+
+  input {
+    display: none;
+  }
+`;
+
+const AddButton = styled.div``;
 
 const EditBoxContainer = styled.div`
   display: flex;

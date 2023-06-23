@@ -6,28 +6,29 @@ const Myinfo_nav = () => {
   const { tab, changeTab } = useStoreTab();
   const navigate = useNavigate();
   const { id } = useParams();
+  const isEdit = location.pathname.includes('edit');
 
   const handleChangeTab = (tabId) => () => {
-    if (location.pathname.includes('edit')) navigate(`/profile/${id}`);
+    if (isEdit) navigate(`/profile/${id}`);
     changeTab(tabId);
   };
 
   return (
     <MenuContainer className="flex-space-between">
       <Menu
-        className={`tab-item selected-${tab == 0}`}
+        className={`tab-item selected-${!isEdit && tab == 0}`}
         onClick={handleChangeTab(0)}
       >
         Profile
       </Menu>
       <Menu
-        className={`tab-item selected-${tab == 1}`}
+        className={`tab-item selected-${!isEdit && tab == 1}`}
         onClick={handleChangeTab(1)}
       >
         Questions
       </Menu>
       <Menu
-        className={`tab-item selected-${tab == 2}`}
+        className={`tab-item selected-${!isEdit && tab == 2}`}
         onClick={handleChangeTab(2)}
       >
         Answers

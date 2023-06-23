@@ -21,14 +21,7 @@ const ProfileEdit = () => {
   const requestUserInfo = async () => {
     try {
       const res = await API.GET(API_MEMBER(id));
-      console.log(res);
-      setUserData({
-        username: res.data.username,
-        email: res.data.email,
-        content: res.data.content,
-        created: res.data.createdAt,
-        modified: res.data.modifiedAt,
-      });
+      setUserData(res.data);
     } catch (err) {
       console.log(err);
     }
