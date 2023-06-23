@@ -14,22 +14,22 @@ const DetailAnswer: React.FC<Tprops> = ({ quData, deleteQu, updateQu }) => {
   return (
     <>
       <h3>{quData.answers.length} Answer</h3>
-      <AnswerContainer>
-        <VoteContainer />
-        <AnswerMain>
-          <AnswerText>
-            {quData.answers.map(({ answerId, content }) => (
+      {quData.answers.map(({ answerId, content }) => (
+        <AnswerContainer>
+          <VoteContainer />
+          <AnswerMain>
+            <AnswerText>
               <p key={answerId}>{content}</p>
-            ))}
-          </AnswerText>
-          <LabelContainer
-            quData={quData}
-            deleteQu={deleteQu}
-            id={quData.questionId}
-            updateQu={updateQu}
-          />
-        </AnswerMain>
-      </AnswerContainer>
+            </AnswerText>
+            <LabelContainer
+              quData={quData}
+              deleteQu={deleteQu}
+              id={quData.questionId}
+              updateQu={updateQu}
+            />
+          </AnswerMain>
+        </AnswerContainer>
+      ))}
     </>
   );
 };

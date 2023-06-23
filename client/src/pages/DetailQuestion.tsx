@@ -34,7 +34,7 @@ export default function DetailQuestion() {
   //질문데이터 불러오기
   const requestQuestion = async () => {
     try {
-      const res = await API.GET(`/questions/${id}`);
+      const res = await API.GET(`/api/questions/${id}`);
       setQuData(res.data);
       setIsLoading(false);
       console.log(quData);
@@ -46,7 +46,7 @@ export default function DetailQuestion() {
   // 질문글 삭제하기
   const deleteQuestion = async (questionId) => {
     try {
-      questionId && (await API.DELETE({ url: `/questions/${questionId}` }));
+      questionId && (await API.DELETE({ url: `/api/questions/${questionId}` }));
       navigate(`/`);
     } catch (err) {
       console.log(err);
@@ -55,7 +55,7 @@ export default function DetailQuestion() {
 
   // 질문글 수정하기
   const updateQuestion = (questionId) => {
-    navigate(`/questions/write?id=${questionId}`);
+    navigate(`/questions/write/${questionId}`);
   };
 
   useEffect(() => {
@@ -83,7 +83,11 @@ export default function DetailQuestion() {
           deleteQu={deleteQuestion}
           updateQu={updateQuestion}
         />
-        <DetailAnswerInput />
+        <DetailAnswerInput
+          quData={quData}
+          id={quData.memberId}
+          questionId={quData.questionId}
+        />
       </StyledDetailPage>
     )
   );

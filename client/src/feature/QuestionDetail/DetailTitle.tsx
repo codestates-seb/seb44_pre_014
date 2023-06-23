@@ -10,7 +10,7 @@ type Tprops = {
 
 const DetailTitle: React.FC<Tprops> = ({ quData }) => {
   const navigate = useNavigate();
-  const onClickButton = () => navigate('/ask');
+  const onClickButton = () => navigate('/questions/write');
   return (
     <>
       <DetailPost>

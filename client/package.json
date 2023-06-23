@@ -50,5 +50,5 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "prettier": "^2.8.8"
   },
-  "proxy":"https://teamdev.shop/api/"
+  "proxy":"https://teamdev.shop/"
 }
