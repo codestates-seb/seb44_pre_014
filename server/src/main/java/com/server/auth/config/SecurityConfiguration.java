@@ -88,13 +88,8 @@ public class SecurityConfiguration {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        // configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "https://codestates.shop/")); // 모든 출처에대해 스크립트 기반의 HTTP 통신 허용
-        // configuration.setAllowedMethods(Arrays.asList("POST", "GET", "PATCH", "DELETE"));
-        configuration.addAllowedOrigin("*");
-        ; // 모든 출처에대해 스크립트 기반의 HTTP 통신 허용
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "https://codestates.shop/")); // 모든 출처에대해 스크립트 기반의 HTTP 통신 허용
         configuration.setAllowedMethods(Arrays.asList("POST", "GET", "PATCH", "DELETE"));
-        configuration.addAllowedHeader("*");
-        configuration.setAllowCredentials(false);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
