@@ -25,7 +25,7 @@ const LabelContainer: React.FC<Tprops> = ({
   const handleEdit = () => {
     updateQu(id);
   };
-  console.log(id);
+  console.log(quData);
   return (
     quData && (
       <Label>

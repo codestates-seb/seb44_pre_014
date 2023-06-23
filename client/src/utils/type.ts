@@ -20,6 +20,7 @@ export type TQuestion = {
     award: string;
   };
   createdAt: string;
+  modifiedAt: string;
   view: number;
   memberId: number;
   answerId: number;
