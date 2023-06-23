@@ -16,6 +16,7 @@ import UploadFile from 'components/AskQuestion/UploadFile';
 
 const AskQuestion = ({ id }) => {
   //memebersId 받아와야하는데..? store나 localstoraged에서 불러와야해야
+  //const membersId= localStorage.getItem(memberId)
   const navigate = useNavigate();
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
