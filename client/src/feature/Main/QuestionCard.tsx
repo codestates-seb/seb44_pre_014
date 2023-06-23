@@ -44,7 +44,7 @@ const QuestionCard: React.FC<TProps> = ({ questionData }) => {
             ))}
           </TagList> */}
           <UserCard>
-            <a className="user-card-link" href={`/users/${memberId}`}>
+            <a className="user-card-link" href={`/profile/${memberId}`}>
               {/* <img className="user-card-link--avatar" src={avatar} /> */}
               <img
                 className="user-card-link--avatar"
