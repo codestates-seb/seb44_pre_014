@@ -36,6 +36,7 @@ public class Response {
     private Long view;
     private Boolean solve;
     private Boolean choose;
+    private Integer voteQuantity;
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
 }

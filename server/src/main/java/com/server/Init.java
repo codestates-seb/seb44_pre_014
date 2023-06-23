@@ -1,5 +1,7 @@
 package com.server;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.web.bind.annotation.RestController;
 
 import com.server.answer.entity.Answer;
@@ -28,7 +30,7 @@ public class Init {
         this.commentService = commentService;
     }
 
-    // @PostConstruct
+    @PostConstruct
     public void init() {
         Member member = new Member();
         member.setContent("자기소개");
@@ -104,6 +106,7 @@ public class Init {
             question.setContent("질문 내용입니다.\n".repeat(20));
             question.setSolve(false);
             question.setView(0L);
+            question.setVoteQuantity(0);
             questionService.saveQuestion(question);
         }
         for (long i = 1; i <= 50; i++) {

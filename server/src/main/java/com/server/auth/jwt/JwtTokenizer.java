@@ -1,5 +1,14 @@
 package com.server.auth.jwt;
 
+import java.nio.charset.StandardCharsets;
+import java.security.Key;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jws;
@@ -8,14 +17,6 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.io.Encoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.Getter;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
-
-import java.nio.charset.StandardCharsets;
-import java.security.Key;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Map;
 
 // Jwt 생성 및 검증
 @Component
@@ -44,6 +45,7 @@ public class JwtTokenizer {
         Key key = getKeyFromBase64EncodedKey(base64SecretKey);
 
         return Jwts.builder()
+                .setHeaderParam("typ", "JWT")
                 .setClaims(claims)
                 .setSubject(subject)
                 .setIssuedAt(Calendar.getInstance().getTime())
@@ -53,7 +55,7 @@ public class JwtTokenizer {
     }
 
     // RefreshToken 생성
-    public String generateRefreshToken(String subject, Date expiration, String base64EncodedSecretKey){
+    public String generateRefreshToken(String subject, Date expiration, String base64EncodedSecretKey) {
         Key key = getKeyFromBase64EncodedKey(base64EncodedSecretKey);
 
         return Jwts.builder()

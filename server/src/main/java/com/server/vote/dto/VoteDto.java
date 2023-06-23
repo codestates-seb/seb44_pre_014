@@ -1,15 +1,16 @@
-package com.server.question.dto;
+package com.server.vote.dto;
 
 import javax.validation.constraints.NotBlank;
 
 import lombok.Getter;
 
-public class LikeDto {
+public class VoteDto {
     @Getter
     public static class Post {
         @NotBlank
-        private Long memberId;
+        private Long questionId;
+
         @NotBlank
-        private Integer value;
+        private Integer upDown;
     }
 }

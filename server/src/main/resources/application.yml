@@ -15,11 +15,11 @@ spring:
         url: ${SQL_URL}
         username: ${SQL_USERNAME}
         password: ${SQL_PASSWORD}
-    # jpa:
+    jpa:
         # show-sql: true
         # generate-ddl: true
-        # hibernate:
-            # ddl-auto: create-drop
+        hibernate:
+            ddl-auto: create-drop
         # properties:
                 # hibernate:
                     # show_sql: true

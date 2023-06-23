@@ -25,7 +25,6 @@ import com.server.Response.PagingResponse;
 import com.server.Response.PagingResponse.Info;
 import com.server.Response.Response;
 import com.server.file.FileManager;
-import com.server.question.dto.LikeDto;
 import com.server.question.dto.QuestionDto;
 import com.server.question.entity.Question;
 import com.server.question.mapper.QuestionMapper;
@@ -136,13 +135,5 @@ public class QuestionController {
 
         return new ResponseEntity<>(files, HttpStatus.OK);
         // return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(files.get(0));
-    }
-
-    @PostMapping("/{questionId}/likes")
-    public ResponseEntity postLike(@PathVariable("questionId") long questionId,
-            @RequestBody LikeDto.Post postDto) {
-        // Authentication 으로 회원 정보 검증
-
-        return null;
     }
 }
