@@ -21,6 +21,5 @@ const DivContainer = styled.div`
 
 const ContentContainer = styled.div`
   padding: 24px;
-  width: calc(100%-164px);
-  width: 1100px;
+  max-width: 1100px;
 `;
