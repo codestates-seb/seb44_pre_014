@@ -2,18 +2,18 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import Button from 'components/Button/Button';
 import QuestionList from 'feature/Main/QuestionList';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import API from 'services/api/index';
 import { API_QUESTIONS } from 'services/api/key';
 import useIntersectionObserver from 'hooks/useIntersectionObserver';
 
 const MainPage = () => {
   const [isError, setIsError] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [questionList, setQuestionList] = useState([]);
   const [pageInfo, setPageInfo] = useState({
     totalCount: 0,
-    remainCount: 0,
+    count: 0,
     totalPage: -1,
     currentPage: 0,
   });
@@ -39,14 +39,11 @@ const MainPage = () => {
     }
   };
 
-  useEffect(() => {
-    requestQuestionList();
-  }, []);
-
   useIntersectionObserver({
     root: null,
     target: lastCardRef,
-    enabled: !isError && pageInfo.totalPage != pageInfo.currentPage,
+    enabled:
+      !isLoading && !isError && pageInfo.totalPage != pageInfo.currentPage,
     onIntersect: requestQuestionList,
   });
 

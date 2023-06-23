@@ -1,1 +1,1 @@
-export const API_QUESTIONS = (page) => `/questions?page=${page}&size=20`;
+export const API_QUESTIONS = (page) => `/api/questions?page=${page}&size=20`;
