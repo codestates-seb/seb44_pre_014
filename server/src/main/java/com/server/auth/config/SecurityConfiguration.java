@@ -1,6 +1,6 @@
 package com.server.auth.config;
 
-import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -87,13 +87,14 @@ public class SecurityConfiguration {
     // cors 설정
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "https://codestates.shop/")); // 모든 출처에대해 스크립트 기반의 HTTP 통신 허용
-        configuration.setAllowedMethods(Arrays.asList("POST", "GET", "PATCH", "DELETE"));
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
+        CorsConfiguration corsConfiguration = new CorsConfiguration();
+        corsConfiguration.setAllowedOrigins(List.of("https://codestates.shop/", "http://localhost:3000/", "http://localhost:8080/"));
+        corsConfiguration.setAllowedHeaders(List.of(""));
+        corsConfiguration.setExposedHeaders(List.of("Authorization", "Refresh"));
+        corsConfiguration.setAllowedMethods(List.of("POST", "GET", "PATCH", "DELETE", "OPTIONS"));
+        UrlBasedCorsConfigurationSource urlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource();
+        urlBasedCorsConfigurationSource.registerCorsConfiguration("/**", corsConfiguration);
+        return urlBasedCorsConfigurationSource;
     }
 
     // spring security filter 등록
