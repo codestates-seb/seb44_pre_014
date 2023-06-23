@@ -35,7 +35,7 @@ public class VoteContoller {
         this.voteMapper = voteMapper;
     }
 
-    @PostMapping
+    @PostMapping("/write")
     public ResponseEntity postVote(@RequestBody VoteDto.Post postDto,
             Authentication authentication) {
         String email = authentication.getName();
