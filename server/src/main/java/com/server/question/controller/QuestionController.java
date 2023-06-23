@@ -32,7 +32,7 @@ import com.server.question.mapper.QuestionMapper;
 import com.server.question.service.QuestionService;
 
 @RestController
-@RequestMapping("/questions")
+@RequestMapping("/api/questions")
 public class QuestionController {
     private QuestionService questionService;
     private QuestionMapper questionMapper;
@@ -63,10 +63,11 @@ public class QuestionController {
         List<Question> questions = pageQuestions.getContent();
         // List<Question> questions = questionService.findQuestions();
         List<Response> responses = questionMapper.questionsToResponses(questions);
+
         Info info = new Info(pageQuestions.getTotalElements(),
-            pageQuestions.getNumberOfElements(),
             pageQuestions.getTotalPages(),
-            pageQuestions.getNumber() + 1);
+            pageQuestions.getNumber() + 1,
+            pageQuestions.getNumberOfElements());
 
         PagingResponse pagingResponse = new PagingResponse(info, responses);
 
