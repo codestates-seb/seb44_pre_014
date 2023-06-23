@@ -1,17 +1,24 @@
 import Footer from 'components/Footer/Footer';
 import Header from 'components/Header/Header';
-import AskQuestion from 'feature/Main/AskQuestion/AskQuestion';
+import EditQuestion from 'feature/Main/AskQuestion/EditQuestion';
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 /*ContentContainer안에 컴포넌트 넣어서 페이지 구성 */
 
-const TestPagea = () => {
+const EditPage = () => {
+  const param = useParams();
+  useEffect(() => {
+    console.log(param.id);
+    console.log('edit page');
+  }, []);
   return (
     <div>
       <Header />
       <DivContainer>
         <ContentContainer>
-          <AskQuestion />
+          <EditQuestion id={param.id} />
         </ContentContainer>
       </DivContainer>
       <Footer />
@@ -19,7 +26,7 @@ const TestPagea = () => {
   );
 };
 
-export default TestPagea;
+export default EditPage;
 
 const DivContainer = styled.div`
   width: 100%;

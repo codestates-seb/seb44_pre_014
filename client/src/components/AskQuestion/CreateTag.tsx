@@ -1,19 +1,34 @@
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 const TagBar = ({ writeTag, setwriteTag, title, help }) => {
-  const navigate = useNavigate();
   const [newTag, setNewTag] = useState('');
+  const check = writeTag.includes(newTag); //초기 false
+
   const TagHandler = (e: React.FormEvent<HTMLInputElement>) => {
     setNewTag(e.currentTarget.value);
   };
 
   const handleOnKeyPress = (e) => {
-    if (e.key === 'Enter') {
-      setwriteTag([...writeTag, newTag]);
-      setNewTag('');
+    if (e.key === 'Enter' && writeTag.length < 5) {
+      checktagexist();
+      if (!check) {
+        setwriteTag([...writeTag, newTag]);
+        setNewTag('');
+      } else {
+        console.log('이미 태그가 존재합니다');
+      }
     }
+  };
+
+  const checktagexist = () => {
+    console.log(check);
+  };
+
+  const deleteTag = (event) => {
+    const deltag: string = event.currentTarget.innerHTML;
+    console.log(deltag);
+    setwriteTag(writeTag.filter((el) => el !== deltag));
   };
 
   useEffect(() => {
@@ -26,6 +41,7 @@ const TagBar = ({ writeTag, setwriteTag, title, help }) => {
       <TagContainer>
         <div className="title">{title[0]}</div>
         <div className="help">{help}</div>
+        {check && <div className="warning">* 이미 태그가 존재합니다</div>}
         <input
           className="tag-search"
           placeholder="입력하세요"
@@ -34,11 +50,21 @@ const TagBar = ({ writeTag, setwriteTag, title, help }) => {
           onKeyPress={handleOnKeyPress}
         ></input>
         <TagsList>
-          {writeTag[0] && <TagsName>{writeTag[0]}</TagsName>}
-          {writeTag[1] && <TagsName>{writeTag[1]}</TagsName>}
-          {writeTag[2] && <TagsName>{writeTag[2]}</TagsName>}
-          {writeTag[3] && <TagsName>{writeTag[3]}</TagsName>}
-          {writeTag[4] && <TagsName>{writeTag[4]}</TagsName>}
+          {writeTag[0] && (
+            <TagsName onClick={deleteTag}>{writeTag[0]}</TagsName>
+          )}
+          {writeTag[1] && (
+            <TagsName onClick={deleteTag}>{writeTag[1]}</TagsName>
+          )}
+          {writeTag[2] && (
+            <TagsName onClick={deleteTag}>{writeTag[2]}</TagsName>
+          )}
+          {writeTag[3] && (
+            <TagsName onClick={deleteTag}>{writeTag[3]}</TagsName>
+          )}
+          {writeTag[4] && (
+            <TagsName onClick={deleteTag}>{writeTag[4]}</TagsName>
+          )}
         </TagsList>
       </TagContainer>
     </>
@@ -57,6 +83,10 @@ const TagContainer = styled.div`
     width: 100%;
     font-size: 12px;
   }
+  .warning {
+    color: red;
+    font-size: 12px;
+  }
   border: 1px solid var(--black-075);
   border-radius: 3px;
 `;
@@ -68,13 +98,14 @@ const TagsList = styled.div`
 
 const TagsName = styled.div`
   display: flex;
-  background-color: var(--blue-300);
-  width: 12%;
-  height: 20px;
-  padding-top: 1px;
+  background-color: var(--powder-100);
+  width: auto;
+  height: 30px;
+  padding: 3px 30px;
   border-radius: 3px;
   font-size: 13px;
-  color: var(--white);
+  border: 1px solid var(--black-075);
+  color: var(--black-700);
   text-align: center;
   margin: 3px;
   justify-content: center;

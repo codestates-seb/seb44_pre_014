@@ -2,6 +2,7 @@ export const helpTitle = [
   ['Title'],
   ['What are the details of your problem and what did you try to solve it ?'],
   ['Tags'],
+  ['How to Edit'],
 ];
 
 export const HeaderSentence = [
@@ -27,4 +28,11 @@ export const bannerContents = [
   [
     'Tags help ensure that your question will get attention from the right people.Tag things in more than one way so people can find them more easily. Add tags for product lines, projects, teams, and the specific technologies or languages used.',
   ],
+];
+export const HowToEdit = [
+  'Correct minor typos or mistakes',
+  'Clarify meaning without changing it',
+  'Add related resources or links',
+  'Always respect the author’s intent',
+  'Don’t use edits to reply to the author',
 ];

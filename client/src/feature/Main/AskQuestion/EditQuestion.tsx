@@ -1,28 +1,22 @@
 import { InputItem, TextareaItem } from 'components/AskQuestion/CreateAsk';
-import HelpItem from 'components/AskQuestion/SelectHelp';
 import { useState, useEffect } from 'react';
 import API from '../../../services/api/index';
-import {
-  HeaderSentence,
-  helpTitle,
-  helpSentances,
-  bannerTitle,
-  bannerContents,
-} from './Banner';
+import { helpTitle, helpSentances, HowToEdit } from './Banner';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import TagBar from 'components/AskQuestion/CreateTag';
 
-const AskQuestion: React.FC = () => {
+const EditQuestion = ({ id }) => {
   //memebersId 받아와야하는데..? store나 localstoraged에서 불러와야해야
   const member = 1; //일단 임의로 넣기
   const navigate = useNavigate();
+
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
   const [writetag, setwriteTag] = useState([]);
   const [isbReady, setIsbReady] = useState(false);
   const [istReady, setIstReady] = useState(false);
-  const [selectHelp, setSelectHelp] = useState('4');
+
   const postok = istReady && isbReady;
   const warningpost = () => {
     console.log('cannot post');
@@ -35,19 +29,19 @@ const AskQuestion: React.FC = () => {
     title.length > 0 ? setIstReady(true) : setIstReady(false);
   }, [title]);
 
-  const url = '/api/questions/write';
+  const patchurl = `/api/questions/${id}/edit`;
+  const geturl = `/api/questions/${id}`;
   const newData = {
     title: title,
     content: body,
     memberId: member,
   };
-
   const goToMain = () => {
     navigate('/');
   };
   const newPost = async () => {
     try {
-      const res = await API.POST({ url: url, data: newData });
+      const res = await API.PATCH({ url: patchurl, data: newData });
       console.log(res);
       goToMain();
     } catch (err) {
@@ -55,57 +49,59 @@ const AskQuestion: React.FC = () => {
     }
   };
 
+  const getPost = async () => {
+    try {
+      const res = await API.GET(geturl);
+      console.log(res);
+      setBody(res.data.content);
+      setTitle(res.data.title);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  useEffect(() => {
+    getPost();
+  }, []);
+
   return (
     <MainWrapper>
       <HeadContainer>
-        <div className="ask-header-title">Ask a public question</div>
+        <div className="ask-header-title">Edit a public question</div>
         <HeaderHelp>
-          <div className="head">Writing a good question</div>
-          <div className="contents">{HeaderSentence[0]}</div>
+          <div className="head">{helpTitle[3]}</div>
+          <div className="contents">
+            {HowToEdit.map((el) => (
+              <ul>
+                <li>{el}</li>
+              </ul>
+            ))}
+          </div>
         </HeaderHelp>
       </HeadContainer>
       <ItemContainer>
-        <SingleWrapper onClick={() => setSelectHelp('0')}>
+        <SingleWrapper>
           <InputItem
+            value={title}
             setTitle={setTitle}
             title={helpTitle[0]}
             help={helpSentances[0]}
-            value={title}
           ></InputItem>
-          {selectHelp === '0' ? (
-            <HelpItem
-              title={bannerTitle[0]}
-              help={bannerContents[0]}
-            ></HelpItem>
-          ) : null}
         </SingleWrapper>
-        <SingleWrapper onClick={() => setSelectHelp('1')}>
+        <SingleWrapper>
           <TextareaItem
+            value={body}
             setBody={setBody}
             title={helpTitle[1]}
             help={helpSentances[1]}
-            value={body}
           ></TextareaItem>
-          {selectHelp === '1' ? (
-            <HelpItem
-              title={bannerTitle[1]}
-              help={bannerContents[1]}
-            ></HelpItem>
-          ) : null}
         </SingleWrapper>
-        <SingleWrapper onClick={() => setSelectHelp('2')}>
+        <SingleWrapper>
           <TagBar
             writeTag={writetag}
             setwriteTag={setwriteTag}
             title={helpTitle[2]}
             help={helpSentances[2]}
           />
-          {selectHelp === '2' ? (
-            <HelpItem
-              title={bannerTitle[2]}
-              help={bannerContents[2]}
-            ></HelpItem>
-          ) : null}
         </SingleWrapper>
       </ItemContainer>
       <BtnWrapper>
@@ -121,7 +117,7 @@ const AskQuestion: React.FC = () => {
   );
 };
 
-export default AskQuestion;
+export default EditQuestion;
 
 const MainWrapper = styled.div`
   display: flex;
@@ -150,7 +146,7 @@ const HeadContainer = styled.section`
 const HeaderHelp = styled.section`
   width: 70%;
   background-color: var(--blue-050);
-  padding: 50px 0px;
+  padding: 10px 0px;
   border-radius: 3px;
   margin-top: 30px;
   color: var(--fc-medium);
@@ -164,8 +160,9 @@ const HeaderHelp = styled.section`
   .contents {
     display: flex;
     font-weight: 400;
-    font-size: 15px;
-    padding: 10px 30px;
+    flex-direction: column;
+    padding: 0;
+    font-size: 12px;
   }
 `;
 

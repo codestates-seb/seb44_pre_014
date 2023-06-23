@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const InputItem = ({ setTitle, title, help }) => {
+const InputItem = ({ setTitle, title, help, value }) => {
   const textHandler = (e: React.FormEvent<HTMLInputElement>) => {
     setTitle(e.currentTarget.value);
   };
@@ -9,13 +9,17 @@ const InputItem = ({ setTitle, title, help }) => {
     <InputContainer>
       <div className="title">{title[0]}</div>
       <div className="help">{help}</div>
-      <input onChange={textHandler} className="modify-input-content"></input>
+      <input
+        onChange={textHandler}
+        className="modify-input-content"
+        value={value}
+      ></input>
     </InputContainer>
   );
 };
 
-const TextareaItem = ({ setBody, title, help }) => {
-  const textHandler = (e: React.FormEvent<HTMLInputElement>) => {
+const TextareaItem = ({ setBody, title, help, value }) => {
+  const textHandler = (e) => {
     setBody(e.currentTarget.value);
   };
 
@@ -23,7 +27,11 @@ const TextareaItem = ({ setBody, title, help }) => {
     <TextareaContainer>
       <div className="title">{title[0]}</div>
       <div className="help">{help}</div>
-      <input onChange={textHandler} className="modify-textarea-content"></input>
+      <textarea
+        onChange={textHandler}
+        className="modify-textarea-content"
+        value={value}
+      ></textarea>
     </TextareaContainer>
   );
 };
