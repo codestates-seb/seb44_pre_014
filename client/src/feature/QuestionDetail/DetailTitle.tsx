@@ -25,7 +25,7 @@ const DetailTitle: React.FC<Tprops> = ({ quData }) => {
           Modified <span>today</span>
         </p>
         <p>
-          Viewed <span>27 times</span>
+          Viewed <span>{quData.view}</span>
         </p>
       </DetailInfo>
     </>

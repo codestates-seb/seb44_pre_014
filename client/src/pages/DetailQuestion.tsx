@@ -1,14 +1,14 @@
 import styled from 'styled-components';
-import VoteContainer from 'components/QuestionDetail/VoteContainer';
-import DetailTitle from 'components/QuestionDetail/DetailTitle';
-import DetailMainText from 'components/QuestionDetail/DetailMainText';
-import DetailAnswerInput from 'components/QuestionDetail/DetailAnswerInput';
-import DetailAnswer from 'components/QuestionDetail/DetailAnswer';
-import LabelContainer from 'components/QuestionDetail/LabellContainer';
-import { useParams } from 'react-router-dom';
+import VoteContainer from 'feature/QuestionDetail/VoteContainer';
+import DetailTitle from 'feature/QuestionDetail/DetailTitle';
+import DetailMainText from 'feature/QuestionDetail/DetailMainText';
+import DetailAnswerInput from 'feature/QuestionDetail/DetailAnswerInput';
+import DetailAnswer from 'feature/QuestionDetail/DetailAnswer';
+import LabelContainer from 'feature/QuestionDetail/LabellContainer';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 // import axios from 'axios';
-import api from 'services/api';
+import API from 'services/api/index';
 
 const StyledDetailPage = styled.div`
   max-width: 1100px;
@@ -29,16 +29,33 @@ export default function DetailQuestion() {
   const { id } = useParams();
   const [quData, setQuData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
 
+  //질문데이터 불러오기
   const requestQuestion = async () => {
     try {
-      const res = await api.GET(`/questions/${id}`);
+      const res = await API.GET(`/questions/${id}`);
       setQuData(res.data);
-      console.log(res.data.writer);
       setIsLoading(false);
+      console.log(quData);
     } catch (err) {
       console.log(err);
     }
+  };
+
+  // 질문글 삭제하기
+  const deleteQuestion = async (questionId) => {
+    try {
+      questionId && (await API.DELETE({ url: `/questions/${questionId}` }));
+      navigate(`/`);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  // 질문글 수정하기
+  const updateQuestion = (questionId) => {
+    navigate(`/questions/write?id=${questionId}`);
   };
 
   useEffect(() => {
@@ -53,10 +70,19 @@ export default function DetailQuestion() {
           <VoteContainer />
           <MainContainer>
             <DetailMainText quData={quData} />
-            <LabelContainer quData={quData} />
+            <LabelContainer
+              quData={quData}
+              deleteQu={deleteQuestion}
+              id={quData.questionId}
+              updateQu={updateQuestion}
+            />
           </MainContainer>
         </DetailMain>
-        <DetailAnswer quData={quData} />
+        <DetailAnswer
+          quData={quData}
+          deleteQu={deleteQuestion}
+          updateQu={updateQuestion}
+        />
         <DetailAnswerInput />
       </StyledDetailPage>
     )

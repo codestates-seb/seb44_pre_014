@@ -8,21 +8,32 @@ import { TQuestion } from 'utils/type';
 
 type Tprops = {
   quData: TQuestion;
+  deleteQu: (id: number) => void;
+  id: number;
+  updateQu: (id: number) => void;
 };
 
-const LabelContainer: React.FC<Tprops> = ({ quData }) => {
+const LabelContainer: React.FC<Tprops> = ({
+  quData,
+  deleteQu,
+  id,
+  updateQu,
+}) => {
   const navigate = useNavigate();
   const onClickButton = () => navigate('/button');
+  const handleEdit = () => {
+    updateQu(id);
+  };
   console.log(quData);
   return (
     quData && (
       <Label>
         <ButtonContainer>
           <DetailButton onClick={onClickButton}>Share</DetailButton>
-          <DetailButton onClick={onClickButton}>Edit</DetailButton>
-          <DetailButton onClick={onClickButton}>Delete</DetailButton>
+          <DetailButton onClick={handleEdit}>Edit</DetailButton>
+          <DetailButton onClick={() => deleteQu(id)}>Delete</DetailButton>
         </ButtonContainer>
-        <UserInfo img={cat} site="userinfo" name={quData.writer} />
+        <UserInfo img={cat} site="/userinfo" name={quData.writer} />
       </Label>
     )
   );

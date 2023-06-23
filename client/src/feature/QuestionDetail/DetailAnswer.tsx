@@ -6,12 +6,14 @@ import { TQuestion } from 'utils/type';
 
 type Tprops = {
   quData: TQuestion;
+  deleteQu: (id: number) => void;
+  updateQu: (id: number) => void;
 };
 
-const DetailAnswer: React.FC<Tprops> = ({ quData }) => {
+const DetailAnswer: React.FC<Tprops> = ({ quData, deleteQu, updateQu }) => {
   return (
     <>
-      <h3>2 Answer</h3>
+      <h3>{quData.answers.length} Answer</h3>
       <AnswerContainer>
         <VoteContainer />
         <AnswerMain>
@@ -20,7 +22,12 @@ const DetailAnswer: React.FC<Tprops> = ({ quData }) => {
               <p key={answerId}>{content}</p>
             ))}
           </AnswerText>
-          <LabelContainer quData={quData} />
+          <LabelContainer
+            quData={quData}
+            deleteQu={deleteQu}
+            id={quData.questionId}
+            updateQu={updateQu}
+          />
         </AnswerMain>
       </AnswerContainer>
     </>

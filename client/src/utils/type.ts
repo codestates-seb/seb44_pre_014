@@ -20,4 +20,5 @@ export type TQuestion = {
     award: string;
   };
   createdAt: string;
+  view: number;
 };
