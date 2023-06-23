@@ -94,6 +94,9 @@ const EditQuestion = ({ id }) => {
             title={helpTitle[1]}
             help={helpSentances[1]}
           ></TextareaItem>
+          {!isbReady ? (
+            <div className="check-warning">* 20자 이상 입력하세요</div>
+          ) : null}
         </SingleWrapper>
         <SingleWrapper>
           <TagBar
@@ -183,6 +186,13 @@ const ItemContainer = styled.div`
 const SingleWrapper = styled.section`
   display: grid;
   grid-template-columns: 1fr;
+  .check-warning {
+    color: red;
+    font-size: 12px;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 0;
+  }
 `;
 
 const BtnWrapper = styled.div`

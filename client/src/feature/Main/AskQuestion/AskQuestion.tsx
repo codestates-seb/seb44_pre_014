@@ -22,7 +22,7 @@ const AskQuestion: React.FC = () => {
   const [writetag, setwriteTag] = useState([]);
   const [isbReady, setIsbReady] = useState(false);
   const [istReady, setIstReady] = useState(false);
-  const [selectHelp, setSelectHelp] = useState('4');
+  const [selectHelp, setSelectHelp] = useState('init');
   const postok = istReady && isbReady;
   const warningpost = () => {
     console.log('cannot post');
@@ -86,6 +86,9 @@ const AskQuestion: React.FC = () => {
             help={helpSentances[1]}
             value={body}
           ></TextareaItem>
+          {!isbReady && selectHelp === '1' ? (
+            <div className="check-warning">* 20자 이상 입력하세요</div>
+          ) : null}
           {selectHelp === '1' ? (
             <HelpItem
               title={bannerTitle[1]}
@@ -181,6 +184,13 @@ const ItemContainer = styled.div`
 const SingleWrapper = styled.section`
   display: grid;
   grid-template-columns: 1fr;
+  .check-warning {
+    color: red;
+    font-size: 12px;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 0;
+  }
 `;
 
 const BtnWrapper = styled.div`
@@ -207,9 +217,9 @@ const BtnContainer = styled.button`
   font-weight: 600;
   border: none;
   color: white;
-  background-color: var(--blue-300);
+  background-color: var(--blue-500);
   :hover {
-    background-color: var(--blue-500);
+    background-color: var(--blue-600);
   }
 `;
 

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 const TagBar = ({ writeTag, setwriteTag, title, help }) => {
   const [newTag, setNewTag] = useState('');
   const check = writeTag.includes(newTag); //초기 false
+  const warning = false;
 
   const TagHandler = (e: React.FormEvent<HTMLInputElement>) => {
     setNewTag(e.currentTarget.value);
@@ -44,7 +45,7 @@ const TagBar = ({ writeTag, setwriteTag, title, help }) => {
         {check && <div className="warning">* 이미 태그가 존재합니다</div>}
         <input
           className="tag-search"
-          placeholder="입력하세요"
+          placeholder="tag를 입력하세요"
           value={newTag}
           onChange={TagHandler}
           onKeyPress={handleOnKeyPress}
