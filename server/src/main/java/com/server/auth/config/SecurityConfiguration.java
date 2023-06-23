@@ -1,6 +1,6 @@
 package com.server.auth.config;
 
-import java.util.Collections;
+import java.util.List;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -85,7 +85,7 @@ public class SecurityConfiguration {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOriginPatterns(Collections.singletonList(""));
+        configuration.setAllowedOrigins(List.of("https://codestates.shop"));
         configuration.addAllowedMethod("");
         configuration.addAllowedHeader("*");
         configuration.addExposedHeader("Authorization");
