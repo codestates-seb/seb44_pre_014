@@ -20,7 +20,7 @@ const AskQuestion: React.FC = () => {
   const navigate = useNavigate();
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
-  const [writetag, setwriteTag] = useState('');
+  const [writetag, setwriteTag] = useState([]);
   const [isbReady, setIsbReady] = useState(false);
   const [istReady, setIstReady] = useState(false);
   const [selectHelp, setSelectHelp] = useState('4');
@@ -36,7 +36,7 @@ const AskQuestion: React.FC = () => {
     title.length > 0 ? setIstReady(true) : setIstReady(false);
   }, [title]);
 
-  const url = '/questions/write';
+  const url = '/api/questions/write';
   const newData = {
     title: title,
     content: body,
@@ -89,6 +89,7 @@ const AskQuestion: React.FC = () => {
         </SingleWrapper>
         <SingleWrapper onClick={() => setSelectHelp('2')}>
           <TagBar
+            writeTag={writetag}
             setwriteTag={setwriteTag}
             title={helpTitle[2]}
             help={helpSentances[2]}
