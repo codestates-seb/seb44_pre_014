@@ -1,13 +1,11 @@
 package com.server.auth.config;
 
-import java.util.List;
+import java.util.Collections;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
@@ -28,8 +26,6 @@ import com.server.auth.userdetails.OAuth2UserDetailsService;
 import com.server.auth.utils.CustomAuthorityUtils;
 
 @Configuration
-@EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration {
     private final JwtTokenizer jwtTokenizer;
     private final CustomAuthorityUtils customAuthorityUtils;
@@ -51,6 +47,7 @@ public class SecurityConfiguration {
         http
                 // click jacking 공격을 방지하기 위한 설정
                 .headers().frameOptions().sameOrigin()
+
                 // csrf 공격 방지
                 .and()
                 .csrf().disable()
@@ -87,14 +84,16 @@ public class SecurityConfiguration {
     // cors 설정
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration corsConfiguration = new CorsConfiguration();
-        corsConfiguration.setAllowedOrigins(List.of("https://codestates.shop/", "http://localhost:3000/", "http://localhost:8080/"));
-        corsConfiguration.setAllowedHeaders(List.of(""));
-        corsConfiguration.setExposedHeaders(List.of("Authorization", "Refresh"));
-        corsConfiguration.setAllowedMethods(List.of("POST", "GET", "PATCH", "DELETE", "OPTIONS"));
-        UrlBasedCorsConfigurationSource urlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource();
-        urlBasedCorsConfigurationSource.registerCorsConfiguration("/**", corsConfiguration);
-        return urlBasedCorsConfigurationSource;
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOriginPatterns(Collections.singletonList(""));
+        configuration.addAllowedMethod("");
+        configuration.addAllowedHeader("*");
+        configuration.addExposedHeader("Authorization");
+        configuration.setAllowCredentials(true);
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+
+        return source;
     }
 
     // spring security filter 등록
