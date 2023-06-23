@@ -4,6 +4,7 @@ import lombok.Getter;
 
 public enum
 ExceptionCode {
+    MEMBER_UNAUTHORIZED(401, "인증되지 않은 사용자입니다."),
     MEMBER_NOT_FOUND(404, "찾는 멤버가 없습니다."),
     MEMBER_EMAIL_EXISTS(409, "이메일이 중복됩니다."),
     INVALID_MEMBER(409, "email 또는 password 가 일치하지 않습니다"),
