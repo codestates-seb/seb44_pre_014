@@ -68,7 +68,7 @@ const StyledWrapper = styled.div`
   border-right: 1px solid var(--black-100);
   min-width: 164px;
 
-  @media screen and (max-width: 800px) {
+  @media screen and (max-width: 768px) {
     display: none;
   }
 `;

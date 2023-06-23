@@ -47,7 +47,6 @@ export default ProfileEdit;
 
 const MyPageContainer = styled.main`
   font-size: 14px;
-  width: calc(100%-200px);
   height: 100%;
 `;
 

@@ -15,11 +15,8 @@ export default ProfilePage;
 
 const DivContainer = styled.div`
   width: 100%;
-  display: flex;
-  justify-content: center;
 `;
 
 const ContentContainer = styled.div`
   padding: 24px;
-  max-width: 1100px;
 `;

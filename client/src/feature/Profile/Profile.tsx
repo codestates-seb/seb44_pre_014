@@ -60,6 +60,6 @@ export default Profile;
 
 const MyPageContainer = styled.main`
   font-size: 14px;
-  width: calc(100%-200px);
+  width: 100%;
   height: 100%;
 `;

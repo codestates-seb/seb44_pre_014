@@ -63,7 +63,7 @@ const MainPage = () => {
 };
 
 const StyledMainPage = styled.div`
-  max-width: 800px;
+  max-width: 1100px;
   position: relative;
 `;
 
