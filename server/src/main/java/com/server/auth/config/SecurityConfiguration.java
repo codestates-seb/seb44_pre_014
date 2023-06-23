@@ -37,9 +37,9 @@ public class SecurityConfiguration {
     private final OAuth2UserSuccessHandler oAuth2UserSuccessHandler;
 
     public SecurityConfiguration(JwtTokenizer jwtTokenizer,
-                                 CustomAuthorityUtils customAuthorityUtils,
-                                 OAuth2UserDetailsService oAuth2UserDetailsService,
-                                 OAuth2UserSuccessHandler oAuth2UserSuccessHandler) {
+            CustomAuthorityUtils customAuthorityUtils,
+            OAuth2UserDetailsService oAuth2UserDetailsService,
+            OAuth2UserSuccessHandler oAuth2UserSuccessHandler) {
         this.jwtTokenizer = jwtTokenizer;
         this.customAuthorityUtils = customAuthorityUtils;
         this.oAuth2UserDetailsService = oAuth2UserDetailsService;
@@ -51,7 +51,6 @@ public class SecurityConfiguration {
         http
                 // click jacking 공격을 방지하기 위한 설정
                 .headers().frameOptions().sameOrigin()
-
                 // csrf 공격 방지
                 .and()
                 .csrf().disable()
@@ -89,10 +88,13 @@ public class SecurityConfiguration {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("*")); // 모든 출처에대해 스크립트 기반의 HTTP 통신 허용
-        configuration.setAllowedHeaders(Arrays.asList("*"));
+        // configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "https://codestates.shop/")); // 모든 출처에대해 스크립트 기반의 HTTP 통신 허용
+        // configuration.setAllowedMethods(Arrays.asList("POST", "GET", "PATCH", "DELETE"));
+        configuration.addAllowedOrigin("*");
+        ; // 모든 출처에대해 스크립트 기반의 HTTP 통신 허용
         configuration.setAllowedMethods(Arrays.asList("POST", "GET", "PATCH", "DELETE"));
-        configuration.setAllowCredentials(true);
+        configuration.addAllowedHeader("*");
+        configuration.setAllowCredentials(false);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
@@ -105,7 +107,8 @@ public class SecurityConfiguration {
         public void configure(HttpSecurity builder) throws Exception {
             AuthenticationManager authenticationManager = builder.getSharedObject(AuthenticationManager.class);
 
-            JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(jwtTokenizer, authenticationManager);
+            JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(jwtTokenizer,
+                authenticationManager);
             jwtAuthenticationFilter.setFilterProcessesUrl("/members/login");
             jwtAuthenticationFilter.setAuthenticationSuccessHandler(new MemberAuthenticationSuccessHandler());
             jwtAuthenticationFilter.setAuthenticationFailureHandler(new MemberAuthenticationFailureHandler());
