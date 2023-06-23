@@ -89,7 +89,7 @@ public class SecurityConfiguration {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("*")); // 모든 출처에대해 스크립트 기반의 HTTP 통신 허용
+        configuration.setAllowedOrigins(Arrays.asList("https://codestates.shop/")); // 모든 출처에대해 스크립트 기반의 HTTP 통신 허용
         configuration.setAllowedHeaders(Arrays.asList("*"));
         configuration.setAllowedMethods(Arrays.asList("POST", "GET", "PATCH", "DELETE"));
 
