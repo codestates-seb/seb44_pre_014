@@ -145,12 +145,12 @@ const HeadContainer = styled.section`
 
 const HeaderHelp = styled.section`
   width: 70%;
-  background-color: var(--blue-050);
+  background-color: var(--yellow-100);
   padding: 10px 0px;
   border-radius: 3px;
   margin-top: 30px;
   color: var(--fc-medium);
-  border: 1px solid var(--powder-200);
+  border: 1px solid var(--black-200);
   .head {
     display: flex;
     font-weight: 500;
@@ -163,6 +163,11 @@ const HeaderHelp = styled.section`
     flex-direction: column;
     padding: 0;
     font-size: 12px;
+    ul {
+      height: 5px;
+      margin-bottom: 5px;
+    }
+    margin-bottom: 20px;
   }
 `;
 

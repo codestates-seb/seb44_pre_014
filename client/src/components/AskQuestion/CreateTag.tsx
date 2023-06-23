@@ -100,7 +100,7 @@ const TagsName = styled.div`
   display: flex;
   background-color: var(--powder-100);
   width: auto;
-  height: 30px;
+  height: auto;
   padding: 3px 30px;
   border-radius: 3px;
   font-size: 13px;
