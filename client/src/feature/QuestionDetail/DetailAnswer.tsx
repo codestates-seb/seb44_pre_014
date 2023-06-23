@@ -6,7 +6,7 @@ import { TQuestion } from 'utils/type';
 
 type Tprops = {
   quData: TQuestion;
-  deleteQu: (id: number) => void;
+  deleteQu: (id: number, type: string) => void;
   updateQu: (id: number) => void;
 };
 
@@ -24,8 +24,9 @@ const DetailAnswer: React.FC<Tprops> = ({ quData, deleteQu, updateQu }) => {
             <LabelContainer
               quData={quData}
               deleteQu={deleteQu}
-              id={quData.questionId}
+              id={answerId}
               updateQu={updateQu}
+              type="answer"
             />
           </AnswerMain>
         </AnswerContainer>

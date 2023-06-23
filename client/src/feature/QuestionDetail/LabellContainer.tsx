@@ -3,14 +3,14 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import UserInfo from './UserInfo';
-import cat from '../../assets/images/cat.jpg';
 import { TQuestion } from 'utils/type';
 
 type Tprops = {
   quData: TQuestion;
-  deleteQu: (id: number) => void;
+  deleteQu?: (id: number, type: string) => void;
   id: number;
   updateQu: (id: number) => void;
+  type: string;
 };
 
 const LabelContainer: React.FC<Tprops> = ({
@@ -18,22 +18,27 @@ const LabelContainer: React.FC<Tprops> = ({
   deleteQu,
   id,
   updateQu,
+  type,
 }) => {
   const navigate = useNavigate();
   const onClickButton = () => navigate('/button');
   const handleEdit = () => {
     updateQu(id);
   };
-  console.log(quData);
+  console.log(id);
   return (
     quData && (
       <Label>
         <ButtonContainer>
           <DetailButton onClick={onClickButton}>Share</DetailButton>
           <DetailButton onClick={handleEdit}>Edit</DetailButton>
-          <DetailButton onClick={() => deleteQu(id)}>Delete</DetailButton>
+          <DetailButton onClick={() => deleteQu(id, type)}>Delete</DetailButton>
         </ButtonContainer>
-        <UserInfo img={cat} site="/userinfo" name={quData.writer} />
+        <UserInfo
+          img={`http://teamdev.shop/members/${quData.memberId}/files`}
+          site="/userinfo"
+          name={quData.writer}
+        />
       </Label>
     )
   );

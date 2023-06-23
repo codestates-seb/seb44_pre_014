@@ -21,4 +21,6 @@ export type TQuestion = {
   };
   createdAt: string;
   view: number;
+  memberId: number;
+  answerId: number;
 };

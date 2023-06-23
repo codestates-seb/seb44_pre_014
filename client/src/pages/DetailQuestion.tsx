@@ -44,9 +44,15 @@ export default function DetailQuestion() {
   };
 
   // 질문글 삭제하기
-  const deleteQuestion = async (questionId) => {
+  const deleteQuestion = async (id: number, type: string) => {
     try {
-      questionId && (await API.DELETE({ url: `/api/questions/${questionId}` }));
+      if (type === 'question') {
+        //질문삭제
+        await API.DELETE({ url: `/api/questions/${id}` });
+      } else {
+        // 답변삭제
+        await API.DELETE({ url: `/answers/${id}` });
+      }
       navigate(`/`);
     } catch (err) {
       console.log(err);
@@ -71,6 +77,7 @@ export default function DetailQuestion() {
           <MainContainer>
             <DetailMainText quData={quData} />
             <LabelContainer
+              type="question"
               quData={quData}
               deleteQu={deleteQuestion}
               id={quData.questionId}
