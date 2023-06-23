@@ -12,6 +12,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import TagBar from 'components/AskQuestion/CreateTag';
+import UploadFile from 'components/AskQuestion/UploadFile';
 
 const AskQuestion: React.FC = () => {
   //memebersId 받아와야하는데..? store나 localstoraged에서 불러와야해야
@@ -110,6 +111,9 @@ const AskQuestion: React.FC = () => {
             ></HelpItem>
           ) : null}
         </SingleWrapper>
+        <SingleWrapper>
+          <UploadFile />
+        </SingleWrapper>
       </ItemContainer>
       <BtnWrapper>
         <BtnContainer
@@ -132,7 +136,6 @@ const MainWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 0px 30px;
 `;
 
 const HeadContainer = styled.section`
@@ -155,7 +158,7 @@ const HeaderHelp = styled.section`
   background-color: var(--blue-050);
   padding: 50px 0px;
   border-radius: 3px;
-  margin-top: 30px;
+  margin-top: 10px;
   color: var(--fc-medium);
   border: 1px solid var(--powder-200);
   .head {
@@ -166,8 +169,10 @@ const HeaderHelp = styled.section`
   }
   .contents {
     display: flex;
+    flex-direction: column;
+    padding: 0;
     font-weight: 400;
-    font-size: 15px;
+    font-size: 12px;
     padding: 10px 30px;
   }
 `;

@@ -219,9 +219,9 @@ const BtnContainer = styled.button`
   font-weight: 600;
   border: none;
   color: white;
-  background-color: var(--blue-300);
+  background-color: var(--blue-500);
   :hover {
-    background-color: var(--blue-500);
+    background-color: var(--blue-600);
   }
 `;
 
