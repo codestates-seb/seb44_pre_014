@@ -2,6 +2,7 @@ import { Profile } from 'components/MyPage/Myinfo_top';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import API from '../../services/api/index';
 import styled from 'styled-components';
 
 const Edit_main = () => {
@@ -17,12 +18,29 @@ const Edit_main = () => {
     setAbout(e.currentTarget.value);
   };
 
+  const memberId = 3;
+  const url = `/members/${memberId}/edit`;
+  const editData = {
+    username: display,
+    content: about,
+  };
+  const newProfileEdit = async () => {
+    try {
+      const res = await API.PATCH({ url: url, data: editData });
+      console.log(res);
+      navigate('/');
+      window.scrollTo({ top: 0 });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <MainContainer>
       <div className="public-title">Public information</div>
       <TypeContainer>
         <TypeTitle>
-          Profile Image
+          <div className="edit-image">Profile Image</div>
           <Profile></Profile>
         </TypeTitle>
         <TypeInput></TypeInput>
@@ -35,7 +53,7 @@ const Edit_main = () => {
         </TypeTitle>
       </TypeContainer>
       <ButtonContainer>
-        <SaveButton>Save Profile</SaveButton>
+        <SaveButton onClick={newProfileEdit}>Save Profile</SaveButton>
         <CancelButton
           onClick={() => {
             navigate('/');
@@ -74,6 +92,10 @@ const TypeTitle = styled.div`
   font-size: 15px;
   font-weight: 600;
   flex-direction: column;
+  .edit-image {
+    margin-bottom: 6px;
+    margin-left: 3px;
+  }
   input {
     width: 50%;
     margin: 20px 0px;

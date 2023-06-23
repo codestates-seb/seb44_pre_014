@@ -10,6 +10,38 @@ const Myinfo_top = ({ userData }) => {
   const navigate = useNavigate();
   const { myname, myemail, mycontent } = useStoreMydata();
 
+  function DateFormat(now) {
+    // 날짜 형식 변환
+    const isoDateString = now;
+    const date = new Date(isoDateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const Formated = `${year}-${month}-${day}`;
+    return Formated;
+  }
+  function Diff(now, at) {
+    // 현재 시간과 입력 시간과의 차이
+    const startDate = new Date(now);
+    const endDate = new Date(at);
+    const timeDiff = Math.abs(endDate.getTime() - startDate.getTime());
+    const diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+    return diffDays + 1;
+  }
+
+  const now = DateFormat(new Date());
+  const signin = DateFormat(userData?.modified); //회원가입 시간
+  const modifiedWhen = DateFormat(userData?.created); // 회원정보 변경 시간
+
+  const modifiedTime = Diff(now, modifiedWhen); // 정보수정후 얼마나 시간이 지났는지
+  const since = Diff(now, signin); // 생성후 얼마나 시간이 지났는지
+
+  const history = {
+    // 회원관련 시간 정보
+    signupDate: since,
+    modified: modifiedTime,
+  };
+
   return (
     <ProfileContainer>
       <div className="profile-top">
@@ -22,6 +54,13 @@ const Myinfo_top = ({ userData }) => {
             {userData ? userData.username : null}
           </div>
           <UserContents>{userData ? userData.content : null}</UserContents>
+          <UserContents>
+            {' '}
+            <div className="day-info">{`🎂 Member for ${history.signupDate} days`}</div>
+            <div className="day-info">{`📝 Modified before ${
+              history.modified - 1
+            } days`}</div>
+          </UserContents>
           <UserEmail className="display-intro">
             {userData ? userData.email : null}
           </UserEmail>
@@ -78,7 +117,7 @@ export const Profile = styled.div`
   font-size: 55px;
   width: 120px;
   height: 120px;
-  margin-top: 10px;
+  margin-bottom: 10px;
   @media (max-width: 612px) {
     width: 60px;
     height: 60px;
@@ -130,6 +169,9 @@ const UserContents = styled.div`
   margin: 0;
   font-size: 15px;
   color: var(--black-500);
+  .day-info {
+    font-size: 12px;
+  }
   @media (max-width: 612px) {
     font-size: 11px;
   }

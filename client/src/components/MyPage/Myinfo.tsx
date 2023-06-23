@@ -15,7 +15,9 @@ const Myinfo = () => {
     questions: [],
     answers: [],
   });
-  const infourl = '/members/1';
+
+  const memberId = 3;
+  const infourl = `/members/${memberId}`;
 
   //따로 스토어 파서 저장하자.
   const requestUserInfo = async () => {

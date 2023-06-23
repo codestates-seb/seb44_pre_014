@@ -13,7 +13,7 @@ const MyEdit = () => {
     created: '',
     modified: '',
   });
-  const infourl = '/members/1';
+  const infourl = '/members/3';
 
   //따로 스토어 파서 저장하자.
   const requestUserInfo = async () => {
