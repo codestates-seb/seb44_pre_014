@@ -3,6 +3,9 @@ import styled from 'styled-components';
 const MyQuestionList = ({ questionList }) => {
   return (
     <StyledMyQuestionList>
+      {questionList.length === 0 && (
+        <NoneList>You have not asked any questions</NoneList>
+      )}
       {questionList.map(({ solve, title, answers }) => (
         <QuestionsBox>
           <div className="icon-ques">{solve ? '✅' : '👾'}</div>
@@ -19,6 +22,14 @@ export default MyQuestionList;
 const StyledMyQuestionList = styled.div`
   border: 1px solid var(--black-100);
   border-radius: 5px;
+`;
+
+const NoneList = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 155px;
+  color: var(--fc-light);
 `;
 
 const QuestionsBox = styled.div`

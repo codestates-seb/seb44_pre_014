@@ -10,7 +10,7 @@ import MyPageTabProfile from './MyPageTab/MyPageTabProfile';
 import MyPageTabQuestion from './MyPageTab/MyPageTabQuestion';
 import MyPageTabAnswer from './MyPageTab/MyPageTabAnswer';
 
-const Myinfo = () => {
+const Profile = () => {
   const { id } = useParams();
   const [userData, setUserData] = useState({
     username: '',
@@ -23,7 +23,6 @@ const Myinfo = () => {
   });
   const { tab } = useStoreTab();
 
-  //따로 스토어 파서 저장하자.
   const requestUserInfo = async () => {
     try {
       const res = await API.GET(API_MEMBER(id));
@@ -57,7 +56,7 @@ const Myinfo = () => {
   );
 };
 
-export default Myinfo;
+export default Profile;
 
 const MyPageContainer = styled.main`
   font-size: 14px;

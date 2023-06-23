@@ -1,11 +1,13 @@
 import styled from 'styled-components';
-import Myinfo_nav from 'feature/MyPage/Myinfo_nav';
-import Myinfo_top from 'feature/MyPage/Myinfo_top';
-import Edit_main from './Edit_main';
+import Myinfo_nav from 'feature/Profile/Myinfo_nav';
+import Myinfo_top from 'feature/Profile/Myinfo_top';
 import API from '../../services/api/index';
 import { useState, useEffect } from 'react';
+import Edit_main from 'components/MyPageEdit/Edit_main';
+import { API_MEMBER } from 'services/api/type';
+import { useParams } from 'react-router-dom';
 
-const MyEdit = () => {
+const ProfileEdit = () => {
   const [userData, setUserData] = useState({
     username: '',
     email: '',
@@ -13,12 +15,12 @@ const MyEdit = () => {
     created: '',
     modified: '',
   });
-  const infourl = '/members/3';
 
+  const { id } = useParams();
   //따로 스토어 파서 저장하자.
   const requestUserInfo = async () => {
     try {
-      const res = await API.GET(infourl);
+      const res = await API.GET(API_MEMBER(id));
       console.log(res);
       setUserData({
         username: res.data.username,
@@ -38,39 +40,29 @@ const MyEdit = () => {
 
   return (
     <MyPageContainer>
-      <Myinfo_top userData={userData}></Myinfo_top>
-      <MyPageBarSection>
-        <Myinfo_nav></Myinfo_nav>
-      </MyPageBarSection>
-      <MyPageMainSection>
-        <EditContainer>
-          <div className="edit-title">Edit Your Profile</div>
-          <Edit_main />
-        </EditContainer>
-      </MyPageMainSection>
+      <Myinfo_top userData={userData} />
+      <Myinfo_nav />
+      <EditContainer>
+        <div className="edit-title">Edit Your Profile</div>
+        <Edit_main userData={userData} />
+      </EditContainer>
     </MyPageContainer>
   );
 };
 
-export default MyEdit;
+export default ProfileEdit;
 
 const MyPageContainer = styled.main`
   font-size: 14px;
   width: calc(100%-200px);
   height: 100%;
 `;
-const MyPageBarSection = styled.section`
-  padding-left: 20px;
-`;
-const MyPageMainSection = styled.section`
-  padding-top: 15px;
-  padding-left: 20px;
-`;
 
 const EditContainer = styled.div`
   .edit-title {
     font-size: 27px;
-    padding: 20px 20px;
+    padding-bottom: 24px;
+    margin-bottom: 16px;
     border-bottom: 1px solid var(--black-100);
   }
 `;

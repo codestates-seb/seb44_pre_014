@@ -5,6 +5,9 @@ import { RiMessage2Fill } from 'react-icons/ri';
 const MyAnswerList = ({ answerList }) => {
   return (
     <StyledMyAnswerList>
+      {answerList.length === 0 && (
+        <NoneList>You have not answered any questions</NoneList>
+      )}
       {answerList.map(({ choose, content }) => (
         <AnswersBox>
           <RiMessage2Fill className="icon-info"></RiMessage2Fill>
@@ -21,6 +24,14 @@ export default MyAnswerList;
 const StyledMyAnswerList = styled.div`
   border: 1px solid var(--black-100);
   border-radius: 5px;
+`;
+
+const NoneList = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 155px;
+  color: var(--fc-light);
 `;
 
 const AnswersBox = styled.div`

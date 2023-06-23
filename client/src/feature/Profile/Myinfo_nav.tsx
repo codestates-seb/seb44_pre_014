@@ -1,10 +1,16 @@
 import styled from 'styled-components';
 import { useStoreTab } from 'store/tab/store.tab';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const Myinfo_nav = () => {
   const { tab, changeTab } = useStoreTab();
+  const navigate = useNavigate();
+  const { id } = useParams();
 
-  const handleChangeTab = (tabId) => () => changeTab(tabId);
+  const handleChangeTab = (tabId) => () => {
+    if (location.pathname.includes('edit')) navigate(`/profile/${id}`);
+    changeTab(tabId);
+  };
 
   return (
     <MenuContainer className="flex-space-between">
@@ -26,12 +32,12 @@ const Myinfo_nav = () => {
       >
         Answers
       </Menu>
-      <Menu
+      {/* <Menu
         className={`tab-item selected-${tab == 3}`}
         onClick={handleChangeTab(3)}
       >
         Settings
-      </Menu>
+      </Menu> */}
     </MenuContainer>
   );
 };

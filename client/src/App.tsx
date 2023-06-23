@@ -1,14 +1,14 @@
 import { Route, Routes } from 'react-router-dom';
 import MainPage from 'pages/MainPage';
-import MyPage from 'pages/MyPage';
-import MyPageEdit from 'pages/MyPageEdit';
+import ProfilePage from 'pages/ProfilePage';
+import ProfileEditPage from 'pages/ProfileEditPage';
 
 const App = () => {
   return (
     <Routes>
-      <Route path="/mypage/:id" element={<MyPage />} />
-      <Route path="/mypage/edit" element={<MyPageEdit />} />
-      <Route path="/main" element={<MainPage />} />
+      <Route path="/" element={<MainPage />} />
+      <Route path="/profile/:id" element={<ProfilePage />} />
+      <Route path="/profile/edit/:id" element={<ProfileEditPage />} />
     </Routes>
   );
 };

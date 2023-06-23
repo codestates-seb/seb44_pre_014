@@ -1,12 +1,13 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useStoreMydata } from 'store/count/store.mydata';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useGetUserInfo } from 'store/userInfo/store.userInfo';
 import styled from 'styled-components';
 import { PencilSvg } from './MyPageSvg';
 
 const Myinfo_top = ({ userData }) => {
   const navigate = useNavigate();
-  const { myname, myemail, mycontent } = useStoreMydata();
+  const { id } = useParams();
+  const userInfo = useGetUserInfo();
 
   function DateFormat(now) {
     // 날짜 형식 변환
@@ -44,7 +45,7 @@ const Myinfo_top = ({ userData }) => {
   return (
     <ProfileContainer>
       <Profile className="profile-img">
-        <img src={`https://teamdev.shop/members/1/files`} />
+        <img src={`https://teamdev.shop/members/${id}/files`} />
       </Profile>
       <ItemContainer>
         <div className="display-name">
@@ -61,20 +62,22 @@ const Myinfo_top = ({ userData }) => {
           {userData ? userData.email : null}
         </UserEmail>
       </ItemContainer>
-      <ProfileBtnContainer>
-        <div
-          className="profile-edit-button"
-          onClick={() => {
-            navigate('/mypage/edit');
-          }}
-        >
-          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18">
-            <path d={PencilSvg}></path>
-          </svg>
-          Edit profile
-        </div>
-        {/* <div className="profile-detail-button">Profiles</div> */}
-      </ProfileBtnContainer>
+      {userInfo.memberId === Number(id) && (
+        <ProfileBtnContainer>
+          <div
+            className="profile-edit-button"
+            onClick={() => {
+              navigate(`/profile/edit/${id}`);
+            }}
+          >
+            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18">
+              <path d={PencilSvg}></path>
+            </svg>
+            Edit profile
+          </div>
+          {/* <div className="profile-detail-button">Profiles</div> */}
+        </ProfileBtnContainer>
+      )}
     </ProfileContainer>
   );
 };
