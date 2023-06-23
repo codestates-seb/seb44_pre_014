@@ -9,10 +9,6 @@ import styled from 'styled-components';
 
 const EditPage = () => {
   const param = useParams();
-  useEffect(() => {
-    console.log(param.id);
-    console.log('edit page');
-  }, []);
   return (
     <div>
       <Header />

@@ -4,7 +4,7 @@ import API from '../../services/api/index';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-const UploadFile = () => {
+const UploadFile = ({ edit }) => {
   const id = useParams();
   const [fileurl, setFileurl] = useState(``);
   const [file, setFile] = useState();
@@ -23,7 +23,7 @@ const UploadFile = () => {
         formData.append('files', file);
 
         await API.POST({
-          url: `/api/questions/${id.id}/files?size=1`,
+          url: `/api/questions/${id.id}/files`,
           data: formData,
           headers: { 'Content-Type': 'multipart/form-data' },
         });
@@ -43,7 +43,9 @@ const UploadFile = () => {
     }
   };
   useEffect(() => {
-    getDataurl();
+    if (edit) {
+      getDataurl();
+    }
     console.log(id);
   }, []);
 

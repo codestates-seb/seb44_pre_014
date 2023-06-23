@@ -4,6 +4,7 @@ import API from '../../../services/api/index';
 import { helpTitle, helpSentances, HowToEdit } from './Banner';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import UploadFile from 'components/AskQuestion/UploadFile';
 import TagBar from 'components/AskQuestion/CreateTag';
 
 const EditQuestion = ({ id }) => {
@@ -22,11 +23,11 @@ const EditQuestion = ({ id }) => {
     console.log('cannot post');
   };
   useEffect(() => {
-    body.length > 20 ? setIsbReady(true) : setIsbReady(false);
+    body?.length > 20 ? setIsbReady(true) : setIsbReady(false);
   }, [body]);
 
   useEffect(() => {
-    title.length > 0 ? setIstReady(true) : setIstReady(false);
+    title?.length > 0 ? setIstReady(true) : setIstReady(false);
   }, [title]);
 
   const patchurl = `/api/questions/${id}/edit`;
@@ -71,7 +72,7 @@ const EditQuestion = ({ id }) => {
           <div className="head">{helpTitle[3]}</div>
           <div className="contents">
             {HowToEdit.map((el) => (
-              <ul>
+              <ul key={el}>
                 <li>{el}</li>
               </ul>
             ))}
@@ -105,6 +106,9 @@ const EditQuestion = ({ id }) => {
             title={helpTitle[2]}
             help={helpSentances[2]}
           />
+        </SingleWrapper>
+        <SingleWrapper>
+          <UploadFile edit={true} />
         </SingleWrapper>
       </ItemContainer>
       <BtnWrapper>

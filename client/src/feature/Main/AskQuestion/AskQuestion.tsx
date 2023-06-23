@@ -9,14 +9,13 @@ import {
   bannerTitle,
   bannerContents,
 } from './Banner';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import TagBar from 'components/AskQuestion/CreateTag';
 import UploadFile from 'components/AskQuestion/UploadFile';
 
-const AskQuestion: React.FC = () => {
+const AskQuestion = ({ id }) => {
   //memebersId 받아와야하는데..? store나 localstoraged에서 불러와야해야
-  const member = 1; //일단 임의로 넣기
   const navigate = useNavigate();
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
@@ -29,18 +28,18 @@ const AskQuestion: React.FC = () => {
     console.log('cannot post');
   };
   useEffect(() => {
-    body.length > 20 ? setIsbReady(true) : setIsbReady(false);
+    body?.length > 20 ? setIsbReady(true) : setIsbReady(false);
   }, [body]);
 
   useEffect(() => {
-    title.length > 0 ? setIstReady(true) : setIstReady(false);
+    title?.length > 0 ? setIstReady(true) : setIstReady(false);
   }, [title]);
 
   const url = '/api/questions/write';
   const newData = {
     title: title,
     content: body,
-    memberId: member,
+    memberId: id,
   };
 
   const goToMain = () => {
@@ -112,7 +111,7 @@ const AskQuestion: React.FC = () => {
           ) : null}
         </SingleWrapper>
         <SingleWrapper>
-          <UploadFile />
+          <UploadFile edit={false} />
         </SingleWrapper>
       </ItemContainer>
       <BtnWrapper>

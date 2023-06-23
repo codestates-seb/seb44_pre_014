@@ -10,16 +10,12 @@ import styled from 'styled-components';
 const AskPage = () => {
   const param = useParams();
 
-  useEffect(() => {
-    console.log(param);
-    console.log('기본 ask');
-  }, []);
   return (
     <div>
       <Header />
       <DivContainer>
         <ContentContainer>
-          <AskQuestion />
+          <AskQuestion id={param.id} />
         </ContentContainer>
       </DivContainer>
       <Footer />

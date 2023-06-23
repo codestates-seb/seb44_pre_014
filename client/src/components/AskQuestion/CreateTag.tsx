@@ -4,15 +4,17 @@ import { useEffect, useState } from 'react';
 const TagBar = ({ writeTag, setwriteTag, title, help }) => {
   const [newTag, setNewTag] = useState('');
   const check = writeTag.includes(newTag); //초기 false
-  const warning = false;
 
   const TagHandler = (e: React.FormEvent<HTMLInputElement>) => {
     setNewTag(e.currentTarget.value);
   };
 
   const handleOnKeyPress = (e) => {
-    if (e.key === 'Enter' && writeTag.length < 5) {
-      checktagexist();
+    if (e.key === 'Enter') {
+      if (writeTag?.length === 5) {
+        console.log('5개 태그입니다!');
+        return;
+      }
       if (!check) {
         setwriteTag([...writeTag, newTag]);
         setNewTag('');
@@ -22,10 +24,6 @@ const TagBar = ({ writeTag, setwriteTag, title, help }) => {
     }
   };
 
-  const checktagexist = () => {
-    console.log(check);
-  };
-
   const deleteTag = (event) => {
     const deltag: string = event.currentTarget.innerHTML;
     console.log(deltag);
@@ -33,7 +31,6 @@ const TagBar = ({ writeTag, setwriteTag, title, help }) => {
   };
 
   useEffect(() => {
-    console.log(writeTag);
     console.log('update');
   }, [writeTag]);
 
