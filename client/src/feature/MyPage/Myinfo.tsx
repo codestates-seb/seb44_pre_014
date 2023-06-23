@@ -1,11 +1,17 @@
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import Myinfo_nav from './Myinfo_nav';
-import Myinfo_main from './Myinfo_main';
 import API from '../../services/api/index';
 import Myinfo_top from './Myinfo_top';
+import { API_MEMBER } from 'services/api/type';
+import { useParams } from 'react-router-dom';
+import { useStoreTab } from 'store/tab/store.tab';
+import MyPageTabProfile from './MyPageTab/MyPageTabProfile';
+import MyPageTabQuestion from './MyPageTab/MyPageTabQuestion';
+import MyPageTabAnswer from './MyPageTab/MyPageTabAnswer';
 
 const Myinfo = () => {
+  const { id } = useParams();
   const [userData, setUserData] = useState({
     username: '',
     email: '',
@@ -15,14 +21,12 @@ const Myinfo = () => {
     questions: [],
     answers: [],
   });
-
-  const memberId = 3;
-  const infourl = `/members/${memberId}`;
+  const { tab } = useStoreTab();
 
   //따로 스토어 파서 저장하자.
   const requestUserInfo = async () => {
     try {
-      const res = await API.GET(infourl);
+      const res = await API.GET(API_MEMBER(id));
       console.log(res);
       setUserData({
         username: res.data.username,
@@ -45,12 +49,10 @@ const Myinfo = () => {
   return (
     <MyPageContainer>
       <Myinfo_top userData={userData} />
-      <MyPageBarSection>
-        <Myinfo_nav></Myinfo_nav>
-      </MyPageBarSection>
-      <MyPageMainSection>
-        <Myinfo_main userData={userData} />
-      </MyPageMainSection>
+      <Myinfo_nav />
+      {tab == 0 && <MyPageTabProfile userData={userData} />}
+      {tab == 1 && <MyPageTabQuestion userData={userData} />}
+      {tab == 2 && <MyPageTabAnswer userData={userData} />}
     </MyPageContainer>
   );
 };
@@ -61,11 +63,4 @@ const MyPageContainer = styled.main`
   font-size: 14px;
   width: calc(100%-200px);
   height: 100%;
-`;
-const MyPageBarSection = styled.section`
-  padding-left: 20px;
-`;
-const MyPageMainSection = styled.section`
-  padding-top: 15px;
-  padding-left: 20px;
 `;

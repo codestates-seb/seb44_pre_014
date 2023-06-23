@@ -1,4 +1,4 @@
-import { Profile } from 'components/MyPage/Myinfo_top';
+import { Profile } from 'feature/MyPage/Myinfo_top';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';

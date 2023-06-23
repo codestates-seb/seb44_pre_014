@@ -86,6 +86,7 @@ const Footerbox = styled.div`
   height: 8%;
   color: whitesmoke;
   justify-content: center;
+
   img {
     width: 44px;
     height: 44px;

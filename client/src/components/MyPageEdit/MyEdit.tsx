@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import Myinfo_nav from 'components/MyPage/Myinfo_nav';
-import Myinfo_top from 'components/MyPage/Myinfo_top';
+import Myinfo_nav from 'feature/MyPage/Myinfo_nav';
+import Myinfo_top from 'feature/MyPage/Myinfo_top';
 import Edit_main from './Edit_main';
 import API from '../../services/api/index';
 import { useState, useEffect } from 'react';

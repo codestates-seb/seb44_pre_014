@@ -1,11 +1,10 @@
 import styled from 'styled-components';
-import MyList from './MyAnswerList';
 import MyAnswerList from './MyAnswerList';
 import MyQuestionList from './MyQuestionList';
 
-const Myinfo_main = ({ userData }) => {
+const MyPageTabProfile = ({ userData }) => {
   return (
-    <MainContainer>
+    <StyledMyPageTabProfile>
       <SideContainer>
         <StatContainer>
           <StatTitle>Stats</StatTitle>
@@ -26,40 +25,37 @@ const Myinfo_main = ({ userData }) => {
         </StatContainer>
       </SideContainer>
       <InfoContainer>
-        <QuestionsBox>
-          <MyQuestion>
-            <MyQuestionList userData={userData}></MyQuestionList>
-          </MyQuestion>
-          <MyAnswer>
-            <MyAnswerList userData={userData} />
-          </MyAnswer>
-        </QuestionsBox>
+        <MyQuestion>
+          <StatTitle>Questions</StatTitle>
+          <MyQuestionList questionList={userData.questions.slice(0, 3)} />
+        </MyQuestion>
+        <MyAnswer>
+          <StatTitle>Answers</StatTitle>
+          <MyAnswerList answerList={userData.answers.slice(0, 3)} />
+        </MyAnswer>
       </InfoContainer>
-    </MainContainer>
+    </StyledMyPageTabProfile>
   );
 };
 
-export default Myinfo_main;
+export default MyPageTabProfile;
 
-const MainContainer = styled.div`
+const StyledMyPageTabProfile = styled.div`
   display: flex;
   flex-direction: row;
-  @media (max-width: 1300px) {
-    padding-left: 30px;
-    margin-right: 40px;
+  gap: 24px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
   }
 `;
 
 const SideContainer = styled.div`
-  margin: 12px;
-  margin-top: 23px;
   width: 25%;
   display: flex;
-  border-radius: 3px;
-  border: 1px solid var(--fc-light);
-  max-height: 100px;
-  @media (max-width: 800px) {
-    display: none;
+
+  @media (max-width: 768px) {
+    width: 100%;
   }
 `;
 
@@ -72,10 +68,11 @@ const StatContainer = styled.div`
 
 const StatTitle = styled.div`
   display: flex;
-  padding: 8px;
-  margin-left: 5px;
-  @media (max-width: 900px) {
-    font-size: 17px;
+  margin-bottom: 8px;
+  font-size: 21px;
+
+  @media (max-width: 768px) {
+    font-size: 19px;
   }
 `;
 
@@ -83,16 +80,17 @@ const StatBox = styled.div`
   display: flex;
   font-size: 17px;
   color: var(--black-600);
-  padding: 5px;
+  padding: 12px;
   align-items: center;
   justify-content: center;
+  gap: 16px;
+  border-radius: 3px;
+  border: 1px solid var(--black-100);
+
   div {
-    margin: 0px 20px;
     font-size: 13px;
-    @media (max-width: 900px) {
-      font-size: 13px;
-    }
   }
+
   .count {
     font-size: 18px;
     color: black;
@@ -100,35 +98,22 @@ const StatBox = styled.div`
 `;
 
 const InfoContainer = styled.div`
-  margin: 12px;
   display: flex;
   width: 75%;
   flex-direction: column;
-  @media (max-width: 800px) {
+  gap: 24px;
+
+  @media (max-width: 768px) {
     width: 100%;
   }
 `;
 
-const QuestionsBox = styled.div`
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-`;
-
 const MyQuestion = styled.div`
   display: flex;
-  border: 1px solid var(--black-075);
-  margin: 12px;
-  border-radius: 3px;
-  min-height: 100px;
   flex-direction: column;
 `;
 
 const MyAnswer = styled.div`
   display: flex;
-  border: 1px solid var(--black-075);
-  margin: 12px;
-  border-radius: 3px;
-  min-height: 100px;
   flex-direction: column;
 `;
