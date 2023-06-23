@@ -57,6 +57,7 @@ const StyledWrapper = styled.div`
   border-bottom: 1px solid var(--black-100);
   z-index: 100;
 `;
+
 const HeaderContainer = styled.div`
   position: sticky;
   width: 1250px;
