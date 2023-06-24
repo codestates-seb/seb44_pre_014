@@ -21,9 +21,7 @@ const ProfileEditPage = () => {
 export default ProfileEditPage;
 
 const StyledProfileEditPage = styled.div`
-  max-width: 1100px;
-  display: flex;
-  justify-content: center;
+  width: 100%;
 `;
 
 const ContentContainer = styled.div`
