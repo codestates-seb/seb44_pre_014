@@ -1,0 +1,59 @@
+= Stack Overflow 클론 웹 애플리케이션 =
+:sectnums:
+:toc: left
+:toclevels: 4
+:toc-title: Table of Contents
+:source-highlighter: prettify
+
+14조 개발의민족
+
+v1.0.0, 2023.06.24
+
+***
+== MemberController ==
+=== 회원 등록
+.curl-request
+include::{snippets}/post-member/curl-request.adoc[]
+
+.http-request
+include::{snippets}/post-member/http-request.adoc[]
+
+.request-fields
+include::{snippets}/post-member/request-fields.adoc[]
+
+.http-response
+include::{snippets}/post-member/http-response.adoc[]
+
+
+***
+== QuestionController ==
+=== 질문 등록
+.curl-request
+include::{snippets}/post-question/curl-request.adoc[]
+
+.http-request
+include::{snippets}/post-question/http-request.adoc[]
+
+.request-fields
+include::{snippets}/post-question/request-fields.adoc[]
+
+.http-response
+include::{snippets}/post-question/http-response.adoc[]
+
+
+***
+== AnswerController ==
+=== 답변 등록
+.curl-request
+include::{snippets}/post-answer/curl-request.adoc[]
+
+.http-request
+include::{snippets}/post-answer/http-request.adoc[]
+
+.request-fields
+include::{snippets}/post-answer/request-fields.adoc[]
+
+.http-response
+include::{snippets}/post-answer/http-response.adoc[]
+
+

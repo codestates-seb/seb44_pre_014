@@ -18,7 +18,7 @@ import com.server.kakao.service.KakaoService;
 @RestController
 @RequestMapping("/kakao")
 public class KakaoController {
-    @Value("${kakao.redirect-url}")
+//    @Value("${kakao.redirect-url}")
     private String redirecUrl;
 
     private String accessToken;

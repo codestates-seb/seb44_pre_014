@@ -8,10 +8,10 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 @Component
 public class KakaoAuth {
-    @Value("${kakao.redirect-url}")
+//    @Value("${kakao.redirect-url}")
     private String redirecUrl;
 
-    @Value("${kakao.api-key}")
+//    @Value("${kakao.api-key}")
     private String apiKey;
 
     private String tokenApiUrl = "https://kauth.kakao.com/oauth/token";

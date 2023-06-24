@@ -3,10 +3,12 @@ package com.server.question.dto;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 public class QuestionDto {
     @Getter
+    @AllArgsConstructor
     public static class Post {
         private String title;
 
@@ -18,6 +20,7 @@ public class QuestionDto {
     }
 
     @Getter
+    @AllArgsConstructor
     public static class Patch {
         private String title;
 

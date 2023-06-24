@@ -30,8 +30,8 @@ spring:
     # sql:
         # init:
             # mode: always
-kakao:
-    redirect-url: ${REDIRECT_URL}
-    api-key: ${API_KEY}
-upload:
-    path: ${SAVE_PATH}
+#kakao:
+#    redirect-url: ${REDIRECT_URL}
+#    api-key: ${API_KEY}
+#upload:
+#    path: ${SAVE_PATH}

@@ -37,8 +37,8 @@ public class QuestionController {
     private QuestionService questionService;
     private QuestionMapper questionMapper;
 
-    @Autowired
-    private FileManager fileManager;
+//    @Autowired
+//    private FileManager fileManager;
 
     public QuestionController(QuestionService questionService,
             QuestionMapper questionMapper) {
@@ -120,22 +120,22 @@ public class QuestionController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PostMapping("/{questionId}/files")
-    public ResponseEntity postFile(@PathVariable("questionId") long questionId,
-            @RequestPart("files") List<MultipartFile> files) throws Exception {
-        fileManager.saveFiles(questionId, "questions", files);
+//    @PostMapping("/{questionId}/files")
+//    public ResponseEntity postFile(@PathVariable("questionId") long questionId,
+//            @RequestPart("files") List<MultipartFile> files) throws Exception {
+//        fileManager.saveFiles(questionId, "questions", files);
+//
+//        return new ResponseEntity<>(HttpStatus.CREATED);
+//    }
 
-        return new ResponseEntity<>(HttpStatus.CREATED);
-    }
-
-    @GetMapping("/{questionId}/files")
-    public ResponseEntity getFile(@PathVariable long questionId,
-            @RequestParam("size") int size) throws IOException {
-        List<byte[]> files = fileManager.getFiles(size, questionId, "questions");
-
-        return new ResponseEntity<>(files, HttpStatus.OK);
-        // return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(files.get(0));
-    }
+//    @GetMapping("/{questionId}/files")
+//    public ResponseEntity getFile(@PathVariable long questionId,
+//            @RequestParam("size") int size) throws IOException {
+//        List<byte[]> files = fileManager.getFiles(size, questionId, "questions");
+//
+//        return new ResponseEntity<>(files, HttpStatus.OK);
+//        // return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(files.get(0));
+//    }
 
     @PostMapping("/{questionId}/likes")
     public ResponseEntity postLike(@PathVariable("questionId") long questionId,

@@ -33,8 +33,8 @@ public class AnswerController {
     private AnswerService answerService;
     private AnswerMapper answerMapper;
 
-    @Autowired
-    private FileManager fileManager;
+//    @Autowired
+//    private FileManager fileManager;
 
     public AnswerController(AnswerService answerService,
             AnswerMapper answerMapper) {
@@ -92,20 +92,20 @@ public class AnswerController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PostMapping("/{answerId}/files")
-    public ResponseEntity postFile(@PathVariable("answerId") long answerId,
-            @RequestPart("files") List<MultipartFile> files) throws Exception {
-        fileManager.saveFiles(answerId, "answers", files);
+//    @PostMapping("/{answerId}/files")
+//    public ResponseEntity postFile(@PathVariable("answerId") long answerId,
+//            @RequestPart("files") List<MultipartFile> files) throws Exception {
+//        fileManager.saveFiles(answerId, "answers", files);
+//
+//        return new ResponseEntity<>(HttpStatus.CREATED);
+//    }
 
-        return new ResponseEntity<>(HttpStatus.CREATED);
-    }
-
-    @GetMapping("/{answerId}/files")
-    public ResponseEntity getFile(@PathVariable long answerId,
-            @RequestParam("size") int size) throws IOException {
-        List<byte[]> files = fileManager.getFiles(size, answerId, "answers");
-
-        return new ResponseEntity<>(files, HttpStatus.OK);
-        // return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(files.get(0));
-    }
+//    @GetMapping("/{answerId}/files")
+//    public ResponseEntity getFile(@PathVariable long answerId,
+//            @RequestParam("size") int size) throws IOException {
+//        List<byte[]> files = fileManager.getFiles(size, answerId, "answers");
+//
+//        return new ResponseEntity<>(files, HttpStatus.OK);
+//        // return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(files.get(0));
+//    }
 }

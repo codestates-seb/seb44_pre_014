@@ -41,7 +41,7 @@ public class MemberController {
     private final MemberService memberService;
     private final MemberMapper memberMapper;
 
-    @Autowired
+//    @Autowired
     private FileManager fileManager;
 
     public MemberController(MemberService memberService,
