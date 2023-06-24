@@ -6,11 +6,13 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import UploadFile from 'components/AskQuestion/UploadFile';
 import TagBar from 'components/AskQuestion/CreateTag';
+import { useStoreFile } from 'store/count/store.file';
 
 const EditQuestion = ({ id }) => {
   //memebersId 받아와야하는데..? store나 localstoraged에서 불러와야해야
   const member = 1; //일단 임의로 넣기
   const navigate = useNavigate();
+  const { newFile, setnewFile } = useStoreFile();
 
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
@@ -36,6 +38,7 @@ const EditQuestion = ({ id }) => {
     title: title,
     content: body,
     memberId: member,
+    tagNames: writetag,
   };
   const goToMain = () => {
     navigate('/');
@@ -56,6 +59,9 @@ const EditQuestion = ({ id }) => {
       console.log(res);
       setBody(res.data.content);
       setTitle(res.data.title);
+      if (res.data.TagNames) {
+        setwriteTag(res.data.TagNames);
+      }
     } catch (err) {
       console.log(err);
     }

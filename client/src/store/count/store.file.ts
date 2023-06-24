@@ -2,27 +2,27 @@ import { isTestEnvironment } from 'utils/isTestEnvironment';
 import create from 'zustand';
 import { devtools } from 'zustand/middleware';
 
-interface TStoreCount {
-  file: string;
-  setFile: () => void;
+interface TStoreFile {
+  newFile: string;
+  setnewFile: (data: string) => void;
 }
 
 // 사용방법
-// const { count, plusCount, minusCount } = useStoreCount();
+// const { newFile, setnewFile } = useStoreCount();
 
 const store = (set) => ({
-  file: '',
-  setFile: () => {
-    set(({ file }) => ({
-      file: file,
+  newFile: '',
+  setnewFile: (data) => {
+    set(({ state }) => ({
+      newFile: data,
     }));
   },
 });
 
-export const useStoreFile = create<TStoreCount>()(
+export const useStoreFile = create<TStoreFile>()(
   isTestEnvironment ? devtools(store) : store
 );
 
 export const useGetFile = () => {
-  return useStoreFile((state) => state.file);
+  return useStoreFile((state) => state.newFile);
 };

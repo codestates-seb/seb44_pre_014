@@ -39,6 +39,7 @@ const AskQuestion = ({ id }) => {
     title: title,
     content: body,
     memberId: id,
+    tagNames: writetag,
   };
 
   const goToMain = () => {

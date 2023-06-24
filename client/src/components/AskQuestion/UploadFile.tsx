@@ -3,8 +3,9 @@ import styled from 'styled-components';
 import API from '../../services/api/index';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-
+import { useStoreFile } from 'store/count/store.file';
 const UploadFile = ({ edit }) => {
+  const { newFile, setnewFile } = useStoreFile();
   const id = useParams();
   const [fileurl, setFileurl] = useState(``);
   const [file, setFile] = useState();
@@ -60,7 +61,10 @@ const UploadFile = ({ edit }) => {
     <FileContainer>
       <div className="upload-title">Upload</div>
       <form onSubmit={onSubmitForm}>
-        <img id="preview" src={fileurl} width={300} height={300} />
+        {edit === 'patch' && (
+          <img id="preview" src={fileurl} width={300} height={300} />
+        )}
+        {edit === 'new' && <div>파일을 등록하세요</div>}
         <input
           className="upload-name"
           placeholder={

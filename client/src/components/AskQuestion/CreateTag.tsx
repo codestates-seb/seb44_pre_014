@@ -50,7 +50,7 @@ const TagBar = ({ writeTag, setwriteTag, title, help }) => {
           placeholder="tag를 입력하세요"
           value={newTag}
           onChange={TagHandler}
-          onKeyDown={handleOnKeyPress}
+          onKeyPress={handleOnKeyPress}
         ></input>
         <TagsList>
           {writeTag[0] && (
