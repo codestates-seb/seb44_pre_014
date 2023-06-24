@@ -29,22 +29,18 @@ public class TagService {
         for (Tag tag : tags) {
             Tag foundTag = tagRepository.findByTagName(tag.getTagName());
             if (foundTag == null) {
-                tag = tagRepository.save(tag);
+                tagRepository.save(tag);
             } else {
-                tag = foundTag;
+                tag.setTagId(foundTag.getTagId());
             }
         }
 
         return tags;
     }
 
-    public Tag findTagByTagName(String tagName) {
-        return tagRepository.findByTagName(tagName);
-    }
-
-    public List<Tag> findAllByKeyword(String keyword) {
+    public List<Tag> findAllByTagName(String tagName) {
         Sort sort = Sort.by("tagName");
-        List<Tag> tags = tagRepository.findAllByTagNameContainingIgnoreCase(keyword, sort);
+        List<Tag> tags = tagRepository.findAllByTagNameContainingIgnoreCase(tagName, sort);
 
         return tags;
     }

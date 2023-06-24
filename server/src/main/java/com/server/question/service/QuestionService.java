@@ -53,7 +53,7 @@ public class QuestionService {
         Optional<Question> optional = questionRepository.findById(questionId);
 
         return optional.orElseThrow(
-            () -> new RuntimeException("찾는 답변이 없습니다."));
+            () -> new RuntimeException("찾는 질문이 없습니다."));
     }
 
     public Page<Question> findQuestionsByKeyword(int size, int page, String keyword) {
@@ -65,18 +65,6 @@ public class QuestionService {
                 .findByTitleContainingIgnoreCaseOrContentContainingIgnoreCase(keyword,
                     keyword,
                     PageRequest.of(page, size, sort3));
-    }
-
-    public Page<Question> findQuestionsByTagName(int size, int page, String tagName) {
-        Sort sort1 = Sort.by("createdAt").descending();
-        Sort sort2 = Sort.by("questionId").descending();
-        Sort sort3 = sort1.and(sort2);
-
-        return null;
-
-        // return questionRepository
-        //         .findByQuestionTags_Tag_TagName(tagName,
-        //             PageRequest.of(page, size, sort3));
     }
 
     public Question updateQuestion(Question question) {

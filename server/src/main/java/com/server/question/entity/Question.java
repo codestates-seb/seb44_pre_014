@@ -41,9 +41,6 @@ public class Question extends BaseEntity {
 
     private Integer voteQuantity;
 
-    @OneToMany(mappedBy = "tag")
-    private List<QuestionTag> questionTags;
-
     @ManyToOne
     @JoinColumn(name = "memberId")
     private Member member;
@@ -53,6 +50,9 @@ public class Question extends BaseEntity {
 
     @OneToMany(mappedBy = "question")
     private List<Comment> comments;
+
+    @OneToMany(mappedBy = "question")
+    private List<QuestionTag> questionTags;
 
     @Transient
     private boolean canUpdate = true;

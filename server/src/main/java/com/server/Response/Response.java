@@ -39,4 +39,5 @@ public class Response {
     private Integer voteQuantity;
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
+    private List<String> tagNames;
 }

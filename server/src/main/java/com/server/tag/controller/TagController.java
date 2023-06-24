@@ -26,8 +26,8 @@ public class TagController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity getTagsByKeyword(@RequestParam("keyword") String keyword) {
-        List<Tag> tags = tagService.findAllByKeyword(keyword);
+    public ResponseEntity getTagsByTagName(@RequestParam("tagName") String tagName) {
+        List<Tag> tags = tagService.findAllByTagName(tagName);
         List<String> tagNames = tagMapper.tagsToTagNames(tags);
 
         return new ResponseEntity<>(tagNames, HttpStatus.OK);

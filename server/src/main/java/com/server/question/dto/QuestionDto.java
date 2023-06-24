@@ -29,5 +29,7 @@ public class QuestionDto {
         private String content;
 
         private Boolean solve;
+
+        private Set<String> tagNames;
     }
 }

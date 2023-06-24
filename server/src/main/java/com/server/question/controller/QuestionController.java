@@ -86,6 +86,47 @@ public class QuestionController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @PatchMapping("/{questionId}/edit")
+    public ResponseEntity patchQuestion(@Valid @RequestBody QuestionDto.Patch patchDto,
+            @PathVariable("questionId") long questionId) {
+        Question question = questionMapper.patchDtoToQuestion(patchDto);
+        question.setQuestionId(questionId);
+
+        Question updatedQuestion = questionService.updateQuestion(question);
+        List<Tag> tags = tagService.saveTags(new ArrayList<>(patchDto.getTagNames()));
+
+        List<QuestionTag> existingQuestionTags = updatedQuestion.getQuestionTags();
+        for (int i = 0; i < existingQuestionTags.size(); i++) {
+            if (tags == null) {
+                break;
+            }
+            QuestionTag existingQuestionTag = existingQuestionTags.get(i);
+            for (Tag tag : tags) {
+                if (tag.getTagName().equals(existingQuestionTag.getTag().getTagName())) {
+                    existingQuestionTags.remove(i--);
+                    break;
+                }
+            }
+        }
+        questionTagService.deleteQuestionTags(existingQuestionTags);
+
+        List<QuestionTag> questionTags = new ArrayList<>();
+
+        for (Tag tag : tags) {
+            Question saveQuestion = new Question();
+            saveQuestion.setQuestionId(updatedQuestion.getQuestionId());
+            Tag saveTag = new Tag();
+            saveTag.setTagId(tag.getTagId()); // 최적화 필요
+            QuestionTag questionTag = new QuestionTag();
+            questionTag.setQuestion(saveQuestion);
+            questionTag.setTag(saveTag);
+            questionTags.add(questionTag);
+        }
+        questionTagService.updateQuestionTags(questionTags);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     @GetMapping
     public ResponseEntity getQuestions(@RequestParam("size") int size,
             @RequestParam("page") int page) {
@@ -116,46 +157,40 @@ public class QuestionController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity getQuestionsByKeywordOrTagName(@RequestParam("size") int size,
+    public ResponseEntity getQuestionsByKeyword(@RequestParam("size") int size,
             @RequestParam("page") int page,
-            @RequestParam("keyword") String keyword,
-            @RequestParam("tagName") String tagName) {
-        // Page<Question> pageQuestions = null;
+            @RequestParam("keyword") String keyword) {
+        Page<Question> pageQuestions = questionService
+                .findQuestionsByKeyword(size, page - 1, keyword);
+        List<Question> questions = pageQuestions.getContent();
+        List<Response> responses = questionMapper.questionsToResponses(questions);
+        Info info = new Info(pageQuestions.getTotalElements(),
+            pageQuestions.getTotalPages(),
+            pageQuestions.getNumber() + 1,
+            pageQuestions.getNumberOfElements());
+        PagingResponse pagingResponse = new PagingResponse(info, responses);
 
-        // if (keyword.length() < 1 && tagName.length() < 1) {
-        //     return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        // }
-        // if (keyword.length() > 0 && tagName.length() > 0) {
-        //     pageQuestions = questionService.findQuestionsByKeywordAndTagName(size, page - 1,
-        //         keyword, tagName);
-        // } else if (keyword.length() > 0) {
-        //     pageQuestions = questionService.findQuestionsByKeyword(size, page - 1, keyword);
-        // } else {
-        //     pageQuestions = questionService.findQuestionsByTagName(size, page - 1, tagName);
-        // }
-
-        // List<Question> questions = pageQuestions.getContent();
-        // List<Response> responses = questionMapper.questionsToResponses(questions);
-        // Info info = new Info(pageQuestions.getTotalElements(),
-        //     pageQuestions.getTotalPages(),
-        //     pageQuestions.getNumber() + 1,
-        //     pageQuestions.getNumberOfElements());
-
-        // PagingResponse pagingResponse = new PagingResponse(info, responses);
-
-        // return new ResponseEntity<>(pagingResponse, HttpStatus.OK);
-        return new ResponseEntity<>(null);
+        return new ResponseEntity<>(pagingResponse, HttpStatus.OK);
     }
 
-    @PatchMapping("/{questionId}/edit")
-    public ResponseEntity patchQuestion(@Valid @RequestBody QuestionDto.Patch patchDto,
-            @PathVariable("questionId") long questionId) {
-        Question question = questionMapper.patchDtoToQuestion(patchDto);
-        question.setQuestionId(questionId);
+    @GetMapping("/tags/search")
+    public ResponseEntity getQuestionsByTagName(@RequestParam("size") int size,
+            @RequestParam("page") int page,
+            @RequestParam("tagName") String tagName) {
+        Page<QuestionTag> pageQuestionTags = questionTagService
+                .findQuestionsByTagName(size, page - 1, tagName);
+        List<QuestionTag> questionTags = pageQuestionTags.getContent();
 
-        questionService.updateQuestion(question);
+        List<Question> questions = questionMapper.questionTagsToQuestions(questionTags);
+        List<Response> responses = questionMapper.questionsToResponses(questions);
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        Info info = new Info(pageQuestionTags.getTotalElements(),
+            pageQuestionTags.getTotalPages(),
+            pageQuestionTags.getNumber() + 1,
+            pageQuestionTags.getNumberOfElements());
+        PagingResponse pagingResponse = new PagingResponse(info, responses);
+
+        return new ResponseEntity<>(pagingResponse, HttpStatus.OK);
     }
 
     @DeleteMapping("/{questionId}")
