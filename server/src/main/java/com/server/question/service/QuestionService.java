@@ -15,10 +15,12 @@ import com.server.comment.entity.Comment;
 import com.server.comment.service.CommentService;
 import com.server.question.entity.Question;
 import com.server.question.repository.QuestionRepository;
+import com.server.question.repository.QuestionTagRepository;
 
 @Service
 public class QuestionService {
     private QuestionRepository questionRepository;
+    private QuestionTagRepository questionTagRepository;
 
     @Autowired
     private AnswerService answerService;
@@ -26,8 +28,10 @@ public class QuestionService {
     @Autowired
     private CommentService commentService;
 
-    public QuestionService(QuestionRepository questionRepository) {
+    public QuestionService(QuestionRepository questionRepository,
+            QuestionTagRepository questionTagRepository) {
         this.questionRepository = questionRepository;
+        this.questionTagRepository = questionTagRepository;
     }
 
     public Question saveQuestion(Question question) {
@@ -61,6 +65,18 @@ public class QuestionService {
                 .findByTitleContainingIgnoreCaseOrContentContainingIgnoreCase(keyword,
                     keyword,
                     PageRequest.of(page, size, sort3));
+    }
+
+    public Page<Question> findQuestionsByTagName(int size, int page, String tagName) {
+        Sort sort1 = Sort.by("createdAt").descending();
+        Sort sort2 = Sort.by("questionId").descending();
+        Sort sort3 = sort1.and(sort2);
+
+        return null;
+
+        // return questionRepository
+        //         .findByQuestionTags_Tag_TagName(tagName,
+        //             PageRequest.of(page, size, sort3));
     }
 
     public Question updateQuestion(Question question) {

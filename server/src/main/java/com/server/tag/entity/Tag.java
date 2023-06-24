@@ -1,13 +1,15 @@
-package com.server.question.entity;
+package com.server.tag.entity;
 
+import java.util.List;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
-import com.server.tag.entity.Tag;
+import com.server.question.entity.QuestionTag;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,16 +21,14 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class QuestionTag {
+public class Tag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long questionTagId;
+    private Long tagId;
 
-    @ManyToOne
-    @JoinColumn(name = "questionId")
-    private Question question;
+    @Column(unique = true)
+    private String tagName;
 
-    @ManyToOne
-    @JoinColumn(name = "tagId")
-    private Tag tag;
+    @OneToMany(mappedBy = "tag")
+    private List<QuestionTag> questionTags;
 }

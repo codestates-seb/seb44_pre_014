@@ -41,6 +41,9 @@ public class Question extends BaseEntity {
 
     private Integer voteQuantity;
 
+    @OneToMany(mappedBy = "tag")
+    private List<QuestionTag> questionTags;
+
     @ManyToOne
     @JoinColumn(name = "memberId")
     private Member member;

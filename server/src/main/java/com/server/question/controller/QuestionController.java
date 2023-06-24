@@ -1,6 +1,7 @@
 package com.server.question.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -27,32 +28,62 @@ import com.server.Response.Response;
 import com.server.file.FileManager;
 import com.server.question.dto.QuestionDto;
 import com.server.question.entity.Question;
+import com.server.question.entity.QuestionTag;
 import com.server.question.mapper.QuestionMapper;
 import com.server.question.service.QuestionService;
+import com.server.question.service.QuestionTagService;
+import com.server.tag.entity.Tag;
+import com.server.tag.service.TagService;
 
 @RestController
 @RequestMapping("/api/questions")
 public class QuestionController {
     private QuestionService questionService;
+    private QuestionTagService questionTagService;
     private QuestionMapper questionMapper;
+
+    @Autowired
+    private TagService tagService;
 
     @Autowired
     private FileManager fileManager;
 
     public QuestionController(QuestionService questionService,
-            QuestionMapper questionMapper) {
+            QuestionMapper questionMapper,
+            QuestionTagService questionTagService) {
         this.questionService = questionService;
         this.questionMapper = questionMapper;
+        this.questionTagService = questionTagService;
     }
 
     @PostMapping("/write")
     public ResponseEntity postQuestion(@Valid @RequestBody QuestionDto.Post postDto) {
         Question question = questionMapper.postDtoToQuestion(postDto);
         question.setSolve(false);
+        question.setView(0L);
+        question.setVoteQuantity(0);
 
-        questionService.saveQuestion(question);
+        Question savedQuestion = questionService.saveQuestion(question);
+        List<Tag> tags = tagService.saveTags(new ArrayList<>(postDto.getTagNames()));
 
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        if (tags == null) {
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        List<QuestionTag> questionTags = new ArrayList<>();
+
+        for (Tag tag : tags) {
+            Question saveQuestion = new Question();
+            saveQuestion.setQuestionId(savedQuestion.getQuestionId());
+            Tag saveTag = new Tag();
+            saveTag.setTagId(tag.getTagId()); // 최적화 필요
+            QuestionTag questionTag = new QuestionTag();
+            questionTag.setQuestion(saveQuestion);
+            questionTag.setTag(saveTag);
+            questionTags.add(questionTag);
+        }
+        questionTagService.saveQuestionTags(questionTags);
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping
@@ -67,7 +98,6 @@ public class QuestionController {
             pageQuestions.getTotalPages(),
             pageQuestions.getNumber() + 1,
             pageQuestions.getNumberOfElements());
-
         PagingResponse pagingResponse = new PagingResponse(info, responses);
 
         return new ResponseEntity<>(pagingResponse, HttpStatus.OK);
@@ -86,20 +116,35 @@ public class QuestionController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity getQuestionsByKeyword(@RequestParam("size") int size,
+    public ResponseEntity getQuestionsByKeywordOrTagName(@RequestParam("size") int size,
             @RequestParam("page") int page,
-            @RequestParam("keyword") String keyword) {
-        Page<Question> pageQuestions = questionService.findQuestionsByKeyword(size, page - 1, keyword);
-        List<Question> questions = pageQuestions.getContent();
-        List<Response> responses = questionMapper.questionsToResponses(questions);
-        Info info = new Info(pageQuestions.getTotalElements(),
-            pageQuestions.getTotalPages(),
-            pageQuestions.getNumber() + 1,
-            pageQuestions.getNumberOfElements());
+            @RequestParam("keyword") String keyword,
+            @RequestParam("tagName") String tagName) {
+        // Page<Question> pageQuestions = null;
 
-        PagingResponse pagingResponse = new PagingResponse(info, responses);
+        // if (keyword.length() < 1 && tagName.length() < 1) {
+        //     return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        // }
+        // if (keyword.length() > 0 && tagName.length() > 0) {
+        //     pageQuestions = questionService.findQuestionsByKeywordAndTagName(size, page - 1,
+        //         keyword, tagName);
+        // } else if (keyword.length() > 0) {
+        //     pageQuestions = questionService.findQuestionsByKeyword(size, page - 1, keyword);
+        // } else {
+        //     pageQuestions = questionService.findQuestionsByTagName(size, page - 1, tagName);
+        // }
 
-        return new ResponseEntity<>(pagingResponse, HttpStatus.OK);
+        // List<Question> questions = pageQuestions.getContent();
+        // List<Response> responses = questionMapper.questionsToResponses(questions);
+        // Info info = new Info(pageQuestions.getTotalElements(),
+        //     pageQuestions.getTotalPages(),
+        //     pageQuestions.getNumber() + 1,
+        //     pageQuestions.getNumberOfElements());
+
+        // PagingResponse pagingResponse = new PagingResponse(info, responses);
+
+        // return new ResponseEntity<>(pagingResponse, HttpStatus.OK);
+        return new ResponseEntity<>(null);
     }
 
     @PatchMapping("/{questionId}/edit")
