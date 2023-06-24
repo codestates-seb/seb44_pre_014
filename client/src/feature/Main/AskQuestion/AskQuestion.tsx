@@ -9,14 +9,12 @@ import {
   bannerTitle,
   bannerContents,
 } from './Banner';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import TagBar from 'components/AskQuestion/CreateTag';
 import UploadFile from 'components/AskQuestion/UploadFile';
 
 const AskQuestion = ({ id }) => {
-  //memebersId 받아와야하는데..? store나 localstoraged에서 불러와야해야
-  //const membersId= localStorage.getItem(memberId)
   const navigate = useNavigate();
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
@@ -111,9 +109,9 @@ const AskQuestion = ({ id }) => {
             ></HelpItem>
           ) : null}
         </SingleWrapper>
-        <SingleWrapper>
-          <UploadFile edit={false} />
-        </SingleWrapper>
+        {/* <SingleWrapper>
+          <UploadFile edit={'new'} />
+        </SingleWrapper> */}
       </ItemContainer>
       <BtnWrapper>
         <BtnContainer

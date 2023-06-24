@@ -4,13 +4,20 @@ import { useEffect, useState } from 'react';
 const TagBar = ({ writeTag, setwriteTag, title, help }) => {
   const [newTag, setNewTag] = useState('');
   const check = writeTag.includes(newTag); //초기 false
+  const [long, setLong] = useState(false);
 
   const TagHandler = (e: React.FormEvent<HTMLInputElement>) => {
     setNewTag(e.currentTarget.value);
   };
 
-  const handleOnKeyPress = (e) => {
+  const handleOnKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
+      if (newTag?.length > 15) {
+        setLong(true);
+        return;
+      } else {
+        setLong(false);
+      }
       if (writeTag?.length === 5) {
         console.log('5개 태그입니다!');
         return;
@@ -18,20 +25,17 @@ const TagBar = ({ writeTag, setwriteTag, title, help }) => {
       if (!check) {
         setwriteTag([...writeTag, newTag]);
         setNewTag('');
-      } else {
-        console.log('이미 태그가 존재합니다');
       }
     }
   };
 
   const deleteTag = (event) => {
     const deltag: string = event.currentTarget.innerHTML;
-    console.log(deltag);
     setwriteTag(writeTag.filter((el) => el !== deltag));
   };
 
   useEffect(() => {
-    console.log('update');
+    console.log(writeTag);
   }, [writeTag]);
 
   return (
@@ -40,12 +44,13 @@ const TagBar = ({ writeTag, setwriteTag, title, help }) => {
         <div className="title">{title[0]}</div>
         <div className="help">{help}</div>
         {check && <div className="warning">* 이미 태그가 존재합니다</div>}
+        {long ? <div className="warning">* 15자 이내로 입력하세요</div> : null}
         <input
           className="tag-search"
           placeholder="tag를 입력하세요"
           value={newTag}
           onChange={TagHandler}
-          onKeyPress={handleOnKeyPress}
+          onKeyDown={handleOnKeyPress}
         ></input>
         <TagsList>
           {writeTag[0] && (

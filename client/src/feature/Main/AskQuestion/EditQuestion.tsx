@@ -108,7 +108,7 @@ const EditQuestion = ({ id }) => {
           />
         </SingleWrapper>
         <SingleWrapper>
-          <UploadFile edit={true} />
+          <UploadFile edit={'patch'} />
         </SingleWrapper>
       </ItemContainer>
       <BtnWrapper>

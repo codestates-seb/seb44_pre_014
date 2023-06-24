@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import API from '../../services/api/index';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 const UploadFile = ({ edit }) => {
@@ -10,15 +10,19 @@ const UploadFile = ({ edit }) => {
   const [file, setFile] = useState();
   const [success, setSuccess] = useState(false);
   const readURL = (event) => {
-    setFile(event.target.files[0]);
-    const res = URL.createObjectURL(event.target.files[0]);
-    setFileurl(res);
+    if (event.target.files[0]) {
+      setFile(event.target.files[0]);
+      console.log(event.target.files[0]);
+      const res = URL.createObjectURL(event.target.files[0]);
+      setFileurl(res);
+    }
   };
 
   const onSubmitForm = async (event) => {
     try {
-      event.preventDefault();
+      event.preventDefault(); //리디렉션 방지..
 
+      //POST 요청
       if (file) {
         const formData = new FormData();
         formData.append('files', file);
@@ -46,7 +50,7 @@ const UploadFile = ({ edit }) => {
     }
   };
   useEffect(() => {
-    if (edit) {
+    if (edit === 'patch') {
       getDataurl();
     }
     console.log(id);
@@ -59,7 +63,11 @@ const UploadFile = ({ edit }) => {
         <img id="preview" src={fileurl} width={300} height={300} />
         <input
           className="upload-name"
-          placeholder={file ? '업로드 완료!' : '업로드 전..'}
+          placeholder={
+            file
+              ? '파일이 업로드 준비 상태입니다.'
+              : '파일이 준비되지 않았습니다.'
+          }
         ></input>
         <div className="button-file">
           <label htmlFor="file" onClick={() => setSuccess(false)}>
@@ -70,7 +78,9 @@ const UploadFile = ({ edit }) => {
         </div>
       </form>
       {success ? (
-        <div className="success-message">파일 전송에 성공했습니다 ✅</div>
+        <div className="success-message">
+          서버로의 파일 전송에 성공했습니다 ✅
+        </div>
       ) : null}
     </FileContainer>
   );
