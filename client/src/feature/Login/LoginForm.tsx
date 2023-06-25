@@ -3,6 +3,7 @@ import { useState } from 'react';
 import API from 'services/api/index';
 import { API_LOGIN } from 'services/api/key';
 import { useNavigate } from 'react-router-dom';
+import { useStore } from '../../store/user/store.user';
 interface LoginFormData {
   email: string;
   password: string;
@@ -13,6 +14,8 @@ const LoginForm = () => {
     email: '',
     password: '',
   });
+
+  const { setMemberId } = useStore();
 
   const navigate = useNavigate();
 
@@ -36,9 +39,12 @@ const LoginForm = () => {
       }).then((res) => {
         // accessToken : 응답 헤더
         const accessToken = res.headers.get('Authorization');
-
-        // 로컬스토리지에 토큰 저장
+        const memberId = res.headers.get('memberId');
+        // store에 memberId 저장
+        setMemberId(memberId);
+        // 로컬스토리지에 accessToken, memberId 저장
         localStorage.setItem('accessToken', accessToken);
+        localStorage.setItem('memberId', memberId);
         alert('login success!');
         navigate('/');
       });
