@@ -88,7 +88,7 @@ public class SecurityConfiguration {
         configuration.setAllowedOrigins(List.of("https://codestates.shop"));
         configuration.addAllowedMethod("*");
         configuration.addAllowedHeader("*");
-        // configuration.addExposedHeader("Authorization");
+        configuration.addExposedHeader("Authorization");
         configuration.setAllowCredentials(true);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
