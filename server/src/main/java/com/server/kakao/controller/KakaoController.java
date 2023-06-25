@@ -58,8 +58,7 @@ public class KakaoController {
     public String postMessage(@PathVariable("message") String message,
             HttpServletResponse response) throws IOException {
         if (tokens == null) {
-            // response.sendRedirect(redirecUrl + "/kakao");
-            response.sendRedirect("https://naver.com");
+            response.sendRedirect(redirecUrl + "/kakao");
             return "인증 필요";
         }
 
