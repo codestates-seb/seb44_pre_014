@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import API from 'services/api/index';
 import { API_LOGIN } from 'services/api/key';
+import { useNavigate } from 'react-router-dom';
 interface LoginFormData {
   email: string;
   password: string;
@@ -12,6 +13,8 @@ const LoginForm = () => {
     email: '',
     password: '',
   });
+
+  const navigate = useNavigate();
 
   const handleInputChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -31,17 +34,13 @@ const LoginForm = () => {
         url: API_LOGIN,
         data: loginFormData,
       }).then((res) => {
-        if (res.ok) {
-          // accessToken : 응답 헤더
-          // refreshToken : 응답 데이터
-          const accessToken = res.headers.get('Authorization');
-          const refreshToken = res.headers.get('Refresh');
+        // accessToken : 응답 헤더
+        const accessToken = res.headers.get('Authorization');
 
-          // 로컬스토리지에 토큰 저장
-          localStorage.setItem('accessToken', accessToken);
-          localStorage.setItem('refreshToken', refreshToken);
-          alert('login success!');
-        }
+        // 로컬스토리지에 토큰 저장
+        localStorage.setItem('accessToken', accessToken);
+        alert('login success!');
+        navigate('/');
       });
     } catch (error) {
       // 로그인 실패 처리
