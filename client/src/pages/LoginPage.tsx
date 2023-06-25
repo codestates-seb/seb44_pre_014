@@ -18,6 +18,7 @@ export default LoginPage;
 const StyledLoginPage = styled.div`
   width: 100%;
   background-color: var(--black-050);
+
   height: 100vh;
   display: flex;
   justify-content: center;
