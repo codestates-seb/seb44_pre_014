@@ -61,7 +61,7 @@ export default function DetailQuestion() {
 
   // 질문글 수정하기
   const updateQuestion = (questionId) => {
-    navigate(`/questions/write/${questionId}`);
+    navigate(`/questions/edit/${questionId}`);
   };
 
   useEffect(() => {
