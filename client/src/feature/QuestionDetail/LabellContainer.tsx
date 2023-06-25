@@ -9,7 +9,7 @@ type Tprops = {
   quData: TQuestion;
   deleteQu?: (id: number, type: string) => void;
   id: number;
-  updateQu: (id: number) => void;
+  updateQu: (id: number, type: string) => void;
   type: string;
 };
 
@@ -23,7 +23,7 @@ const LabelContainer: React.FC<Tprops> = ({
   const navigate = useNavigate();
   const onClickButton = () => navigate('/button');
   const handleEdit = () => {
-    updateQu(id);
+    updateQu(id, type);
   };
   console.log(quData);
   return (

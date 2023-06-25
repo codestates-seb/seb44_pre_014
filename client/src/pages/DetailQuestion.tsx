@@ -29,7 +29,10 @@ export default function DetailQuestion() {
   const { id } = useParams();
   const [quData, setQuData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isEdit, setIsEdit] = useState(false);
   const navigate = useNavigate();
+
+  //질문 수정하기
 
   //질문데이터 불러오기
   const requestQuestion = async () => {
@@ -60,8 +63,12 @@ export default function DetailQuestion() {
   };
 
   // 질문글 수정하기
-  const updateQuestion = (questionId) => {
-    navigate(`/questions/edit/${questionId}`);
+  const updateQuestion = (id: number, type: string) => {
+    if (type === 'question') {
+      navigate(`/questions/edit/${id}`);
+    } else {
+      setIsEdit(true);
+    }
   };
 
   useEffect(() => {
@@ -89,6 +96,8 @@ export default function DetailQuestion() {
           quData={quData}
           deleteQu={deleteQuestion}
           updateQu={updateQuestion}
+          isEdit={isEdit}
+          setIsEdit={setIsEdit}
         />
         <DetailAnswerInput
           quData={quData}

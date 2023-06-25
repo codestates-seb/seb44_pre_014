@@ -3,14 +3,23 @@ import styled from 'styled-components';
 import VoteContainer from './VoteContainer';
 import LabelContainer from './LabellContainer';
 import { TQuestion } from 'utils/type';
+import EditAnswer from './EditAnswer';
 
 type Tprops = {
   quData: TQuestion;
   deleteQu: (id: number, type: string) => void;
-  updateQu: (id: number) => void;
+  updateQu: (id: number, type: string) => void;
+  isEdit: boolean;
+  setIsEdit: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const DetailAnswer: React.FC<Tprops> = ({ quData, deleteQu, updateQu }) => {
+const DetailAnswer: React.FC<Tprops> = ({
+  quData,
+  deleteQu,
+  updateQu,
+  isEdit,
+  setIsEdit,
+}) => {
   return (
     <>
       <h3>{quData.answers.length} Answer</h3>
@@ -18,9 +27,18 @@ const DetailAnswer: React.FC<Tprops> = ({ quData, deleteQu, updateQu }) => {
         <AnswerContainer>
           <VoteContainer />
           <AnswerMain>
-            <AnswerText>
-              <p key={answerId}>{content}</p>
-            </AnswerText>
+            {isEdit && (
+              <EditAnswer
+                setIsEdit={setIsEdit}
+                content={content}
+                id={answerId}
+              />
+            )}
+            {!isEdit && (
+              <AnswerText>
+                <p key={answerId}>{content}</p>
+              </AnswerText>
+            )}
             <LabelContainer
               quData={quData}
               deleteQu={deleteQu}
