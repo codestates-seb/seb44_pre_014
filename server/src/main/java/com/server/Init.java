@@ -103,7 +103,7 @@ public class Init {
             question.setMember(member);
             question.setQuestionId(i);
             question.setTitle("질문 제목" + i);
-            question.setContent("질문 내용입니다.<br />".repeat(20));
+            question.setContent("질문 내용입니다.\n".repeat(20));
             question.setSolve(false);
             question.setView(0L);
             question.setVoteQuantity(0);
