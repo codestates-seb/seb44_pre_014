@@ -2,20 +2,21 @@ import Footer from 'components/Footer/Footer';
 import Header from 'components/Header/Header';
 import EditQuestion from 'feature/Main/AskQuestion/EditQuestion';
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 /*ContentContainer안에 컴포넌트 넣어서 페이지 구성 */
 
 const EditPage = () => {
   const param = useParams();
+  const nav = useNavigate();
   /*
+  const membersId = localStorage.getItem('memberId');
   useEffect(() => {
-    const membersId = localStorage.getItem('memberId');
     if (!membersId) {
       nav('/login');
     }
-  }, []); */
+  }, [membersId]); */
   const myId = 1; //일단 임의로 아무 아이디나 넣기
   return (
     <div>

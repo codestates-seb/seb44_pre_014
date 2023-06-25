@@ -13,12 +13,12 @@ const AskPage = () => {
   //멤버 아이디가 없다면 로그인 페이지로 이동하게 구현할것.
   const nav = useNavigate();
   /*
+  const membersId = localStorage.getItem('memberId');
   useEffect(() => {
-    const membersId = localStorage.getItem('memberId');
     if (!membersId) {
       nav('/login');
     }
-  }, []); */
+  }, [membersId]); */
   const membersId = 3; //일단 임의로 아무 아이디나 넣기
   return (
     <div>

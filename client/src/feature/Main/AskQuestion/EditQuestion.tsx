@@ -58,8 +58,8 @@ const EditQuestion = ({ id, myId }) => {
       setBody(res.data.content);
       setTitle(res.data.title);
       setMember(res.data.memberId);
-      if (res.data.TagNames) {
-        setwriteTag(res.data.TagNames);
+      if (res.data.tagNames) {
+        setwriteTag(res.data.tagNames);
       }
     } catch (err) {
       console.log(err);
