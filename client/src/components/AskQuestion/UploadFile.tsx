@@ -19,6 +19,11 @@ const UploadFile = ({ edit }) => {
     }
   };
 
+  const fileDelete = () => {
+    setFile(null);
+    setFileurl('');
+  };
+
   const onSubmitForm = async (event) => {
     try {
       event.preventDefault(); //리디렉션 방지..
@@ -35,6 +40,8 @@ const UploadFile = ({ edit }) => {
         });
         console.log('file upload');
         setSuccess(true);
+      } else {
+        console.log('file is null');
       }
     } catch (err) {
       console.log(err);
@@ -70,7 +77,7 @@ const UploadFile = ({ edit }) => {
           placeholder={
             file
               ? '파일이 업로드 준비 상태입니다.'
-              : '파일이 준비되지 않았습니다.'
+              : '새 파일이 준비되지 않았습니다.'
           }
         ></input>
         <div className="button-file">
@@ -78,6 +85,9 @@ const UploadFile = ({ edit }) => {
             파일 찾기
           </label>
           <input type="file" id="file" onChange={readURL} />
+          <button className="file-del" onClick={fileDelete}>
+            파일 삭제
+          </button>
           <button type="submit">파일 업로드</button>
         </div>
       </form>
@@ -161,6 +171,10 @@ const FileContainer = styled.div`
     margin-left: 10px;
     margin-top: 10px;
     height: 40px;
+  }
+  .file-del {
+    padding-left: 15px;
+    padding-right: 15px;
   }
   .success-message {
     font-size: 12px;
