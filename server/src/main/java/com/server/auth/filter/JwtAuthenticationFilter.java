@@ -1,24 +1,27 @@
 package com.server.auth.filter;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import com.server.auth.jwt.JwtTokenizer;
-import com.server.auth.dto.LoginDto;
-import com.server.member.entity.Member;
+import java.io.IOException;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.server.auth.dto.LoginDto;
+import com.server.auth.jwt.JwtTokenizer;
+import com.server.member.entity.Member;
+
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 
 // 클라이언트 요청 시 JWT 인증을 하기 위해 설치하는 커스텀 필터
 @Slf4j
@@ -54,6 +57,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         String accessToken = delegateAccessToken(member);
         //String refreshToken = delegateRefreshToken(member);
 
+        response.setHeader("memberId", Long.toString(member.getMemberId()));
         response.setHeader("Authorization", "Bearer_" + accessToken);
         //response.setHeader("Refresh", refreshToken);
 
