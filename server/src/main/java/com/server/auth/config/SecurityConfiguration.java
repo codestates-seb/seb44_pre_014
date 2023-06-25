@@ -87,7 +87,7 @@ public class SecurityConfiguration {
         CorsConfiguration configuration = new CorsConfiguration();
         // configuration.setAllowedOrigins(List.of("https://codestates.shop"));
         configuration.setAllowedOrigins(
-            List.of("http://192.168.219.104:3000", "http://192.168.219.104:8080", "http://192.168.219.104:80"));
+            List.of("http://192.168.219.104"));
         configuration.addAllowedMethod("*");
         configuration.addAllowedHeader("*");
         // configuration.addExposedHeader("Authorization");
