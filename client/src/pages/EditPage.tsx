@@ -9,12 +9,20 @@ import styled from 'styled-components';
 
 const EditPage = () => {
   const param = useParams();
+  /*
+  useEffect(() => {
+    const membersId = localStorage.getItem('memberId');
+    if (!membersId) {
+      nav('/login');
+    }
+  }, []); */
+  const myId = 1; //일단 임의로 아무 아이디나 넣기
   return (
     <div>
       <Header />
       <DivContainer>
         <ContentContainer>
-          <EditQuestion id={param.id} />
+          <EditQuestion id={param.id} myId={myId} />
         </ContentContainer>
       </DivContainer>
       <Footer />

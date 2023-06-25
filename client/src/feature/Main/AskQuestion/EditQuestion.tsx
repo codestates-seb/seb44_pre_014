@@ -8,12 +8,10 @@ import UploadFile from 'components/AskQuestion/UploadFile';
 import TagBar from 'components/AskQuestion/CreateTag';
 import { useStoreFile } from 'store/count/store.file';
 
-const EditQuestion = ({ id }) => {
-  //memebersId 받아와야하는데..? store나 localstoraged에서 불러와야해야
-  const member = 1; //일단 임의로 넣기
+const EditQuestion = ({ id, myId }) => {
+  const [member, setMember] = useState<number>();
   const navigate = useNavigate();
   const { newFile, setnewFile } = useStoreFile();
-
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
   const [writetag, setwriteTag] = useState([]);
@@ -59,6 +57,7 @@ const EditQuestion = ({ id }) => {
       console.log(res);
       setBody(res.data.content);
       setTitle(res.data.title);
+      setMember(res.data.memberId);
       if (res.data.TagNames) {
         setwriteTag(res.data.TagNames);
       }
@@ -69,6 +68,13 @@ const EditQuestion = ({ id }) => {
   useEffect(() => {
     getPost();
   }, []);
+
+  useEffect(() => {
+    if (member && member !== myId) {
+      console.log('자신이 쓴 글만 수정할 수 있습니다.');
+      goToMain();
+    }
+  }, [member]);
 
   return (
     <MainWrapper>
