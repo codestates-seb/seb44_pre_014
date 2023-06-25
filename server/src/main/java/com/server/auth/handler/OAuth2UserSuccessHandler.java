@@ -42,10 +42,11 @@ public class OAuth2UserSuccessHandler extends SimpleUrlAuthenticationSuccessHand
         //String refreshToken = delegateRefreshToken(authentication);
 
         String uri = createURI(accessToken).toString();
-        getRedirectStrategy().sendRedirect(request, response, uri);
 
         response.setHeader("Authorization", "Bearer_" + accessToken);
         //response.setHeader("Refresh", refreshToken);
+
+        getRedirectStrategy().sendRedirect(request, response, uri);
     }
 
     // JWT 토큰은 delegateAccessToken 메서드를 통해 생성

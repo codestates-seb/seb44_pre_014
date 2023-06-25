@@ -41,7 +41,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         ObjectMapper objectMapper = new ObjectMapper();
         LoginDto loginDto = objectMapper.readValue(request.getInputStream(), LoginDto.class);
 
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginDto.getEmail(), loginDto.getPassword());
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
+            loginDto.getEmail(), loginDto.getPassword());
 
         return authenticationManager.authenticate(authenticationToken);
     }
@@ -49,10 +50,10 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     // 인증이 성공된 후 사용자 정보를 바탕으로 AccessToken 및 RefreshToken 생성
     @Override
     protected void successfulAuthentication(HttpServletRequest request,
-                                            HttpServletResponse response,
-                                            FilterChain chain,
-                                            Authentication authResult) throws ServletException, IOException {
-        Member member = (Member) authResult.getPrincipal();
+            HttpServletResponse response,
+            FilterChain chain,
+            Authentication authResult) throws ServletException, IOException {
+        Member member = (Member)authResult.getPrincipal();
 
         String accessToken = delegateAccessToken(member);
         //String refreshToken = delegateRefreshToken(member);
@@ -78,11 +79,11 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         return jwtTokenizer.generateAccessToken(claims, subject, expiration, base64EncodedSecretKey);
     }
 
-//    private String delegateRefreshToken(Member member) {
-//        String subject = member.getEmail();
-//        Date expiration = jwtTokenizer.getTokenExpiration(jwtTokenizer.getRefreshTokenExpirationSeconds());
-//        String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
-//
-//        return jwtTokenizer.generateRefreshToken(subject, expiration, base64EncodedSecretKey);
-//    }
+    //    private String delegateRefreshToken(Member member) {
+    //        String subject = member.getEmail();
+    //        Date expiration = jwtTokenizer.getTokenExpiration(jwtTokenizer.getRefreshTokenExpirationSeconds());
+    //        String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
+    //
+    //        return jwtTokenizer.generateRefreshToken(subject, expiration, base64EncodedSecretKey);
+    //    }
 }
