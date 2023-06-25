@@ -32,4 +32,11 @@ public class TagController {
 
         return new ResponseEntity<>(tagNames, HttpStatus.OK);
     }
+
+    // @GetMapping
+    // public String redirect() {
+    //     // return "redirect:{리다이렉트할 주소}";
+    //     // return "redirect:https://{도메인 및 포트}/{경로(path)}?{쿼리도 가능}"; 
+    //     return "redirect:https"; // 예시
+    // }
 }
