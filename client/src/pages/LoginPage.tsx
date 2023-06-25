@@ -5,10 +5,10 @@ import styled from 'styled-components';
 const LoginPage = () => {
   return (
     <StyledLoginPage>
-      <div>
+      <DivContainer>
         <Oauth />
         <LoginForm />
-      </div>
+      </DivContainer>
     </StyledLoginPage>
   );
 };
@@ -16,9 +16,13 @@ const LoginPage = () => {
 export default LoginPage;
 
 const StyledLoginPage = styled.div`
+  width: 100%;
+
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--black-050);
+  padding: 24px;
 `;
+
+const DivContainer = styled.div``;
