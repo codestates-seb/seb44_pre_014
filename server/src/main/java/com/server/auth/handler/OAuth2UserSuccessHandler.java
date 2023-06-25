@@ -73,7 +73,7 @@ public class OAuth2UserSuccessHandler extends SimpleUrlAuthenticationSuccessHand
                 .newInstance()
                 .fromUriString(redirectUrl)
                 // .path("/")
-                .queryParam("Authorization", "Bearer_" + accessToken)
+                // .queryParam("Authorization", "Bearer_" + accessToken)
                 .build()
                 .toUri();
     }
