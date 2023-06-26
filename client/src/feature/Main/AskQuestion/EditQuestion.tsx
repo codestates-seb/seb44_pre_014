@@ -6,15 +6,18 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import UploadFile from 'components/AskQuestion/UploadFile';
 import TagBar from 'components/AskQuestion/CreateTag';
+import { useUserStore } from 'store/user/store.user';
 
-const EditQuestion = ({ id, myId }) => {
+const EditQuestion = ({ id }) => {
   const [member, setMember] = useState(); //이 글을 쓴 사람의 ID
+  const { memberId, isLoading } = useUserStore();
   const navigate = useNavigate();
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
   const [writetag, setwriteTag] = useState([]);
   const [isbReady, setIsbReady] = useState(false);
   const [istReady, setIstReady] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const postok = istReady && isbReady;
   const warningpost = () => {
@@ -48,7 +51,6 @@ const EditQuestion = ({ id, myId }) => {
     try {
       const res = await API.PATCH({ url: patchurl, data: newData });
       if (res.status !== 200) throw res;
-
       goBack();
     } catch (err) {
       console.log(err);
@@ -57,6 +59,7 @@ const EditQuestion = ({ id, myId }) => {
 
   const getPost = async () => {
     try {
+      setLoading(true);
       const res = await API.GET(geturl);
       if (res.status !== 200) throw res;
       setBody(res.data.content);
@@ -65,6 +68,7 @@ const EditQuestion = ({ id, myId }) => {
       if (res.data.tagNames) {
         setwriteTag(res.data.tagNames);
       }
+      setLoading(false);
     } catch (err) {
       console.log(err);
     }
@@ -72,7 +76,10 @@ const EditQuestion = ({ id, myId }) => {
 
   useEffect(() => {
     getPost();
-  }, []);
+    if (isLoading && memberId !== member) {
+      goToMain();
+    }
+  }, [isLoading]);
 
   return (
     <MainWrapper>
