@@ -16,7 +16,7 @@ const DetailTitle: React.FC<Tprops> = ({ quData }) => {
     if (Number(memberId) === quData.memberId) {
       navigate('/questions/write');
     } else {
-      alert(`회원님이 작성한 질문이 아닙니다.`);
+      alert(`회원님이 작성한 질문이 아닙니다!`);
     }
   };
   function formatRelativeDate(dateString: string): string {

@@ -11,10 +11,11 @@ type Eprops = {
 
 const EditAnswer: React.FC<Eprops> = ({ setIsEdit, content, id }) => {
   const editInputRef = useRef<HTMLTextAreaElement>(null);
+  const timestamp = 0;
 
   useEffect(() => {
     handleEdit;
-  }, [content]);
+  }, [timestamp]);
 
   const handleEdit = async () => {
     const enteredText = editInputRef.current?.value;
@@ -25,6 +26,7 @@ const EditAnswer: React.FC<Eprops> = ({ setIsEdit, content, id }) => {
         data: { content: enteredText, choose: true },
       });
       console.log('요청성공');
+      timestamp + 1;
     } catch (err) {
       console.error(err);
     }
