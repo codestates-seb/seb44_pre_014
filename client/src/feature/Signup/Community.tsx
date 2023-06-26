@@ -95,19 +95,12 @@ const StyledCommunitySection = styled.div`
   align-items: center;
   margin: 0px;
   padding: 0px;
-
-  @media (min-height: 985px) {
-    width: 100vw;
-    height: 100vh;
-  }
 `;
 
 const DivContent = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
-  max-width: 1264px;
   width: 100%;
 `;
 
@@ -117,7 +110,7 @@ const LeftDiv = styled.div`
   width: 500px;
   height: 400px;
 
-  @media (max-width: 816px) {
+  @media (max-width: 1024px) {
     display: none;
   }
   > h1 {
