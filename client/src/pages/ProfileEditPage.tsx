@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 import ProfileEdit from 'feature/ProfileEdit/ProfileEdit';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useStore } from 'store/user/store.user';
+import { useUserStore } from 'store/user/store.user';
 
 const ProfileEditPage = () => {
-  const { memberId } = useStore();
+  const { memberId } = useUserStore();
   const { id } = useParams();
   const navigate = useNavigate();
 

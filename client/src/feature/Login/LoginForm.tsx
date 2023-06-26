@@ -3,7 +3,7 @@ import { useState } from 'react';
 import API from 'services/api/index';
 import { API_LOGIN } from 'services/api/key';
 import { useNavigate } from 'react-router-dom';
-import { useStore } from '../../store/user/store.user';
+import { useUserStore } from '../../store/user/store.user';
 interface LoginFormData {
   email: string;
   password: string;
@@ -15,7 +15,7 @@ const LoginForm = () => {
     password: '',
   });
 
-  const { setMemberId } = useStore();
+  const { setMemberId } = useUserStore();
 
   const navigate = useNavigate();
 

@@ -6,10 +6,11 @@ import { FaInbox, FaStackExchange } from 'react-icons/fa';
 import { BiSearch } from 'react-icons/bi';
 import { useNavigate } from 'react-router-dom';
 import { BsFillTrophyFill, BsFillQuestionCircleFill } from 'react-icons/bs';
-import { useStore } from 'store/user/store.user';
+import { useUserStore } from 'store/user/store.user';
 
 const Header: React.FC = () => {
-  const { memberId, setMemberId } = useStore();
+  const { memberId, setMemberId } = useUserStore();
+  console.log(memberId);
 
   //나중에 로컬스토리지에서 받아오는 것으로 수정.
   const navigate = useNavigate();
