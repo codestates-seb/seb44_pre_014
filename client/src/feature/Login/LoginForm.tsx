@@ -38,8 +38,8 @@ const LoginForm = () => {
       });
 
       if (res.status !== 200) throw res;
-      const accessToken = res.headers['Authorization'];
-      const memberId = res.headers['memberId'];
+      const accessToken = res.headers.get('Authorization');
+      const memberId = res.headers.get('memberId');
       // store에 memberId 저장
       setMemberId(memberId);
       // 로컬스토리지에 accessToken, memberId 저장

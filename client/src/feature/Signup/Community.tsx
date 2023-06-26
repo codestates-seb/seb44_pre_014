@@ -95,7 +95,6 @@ const StyledCommunitySection = styled.div`
   align-items: center;
   margin: 0px;
   padding: 0px;
-  background-color: var(--white);
 
   @media (min-height: 985px) {
     width: 100vw;

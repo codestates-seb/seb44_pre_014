@@ -23,4 +23,5 @@ const StyledSignupPage = styled.div`
   justify-content: center;
   align-items: center;
   padding: 24px;
+  background-color: var(--black-050);
 `;
