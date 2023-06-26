@@ -29,7 +29,7 @@ const QuestionCard: React.FC<TProps> = ({ questionData }) => {
       </PostSummary> */}
       <PostContent>
         <Title>
-          <a className="title-link" href={`/question/${questionId}`}>
+          <a className="title-link" href={`/questions/${questionId}`}>
             {title}
           </a>
         </Title>
