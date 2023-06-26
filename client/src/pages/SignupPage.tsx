@@ -24,7 +24,7 @@ const StyledSignupPage = styled.div`
   position: absolute;
   left: 0;
   width: 100vw;
-  height: 100%;
+  height: 110%;
   background-color: var(--black-050);
 
   .signup-page-box {
