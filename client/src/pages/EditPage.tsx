@@ -19,15 +19,11 @@ const EditPage = () => {
   }, [membersId]); */
   const membersId = 1; //일단 임의로 아무 아이디나 넣기
   return (
-    <div>
-      <Header />
-      <DivContainer>
-        <ContentContainer>
-          <EditQuestion id={param.id} myId={membersId} />
-        </ContentContainer>
-      </DivContainer>
-      <Footer />
-    </div>
+    <DivContainer>
+      <ContentContainer>
+        <EditQuestion id={param.id} myId={membersId} />
+      </ContentContainer>
+    </DivContainer>
   );
 };
 

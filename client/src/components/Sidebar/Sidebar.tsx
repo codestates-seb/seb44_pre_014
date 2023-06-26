@@ -5,6 +5,8 @@ import { AiFillInfoCircle } from 'react-icons/ai';
 import { svgbag, svgstar } from './SidebarSvg';
 
 const Sidebar: React.FC = () => {
+  if (location.pathname.includes('/questions/write')) return null;
+  if (location.pathname.includes('/login')) return null;
   return (
     <StyledWrapper>
       <ListContainer>

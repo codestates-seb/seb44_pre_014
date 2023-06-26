@@ -21,15 +21,11 @@ const AskPage = () => {
   }, [membersId]); */
   const membersId = 3; //일단 임의로 아무 아이디나 넣기
   return (
-    <div>
-      <Header />
-      <DivContainer>
-        <ContentContainer>
-          <AskQuestion id={membersId} />
-        </ContentContainer>
-      </DivContainer>
-      <Footer />
-    </div>
+    <DivContainer>
+      <ContentContainer>
+        <AskQuestion id={membersId} />
+      </ContentContainer>
+    </DivContainer>
   );
 };
 
@@ -37,6 +33,7 @@ export default AskPage;
 
 const DivContainer = styled.div`
   width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   background-color: var(--black-050);
