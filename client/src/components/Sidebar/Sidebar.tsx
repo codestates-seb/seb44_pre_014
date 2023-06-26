@@ -98,6 +98,12 @@ const TextWrapper = styled.div`
   }
 `;
 
+const StickyContainer = styled.div`
+  position: fixed;
+  top: 65px;
+  width: auto;
+`;
+
 const HomeContainer = styled.div`
   align-items: left;
   font-size: 13px;
