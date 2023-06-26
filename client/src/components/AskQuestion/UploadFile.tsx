@@ -124,6 +124,9 @@ const FileContainer = styled.div`
     #preview {
       margin-bottom: 10px;
     }
+    img {
+      border: 1px solid var(--black-075);
+    }
     .upload-name {
       display: flex;
       height: 30px;

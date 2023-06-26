@@ -131,7 +131,6 @@ export default AskQuestion;
 
 const MainWrapper = styled.div`
   display: flex;
-  background-color: var(--black-050);
   flex-direction: column;
   align-items: center;
   justify-content: center;
