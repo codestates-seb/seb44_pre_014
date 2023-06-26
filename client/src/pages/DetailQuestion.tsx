@@ -33,6 +33,7 @@ export default function DetailQuestion() {
   const [isLoading, setIsLoading] = useState(true);
   const [isEdit, setIsEdit] = useState(false);
   const [selectedAnswerId, setSelectedAnswerId] = useState<number | null>(null);
+  const [timeStamp, setTimeStamp] = useState(0);
   const navigate = useNavigate();
 
   //질문 수정하기
@@ -57,6 +58,7 @@ export default function DetailQuestion() {
       if (type === 'question') {
         //질문삭제
         const res = await API.DELETE({ url: `/api/questions/${id}` });
+        navigate(`/`);
         if (res.status !== 200) throw res;
       } else {
         // 답변삭제
@@ -81,7 +83,7 @@ export default function DetailQuestion() {
 
   useEffect(() => {
     requestQuestion();
-  }, [id]);
+  }, [id, timeStamp]);
 
   return (
     !isLoading && (
@@ -107,6 +109,8 @@ export default function DetailQuestion() {
           isEdit={isEdit}
           setIsEdit={setIsEdit}
           selectedAnswerId={selectedAnswerId}
+          setTimeStamp={setTimeStamp}
+          timeStamp={timeStamp}
         />
         <DetailAnswerInput
           quData={quData}
