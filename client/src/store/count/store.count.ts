@@ -1,5 +1,5 @@
 import { isTestEnvironment } from 'utils/isTestEnvironment';
-import create from 'zustand';
+import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 
 interface TStoreCount {
