@@ -11,13 +11,9 @@ type Tprops = {
 
 const DetailTitle: React.FC<Tprops> = ({ quData }) => {
   const navigate = useNavigate();
-  const { memberId } = useStore();
+  // const { memberId } = useStore();
   const onClickButton = () => {
-    if (Number(memberId) === quData.memberId) {
-      navigate('/questions/write');
-    } else {
-      alert(`회원님이 작성한 질문이 아닙니다!`);
-    }
+    navigate('/questions/write');
   };
   function formatRelativeDate(dateString: string): string {
     const date: Date = new Date(dateString);
