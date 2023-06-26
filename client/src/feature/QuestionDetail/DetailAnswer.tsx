@@ -12,6 +12,8 @@ type Tprops = {
   isEdit: boolean;
   setIsEdit: React.Dispatch<React.SetStateAction<boolean>>;
   selectedAnswerId: number;
+  setTimeStamp: React.Dispatch<React.SetStateAction<number>>;
+  timeStamp: number;
 };
 
 const DetailAnswer: React.FC<Tprops> = ({
@@ -21,6 +23,8 @@ const DetailAnswer: React.FC<Tprops> = ({
   setIsEdit,
   updateQu,
   selectedAnswerId,
+  setTimeStamp,
+  timeStamp,
 }) => {
   return (
     <>
@@ -34,6 +38,8 @@ const DetailAnswer: React.FC<Tprops> = ({
                 setIsEdit={setIsEdit}
                 content={content}
                 id={answerId}
+                setTimeStamp={setTimeStamp}
+                timeStamp={timeStamp}
               />
             )}
             {isEdit && selectedAnswerId !== answerId && (
