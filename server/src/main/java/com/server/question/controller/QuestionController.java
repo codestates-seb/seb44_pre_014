@@ -64,11 +64,10 @@ public class QuestionController {
         question.setVoteQuantity(0);
 
         Question savedQuestion = questionService.saveQuestion(question);
-        List<Tag> tags = tagService.saveTags(new ArrayList<>(postDto.getTagNames()));
-
-        if (tags == null) {
+        if (postDto.getTagNames() == null) {
             return new ResponseEntity<>(HttpStatus.OK);
         }
+        List<Tag> tags = tagService.saveTags(new ArrayList<>(postDto.getTagNames()));
         List<QuestionTag> questionTags = new ArrayList<>();
 
         for (Tag tag : tags) {
