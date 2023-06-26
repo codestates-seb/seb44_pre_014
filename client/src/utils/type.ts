@@ -1,13 +1,29 @@
 export type TQuestion = {
-  writer: string;
-  memberId: number;
   questionId: number;
-  answers: TAnswer[];
+  voteCount: number;
+  answerCount: number;
+  answers: {
+    answerId: number;
+    content: string;
+    createdAt: string;
+    modifiedAt: string;
+  }[];
+  viewCount: number;
   title: string;
+  writer: string;
   content: string;
-  solve: boolean;
+  tag: { title: string; avatar?: string; link: string }[];
+  user: {
+    id: number;
+    avatar: string;
+    name: string;
+    award: string;
+  };
   createdAt: string;
   modifiedAt: string;
+  view: number;
+  memberId: number;
+  answerId: number;
 };
 
 export type TAnswer = {

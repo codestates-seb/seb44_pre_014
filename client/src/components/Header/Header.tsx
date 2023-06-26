@@ -1,16 +1,28 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from '../../assets/mainlogo.png';
 import sublogo from '../../assets/sublogo.png';
 import styled from 'styled-components';
 import { FaInbox, FaStackExchange } from 'react-icons/fa';
 import { BiSearch } from 'react-icons/bi';
+import { useNavigate } from 'react-router-dom';
 import { BsFillTrophyFill, BsFillQuestionCircleFill } from 'react-icons/bs';
 
 const Header: React.FC = () => {
+  //나중에 로컬스토리지에서 받아오는 것으로 수정.
+  //const memberId = localStorage.getItem('memberId');
+  const navigate = useNavigate();
+  const memberId = 1;
+  const handleImgError = (e) => {
+    e.target.src = 'https://i.ibb.co/gwgngJy/cutecat.jpg';
+    //프로필이미지가 없을때 기본 프로필!
+  };
+  const moveToMain = () => {
+    navigate('/');
+  };
   return (
     <StyledWrapper>
       <HeaderContainer>
-        <LogoWrapper>
+        <LogoWrapper onClick={moveToMain}>
           <img src={logo} className="header-logo" />
           <img src={sublogo} className="header-sublogo"></img>
         </LogoWrapper>
@@ -19,7 +31,17 @@ const Header: React.FC = () => {
           <BiSearch className="search-icon" />
           <SerachBar placeholder="Search.." />
         </SerachWrapper>
-        <MyPageIcon>프로필사진</MyPageIcon>
+        {memberId ? (
+          <MyPageIcon>
+            <img
+              className="header-mypage"
+              src={`http://teamdev.shop/members/${memberId}/files`}
+              onError={handleImgError}
+              width={30}
+              height={30}
+            />
+          </MyPageIcon>
+        ) : null}
         <IconWrapper>
           <Icon className="icon">
             <FaInbox size={20} />
@@ -35,8 +57,8 @@ const Header: React.FC = () => {
           </Icon>
         </IconWrapper>
         <LoginWrapper>
-          <LoginLinkButton>Login</LoginLinkButton>
-          <LogoutLinkButton>Log out</LogoutLinkButton>
+          {!memberId && <LoginLinkButton>Login</LoginLinkButton>}
+          {memberId && <LogoutLinkButton>Log out</LogoutLinkButton>}
         </LoginWrapper>
       </HeaderContainer>
     </StyledWrapper>
@@ -140,14 +162,26 @@ const SerachBar = styled.input`
 const MyPageIcon = styled.div`
   display: flex;
   font-size: 11px;
+  padding-left: 8px;
+  padding-right: 8px;
+  border-radius: 3px;
+  padding-top: 10px;
+  margin-left: 12px;
+  padding-bottom: 14px;
+  :hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  img {
+    border-radius: 3px;
+  }
 `;
 
 const IconWrapper = styled.div`
   display: flex;
   color: var(--black-600);
-  margin-left: 1rem;
+  margin-left: 5px;
   padding-bottom: 13px;
-  @media (max-width: 600px) {
+  @media (max-width: 700px) {
     display: none;
   }
 `;
@@ -185,6 +219,7 @@ const LoginLinkButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 10px;
   :hover {
     background-color: var(--blue-200);
   }
@@ -202,6 +237,7 @@ const LogoutLinkButton = styled.button`
   margin: 5px;
   padding-left: 7px;
   padding-right: 7px;
+  margin-bottom: 10px;
   color: white;
   display: flex;
   align-items: center;

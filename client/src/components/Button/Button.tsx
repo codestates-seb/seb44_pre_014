@@ -48,7 +48,10 @@ const StyledButton = styled.div<ButtonProps>`
   font-size: 13px;
   padding: 10px;
   border-radius: 4px;
+  border: 1px solid 'var(--blue-500)';
   white-space: nowrap !important;
+  font-weight: normal;
+  text-align: center;
 
   &:hover {
     color: ${({ hoverColor }) => hoverColor};
