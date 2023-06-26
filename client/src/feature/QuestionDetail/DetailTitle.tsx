@@ -4,6 +4,7 @@ import Button from 'components/Button/Button';
 import { useNavigate } from 'react-router-dom';
 import { TQuestion } from 'utils/type';
 import { useUserStore } from 'store/user/store.user';
+import moment from 'moment';
 
 type Tprops = {
   quData: TQuestion;
@@ -13,27 +14,9 @@ const DetailTitle: React.FC<Tprops> = ({ quData }) => {
   const navigate = useNavigate();
   const { memberId } = useUserStore();
   const onClickButton = () => {
-    if (Number(memberId) === quData.memberId) {
-      navigate('/questions/write');
-    } else {
-      alert(`회원님이 작성한 질문이 아닙니다.`);
-    }
+    navigate('/questions/write');
   };
-  function formatRelativeDate(dateString: string): string {
-    const date: Date = new Date(dateString);
-    const today: Date = new Date();
 
-    const diffTime: number = Math.abs(today.getTime() - date.getTime());
-    const diffDays: number = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-
-    if (diffDays === 0) {
-      return 'today';
-    } else if (diffDays === 1) {
-      return 'yesterday';
-    } else {
-      return `${diffDays} days ago`;
-    }
-  }
   return (
     <>
       <DetailPost>
@@ -42,10 +25,10 @@ const DetailTitle: React.FC<Tprops> = ({ quData }) => {
       </DetailPost>
       <DetailInfo>
         <p>
-          Asked <span>{formatRelativeDate(quData.createdAt)}</span>
+          Asked <span>{moment(quData.createdAt).fromNow()}</span>
         </p>
         <p>
-          Modified <span>{formatRelativeDate(quData.modifiedAt)}</span>
+          Modified <span>{moment(quData.modifiedAt).fromNow()}</span>
         </p>
         <p>
           Viewed <span>{quData.view}</span>

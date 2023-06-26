@@ -11,10 +11,11 @@ type Eprops = {
 
 const EditAnswer: React.FC<Eprops> = ({ setIsEdit, content, id }) => {
   const editInputRef = useRef<HTMLTextAreaElement>(null);
+  const timestamp = 0;
 
   useEffect(() => {
     handleEdit;
-  }, [content]);
+  }, [timestamp]);
 
   const handleEdit = async () => {
     const enteredText = editInputRef.current?.value;
@@ -25,6 +26,7 @@ const EditAnswer: React.FC<Eprops> = ({ setIsEdit, content, id }) => {
         data: { content: enteredText, choose: true },
       });
       console.log('요청성공');
+      timestamp + 1;
     } catch (err) {
       console.error(err);
     }
@@ -39,7 +41,15 @@ const EditAnswer: React.FC<Eprops> = ({ setIsEdit, content, id }) => {
         <textarea defaultValue={content} ref={editInputRef} />
         <ButtonContainer>
           <Button onClick={handleEdit}>edit</Button>
-          <Button onClick={handlecancel}>cancel</Button>
+          <Button
+            onClick={handlecancel}
+            color="var(--blue-500)"
+            bgColor="var(--white)"
+            hoverColor="var(--blue-800)"
+            hoverBgColor="var(--white)"
+          >
+            cancel
+          </Button>
         </ButtonContainer>
       </EditContainer>
     </>
@@ -59,9 +69,7 @@ const EditContainer = styled.div`
 
 const ButtonContainer = styled.div`
   display: flex;
-  &:first-child {
-    margin-right: 10px;
-  }
+  gap: 10px;
 `;
 
 export default EditAnswer;

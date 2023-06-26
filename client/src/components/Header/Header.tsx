@@ -22,6 +22,9 @@ const Header: React.FC = () => {
   const moveToMain = () => {
     navigate('/');
   };
+  const moveMyProfile = () => {
+    navigate(`/profile/${memberId}`);
+  };
 
   // 로그인 버튼 클릭했을 때
   const handleLogin = () => {
@@ -52,7 +55,7 @@ const Header: React.FC = () => {
           <SerachBar placeholder="Search.." />
         </SerachWrapper>
         {memberId ? (
-          <MyPageIcon>
+          <MyPageIcon onClick={moveMyProfile}>
             <img
               className="header-mypage"
               src={`http://teamdev.shop/members/${memberId}/files`}

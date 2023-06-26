@@ -32,14 +32,9 @@ const AskPage = () => {
 export default AskPage;
 
 const DivContainer = styled.div`
-  width: 100%;
   height: 100%;
   display: flex;
-  justify-content: center;
-  background-color: var(--black-050);
 `;
 const ContentContainer = styled.div`
   margin-top: 50px;
-  width: calc(100%-164px);
-  width: 1100px;
 `;

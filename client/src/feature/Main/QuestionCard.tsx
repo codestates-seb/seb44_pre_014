@@ -8,25 +8,35 @@ type TProps = {
 };
 
 const QuestionCard: React.FC<TProps> = ({ questionData }) => {
-  const { questionId, title, content, writer, createdAt, memberId } =
-    questionData;
+  const {
+    questionId,
+    title,
+    content,
+    writer,
+    createdAt,
+    tagNames,
+    memberId,
+    voteQuantity,
+    view,
+    answers,
+  } = questionData;
 
   return (
     <StyledQuestionCard>
-      {/* <PostSummary>
+      <PostSummary>
         <div className="post-summary-item black">
-          <span>{voteCount}</span>
+          <span>{voteQuantity}</span>
           <span>votes</span>
         </div>
         <div className="post-summary-item gray">
-          <span>{answerCount}</span>
+          <span>{answers.length}</span>
           <span>answers</span>
         </div>
         <div className="post-summary-item gray">
-          <span>{viewCount}</span>
+          <span>{view}</span>
           <span>views</span>
         </div>
-      </PostSummary> */}
+      </PostSummary>
       <PostContent>
         <Title>
           <a className="title-link" href={`/questions/${questionId}`}>
@@ -35,20 +45,17 @@ const QuestionCard: React.FC<TProps> = ({ questionData }) => {
         </Title>
         <Excerpt>{content}</Excerpt>
         <PostContentMeta>
-          {/* <TagList>
-            {tag.map(({ title, avatar, link }, index) => (
-              <Tag key={`tag-${index}`} link={link}>
-                {avatar}
-                {title}
-              </Tag>
+          <TagList>
+            {tagNames.map((tag, index) => (
+              <Tag key={`tag-${index}`}>{tag}</Tag>
             ))}
-          </TagList> */}
+          </TagList>
           <UserCard>
             <a className="user-card-link" href={`/profile/${memberId}`}>
               {/* <img className="user-card-link--avatar" src={avatar} /> */}
               <img
                 className="user-card-link--avatar"
-                src={'http://teamdev.shop/members/2/files'}
+                src={`http://teamdev.shop/members/${memberId}/files`}
               />
               <span className="user-card-link--name">{writer}</span>
             </a>
@@ -67,6 +74,7 @@ export default QuestionCard;
 
 const StyledQuestionCard = styled.div`
   padding: 16px;
+  width: 100%;
   border-bottom: 1px solid var(--black-075);
 
   &:first-child {
@@ -79,6 +87,7 @@ const PostSummary = styled.div`
   margin-bottom: 4px;
   gap: 6px;
   flex-wrap: wrap;
+
   font-weight: 500;
 
   .post-summary-item {

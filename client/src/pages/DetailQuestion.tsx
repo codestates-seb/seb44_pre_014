@@ -22,7 +22,9 @@ const DetailMain = styled.div`
 
 const MainContainer = styled.div`
   display: flex;
+  justify-content: space-between;
   flex-direction: column;
+  width: 100%;
 `;
 
 export default function DetailQuestion() {
@@ -30,6 +32,7 @@ export default function DetailQuestion() {
   const [quData, setQuData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isEdit, setIsEdit] = useState(false);
+  const [selectedAnswerId, setSelectedAnswerId] = useState<number | null>(null);
   const navigate = useNavigate();
 
   //질문 수정하기
@@ -67,6 +70,7 @@ export default function DetailQuestion() {
     if (type === 'question') {
       navigate(`/questions/edit/${id}`);
     } else {
+      setSelectedAnswerId(id);
       setIsEdit(true);
     }
   };
@@ -98,6 +102,7 @@ export default function DetailQuestion() {
           updateQu={updateQuestion}
           isEdit={isEdit}
           setIsEdit={setIsEdit}
+          selectedAnswerId={selectedAnswerId}
         />
         <DetailAnswerInput
           quData={quData}
