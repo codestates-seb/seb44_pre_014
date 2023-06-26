@@ -45,7 +45,7 @@ const LabelContainer: React.FC<Tprops> = ({
         </ButtonContainer>
         <UserInfo
           img={`http://teamdev.shop/members/${quData.memberId}/files`}
-          site="/userinfo"
+          site={`/profile/${quData.memberId}`}
           name={quData.writer}
           createdAt={quData.createdAt}
         />

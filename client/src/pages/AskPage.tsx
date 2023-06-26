@@ -13,9 +13,9 @@ const AskPage = () => {
   // 멤버 아이디를 파람으로 받아오기. 해당 멤버가 글을 쓰는 것으로 처리 , 아님 로컬 스토리지에서 멤버 아이디 받아옴.
   //멤버 아이디가 없다면 로그인 페이지로 이동하게 구현할것.
   const nav = useNavigate();
-  const { memberId } = useUserStore();
+  const { memberId, isLoading } = useUserStore();
   useEffect(() => {
-    if (!memberId) {
+    if (!isLoading && !memberId) {
       nav('/login');
     }
   }, []);
