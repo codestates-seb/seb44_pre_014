@@ -3,18 +3,21 @@ import styled from 'styled-components';
 const MyQuestionList = ({ questionList }) => {
   return (
     <StyledMyQuestionList>
-      {questionList.length === 0 && (
+      {questionList.length === 0 ? (
         <NoneList>You have not asked any questions</NoneList>
+      ) : (
+        [...questionList]
+          .reverse()
+          .map(({ questionId, solve, title, answers }) => (
+            <QuestionsBox key={`question-list-item-${questionId}`}>
+              <div className="icon-ques">{solve ? '✅' : '👾'}</div>
+              <CountBox>{answers?.length}</CountBox>
+              <a className="userdata-answer" href={`/questions/${questionId}`}>
+                {title}
+              </a>
+            </QuestionsBox>
+          ))
       )}
-      {questionList.map(({ questionId, solve, title, answers }) => (
-        <QuestionsBox key={`question-list-item-${questionId}`}>
-          <div className="icon-ques">{solve ? '✅' : '👾'}</div>
-          <CountBox>{answers?.length}</CountBox>
-          <a className="userdata-answer" href={`/questions/${questionId}`}>
-            {title}
-          </a>
-        </QuestionsBox>
-      ))}
     </StyledMyQuestionList>
   );
 };

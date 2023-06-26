@@ -27,11 +27,19 @@ const MyPageTabProfile = ({ userData }) => {
       <InfoContainer>
         <MyQuestion>
           <StatTitle>Questions</StatTitle>
-          <MyQuestionList questionList={userData.questions.slice(0, 3)} />
+          <MyQuestionList
+            questionList={
+              userData.questions.length ? userData.questions.slice(-3) : []
+            }
+          />
         </MyQuestion>
         <MyAnswer>
           <StatTitle>Answers</StatTitle>
-          <MyAnswerList answerList={userData.answers.slice(0, 3)} />
+          <MyAnswerList
+            answerList={
+              userData.answers.lengths ? userData.answers.slice(-3) : []
+            }
+          />
         </MyAnswer>
       </InfoContainer>
     </StyledMyPageTabProfile>
