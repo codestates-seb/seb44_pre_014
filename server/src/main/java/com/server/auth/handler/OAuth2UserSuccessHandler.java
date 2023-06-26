@@ -71,9 +71,10 @@ public class OAuth2UserSuccessHandler extends SimpleUrlAuthenticationSuccessHand
         //UriComponentsBuilder 클래스를 사용하여 URL 을 생성하고, 쿼리 스트링에 JWT 토큰을 포함함
         return UriComponentsBuilder
                 .newInstance()
-                .fromUriString(redirectUrl)
+                // .fromUriString(redirectUrl)
+                .fromUriString("http://localhost:3000/login")
                 // .path("/")
-                // .queryParam("Authorization", "Bearer_" + accessToken)
+                .queryParam("Authorization", "Bearer_" + accessToken)
                 .build()
                 .toUri();
     }
