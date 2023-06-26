@@ -4,20 +4,25 @@ import sublogo from '../../assets/sublogo.png';
 import styled from 'styled-components';
 import { FaInbox, FaStackExchange } from 'react-icons/fa';
 import { BiSearch } from 'react-icons/bi';
+import { useNavigate } from 'react-router-dom';
 import { BsFillTrophyFill, BsFillQuestionCircleFill } from 'react-icons/bs';
 
 const Header: React.FC = () => {
   //나중에 로컬스토리지에서 받아오는 것으로 수정.
   //const memberId = localStorage.getItem('memberId');
+  const navigate = useNavigate();
   const memberId = 1;
   const handleImgError = (e) => {
     e.target.src = 'https://i.ibb.co/gwgngJy/cutecat.jpg';
     //프로필이미지가 없을때 기본 프로필!
   };
+  const moveToMain = () => {
+    navigate('/');
+  };
   return (
     <StyledWrapper>
       <HeaderContainer>
-        <LogoWrapper>
+        <LogoWrapper onClick={moveToMain}>
           <img src={logo} className="header-logo" />
           <img src={sublogo} className="header-sublogo"></img>
         </LogoWrapper>
