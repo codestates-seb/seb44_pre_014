@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import UserInfo from './UserInfo';
 import { TQuestion } from 'utils/type';
-import { useStore } from 'store/user/store.user';
+import { useUserStore } from 'store/user/store.user';
 
 type Tprops = {
   quData: TQuestion;
@@ -24,7 +24,7 @@ const LabelContainer: React.FC<Tprops> = ({
 }) => {
   const navigate = useNavigate();
   const onClickButton = () => navigate('/button');
-  const { memberId } = useStore();
+  const { memberId } = useUserStore();
   const handleEdit = () => {
     updateQu(id, type);
   };
