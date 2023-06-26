@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-export const axiosClient = axios.create({});
+export const axiosClient = axios.create({
+  baseURL: process.env.NODE_ENV === 'development' ? '' : 'https://teamdev.shop',
+});
 
 axiosClient.defaults.withCredentials = true;
 
@@ -12,7 +14,6 @@ class API {
         method,
         data,
       });
-
       return response;
     } catch (error) {
       if (error.response && error.response.status === 401) {

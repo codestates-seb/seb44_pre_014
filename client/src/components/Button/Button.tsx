@@ -12,9 +12,9 @@ type TProps = {
 
 const Button: React.FC<TProps> = ({
   children,
-  color = 'var(--color-white)',
+  color = 'var(--white)',
   bgColor = 'var(--blue-500)',
-  hoverColor = 'var(--color-white)',
+  hoverColor = 'var(--white)',
   hoverBgColor = 'var(--blue-600);',
   onClick,
 }) => {
@@ -31,28 +31,7 @@ const Button: React.FC<TProps> = ({
   );
 };
 
-const DetailButton: React.FC<TProps> = ({
-  children,
-  color = 'var(--black-500)',
-  bgColor = 'var(--color-white)',
-  hoverColor = 'var(--black-400)',
-  hoverBgColor = 'var(--color-white);',
-  onClick,
-}) => {
-  return (
-    <StyledButton
-      color={color}
-      bgColor={bgColor}
-      hoverColor={hoverColor}
-      hoverBgColor={hoverBgColor}
-      onClick={onClick}
-    >
-      {children}
-    </StyledButton>
-  );
-};
-
-export { Button, DetailButton };
+export default Button;
 
 type ButtonProps = {
   color: string;
@@ -64,6 +43,7 @@ type ButtonProps = {
 const StyledButton = styled.div<ButtonProps>`
   background-color: ${({ bgColor }) => bgColor};
   color: ${({ color }) => color};
+  height: min-content;
   cursor: pointer;
   font-size: 13px;
   padding: 10px;

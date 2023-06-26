@@ -25,3 +25,19 @@ export type TQuestion = {
   memberId: number;
   answerId: number;
 };
+
+export type TAnswer = {
+  answerId: number;
+  comments: TComment[];
+  content: string;
+  choose: boolean;
+  createdAt: string;
+  modifiedAt: string;
+};
+
+export type TComment = {
+  commentId: number;
+  content: string;
+  createdAt: string;
+  modifiedAt;
+};
