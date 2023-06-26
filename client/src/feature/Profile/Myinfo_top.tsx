@@ -41,11 +41,18 @@ const Myinfo_top = ({ userData }) => {
     signupDate: since,
     modified: modifiedTime,
   };
+  const handleImgError = (e) => {
+    e.target.src = 'https://i.ibb.co/gwgngJy/cutecat.jpg';
+    //프로필이미지가 없을때 기본 프로필!
+  };
 
   return (
     <ProfileContainer>
       <Profile className="profile-img">
-        <img src={`https://teamdev.shop/members/${id}/files`} />
+        <img
+          src={`https://teamdev.shop/members/${id}/files`}
+          onError={handleImgError}
+        />
       </Profile>
       <ItemContainer>
         <div className="display-name">
