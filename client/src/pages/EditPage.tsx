@@ -4,24 +4,19 @@ import EditQuestion from 'feature/Main/AskQuestion/EditQuestion';
 import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { useUserStore } from 'store/user/store.user';
 
 /*ContentContainer안에 컴포넌트 넣어서 페이지 구성 */
 
 const EditPage = () => {
   const param = useParams();
   const nav = useNavigate();
-  /*
-  const membersId = 내가 로그인한 멤버 아이디
-  useEffect(() => {
-    if (!membersId) {
-      nav('/login');
-    }
-  }, [membersId]); */
-  const membersId = 1; //일단 임의로 아무 아이디나 넣기
+  const { memberId } = useUserStore();
+
   return (
     <DivContainer>
       <ContentContainer>
-        <EditQuestion id={param.id} myId={membersId} />
+        <EditQuestion id={param.id} myId={memberId} />
       </ContentContainer>
     </DivContainer>
   );

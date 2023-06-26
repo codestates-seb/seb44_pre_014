@@ -6,12 +6,10 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import UploadFile from 'components/AskQuestion/UploadFile';
 import TagBar from 'components/AskQuestion/CreateTag';
-import { useStoreFile } from 'store/count/store.file';
 
 const EditQuestion = ({ id, myId }) => {
-  const [member, setMember] = useState<number>();
+  const [member, setMember] = useState(); //이 글을 쓴 사람의 ID
   const navigate = useNavigate();
-  const { newFile, setnewFile } = useStoreFile();
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
   const [writetag, setwriteTag] = useState([]);
@@ -70,16 +68,10 @@ const EditQuestion = ({ id, myId }) => {
       console.log(err);
     }
   };
+
   useEffect(() => {
     getPost();
   }, []);
-
-  useEffect(() => {
-    if (member && member !== myId) {
-      console.log('자신이 쓴 글만 수정할 수 있습니다.');
-      goToMain();
-    }
-  }, [member]);
 
   return (
     <MainWrapper>
