@@ -8,17 +8,19 @@ import EditAnswer from './EditAnswer';
 type Tprops = {
   quData: TQuestion;
   deleteQu: (id: number, type: string) => void;
-  updateQu: (id: number, type: string) => void;
+  updateQu?: (id: number, type: string) => void;
   isEdit: boolean;
   setIsEdit: React.Dispatch<React.SetStateAction<boolean>>;
+  selectedAnswerId: number;
 };
 
 const DetailAnswer: React.FC<Tprops> = ({
   quData,
   deleteQu,
-  updateQu,
   isEdit,
   setIsEdit,
+  updateQu,
+  selectedAnswerId,
 }) => {
   return (
     <>
@@ -27,12 +29,17 @@ const DetailAnswer: React.FC<Tprops> = ({
         <AnswerContainer>
           <VoteContainer />
           <AnswerMain>
-            {isEdit && (
+            {isEdit && selectedAnswerId === answerId && (
               <EditAnswer
                 setIsEdit={setIsEdit}
                 content={content}
                 id={answerId}
               />
+            )}
+            {isEdit && selectedAnswerId !== answerId && (
+              <AnswerText>
+                <p key={answerId}>{content}</p>
+              </AnswerText>
             )}
             {!isEdit && (
               <AnswerText>
@@ -43,8 +50,8 @@ const DetailAnswer: React.FC<Tprops> = ({
               quData={quData}
               deleteQu={deleteQu}
               id={answerId}
-              updateQu={updateQu}
               type="answer"
+              updateQu={updateQu}
             />
           </AnswerMain>
         </AnswerContainer>

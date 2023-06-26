@@ -11,6 +11,7 @@ type Tprops = {
   id: number;
   updateQu: (id: number, type: string) => void;
   type: string;
+  handleEdit?: (answerId: number) => void;
 };
 
 const LabelContainer: React.FC<Tprops> = ({
@@ -25,6 +26,7 @@ const LabelContainer: React.FC<Tprops> = ({
   const handleEdit = () => {
     updateQu(id, type);
   };
+
   return (
     quData && (
       <Label>
