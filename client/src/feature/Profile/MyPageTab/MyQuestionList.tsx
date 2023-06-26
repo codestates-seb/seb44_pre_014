@@ -6,11 +6,13 @@ const MyQuestionList = ({ questionList }) => {
       {questionList.length === 0 && (
         <NoneList>You have not asked any questions</NoneList>
       )}
-      {questionList.map(({ solve, title, answers }) => (
-        <QuestionsBox>
+      {questionList.map(({ questionId, solve, title, answers }) => (
+        <QuestionsBox key={`question-list-item-${questionId}`}>
           <div className="icon-ques">{solve ? '✅' : '👾'}</div>
           <CountBox>{answers?.length}</CountBox>
-          <div className="userdata-answer">{title}</div>
+          <a className="userdata-answer" href={`/questions/${questionId}`}>
+            {title}
+          </a>
         </QuestionsBox>
       ))}
     </StyledMyQuestionList>
@@ -41,7 +43,6 @@ const QuestionsBox = styled.div`
   border-radius: 3px;
   font-size: 15px;
   display: flex;
-  color: var(--blue-700);
   padding: 12px;
 
   .userdata-answer {
@@ -50,6 +51,12 @@ const QuestionsBox = styled.div`
     -webkit-box-orient: vertical;
     overflow: hidden;
     -webkit-line-clamp: 1;
+    color: var(--blue-700);
+    text-decoration: none;
+
+    &:hover {
+      color: var(--blue-500);
+    }
   }
 
   .icon-ques {

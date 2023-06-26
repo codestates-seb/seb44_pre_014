@@ -44,7 +44,6 @@ const Edit_main = ({ userData }) => {
         url: API_MEMBER_EDIT(id),
         data: editData,
       });
-      console.log(res);
       navigate(`/profile/${id}`);
       window.scrollTo({ top: 0 });
     } catch (err) {

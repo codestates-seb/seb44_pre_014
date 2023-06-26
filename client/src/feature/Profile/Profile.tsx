@@ -26,7 +26,6 @@ const Profile = () => {
   const requestUserInfo = async () => {
     try {
       const res = await API.GET(API_MEMBER(id));
-      console.log(res);
       setUserData({
         username: res.data.username,
         email: res.data.email,
