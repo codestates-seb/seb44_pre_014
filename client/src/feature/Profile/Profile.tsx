@@ -9,6 +9,7 @@ import { useStoreTab } from 'store/tab/store.tab';
 import MyPageTabProfile from './MyPageTab/MyPageTabProfile';
 import MyPageTabQuestion from './MyPageTab/MyPageTabQuestion';
 import MyPageTabAnswer from './MyPageTab/MyPageTabAnswer';
+import Error from 'components/Error/Error';
 
 const Profile = () => {
   const { id } = useParams();
@@ -21,6 +22,8 @@ const Profile = () => {
     questions: [],
     answers: [],
   });
+  const [isError, setIsError] = useState(false);
+
   const { tab } = useStoreTab();
 
   const requestUserInfo = async () => {
@@ -37,6 +40,7 @@ const Profile = () => {
       });
     } catch (err) {
       console.log(err);
+      setIsError(true);
     }
   };
 
@@ -44,6 +48,7 @@ const Profile = () => {
     requestUserInfo();
   }, []);
 
+  if (isError) return <Error />;
   return (
     <MyPageContainer>
       <Myinfo_top userData={userData} />
