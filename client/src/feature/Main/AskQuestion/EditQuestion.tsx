@@ -40,12 +40,17 @@ const EditQuestion = ({ id, myId }) => {
   };
   const goToMain = () => {
     navigate('/');
+    window.scrollTo(0, 0);
+  };
+  const goBack = () => {
+    navigate(-1);
+    window.scrollTo(0, 0);
   };
   const newPost = async () => {
     try {
       const res = await API.PATCH({ url: patchurl, data: newData });
       console.log(res);
-      goToMain();
+      goBack();
     } catch (err) {
       console.log(err);
     }
@@ -130,7 +135,7 @@ const EditQuestion = ({ id, myId }) => {
         >
           Register
         </BtnContainer>
-        <CancelBtn onClick={goToMain}>Cancel</CancelBtn>
+        <CancelBtn onClick={goBack}>Cancel</CancelBtn>
       </BtnWrapper>
     </MainWrapper>
   );

@@ -44,6 +44,7 @@ const AskQuestion = ({ id }) => {
 
   const goToMain = () => {
     navigate('/');
+    window.scrollTo(0, 0);
   };
   const newPost = async () => {
     try {
