@@ -12,10 +12,10 @@ type TProps = {
 
 const DetailButton: React.FC<TProps> = ({
   children,
-  color = 'var(--white)',
-  bgColor = 'var(--blue-500)',
-  hoverColor = 'var(--white)',
-  hoverBgColor = 'var(--blue-600);',
+  color = 'var(--black-500)',
+  bgColor = 'var(--white)',
+  hoverColor = 'var(--black-400)',
+  hoverBgColor = 'var(--white);',
   onClick,
 }) => {
   return (

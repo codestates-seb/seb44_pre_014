@@ -12,9 +12,7 @@ const MyAnswerList = ({ answerList }) => {
         <AnswersBox key={`answer-list-item-${index}`}>
           <RiMessage2Fill className="icon-info"></RiMessage2Fill>
           <CountBox>{choose ? '💌' : '✉️'}</CountBox>
-          <a className="userdata-answer" href={`/questions/${questionId}`}>
-            {content}
-          </a>
+          <div className="userdata-answer">{content}</div>
         </AnswersBox>
       ))}
     </StyledMyAnswerList>
@@ -54,12 +52,6 @@ const AnswersBox = styled.div`
     -webkit-box-orient: vertical;
     overflow: hidden;
     -webkit-line-clamp: 1;
-    color: var(--blue-700);
-    text-decoration: none;
-
-    &:hover {
-      color: var(--blue-500);
-    }
   }
 
   .icon-info {
