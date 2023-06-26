@@ -1,4 +1,4 @@
-import { DetailButton } from 'components/Button/Button';
+import DetailButton from 'components/Button/Button';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';

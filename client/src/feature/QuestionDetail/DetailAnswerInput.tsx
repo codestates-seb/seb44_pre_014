@@ -1,9 +1,9 @@
-import { Button } from 'components/Button/Button';
 import React, { useEffect, useRef } from 'react';
 import API from 'services/api/index';
 import styled from 'styled-components';
 import { API_ANSWER } from 'services/api/key';
 import { TQuestion } from 'utils/type';
+import Button from 'components/Button/Button';
 
 type Tprops = {
   id: number;

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { Button } from 'components/Button/Button';
+import Button from 'components/Button/Button';
 import API from 'services/api/index';
 
 type Eprops = {
