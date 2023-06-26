@@ -21,10 +21,12 @@ const EditAnswer: React.FC<Eprops> = ({ setIsEdit, content, id }) => {
     const enteredText = editInputRef.current?.value;
 
     try {
-      await API.PATCH({
+      const res = await API.PATCH({
         url: `/answers/${id}/edit`,
         data: { content: enteredText, choose: true },
       });
+      if (res.status !== 200) throw res;
+
       console.log('요청성공');
       timestamp + 1;
     } catch (err) {

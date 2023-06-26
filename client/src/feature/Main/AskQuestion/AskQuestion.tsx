@@ -49,7 +49,8 @@ const AskQuestion = ({ id }) => {
   const newPost = async () => {
     try {
       const res = await API.POST({ url: url, data: newData });
-      console.log(res);
+      if (res.status !== 200) throw res;
+
       goToMain();
     } catch (err) {
       console.log(err);

@@ -29,6 +29,8 @@ const Profile = () => {
   const requestUserInfo = async () => {
     try {
       const res = await API.GET(API_MEMBER(id));
+      if (res.status !== 200) throw res;
+
       setUserData({
         username: res.data.username,
         email: res.data.email,

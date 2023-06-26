@@ -36,11 +36,12 @@ const UploadFile = ({ edit }) => {
         const formData = new FormData();
         formData.append('files', file);
 
-        await API.POST({
+        const res = await API.POST({
           url: `/api/questions/${id.id}/files`,
           data: formData,
           headers: { 'Content-Type': 'multipart/form-data' },
         });
+        if (res.status !== 200) throw res;
         console.log('file upload');
         setSuccess(true);
       } else {

@@ -37,10 +37,12 @@ const SignupForm = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      const response = await API.POST({
+      const res = await API.POST({
         url: API_SIGNUP,
         data: signupFormData,
       });
+      if (res.status !== 200) throw res;
+
       alert('Success Signed up!!');
       setSignupFormData({
         username: '',

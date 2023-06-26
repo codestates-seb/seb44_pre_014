@@ -1,8 +1,6 @@
 import axios from 'axios';
 
-export const axiosClient = axios.create({
-  baseURL: process.env.NODE_ENV === 'development' ? '' : 'https://teamdev.shop',
-});
+export const axiosClient = axios.create({});
 
 axiosClient.defaults.withCredentials = true;
 
@@ -14,6 +12,7 @@ class API {
         method,
         data,
       });
+
       return response;
     } catch (error) {
       if (error.response && error.response.status === 401) {
@@ -47,10 +46,11 @@ class API {
     });
   }
 
-  DELETE({ url }) {
+  DELETE({ url, ...params }) {
     return this.CALL({
       method: 'DELETE',
       url,
+      ...params,
     });
   }
 

@@ -19,6 +19,8 @@ const DetailMainText: React.FC<Tprops> = ({ quData }) => {
       const res = await API.GET(
         `/api/questions/${quData.questionId}/files?size=1`
       );
+      if (res.status !== 200) throw res;
+
       setFileUrl(`data:image/jpeg;base64,` + res.data[0]);
     } catch (err) {
       console.log(err);

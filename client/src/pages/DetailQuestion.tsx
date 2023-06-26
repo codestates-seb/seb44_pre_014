@@ -41,6 +41,8 @@ export default function DetailQuestion() {
   const requestQuestion = async () => {
     try {
       const res = await API.GET(`/api/questions/${id}`);
+      if (res.status !== 200) throw res;
+
       setQuData(res.data);
       setIsLoading(false);
       console.log(quData);
@@ -54,10 +56,12 @@ export default function DetailQuestion() {
     try {
       if (type === 'question') {
         //질문삭제
-        await API.DELETE({ url: `/api/questions/${id}` });
+        const res = await API.DELETE({ url: `/api/questions/${id}` });
+        if (res.status !== 200) throw res;
       } else {
         // 답변삭제
-        await API.DELETE({ url: `/answers/${id}` });
+        const res = await API.DELETE({ url: `/answers/${id}` });
+        if (res.status !== 200) throw res;
       }
       navigate(`/`);
     } catch (err) {

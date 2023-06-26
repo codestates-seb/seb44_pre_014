@@ -23,10 +23,12 @@ const DetailAnswerInput: React.FC<Tprops> = ({ id, questionId, quData }) => {
     const enteredText = textInputRef.current?.value;
     console.log(enteredText);
     try {
-      await API.POST({
+      const res = await API.POST({
         url: API_ANSWER,
         data: { content: enteredText, memberId: id, questionId: questionId },
       });
+      if (res.status !== 200) throw res;
+
       console.log('전송완료');
     } catch (err) {
       console.error(err);

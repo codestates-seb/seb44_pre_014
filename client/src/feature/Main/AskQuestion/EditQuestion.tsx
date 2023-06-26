@@ -47,7 +47,8 @@ const EditQuestion = ({ id, myId }) => {
   const newPost = async () => {
     try {
       const res = await API.PATCH({ url: patchurl, data: newData });
-      console.log(res);
+      if (res.status !== 200) throw res;
+
       goBack();
     } catch (err) {
       console.log(err);
@@ -57,7 +58,7 @@ const EditQuestion = ({ id, myId }) => {
   const getPost = async () => {
     try {
       const res = await API.GET(geturl);
-      console.log(res);
+      if (res.status !== 200) throw res;
       setBody(res.data.content);
       setTitle(res.data.title);
       setMember(res.data.memberId);
