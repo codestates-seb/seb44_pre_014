@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Button from 'components/Button/Button';
 import { useNavigate } from 'react-router-dom';
 import { TQuestion } from 'utils/type';
+
 import { useUserStore } from 'store/user/store.user';
 import moment from 'moment';
 
@@ -12,7 +13,9 @@ type Tprops = {
 
 const DetailTitle: React.FC<Tprops> = ({ quData }) => {
   const navigate = useNavigate();
+
   const { memberId } = useUserStore();
+
   const onClickButton = () => {
     navigate('/questions/write');
   };
