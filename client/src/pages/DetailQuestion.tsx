@@ -33,6 +33,7 @@ export default function DetailQuestion() {
   const [isLoading, setIsLoading] = useState(true);
   const [isEdit, setIsEdit] = useState(false);
   const [selectedAnswerId, setSelectedAnswerId] = useState<number | null>(null);
+  const [timeStamp, setTimeStamp] = useState(0);
   const navigate = useNavigate();
 
   //질문 수정하기
@@ -81,7 +82,7 @@ export default function DetailQuestion() {
 
   useEffect(() => {
     requestQuestion();
-  }, [id]);
+  }, [id, timeStamp]);
 
   return (
     !isLoading && (
@@ -107,6 +108,8 @@ export default function DetailQuestion() {
           isEdit={isEdit}
           setIsEdit={setIsEdit}
           selectedAnswerId={selectedAnswerId}
+          setTimeStamp={setTimeStamp}
+          timeStamp={timeStamp}
         />
         <DetailAnswerInput
           quData={quData}
