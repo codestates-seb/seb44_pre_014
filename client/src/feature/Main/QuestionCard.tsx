@@ -55,7 +55,7 @@ const QuestionCard: React.FC<TProps> = ({ questionData }) => {
               {/* <img className="user-card-link--avatar" src={avatar} /> */}
               <img
                 className="user-card-link--avatar"
-                src={'http://teamdev.shop/members/2/files'}
+                src={`http://teamdev.shop/members/${memberId}/files`}
               />
               <span className="user-card-link--name">{writer}</span>
             </a>
@@ -74,6 +74,7 @@ export default QuestionCard;
 
 const StyledQuestionCard = styled.div`
   padding: 16px;
+  width: 100%;
   border-bottom: 1px solid var(--black-075);
 
   &:first-child {
@@ -86,6 +87,7 @@ const PostSummary = styled.div`
   margin-bottom: 4px;
   gap: 6px;
   flex-wrap: wrap;
+
   font-weight: 500;
 
   .post-summary-item {

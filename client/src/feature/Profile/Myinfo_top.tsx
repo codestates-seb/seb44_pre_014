@@ -1,13 +1,13 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useGetUserInfo } from 'store/userInfo/store.userInfo';
+import { useStore } from 'store/user/store.user';
 import styled from 'styled-components';
 import { PencilSvg } from './MyPageSvg';
 
 const Myinfo_top = ({ userData }) => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const userInfo = useGetUserInfo();
+  const { memberId } = useStore();
 
   function DateFormat(now) {
     // 날짜 형식 변환
@@ -62,7 +62,7 @@ const Myinfo_top = ({ userData }) => {
           {userData ? userData.email : null}
         </UserEmail>
       </ItemContainer>
-      {userInfo.memberId === Number(id) && (
+      {Number(memberId) === Number(id) && (
         <ProfileBtnContainer>
           <div
             className="profile-edit-button"

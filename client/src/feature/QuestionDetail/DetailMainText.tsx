@@ -20,7 +20,6 @@ const DetailMainText: React.FC<Tprops> = ({ quData }) => {
         `/api/questions/${quData.questionId}/files?size=1`
       );
       setFileUrl(`data:image/jpeg;base64,` + res.data[0]);
-      console.log(res);
     } catch (err) {
       console.log(err);
     }

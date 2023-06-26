@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -5,12 +6,13 @@ type UserProps = {
   name: string;
   img: string;
   site: string;
+  createdAt: string;
 };
 
 const UserInfo: React.FC<UserProps> = (props) => {
   return (
     <UserInfoContainer>
-      <div>asked 13 mins ago</div>
+      <div>asked {moment(props.createdAt).fromNow()}</div>
       <UserDetail>
         <img src={props.img} />
         <UserFollow>

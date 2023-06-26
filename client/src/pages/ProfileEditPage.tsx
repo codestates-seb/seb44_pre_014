@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 import ProfileEdit from 'feature/ProfileEdit/ProfileEdit';
-import { useGetUserInfo } from 'store/userInfo/store.userInfo';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useStore } from 'store/user/store.user';
 
 const ProfileEditPage = () => {
-  const userInfo = useGetUserInfo();
+  const { memberId } = useStore();
   const { id } = useParams();
   const navigate = useNavigate();
 
-  if (userInfo.memberId !== Number(id)) navigate(`/profile/${id}`);
+  if (Number(memberId) !== Number(id)) navigate(`/profile/${id}`);
   return (
     <StyledProfileEditPage>
       <ContentContainer>
