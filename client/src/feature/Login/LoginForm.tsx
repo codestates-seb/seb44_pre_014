@@ -32,22 +32,21 @@ const LoginForm = () => {
     e.preventDefault();
 
     try {
-      // 로그인 요청을 서버로 보내는 로직
-      const response = await API.POST({
+      const res = await API.POST({
         url: API_LOGIN,
         data: loginFormData,
-      }).then((res) => {
-        // accessToken : 응답 헤더
-        const accessToken = res.headers.get('Authorization');
-        const memberId = res.headers.get('memberId');
-        // store에 memberId 저장
-        setMemberId(memberId);
-        // 로컬스토리지에 accessToken, memberId 저장
-        localStorage.setItem('accessToken', accessToken);
-        localStorage.setItem('memberId', memberId);
-        alert('login success!');
-        navigate('/');
       });
+
+      if (res.status !== 200) throw res;
+      const accessToken = res.headers['Authorization'];
+      const memberId = res.headers['memberId'];
+      // store에 memberId 저장
+      setMemberId(memberId);
+      // 로컬스토리지에 accessToken, memberId 저장
+      localStorage.setItem('accessToken', accessToken);
+      localStorage.setItem('memberId', memberId);
+      alert('login success!');
+      navigate('/');
     } catch (error) {
       // 로그인 실패 처리
       alert('failed to login!');
