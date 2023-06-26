@@ -50,6 +50,9 @@ const AskQuestion = ({ id }) => {
   };
   const newPost = async () => {
     try {
+      if (!memberId) {
+        navigate('/login');
+      }
       const res = await API.POST({ url: url, data: newData });
       if (res.status !== 200) throw res;
 
