@@ -18,7 +18,10 @@ const UploadFile = ({ edit }) => {
       setFileurl(res);
     }
   };
-
+  const handleImgError = (e) => {
+    e.target.src = 'https://i.ibb.co/vjJJRHK/2023-06-26-10-57-48.png';
+    //프로필이미지가 없을때 기본 프로필!
+  };
   const fileDelete = () => {
     setFile(null);
     setFileurl('');
@@ -69,7 +72,13 @@ const UploadFile = ({ edit }) => {
       <div className="upload-title">Upload</div>
       <form onSubmit={onSubmitForm}>
         {edit === 'patch' && (
-          <img id="preview" src={fileurl} width={300} height={300} />
+          <img
+            id="preview"
+            src={fileurl}
+            width={300}
+            height={300}
+            onError={handleImgError}
+          />
         )}
         {edit === 'new' && <div>파일을 등록하세요</div>}
         <input
