@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Button from 'components/Button/Button';
 import { useNavigate } from 'react-router-dom';
 import { TQuestion } from 'utils/type';
+import { useStore } from 'store/user/store.user';
 
 type Tprops = {
   quData: TQuestion;
@@ -10,7 +11,14 @@ type Tprops = {
 
 const DetailTitle: React.FC<Tprops> = ({ quData }) => {
   const navigate = useNavigate();
-  const onClickButton = () => navigate('/questions/write');
+  const { memberId } = useStore();
+  const onClickButton = () => {
+    if (Number(memberId) === quData.memberId) {
+      navigate('/questions/write');
+    } else {
+      alert(`회원님이 작성한 질문이 아닙니다.`);
+    }
+  };
   function formatRelativeDate(dateString: string): string {
     const date: Date = new Date(dateString);
     const today: Date = new Date();
