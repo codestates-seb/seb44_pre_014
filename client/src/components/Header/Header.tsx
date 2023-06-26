@@ -19,6 +19,9 @@ const Header: React.FC = () => {
   const moveToMain = () => {
     navigate('/');
   };
+  const moveMyProfile = () => {
+    navigate(`/profile/${memberId}`);
+  };
   return (
     <StyledWrapper>
       <HeaderContainer>
@@ -32,7 +35,7 @@ const Header: React.FC = () => {
           <SerachBar placeholder="Search.." />
         </SerachWrapper>
         {memberId ? (
-          <MyPageIcon>
+          <MyPageIcon onClick={moveMyProfile}>
             <img
               className="header-mypage"
               src={`http://teamdev.shop/members/${memberId}/files`}
