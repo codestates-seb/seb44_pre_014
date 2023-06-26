@@ -1,5 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import MainPage from 'pages/MainPage';
+import ProfilePage from 'pages/ProfilePage';
+import ProfileEditPage from 'pages/ProfileEditPage';
 import SignupPage from 'pages/SignupPage';
 import LoginPage from 'pages/LoginPage';
 import { useStore } from './store/user/store.user';
@@ -21,6 +23,8 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={<MainPage />} />
+      <Route path="/profile/:id" element={<ProfilePage />} />
+      <Route path="/profile/edit/:id" element={<ProfileEditPage />} />
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/questions/write" element={<AskPage />} />
