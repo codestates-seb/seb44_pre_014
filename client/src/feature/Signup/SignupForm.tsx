@@ -41,7 +41,6 @@ const SignupForm = () => {
         url: API_SIGNUP,
         data: signupFormData,
       });
-      console.log(response);
       alert('Success Signed up!!');
       setSignupFormData({
         username: '',
@@ -49,6 +48,7 @@ const SignupForm = () => {
         password: '',
         name: '',
       });
+      navigate('/login');
     } catch (error) {
       alert('failed to signup!!');
       console.error(error);
