@@ -1,13 +1,13 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useStore } from 'store/user/store.user';
+import { useUserStore } from 'store/user/store.user';
 import styled from 'styled-components';
 import { PencilSvg } from './MyPageSvg';
 
 const Myinfo_top = ({ userData }) => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const { memberId } = useStore();
+  const { memberId } = useUserStore();
 
   function DateFormat(now) {
     // 날짜 형식 변환
