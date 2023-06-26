@@ -28,6 +28,9 @@ const LabelContainer: React.FC<Tprops> = ({
   const handleEdit = () => {
     updateQu(id, type);
   };
+  const handleDelete = () => {
+    deleteQu(id, type);
+  };
 
   return (
     quData && (
@@ -37,9 +40,7 @@ const LabelContainer: React.FC<Tprops> = ({
           {Number(memberId) === quData.memberId && (
             <>
               <DetailButton onClick={handleEdit}>Edit</DetailButton>
-              <DetailButton onClick={() => deleteQu(id, type)}>
-                Delete
-              </DetailButton>
+              <DetailButton onClick={handleDelete}>Delete</DetailButton>
             </>
           )}
         </ButtonContainer>
