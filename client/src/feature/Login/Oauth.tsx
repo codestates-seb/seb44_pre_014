@@ -124,10 +124,3 @@ const SvgSection = styled.svg`
   width: 19px;
   height: 19px;
 `;
-
-const Div = styled.a`
-  width: 268px;
-  display: flex;
-  justify-content: center;
-  margin-bottom: 24px;
-`;
