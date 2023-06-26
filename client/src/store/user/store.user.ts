@@ -5,7 +5,7 @@ interface StoreState {
   setMemberId: (memberId: string | null) => void;
 }
 
-export const useStore = create<StoreState>((set) => ({
+export const useUserStore = create<StoreState>((set) => ({
   memberId: null,
   setMemberId: (memberId) => set({ memberId }),
 }));
