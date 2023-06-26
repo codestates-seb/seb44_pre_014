@@ -1,16 +1,17 @@
 package com.server.auth.userdetails;
 
-import lombok.extern.slf4j.Slf4j;
+import java.util.Optional;
+
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Component;
-import com.server.auth.userdetails.PrincipalDetails;
+
 import com.server.member.entity.Member;
 import com.server.member.repository.MemberRepository;
 
-import java.util.Optional;
+import lombok.extern.slf4j.Slf4j;
 
 // 외부 OAuth2 제공자에게 인증된 사용자에 대한 UserDetails 객체 로드
 @Slf4j
@@ -40,7 +41,7 @@ public class OAuth2UserDetailsService extends DefaultOAuth2UserService {
 
         Optional<Member> findMember = memberRepository.findByEmail(email);
 
-        Member member = findMember.orElseGet(() -> new Member(email, password, username));
+        Member member = findMember.orElseGet(() -> new Member(email, username, password));
         memberRepository.save(member);
 
         return new PrincipalDetails(member, oAuth2User.getAttributes());
