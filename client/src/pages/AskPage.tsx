@@ -15,7 +15,7 @@ const AskPage = () => {
   const nav = useNavigate();
   const { memberId, isLoading } = useUserStore();
   useEffect(() => {
-    if (!isLoading && !memberId) {
+    if (isLoading && !memberId) {
       nav('/login');
     }
   }, []);

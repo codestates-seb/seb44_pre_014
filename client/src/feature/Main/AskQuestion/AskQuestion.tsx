@@ -13,8 +13,10 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import TagBar from 'components/AskQuestion/CreateTag';
 import UploadFile from 'components/AskQuestion/UploadFile';
+import { useUserStore } from 'store/user/store.user';
 
 const AskQuestion = ({ id }) => {
+  const { memberId, isLoading } = useUserStore();
   const navigate = useNavigate();
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
@@ -56,6 +58,12 @@ const AskQuestion = ({ id }) => {
       console.log(err);
     }
   };
+
+  useEffect(() => {
+    if (!isLoading && !memberId) {
+      navigate('/login');
+    }
+  }, [isLoading]);
 
   return (
     <MainWrapper>
