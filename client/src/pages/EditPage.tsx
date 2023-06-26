@@ -11,12 +11,18 @@ import { useUserStore } from 'store/user/store.user';
 const EditPage = () => {
   const param = useParams();
   const nav = useNavigate();
-  const { memberId } = useUserStore();
+  const { memberId, isLoading } = useUserStore();
+
+  useEffect(() => {
+    if (!isLoading && !memberId) {
+      nav('/login');
+    }
+  }, []);
 
   return (
     <DivContainer>
       <ContentContainer>
-        <EditQuestion id={param.id} myId={memberId} />
+        <EditQuestion id={param.id} />
       </ContentContainer>
     </DivContainer>
   );
