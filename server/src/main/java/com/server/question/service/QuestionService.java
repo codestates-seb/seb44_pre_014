@@ -86,12 +86,6 @@ public class QuestionService {
         List<Answer> answers = question.getAnswers();
         List<Comment> comments = question.getComments();
 
-        for (Comment comment : comments) {
-            commentService.deleteComment(comment.getCommentId());
-        }
-        for (Answer answer : answers) {
-            answerService.deleteAnswer(answer.getAnswerId());
-        }
         questionRepository.deleteById(questionId);
     }
 }

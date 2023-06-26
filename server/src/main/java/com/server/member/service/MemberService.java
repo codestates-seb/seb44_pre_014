@@ -86,15 +86,6 @@ public class MemberService {
         List<Answer> answers = member.getAnswers();
         List<Comment> comments = member.getComments();
 
-        for (Comment comment : comments) {
-            commentService.deleteComment(comment.getCommentId());
-        }
-        for (Answer answer : answers) {
-            answerService.deleteAnswer(answer.getAnswerId());
-        }
-        for (Question question : questions) {
-            questionService.deleteQuestion(question.getQuestionId());
-        }
         memberRepository.deleteById(memberId);
     }
 

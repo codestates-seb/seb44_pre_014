@@ -54,9 +54,6 @@ public class AnswerService {
         Answer answer = findAnswer(answerId);
         List<Comment> comments = answer.getComments();
 
-        for (Comment comment : comments) {
-            commentService.deleteComment(comment.getCommentId());
-        }
         answerRepository.deleteById(answerId);
     }
 }
