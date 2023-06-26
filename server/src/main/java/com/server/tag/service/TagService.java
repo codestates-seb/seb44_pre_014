@@ -21,9 +21,6 @@ public class TagService {
     }
 
     public List<Tag> saveTags(List<String> tagNames) {
-        if (tagNames == null) {
-            return null;
-        }
         List<Tag> tags = tagMapper.tagNamesToTags(tagNames);
 
         for (Tag tag : tags) {
