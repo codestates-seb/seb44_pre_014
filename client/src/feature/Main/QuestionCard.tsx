@@ -8,25 +8,35 @@ type TProps = {
 };
 
 const QuestionCard: React.FC<TProps> = ({ questionData }) => {
-  const { questionId, title, content, writer, createdAt, memberId } =
-    questionData;
+  const {
+    questionId,
+    title,
+    content,
+    writer,
+    createdAt,
+    tagNames,
+    memberId,
+    voteQuantity,
+    view,
+    answers,
+  } = questionData;
 
   return (
     <StyledQuestionCard>
-      {/* <PostSummary>
+      <PostSummary>
         <div className="post-summary-item black">
-          <span>{voteCount}</span>
+          <span>{voteQuantity}</span>
           <span>votes</span>
         </div>
         <div className="post-summary-item gray">
-          <span>{answerCount}</span>
+          <span>{answers.length}</span>
           <span>answers</span>
         </div>
         <div className="post-summary-item gray">
-          <span>{viewCount}</span>
+          <span>{view}</span>
           <span>views</span>
         </div>
-      </PostSummary> */}
+      </PostSummary>
       <PostContent>
         <Title>
           <a className="title-link" href={`/questions/${questionId}`}>
@@ -35,14 +45,14 @@ const QuestionCard: React.FC<TProps> = ({ questionData }) => {
         </Title>
         <Excerpt>{content}</Excerpt>
         <PostContentMeta>
-          {/* <TagList>
-            {tag.map(({ title, avatar, link }, index) => (
-              <Tag key={`tag-${index}`} link={link}>
-                {avatar}
+          <TagList>
+            {tagNames.map((tag, index) => (
+              <Tag key={`tag-${index}`}>
+                {tag}
                 {title}
               </Tag>
             ))}
-          </TagList> */}
+          </TagList>
           <UserCard>
             <a className="user-card-link" href={`/profile/${memberId}`}>
               {/* <img className="user-card-link--avatar" src={avatar} /> */}

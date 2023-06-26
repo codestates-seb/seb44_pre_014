@@ -2,6 +2,8 @@ export type TQuestion = {
   questionId: number;
   voteCount: number;
   answerCount: number;
+  voteQuantity: number;
+  tagNames: string[];
   answers: {
     answerId: number;
     content: string;
