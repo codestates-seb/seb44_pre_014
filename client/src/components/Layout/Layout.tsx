@@ -33,7 +33,7 @@ const DivContainer = styled.div`
 const ContentContainer = styled.div`
   margin: 3.5em 0px 0px 0px;
   width: calc(100% - 164px);
-
+  min-height: calc(100vh - 56px);
   @media (max-width: 768px) {
     width: 100%;
   }
