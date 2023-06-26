@@ -22,7 +22,7 @@ const MainPage = () => {
 
   const navigate = useNavigate();
 
-  const onClickButton = () => navigate('/ask');
+  const onClickButton = () => navigate('/questions/write');
 
   const requestQuestionList = async () => {
     try {
