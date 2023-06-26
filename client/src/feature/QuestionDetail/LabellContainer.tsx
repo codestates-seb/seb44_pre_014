@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import UserInfo from './UserInfo';
 import { TQuestion } from 'utils/type';
+import { useStore } from 'store/user/store.user';
 
 type Tprops = {
   quData: TQuestion;
@@ -23,6 +24,7 @@ const LabelContainer: React.FC<Tprops> = ({
 }) => {
   const navigate = useNavigate();
   const onClickButton = () => navigate('/button');
+  const { memberId } = useStore();
   const handleEdit = () => {
     updateQu(id, type);
   };
@@ -32,8 +34,14 @@ const LabelContainer: React.FC<Tprops> = ({
       <Label>
         <ButtonContainer>
           <DetailButton onClick={onClickButton}>Share</DetailButton>
-          <DetailButton onClick={handleEdit}>Edit</DetailButton>
-          <DetailButton onClick={() => deleteQu(id, type)}>Delete</DetailButton>
+          {Number(memberId) === quData.memberId && (
+            <>
+              <DetailButton onClick={handleEdit}>Edit</DetailButton>
+              <DetailButton onClick={() => deleteQu(id, type)}>
+                Delete
+              </DetailButton>
+            </>
+          )}
         </ButtonContainer>
         <UserInfo
           img={`http://teamdev.shop/members/${quData.memberId}/files`}
