@@ -58,13 +58,14 @@ export default function DetailQuestion() {
       if (type === 'question') {
         //질문삭제
         const res = await API.DELETE({ url: `/api/questions/${id}` });
+        navigate(`/`);
         if (res.status !== 200) throw res;
       } else {
         // 답변삭제
         const res = await API.DELETE({ url: `/answers/${id}` });
+        setTimeStamp(timeStamp + 1);
         if (res.status !== 200) throw res;
       }
-      navigate(`/`);
     } catch (err) {
       console.log(err);
     }
@@ -115,6 +116,8 @@ export default function DetailQuestion() {
           quData={quData}
           id={quData.memberId}
           questionId={quData.questionId}
+          timeStamp={timeStamp}
+          setTimeStamp={setTimeStamp}
         />
       </StyledDetailPage>
     )
