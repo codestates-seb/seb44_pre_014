@@ -11,7 +11,7 @@ const Sidebar: React.FC = () => {
 
   useEffect(() => {
     if (location.pathname.includes('/questions/write')) setIsVisible(false);
-    if (location.pathname.includes('/questions/edit')) setIsVisible(false);
+    else if (location.pathname.includes('/questions/edit')) setIsVisible(false);
     else if (location.pathname.includes('/login')) setIsVisible(false);
     else setIsVisible(true);
   }, [location.pathname]);
