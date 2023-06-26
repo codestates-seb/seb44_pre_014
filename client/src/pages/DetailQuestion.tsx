@@ -22,7 +22,9 @@ const DetailMain = styled.div`
 
 const MainContainer = styled.div`
   display: flex;
+  justify-content: space-between;
   flex-direction: column;
+  width: 100%;
 `;
 
 export default function DetailQuestion() {

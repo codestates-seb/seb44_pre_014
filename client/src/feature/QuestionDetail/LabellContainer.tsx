@@ -38,6 +38,7 @@ const LabelContainer: React.FC<Tprops> = ({
           img={`http://teamdev.shop/members/${quData.memberId}/files`}
           site="/userinfo"
           name={quData.writer}
+          createdAt={quData.createdAt}
         />
       </Label>
     )

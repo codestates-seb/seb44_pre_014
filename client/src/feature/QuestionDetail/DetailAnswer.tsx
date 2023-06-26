@@ -67,4 +67,6 @@ const AnswerText = styled.div`
 const AnswerMain = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
 `;
