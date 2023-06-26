@@ -21,6 +21,11 @@ const QuestionCard: React.FC<TProps> = ({ questionData }) => {
     answers,
   } = questionData;
 
+  const handleImgError = (e) => {
+    e.target.src = 'https://i.ibb.co/gwgngJy/cutecat.jpg';
+    //프로필이미지가 없을때 기본 프로필!
+  };
+
   return (
     <StyledQuestionCard>
       <PostSummary>
@@ -54,6 +59,7 @@ const QuestionCard: React.FC<TProps> = ({ questionData }) => {
             <a className="user-card-link" href={`/profile/${memberId}`}>
               {/* <img className="user-card-link--avatar" src={avatar} /> */}
               <img
+                onError={handleImgError}
                 className="user-card-link--avatar"
                 src={`http://teamdev.shop/members/${memberId}/files`}
               />

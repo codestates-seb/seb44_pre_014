@@ -16,14 +16,17 @@ const LoginPage = () => {
 export default LoginPage;
 
 const StyledLoginPage = styled.div`
-  width: 100%;
+  width: 100vw;
+  position: absolute;
+  left: 0;
   background-color: var(--black-050);
-
-  height: 100vh;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 24px;
 `;
 
-const DivContainer = styled.div``;
+const DivContainer = styled.div`
+  max-width: 1264px;
+  padding: 24px;
+`;

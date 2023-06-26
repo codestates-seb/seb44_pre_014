@@ -13,6 +13,7 @@ const Sidebar: React.FC = () => {
     if (location.pathname.includes('/questions/write')) setIsVisible(false);
     else if (location.pathname.includes('/questions/edit')) setIsVisible(false);
     else if (location.pathname.includes('/login')) setIsVisible(false);
+    else if (location.pathname.includes('/signup')) setIsVisible(false);
     else setIsVisible(true);
   }, [location.pathname]);
 
