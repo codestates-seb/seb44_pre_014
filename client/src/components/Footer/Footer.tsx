@@ -1,49 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 import sublogo from '../../assets/sublogo.png';
+import {
+  stackoverflowMenu,
+  productsMenu,
+  companyMenu,
+  stackexchangenetworkMenu,
+  snsMenu,
+} from './FooterLink';
 
 const Footer: React.FC = () => {
-  const stackoverflowMenu = [
-    ['https://stackoverflow.com/questions', 'Questions'],
-    ['https://stackoverflow.com/help', 'Help'],
-  ];
-  const productsMenu = [
-    ['https://stackoverflow.co/teams/', 'Teams'],
-    ['https://stackoverflow.co/advertising/', 'Advertising'],
-    ['https://stackoverflow.co/collectives/', 'Collectives'],
-    ['https://stackoverflow.co/talent/', 'Talent'],
-  ];
-  const companyMenu = [
-    ['https://stackoverflow.co/', 'About'],
-    ['https://stackoverflow.co/company/press', 'Press'],
-    ['https://stackoverflow.co/company/work-here', 'Work Here'],
-    ['https://stackoverflow.com/legal/terms-of-service', 'Legal'],
-    ['https://stackoverflow.com/legal/privacy-policy', 'Privacy Policy'],
-    ['https://stackoverflow.com/legal/terms-of-service', 'Terms of Service'],
-    ['https://stackoverflow.co/company/contact', 'Contact Us'],
-    ['https://stackoverflow.com/legal/cookie-policy', 'Cookie Settings'],
-    ['https://stackoverflow.com/legal/cookie-policy', 'Cookie Policy'],
-  ];
-  const stackexchangenetworkMenu = [
-    ['https://stackexchange.com/sites#technology', 'Technology'],
-    [
-      'https://stackexchange.com/sites#culturerecreation',
-      'Culture & recreation',
-    ],
-    ['https://stackexchange.com/sites#lifearts', 'Life & arts'],
-    ['https://stackexchange.com/sites#science', 'Science'],
-    ['https://stackexchange.com/sites#professional', 'Professional'],
-    ['https://stackexchange.com/sites#business', 'business'],
-    ['https://api.stackexchange.com/', 'API'],
-    ['https://data.stackexchange.com/', 'Data'],
-  ];
-  const snsMenu = [
-    ['https://stackoverflow.blog/', 'blog'],
-    ['https://www.facebook.com/officialstackoverflow/', 'Facebook'],
-    ['https://twitter.com/stackoverflow', 'Twitter'],
-    ['https://www.linkedin.com/company/stack-overflow', 'linkedin'],
-    ['https://www.instagram.com/thestackoverflow/', 'Instagram'],
-  ];
   return (
     <>
       <Footerbox>
@@ -112,12 +78,12 @@ const Footer: React.FC = () => {
 };
 
 const Footerbox = styled.div`
-  z-index: 5;
   background-color: #232629;
   display: flex;
   gap: 10px;
   bottom: 0;
   width: 100%;
+  height: 8%;
   color: whitesmoke;
   justify-content: center;
   img {

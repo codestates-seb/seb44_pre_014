@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from '../../assets/mainlogo.png';
+import sublogo from '../../assets/sublogo.png';
 import styled from 'styled-components';
 import { FaInbox, FaStackExchange } from 'react-icons/fa';
 import { BiSearch } from 'react-icons/bi';
@@ -11,6 +12,7 @@ const Header: React.FC = () => {
       <HeaderContainer>
         <LogoWrapper>
           <img src={logo} className="header-logo" />
+          <img src={sublogo} className="header-sublogo"></img>
         </LogoWrapper>
         <ProductWrapper>Products</ProductWrapper>
         <SerachWrapper>
@@ -55,7 +57,9 @@ const StyledWrapper = styled.div`
   background-color: white;
   border-top: 3px solid var(--orange-400);
   border-bottom: 1px solid var(--black-100);
+  z-index: 100;
 `;
+
 const HeaderContainer = styled.div`
   position: sticky;
   width: 1250px;
@@ -79,6 +83,17 @@ const LogoWrapper = styled.div`
   .header-logo {
     width: 150px;
     height: 30px;
+    @media (max-width: 900px) {
+      display: none;
+    }
+  }
+  .header-sublogo {
+    width: 40px;
+    height: 40px;
+    display: none;
+    @media (max-width: 900px) {
+      display: flex;
+    }
   }
 `;
 
@@ -132,6 +147,9 @@ const IconWrapper = styled.div`
   color: var(--black-600);
   margin-left: 1rem;
   padding-bottom: 13px;
+  @media (max-width: 600px) {
+    display: none;
+  }
 `;
 
 const Icon = styled.div`
