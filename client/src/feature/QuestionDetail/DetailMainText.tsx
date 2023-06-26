@@ -10,6 +10,10 @@ type Tprops = {
 const DetailMainText: React.FC<Tprops> = ({ quData }) => {
   const [fileUrl, setFileUrl] = useState(``);
 
+  const handleImgError = () => {
+    setFileUrl('');
+  };
+
   const getDataUrl = async () => {
     try {
       const res = await API.GET(
@@ -29,7 +33,9 @@ const DetailMainText: React.FC<Tprops> = ({ quData }) => {
   return (
     <DetailText>
       <p>{quData.content}</p>
-      <img src={fileUrl} width={300} height={300} />
+      {fileUrl && (
+        <img src={fileUrl} width={300} height={300} onError={handleImgError} />
+      )}
     </DetailText>
   );
 };
