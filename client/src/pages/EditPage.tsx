@@ -36,6 +36,5 @@ const DivContainer = styled.div`
 `;
 const ContentContainer = styled.div`
   margin-top: 50px;
-  width: calc(100%-164px);
-  width: 1100px;
+  width: 100%;
 `;
