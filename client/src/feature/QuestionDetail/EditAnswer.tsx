@@ -39,7 +39,15 @@ const EditAnswer: React.FC<Eprops> = ({ setIsEdit, content, id }) => {
         <textarea defaultValue={content} ref={editInputRef} />
         <ButtonContainer>
           <Button onClick={handleEdit}>edit</Button>
-          <Button onClick={handlecancel}>cancel</Button>
+          <Button
+            onClick={handlecancel}
+            color="var(--blue-500)"
+            bgColor="var(--white)"
+            hoverColor="var(--blue-800)"
+            hoverBgColor="var(--white)"
+          >
+            cancel
+          </Button>
         </ButtonContainer>
       </EditContainer>
     </>
@@ -59,9 +67,7 @@ const EditContainer = styled.div`
 
 const ButtonContainer = styled.div`
   display: flex;
-  &:first-child {
-    margin-right: 10px;
-  }
+  gap: 10px;
 `;
 
 export default EditAnswer;

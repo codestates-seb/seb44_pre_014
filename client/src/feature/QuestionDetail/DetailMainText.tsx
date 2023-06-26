@@ -44,6 +44,8 @@ const DetailText = styled.div`
   padding-right: 16px;
   grid-column: 2;
   margin: 16px;
+  white-space: pre-line;
+
   p {
     clear: both;
     margin-top: 0;

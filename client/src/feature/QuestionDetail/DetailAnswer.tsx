@@ -69,6 +69,7 @@ const AnswerContainer = styled.section`
 const AnswerText = styled.div`
   font-size: 16px;
   padding: 15px;
+  white-space: pre-line;
 `;
 
 const AnswerMain = styled.div`
