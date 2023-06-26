@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.server.auth.jwt.JwtTokenizer;
@@ -71,13 +73,16 @@ public class OAuth2UserSuccessHandler extends SimpleUrlAuthenticationSuccessHand
             Authentication authentication) {
         Member member = (Member)authentication.getPrincipal();
         long memberId = member.getMemberId();
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+        params.add("memberId", Long.toString(memberId));
+        params.add("Authorization", "Bearer_" + accessToken);
         //UriComponentsBuilder 클래스를 사용하여 URL 을 생성하고, 쿼리 스트링에 JWT 토큰을 포함함
         return UriComponentsBuilder
                 .newInstance()
                 // .fromUriString(redirectUrl)
                 .fromUriString("http://localhost:3000/login")
                 // .path("/")
-                .queryParam("Authorization", "Bearer_" + accessToken, "memberId", memberId)
+                .queryParams(params)
                 .build()
                 .toUri();
     }
