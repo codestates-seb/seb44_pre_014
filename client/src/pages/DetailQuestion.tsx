@@ -58,6 +58,7 @@ export default function DetailQuestion() {
       if (type === 'question') {
         //질문삭제
         const res = await API.DELETE({ url: `/api/questions/${id}` });
+        navigate(`/`);
         if (res.status !== 200) throw res;
       } else {
         // 답변삭제
