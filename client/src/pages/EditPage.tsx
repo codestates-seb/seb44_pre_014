@@ -11,19 +11,19 @@ const EditPage = () => {
   const param = useParams();
   const nav = useNavigate();
   /*
-  const membersId = localStorage.getItem('memberId');
+  const membersId = 내가 로그인한 멤버 아이디
   useEffect(() => {
     if (!membersId) {
       nav('/login');
     }
   }, [membersId]); */
-  const myId = 1; //일단 임의로 아무 아이디나 넣기
+  const membersId = 1; //일단 임의로 아무 아이디나 넣기
   return (
     <div>
       <Header />
       <DivContainer>
         <ContentContainer>
-          <EditQuestion id={param.id} myId={myId} />
+          <EditQuestion id={param.id} myId={membersId} />
         </ContentContainer>
       </DivContainer>
       <Footer />
