@@ -1,7 +1,22 @@
-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-spring.datasource.url=jdbc:mysql://localhost:8080/useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul
-spring.datasource.username=root
-spring.datasource.password=1234
-spring.jpa.show-sql=true
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.properties.hibernate.format_sql=true
+# spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+# spring.datasource.url=jdbc:mysql://localhost:8080/useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul
+# spring.datasource.username=root
+# spring.datasource.password=1234
+# spring.jpa.show-sql=true
+# spring.jpa.hibernate.ddl-auto=update
+# spring.jpa.properties.hibernate.format_sql=true
+spring:
+    h2:
+        console:
+            enabled: true
+            path: /h2
+            settings:
+                web-allow-others: true
+    datasource:
+        driver-class-name: org.h2.Driver
+        url: jdbc:h2:mem:test
+        username: sa
+        password:
+kakao:
+    redirect-url: ${REDIRECT_URL}
+    api-key: ${API_KEY}
