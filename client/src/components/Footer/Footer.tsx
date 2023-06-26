@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import sublogo from '../../assets/sublogo.png';
 import {
@@ -10,78 +11,89 @@ import {
 } from './FooterLink';
 
 const Footer: React.FC = () => {
-  return (
-    <>
-      <Footerbox>
-        <div className="footer-content">
-          <div className="footer-logo">
-            <img src={sublogo} alt="stackoverflowlogo"></img>
-          </div>
-          <div className="footer-menu1">
-            <h5>STACK OVERFLOW</h5>
-            <ul>
-              {stackoverflowMenu.map((el) => (
-                <li key={el[1]}>
-                  <a href={el[0]}>{el[1]}</a>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="footer-menu2">
-            <h5>PRODUCTS</h5>
+  const [isVisible, setIsVisible] = useState(false);
+  const location = useLocation();
 
-            <ul>
-              {productsMenu.map((el) => (
-                <li key={el[1]}>
-                  <a href={el[0]}>{el[1]}</a>
-                </li>
-              ))}
-            </ul>
+  useEffect(() => {
+    if (location.pathname.includes('/login')) setIsVisible(false);
+    else if (location.pathname.includes('/signup')) setIsVisible(false);
+    else setIsVisible(true);
+  }, [location.pathname]);
+
+  if (!isVisible) return null;
+  else
+    return (
+      <>
+        <Footerbox>
+          <div className="footer-content">
+            <div className="footer-logo">
+              <img src={sublogo} alt="stackoverflowlogo"></img>
+            </div>
+            <div className="footer-menu1">
+              <h5>STACK OVERFLOW</h5>
+              <ul>
+                {stackoverflowMenu.map((el) => (
+                  <li key={el[1]}>
+                    <a href={el[0]}>{el[1]}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="footer-menu2">
+              <h5>PRODUCTS</h5>
+
+              <ul>
+                {productsMenu.map((el) => (
+                  <li key={el[1]}>
+                    <a href={el[0]}>{el[1]}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="footer-menu3">
+              <h5>COMPANY</h5>
+              <ul>
+                {companyMenu.map((el) => (
+                  <li key={el[1]}>
+                    <a href={el[0]}>{el[1]}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="footer-menu4">
+              <h5>STACK EXCHANGE NETWORK</h5>
+              <ul>
+                {stackexchangenetworkMenu.map((el) => (
+                  <li key={el[1]}>
+                    <a href={el[0]}>{el[1]}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="footer-footer">
+              <ul>
+                {snsMenu.map((el) => (
+                  <li key={el[1]}>
+                    <a href={el[0]}>{el[1]}</a>
+                  </li>
+                ))}
+              </ul>
+              <p>
+                Site design/logo © 2023 Stack Exchange Inc; user contributions
+                licensed under CC BY-SA. rev 2023.4.13.4387
+              </p>
+            </div>
           </div>
-          <div className="footer-menu3">
-            <h5>COMPANY</h5>
-            <ul>
-              {companyMenu.map((el) => (
-                <li key={el[1]}>
-                  <a href={el[0]}>{el[1]}</a>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="footer-menu4">
-            <h5>STACK EXCHANGE NETWORK</h5>
-            <ul>
-              {stackexchangenetworkMenu.map((el) => (
-                <li key={el[1]}>
-                  <a href={el[0]}>{el[1]}</a>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="footer-footer">
-            <ul>
-              {snsMenu.map((el) => (
-                <li key={el[1]}>
-                  <a href={el[0]}>{el[1]}</a>
-                </li>
-              ))}
-            </ul>
-            <p>
-              Site design/logo © 2023 Stack Exchange Inc; user contributions
-              licensed under CC BY-SA. rev 2023.4.13.4387
-            </p>
-          </div>
-        </div>
-      </Footerbox>
-    </>
-  );
+        </Footerbox>
+      </>
+    );
 };
 
 const Footerbox = styled.div`
   background-color: #232629;
   display: flex;
+  position: relative;
   gap: 10px;
-  bottom: 0;
   width: 100%;
   height: 8%;
   color: whitesmoke;
