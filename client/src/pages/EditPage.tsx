@@ -15,7 +15,7 @@ const EditPage = () => {
 
   useEffect(() => {
     if (isLoading && !memberId) {
-      nav('/login');
+      nav(-1);
     }
   }, []);
 
