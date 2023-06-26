@@ -32,16 +32,15 @@ public class OAuth2UserDetailsService extends DefaultOAuth2UserService {
         String username;
         // github, facebook 로그인을 통해서 email 이 null 이라면 username 은 기본 값 name 설정
         // 이메일의 @gmail.com 을 제거하여 기본 닉네임으로 사용
-        if(email.equals("null")) {
+        if (email.equals("null")) {
             username = "name";
-        }
-        else {
+        } else {
             username = email.replace("@gmail.com", "");
         }
 
         Optional<Member> findMember = memberRepository.findByEmail(email);
 
-        Member member = findMember.orElseGet(() -> new Member(email, username, password));
+        Member member = findMember.orElseGet(() -> new Member(email, password, username));
         memberRepository.save(member);
 
         return new PrincipalDetails(member, oAuth2User.getAttributes());

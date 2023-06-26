@@ -18,6 +18,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.server.auth.jwt.JwtTokenizer;
 import com.server.auth.userdetails.PrincipalDetails;
+import com.server.member.entity.Member;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -41,7 +42,7 @@ public class OAuth2UserSuccessHandler extends SimpleUrlAuthenticationSuccessHand
         String accessToken = delegateAccessToken(authentication);
         //String refreshToken = delegateRefreshToken(authentication);
 
-        String uri = createURI(accessToken).toString();
+        String uri = createURI(accessToken, authentication).toString();
 
         response.setHeader("Authorization", "Bearer_" + accessToken);
         //response.setHeader("Refresh", refreshToken);
@@ -66,15 +67,17 @@ public class OAuth2UserSuccessHandler extends SimpleUrlAuthenticationSuccessHand
     }
 
     // JWT 토큰을 포함한 리다이렉트 URL 생성
-    private URI createURI(String accessToken) {
-
+    private URI createURI(String accessToken,
+            Authentication authentication) {
+        Member member = (Member)authentication.getPrincipal();
+        long memberId = member.getMemberId();
         //UriComponentsBuilder 클래스를 사용하여 URL 을 생성하고, 쿼리 스트링에 JWT 토큰을 포함함
         return UriComponentsBuilder
                 .newInstance()
                 // .fromUriString(redirectUrl)
                 .fromUriString("http://localhost:3000/login")
                 // .path("/")
-                .queryParam("Authorization", "Bearer_" + accessToken)
+                .queryParam("Authorization", "Bearer_" + accessToken, "memberId", memberId)
                 .build()
                 .toUri();
     }
