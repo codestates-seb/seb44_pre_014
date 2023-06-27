@@ -19,7 +19,7 @@
 
 | 어수현 | MyPage - 회원정보 수정, 이미지 업로드, 다운로드 / Answer - CRUD  / AnswerAnswer - CRUD / AnswerVote - CRUD / Spring Security (JWT, OAuth) |
 |:--------:| :--------: |
-| 이수희 | Member - CRUD / QuestionVote - CRUD / Member, MyPage, Answer, AnswerAnswer, QuestionVote, AnswerVote - ControllerTest / AWS 배포 환경 구축 및 배포 |
+| 이수희 | Member - CRUD / Question - CRUD / Answer - CRUD / Comment - CRUD / Vote / Tag / AWS 배포 환경 구축 및 배포 / 키워드 검색 / 태그 검색, 자동완성 / 페이징 / 파일 업로드, 조회 |
 | 박세빈 | Question - CRUD |
 
 </br>
