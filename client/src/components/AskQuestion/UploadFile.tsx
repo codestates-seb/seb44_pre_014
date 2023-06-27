@@ -41,9 +41,10 @@ const UploadFile = ({ edit }) => {
           data: formData,
           headers: { 'Content-Type': 'multipart/form-data' },
         });
+        if (res.status !== 200) throw res;
+
         console.log('file upload');
         setSuccess(true);
-        if (res.status !== 200) throw res;
       } else {
         console.log('file is null');
       }

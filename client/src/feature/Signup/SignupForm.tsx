@@ -41,7 +41,7 @@ const SignupForm = () => {
         url: API_SIGNUP,
         data: signupFormData,
       });
-      if (res.status !== 200) throw res;
+      if (res.status !== 201) throw res;
 
       alert('Success Signed up!!');
       setSignupFormData({
