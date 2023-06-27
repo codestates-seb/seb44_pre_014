@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.mapstruct.Mapper;
 
-import com.server.Response.Response;
 import com.server.member.dto.MemberDto;
 import com.server.member.entity.Member;
+import com.server.response.Response;
 
 @Mapper(componentModel = "spring")
 public interface MemberMapper {

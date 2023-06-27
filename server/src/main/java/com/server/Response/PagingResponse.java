@@ -1,4 +1,4 @@
-package com.server.Response;
+package com.server.response;
 
 import java.util.List;
 

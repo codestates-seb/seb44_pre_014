@@ -5,12 +5,12 @@ import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-import com.server.Response.Response;
 import com.server.answer.entity.Answer;
 import com.server.comment.dto.CommentDto;
 import com.server.comment.entity.Comment;
 import com.server.member.entity.Member;
 import com.server.question.entity.Question;
+import com.server.response.Response;
 
 @Mapper(componentModel = "spring")
 public interface CommentMapper {

@@ -6,10 +6,10 @@ import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-import com.server.Response.Response;
 import com.server.question.dto.QuestionDto;
 import com.server.question.entity.Question;
 import com.server.question.entity.QuestionTag;
+import com.server.response.Response;
 
 @Mapper(componentModel = "spring")
 public interface QuestionMapper {

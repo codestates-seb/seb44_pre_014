@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.server.Response.Response;
 import com.server.comment.dto.CommentDto;
 import com.server.comment.entity.Comment;
 import com.server.comment.mapper.CommentMapper;
 import com.server.comment.service.CommentService;
+import com.server.response.Response;
 
 import lombok.extern.slf4j.Slf4j;
 

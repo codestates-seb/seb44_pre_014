@@ -20,12 +20,12 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.server.Response.Response;
 import com.server.answer.dto.AnswerDto;
 import com.server.answer.entity.Answer;
 import com.server.answer.mapper.AnswerMapper;
 import com.server.answer.service.AnswerService;
 import com.server.file.FileManager;
+import com.server.response.Response;
 
 @RestController
 @RequestMapping("/answers")

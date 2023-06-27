@@ -22,9 +22,6 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.server.Response.PagingResponse;
-import com.server.Response.PagingResponse.Info;
-import com.server.Response.Response;
 import com.server.file.FileManager;
 import com.server.question.dto.QuestionDto;
 import com.server.question.entity.Question;
@@ -32,6 +29,9 @@ import com.server.question.entity.QuestionTag;
 import com.server.question.mapper.QuestionMapper;
 import com.server.question.service.QuestionService;
 import com.server.question.service.QuestionTagService;
+import com.server.response.PagingResponse;
+import com.server.response.PagingResponse.Info;
+import com.server.response.Response;
 import com.server.tag.entity.Tag;
 import com.server.tag.service.TagService;
 

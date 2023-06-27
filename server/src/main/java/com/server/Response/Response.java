@@ -1,4 +1,4 @@
-package com.server.Response;
+package com.server.response;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -13,7 +13,6 @@ import lombok.Setter;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Response {
     // PK
-    private String writer;
     private Long memberId;
     private Long questionId;
     private Long answerId;
@@ -28,9 +27,10 @@ public class Response {
     private List<Response> answers;
     private List<Response> comments;
 
-    // column
+    // Column
     private String email;
     private String username;
+    private String writer;
     private String title;
     private String content;
     private Long view;

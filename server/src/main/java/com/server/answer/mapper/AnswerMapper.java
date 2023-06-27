@@ -5,9 +5,9 @@ import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-import com.server.Response.Response;
 import com.server.answer.dto.AnswerDto;
 import com.server.answer.entity.Answer;
+import com.server.response.Response;
 
 @Mapper(componentModel = "spring")
 public interface AnswerMapper {
