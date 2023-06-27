@@ -10,7 +10,7 @@
 | 정희창<br>(FE Leader) | 김진아<br>(FE) | 현채은<br>(FE) | 백승효<br>(FE) | 이수희<br>(BE) | 어수현<br>(BE) | 박세빈<br>(BE) |
 |:--------:| :--------: | :--------: | :--------: | :--------: | :--------: |  :--------: |
 | <img src="https://cdn.discordapp.com/attachments/1117333744110538793/1123066157625262230/0f2262886a10e4618607cb9e7462d8a8.png" alt="정희창" width="80" height="80">| <img src="" alt="김진아" width="80" height="80"> | <img src="https://i.pinimg.com/564x/f4/aa/16/f4aa165e0eda10362ca67a0504e6f077.jpg" alt="현채은" width="80" height="80"> | <img src="" alt="백승효" width="80" height="80"> | <img src="" alt="이수희" width="80" height="80"> | <img src="" alt="어수현" width="80" height="80"> |<img src="" alt="박세빈" width="80" height="80"> |
-|[@1](https://github.com/RapiL89) | [@2](https://github.com/swj8560) | [@3](https://github.com/DDunDDang) | [@hyo-4](https://github.com/hyo-4) | [@4](https://github.com/LEE2302) | [@5](https://github.com/JHJFE) | [@6](https://github.com/lyssoi) |
+|[@1](https://github.com/RapiL89) | [@wlsdk7245](https://github.com/wlsdk7245) | [@3](https://github.com/DDunDDang) | [@hyo-4](https://github.com/hyo-4) | [@4](https://github.com/LEE2302) | [@5](https://github.com/JHJFE) | [@6](https://github.com/lyssoi) |
 
 
 </br>
