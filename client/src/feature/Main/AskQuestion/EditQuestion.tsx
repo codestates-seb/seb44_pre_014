@@ -6,17 +6,18 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import UploadFile from 'components/AskQuestion/UploadFile';
 import TagBar from 'components/AskQuestion/CreateTag';
-import { useStoreFile } from 'store/count/store.file';
+import { useUserStore } from 'store/user/store.user';
 
-const EditQuestion = ({ id, myId }) => {
-  const [member, setMember] = useState<number>();
+const EditQuestion = ({ id }) => {
+  const [member, setMember] = useState(); //이 글을 쓴 사람의 ID
+  const { memberId, isLoading } = useUserStore();
   const navigate = useNavigate();
-  const { newFile, setnewFile } = useStoreFile();
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
   const [writetag, setwriteTag] = useState([]);
   const [isbReady, setIsbReady] = useState(false);
   const [istReady, setIstReady] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const postok = istReady && isbReady;
   const warningpost = () => {
@@ -40,12 +41,17 @@ const EditQuestion = ({ id, myId }) => {
   };
   const goToMain = () => {
     navigate('/');
+    window.scrollTo(0, 0);
+  };
+  const goBack = () => {
+    navigate(-1);
+    window.scrollTo(0, 0);
   };
   const newPost = async () => {
     try {
       const res = await API.PATCH({ url: patchurl, data: newData });
-      console.log(res);
-      goToMain();
+      if (res.status !== 200) throw res;
+      goBack();
     } catch (err) {
       console.log(err);
     }
@@ -53,28 +59,27 @@ const EditQuestion = ({ id, myId }) => {
 
   const getPost = async () => {
     try {
+      setLoading(true);
       const res = await API.GET(geturl);
-      console.log(res);
+      if (res.status !== 200) throw res;
       setBody(res.data.content);
       setTitle(res.data.title);
       setMember(res.data.memberId);
       if (res.data.tagNames) {
         setwriteTag(res.data.tagNames);
       }
+      setLoading(false);
     } catch (err) {
       console.log(err);
     }
   };
-  useEffect(() => {
-    getPost();
-  }, []);
 
   useEffect(() => {
-    if (member && member !== myId) {
-      console.log('자신이 쓴 글만 수정할 수 있습니다.');
+    getPost();
+    if (isLoading && memberId !== member) {
       goToMain();
     }
-  }, [member]);
+  }, [isLoading]);
 
   return (
     <MainWrapper>
@@ -130,7 +135,7 @@ const EditQuestion = ({ id, myId }) => {
         >
           Register
         </BtnContainer>
-        <CancelBtn onClick={goToMain}>Cancel</CancelBtn>
+        <CancelBtn onClick={goBack}>Cancel</CancelBtn>
       </BtnWrapper>
     </MainWrapper>
   );
@@ -140,30 +145,31 @@ export default EditQuestion;
 
 const MainWrapper = styled.div`
   display: flex;
-  background-color: var(--black-050);
+  width: 100%;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   margin: 0px 30px;
-`;
-
-const HeadContainer = styled.section`
-  div {
-    font-size: 30px;
-    font-weight: 700;
-  }
-  margin-left: 30%;
-  padding-top: 40px;
-  padding-bottom: 30px;
-  width: 100%;
   @media screen and (min-width: 1050px) {
     background-image: url(https://cdn.sstatic.net/Img/ask/background.svg?v=2e9a8205b368);
     background-repeat: no-repeat;
   }
 `;
 
-const HeaderHelp = styled.section`
+const HeadContainer = styled.section`
+  justify-content: center;
+  align-items: center;
+  div {
+    font-size: 30px;
+    font-weight: 700;
+  }
+  padding-top: 40px;
+  padding-bottom: 30px;
   width: 70%;
+`;
+
+const HeaderHelp = styled.section`
+  width: 100%;
   background-color: var(--yellow-100);
   padding: 10px 0px;
   border-radius: 3px;

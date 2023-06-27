@@ -13,8 +13,10 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import TagBar from 'components/AskQuestion/CreateTag';
 import UploadFile from 'components/AskQuestion/UploadFile';
+import { useUserStore } from 'store/user/store.user';
 
 const AskQuestion = ({ id }) => {
+  const { memberId, isLoading } = useUserStore();
   const navigate = useNavigate();
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
@@ -44,16 +46,27 @@ const AskQuestion = ({ id }) => {
 
   const goToMain = () => {
     navigate('/');
+    window.scrollTo(0, 0);
   };
   const newPost = async () => {
     try {
+      if (!memberId) {
+        navigate('/login');
+      }
       const res = await API.POST({ url: url, data: newData });
-      console.log(res);
+      if (res.status !== 200) throw res;
+
       goToMain();
     } catch (err) {
       console.log(err);
     }
   };
+
+  useEffect(() => {
+    if (!isLoading && !memberId) {
+      navigate('/login');
+    }
+  }, [isLoading]);
 
   return (
     <MainWrapper>
@@ -131,10 +144,14 @@ export default AskQuestion;
 
 const MainWrapper = styled.div`
   display: flex;
-  background-color: var(--black-050);
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  @media screen and (min-width: 1050px) {
+    background-image: url(https://cdn.sstatic.net/Img/ask/background.svg?v=2e9a8205b368);
+    background-repeat: no-repeat;
+  }
 `;
 
 const HeadContainer = styled.section`
@@ -142,24 +159,21 @@ const HeadContainer = styled.section`
     font-size: 30px;
     font-weight: 700;
   }
-  margin-left: 30%;
+
+  width: 70%;
+  margin: 0 auto;
   padding-top: 40px;
   padding-bottom: 30px;
-  width: 100%;
-  @media screen and (min-width: 1050px) {
-    background-image: url(https://cdn.sstatic.net/Img/ask/background.svg?v=2e9a8205b368);
-    background-repeat: no-repeat;
-  }
 `;
 
 const HeaderHelp = styled.section`
-  width: 70%;
   background-color: var(--blue-050);
   padding: 50px 0px;
   border-radius: 3px;
   margin-top: 10px;
   color: var(--fc-medium);
   border: 1px solid var(--powder-200);
+
   .head {
     display: flex;
     font-weight: 500;
@@ -178,6 +192,7 @@ const HeaderHelp = styled.section`
 
 const ItemContainer = styled.div`
   width: 70%;
+  margin: 0 auto;
   display: grid;
   grid-row-gap: 30px;
   padding-bottom: 30px;
@@ -185,6 +200,7 @@ const ItemContainer = styled.div`
     position: relative;
   }
 `;
+
 const SingleWrapper = styled.section`
   display: grid;
   grid-template-columns: 1fr;

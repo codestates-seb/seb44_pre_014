@@ -18,7 +18,10 @@ const UploadFile = ({ edit }) => {
       setFileurl(res);
     }
   };
-
+  const handleImgError = (e) => {
+    e.target.src = 'https://i.ibb.co/vjJJRHK/2023-06-26-10-57-48.png';
+    //프로필이미지가 없을때 기본 프로필!
+  };
   const fileDelete = () => {
     setFile(null);
     setFileurl('');
@@ -33,13 +36,14 @@ const UploadFile = ({ edit }) => {
         const formData = new FormData();
         formData.append('files', file);
 
-        await API.POST({
+        const res = await API.POST({
           url: `/api/questions/${id.id}/files`,
           data: formData,
           headers: { 'Content-Type': 'multipart/form-data' },
         });
         console.log('file upload');
         setSuccess(true);
+        if (res.status !== 200) throw res;
       } else {
         console.log('file is null');
       }
@@ -69,7 +73,13 @@ const UploadFile = ({ edit }) => {
       <div className="upload-title">Upload</div>
       <form onSubmit={onSubmitForm}>
         {edit === 'patch' && (
-          <img id="preview" src={fileurl} width={300} height={300} />
+          <img
+            id="preview"
+            src={fileurl}
+            width={300}
+            height={300}
+            onError={handleImgError}
+          />
         )}
         {edit === 'new' && <div>파일을 등록하세요</div>}
         <input
@@ -114,6 +124,9 @@ const FileContainer = styled.div`
     flex-direction: column;
     #preview {
       margin-bottom: 10px;
+    }
+    img {
+      border: 1px solid var(--black-075);
     }
     .upload-name {
       display: flex;

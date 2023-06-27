@@ -47,10 +47,11 @@ class API {
     });
   }
 
-  DELETE({ url }) {
+  DELETE({ url, ...params }) {
     return this.CALL({
       method: 'DELETE',
       url,
+      ...params,
     });
   }
 

@@ -4,14 +4,14 @@ import ProfilePage from 'pages/ProfilePage';
 import ProfileEditPage from 'pages/ProfileEditPage';
 import SignupPage from 'pages/SignupPage';
 import LoginPage from 'pages/LoginPage';
-import { useStore } from './store/user/store.user';
+import { useUserStore } from './store/user/store.user';
 import { useEffect } from 'react';
 import AskPage from 'pages/AskPage';
 import EditPage from 'pages/EditPage';
 import DetailQuestion from 'pages/DetailQuestion';
 
 const App = () => {
-  const { setMemberId } = useStore();
+  const { setMemberId } = useUserStore();
 
   useEffect(() => {
     const memberId = localStorage.getItem('memberId');

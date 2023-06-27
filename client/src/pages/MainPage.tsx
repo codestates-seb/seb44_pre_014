@@ -22,12 +22,14 @@ const MainPage = () => {
 
   const navigate = useNavigate();
 
-  const onClickButton = () => navigate('/ask');
+  const onClickButton = () => navigate('/questions/write');
 
   const requestQuestionList = async () => {
     try {
       setIsLoading(true);
       const res = await API.GET(API_QUESTIONS(pageInfo.currentPage + 1));
+      if (res.status !== 200) throw res;
+
       setQuestionList([...questionList, ...res.data.contents]);
       setPageInfo(res.data.info);
     } catch (err) {

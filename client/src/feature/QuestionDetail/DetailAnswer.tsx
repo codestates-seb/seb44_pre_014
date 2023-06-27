@@ -8,17 +8,23 @@ import EditAnswer from './EditAnswer';
 type Tprops = {
   quData: TQuestion;
   deleteQu: (id: number, type: string) => void;
-  updateQu: (id: number, type: string) => void;
+  updateQu?: (id: number, type: string) => void;
   isEdit: boolean;
   setIsEdit: React.Dispatch<React.SetStateAction<boolean>>;
+  selectedAnswerId: number;
+  setTimeStamp: React.Dispatch<React.SetStateAction<number>>;
+  timeStamp: number;
 };
 
 const DetailAnswer: React.FC<Tprops> = ({
   quData,
   deleteQu,
-  updateQu,
   isEdit,
   setIsEdit,
+  updateQu,
+  selectedAnswerId,
+  setTimeStamp,
+  timeStamp,
 }) => {
   return (
     <>
@@ -27,12 +33,19 @@ const DetailAnswer: React.FC<Tprops> = ({
         <AnswerContainer>
           <VoteContainer />
           <AnswerMain>
-            {isEdit && (
+            {isEdit && selectedAnswerId === answerId && (
               <EditAnswer
                 setIsEdit={setIsEdit}
                 content={content}
                 id={answerId}
+                setTimeStamp={setTimeStamp}
+                timeStamp={timeStamp}
               />
+            )}
+            {isEdit && selectedAnswerId !== answerId && (
+              <AnswerText>
+                <p key={answerId}>{content}</p>
+              </AnswerText>
             )}
             {!isEdit && (
               <AnswerText>
@@ -43,8 +56,8 @@ const DetailAnswer: React.FC<Tprops> = ({
               quData={quData}
               deleteQu={deleteQu}
               id={answerId}
-              updateQu={updateQu}
               type="answer"
+              updateQu={updateQu}
             />
           </AnswerMain>
         </AnswerContainer>
@@ -62,9 +75,12 @@ const AnswerContainer = styled.section`
 const AnswerText = styled.div`
   font-size: 16px;
   padding: 15px;
+  white-space: pre-line;
 `;
 
 const AnswerMain = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
 `;

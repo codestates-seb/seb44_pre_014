@@ -1,11 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { FaGlobeAmericas } from 'react-icons/fa';
 import { AiFillInfoCircle } from 'react-icons/ai';
 import { svgbag, svgstar } from './SidebarSvg';
+import { useLocation } from 'react-router-dom';
 
 const Sidebar: React.FC = () => {
-  return (
+  const [isVisible, setIsVisible] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname.includes('/questions/write')) setIsVisible(false);
+    else if (location.pathname.includes('/questions/edit')) setIsVisible(false);
+    else if (location.pathname.includes('/login')) setIsVisible(false);
+    else if (location.pathname.includes('/signup')) setIsVisible(false);
+    else setIsVisible(true);
+  }, [location.pathname]);
+
+  return isVisible ? (
     <StyledWrapper>
       <ListContainer>
         <HomeContainer className="category">Home</HomeContainer>
@@ -55,7 +67,7 @@ const Sidebar: React.FC = () => {
         </TeamsContainer>
       </ListContainer>
     </StyledWrapper>
-  );
+  ) : null;
 };
 
 export default Sidebar;

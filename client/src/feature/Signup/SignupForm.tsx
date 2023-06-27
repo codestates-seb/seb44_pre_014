@@ -37,11 +37,12 @@ const SignupForm = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      const response = await API.POST({
+      const res = await API.POST({
         url: API_SIGNUP,
         data: signupFormData,
       });
-      console.log(response);
+      if (res.status !== 200) throw res;
+
       alert('Success Signed up!!');
       setSignupFormData({
         username: '',
@@ -49,6 +50,7 @@ const SignupForm = () => {
         password: '',
         name: '',
       });
+      navigate('/login');
     } catch (error) {
       alert('failed to signup!!');
       console.error(error);

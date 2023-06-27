@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -5,14 +6,18 @@ type UserProps = {
   name: string;
   img: string;
   site: string;
+  createdAt: string;
 };
 
 const UserInfo: React.FC<UserProps> = (props) => {
+  const handleImgError = (event: React.SyntheticEvent<HTMLImageElement>) => {
+    event.currentTarget.style.display = 'none';
+  };
   return (
     <UserInfoContainer>
-      <div>asked 13 mins ago</div>
+      <div>asked {moment(props.createdAt).fromNow()}</div>
       <UserDetail>
-        <img src={props.img} />
+        <img src={props.img} onError={handleImgError} />
         <UserFollow>
           <a href={props.site}>{props.name}</a>
           <span>23</span>

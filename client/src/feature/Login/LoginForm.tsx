@@ -3,7 +3,7 @@ import { useState } from 'react';
 import API from 'services/api/index';
 import { API_LOGIN } from 'services/api/key';
 import { useNavigate } from 'react-router-dom';
-import { useStore } from '../../store/user/store.user';
+import { useUserStore } from '../../store/user/store.user';
 interface LoginFormData {
   email: string;
   password: string;
@@ -15,7 +15,7 @@ const LoginForm = () => {
     password: '',
   });
 
-  const { setMemberId } = useStore();
+  const { setMemberId } = useUserStore();
 
   const navigate = useNavigate();
 
@@ -38,8 +38,8 @@ const LoginForm = () => {
       });
 
       if (res.status !== 200) throw res;
-      const accessToken = res.headers['Authorization'];
-      const memberId = res.headers['memberId'];
+      const accessToken = res.headers.get('Authorization');
+      const memberId = res.headers.get('memberId');
       // store에 memberId 저장
       setMemberId(memberId);
       // 로컬스토리지에 accessToken, memberId 저장

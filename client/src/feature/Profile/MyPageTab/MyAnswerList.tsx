@@ -5,18 +5,19 @@ import { RiMessage2Fill } from 'react-icons/ri';
 const MyAnswerList = ({ answerList }) => {
   return (
     <StyledMyAnswerList>
-      {answerList.length === 0 && (
+      {answerList.length === 0 ? (
         <NoneList>You have not answered any questions</NoneList>
+      ) : (
+        [...answerList]
+          .reverse()
+          .map(({ choose, content, questionId }, index) => (
+            <AnswersBox key={`answer-list-item-${index}`}>
+              <RiMessage2Fill className="icon-info"></RiMessage2Fill>
+              <CountBox>{choose ? '💌' : '✉️'}</CountBox>
+              <div className="userdata-answer">{content}</div>
+            </AnswersBox>
+          ))
       )}
-      {answerList.map(({ choose, content, questionId }, index) => (
-        <AnswersBox key={`answer-list-item-${index}`}>
-          <RiMessage2Fill className="icon-info"></RiMessage2Fill>
-          <CountBox>{choose ? '💌' : '✉️'}</CountBox>
-          <a className="userdata-answer" href={`/questions/${questionId}`}>
-            {content}
-          </a>
-        </AnswersBox>
-      ))}
     </StyledMyAnswerList>
   );
 };
@@ -54,12 +55,6 @@ const AnswersBox = styled.div`
     -webkit-box-orient: vertical;
     overflow: hidden;
     -webkit-line-clamp: 1;
-    color: var(--blue-700);
-    text-decoration: none;
-
-    &:hover {
-      color: var(--blue-500);
-    }
   }
 
   .icon-info {

@@ -1,8 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Button } from 'components/Button/Button';
+import Button from 'components/Button/Button';
 import { useNavigate } from 'react-router-dom';
 import { TQuestion } from 'utils/type';
+
+import moment from 'moment';
 
 type Tprops = {
   quData: TQuestion;
@@ -10,22 +12,11 @@ type Tprops = {
 
 const DetailTitle: React.FC<Tprops> = ({ quData }) => {
   const navigate = useNavigate();
-  const onClickButton = () => navigate('/questions/write');
-  function formatRelativeDate(dateString: string): string {
-    const date: Date = new Date(dateString);
-    const today: Date = new Date();
 
-    const diffTime: number = Math.abs(today.getTime() - date.getTime());
-    const diffDays: number = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+  const onClickButton = () => {
+    navigate('/questions/write');
+  };
 
-    if (diffDays === 0) {
-      return 'today';
-    } else if (diffDays === 1) {
-      return 'yesterday';
-    } else {
-      return `${diffDays} days ago`;
-    }
-  }
   return (
     <>
       <DetailPost>
@@ -34,10 +25,10 @@ const DetailTitle: React.FC<Tprops> = ({ quData }) => {
       </DetailPost>
       <DetailInfo>
         <p>
-          Asked <span>{formatRelativeDate(quData.createdAt)}</span>
+          Asked <span>{moment(quData.createdAt).fromNow()}</span>
         </p>
         <p>
-          Modified <span>{formatRelativeDate(quData.modifiedAt)}</span>
+          Modified <span>{moment(quData.modifiedAt).fromNow()}</span>
         </p>
         <p>
           Viewed <span>{quData.view}</span>

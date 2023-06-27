@@ -21,6 +21,11 @@ const Edit_main = ({ userData }) => {
     setAbout(userData.content);
   }, [userData]);
 
+  const moveToProfile = () => {
+    navigate(`/profile/${id}`);
+    window.scrollTo({ top: 0 });
+  };
+
   const onSubmitForm = async (event) => {
     try {
       event.preventDefault();
@@ -29,11 +34,12 @@ const Edit_main = ({ userData }) => {
         const formData = new FormData();
         formData.append('files', imageFile);
 
-        await API.POST({
+        const res = await API.POST({
           url: API_MEMBER_FILE(id),
           data: formData,
           headers: { 'Content-Type': 'multipart/form-data' },
         });
+        if (res.status !== 200) throw res;
       }
 
       const editData = {
@@ -44,6 +50,8 @@ const Edit_main = ({ userData }) => {
         url: API_MEMBER_EDIT(id),
         data: editData,
       });
+      if (res.status !== 200) throw res;
+
       navigate(`/profile/${id}`);
       window.scrollTo({ top: 0 });
     } catch (err) {
@@ -52,8 +60,6 @@ const Edit_main = ({ userData }) => {
   };
 
   const onChangeForm = (event) => {
-    console.log(event.target.value);
-
     if (event.target.id === 'display') setDisplay(event.target.value);
     else if (event.target.id === 'about') setAbout(event.target.value);
   };
@@ -87,15 +93,10 @@ const Edit_main = ({ userData }) => {
           </ItemContainer>
         </EditBoxContainer>
         <ButtonContainer>
-          <SaveButton type="submit">Save Profile</SaveButton>
-          <CancelButton
-            onClick={() => {
-              navigate(`/profile/${id}`);
-              window.scrollTo({ top: 0 });
-            }}
-          >
-            Cancel
-          </CancelButton>
+          <SaveButton type="submit" onClick={moveToProfile}>
+            Save Profile
+          </SaveButton>
+          <CancelButton onClick={moveToProfile}>Cancel</CancelButton>
         </ButtonContainer>
       </form>
     </StyledEditContainer>

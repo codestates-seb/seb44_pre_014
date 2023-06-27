@@ -21,6 +21,8 @@ const ProfileEdit = () => {
   const requestUserInfo = async () => {
     try {
       const res = await API.GET(API_MEMBER(id));
+      if (res.status !== 200) throw res;
+
       setUserData(res.data);
     } catch (err) {
       console.log(err);

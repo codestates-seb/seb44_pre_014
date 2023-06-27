@@ -1,13 +1,13 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useGetUserInfo } from 'store/userInfo/store.userInfo';
+import { useUserStore } from 'store/user/store.user';
 import styled from 'styled-components';
 import { PencilSvg } from './MyPageSvg';
 
 const Myinfo_top = ({ userData }) => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const userInfo = useGetUserInfo();
+  const { memberId } = useUserStore();
 
   function DateFormat(now) {
     // 날짜 형식 변환
@@ -41,11 +41,18 @@ const Myinfo_top = ({ userData }) => {
     signupDate: since,
     modified: modifiedTime,
   };
+  const handleImgError = (e) => {
+    e.target.src = 'https://i.ibb.co/gwgngJy/cutecat.jpg';
+    //프로필이미지가 없을때 기본 프로필!
+  };
 
   return (
     <ProfileContainer>
       <Profile className="profile-img">
-        <img src={`https://teamdev.shop/members/${id}/files`} />
+        <img
+          src={`https://teamdev.shop/members/${id}/files`}
+          onError={handleImgError}
+        />
       </Profile>
       <ItemContainer>
         <div className="display-name">
@@ -62,7 +69,7 @@ const Myinfo_top = ({ userData }) => {
           {userData ? userData.email : null}
         </UserEmail>
       </ItemContainer>
-      {userInfo.memberId === Number(id) && (
+      {Number(memberId) === Number(id) && (
         <ProfileBtnContainer>
           <div
             className="profile-edit-button"

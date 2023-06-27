@@ -22,7 +22,9 @@ const DetailMain = styled.div`
 
 const MainContainer = styled.div`
   display: flex;
+  justify-content: space-between;
   flex-direction: column;
+  width: 100%;
 `;
 
 export default function DetailQuestion() {
@@ -30,6 +32,8 @@ export default function DetailQuestion() {
   const [quData, setQuData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isEdit, setIsEdit] = useState(false);
+  const [selectedAnswerId, setSelectedAnswerId] = useState<number | null>(null);
+  const [timeStamp, setTimeStamp] = useState(0);
   const navigate = useNavigate();
 
   //질문 수정하기
@@ -38,6 +42,8 @@ export default function DetailQuestion() {
   const requestQuestion = async () => {
     try {
       const res = await API.GET(`/api/questions/${id}`);
+      if (res.status !== 200) throw res;
+
       setQuData(res.data);
       setIsLoading(false);
       console.log(quData);
@@ -51,12 +57,15 @@ export default function DetailQuestion() {
     try {
       if (type === 'question') {
         //질문삭제
-        await API.DELETE({ url: `/api/questions/${id}` });
+        const res = await API.DELETE({ url: `/api/questions/${id}` });
+        navigate(`/`);
+        if (res.status !== 200) throw res;
       } else {
         // 답변삭제
-        await API.DELETE({ url: `/answers/${id}` });
+        const res = await API.DELETE({ url: `/answers/${id}` });
+        setTimeStamp(timeStamp + 1);
+        if (res.status !== 200) throw res;
       }
-      navigate(`/`);
     } catch (err) {
       console.log(err);
     }
@@ -67,13 +76,14 @@ export default function DetailQuestion() {
     if (type === 'question') {
       navigate(`/questions/edit/${id}`);
     } else {
+      setSelectedAnswerId(id);
       setIsEdit(true);
     }
   };
 
   useEffect(() => {
     requestQuestion();
-  }, [id]);
+  }, [id, timeStamp]);
 
   return (
     !isLoading && (
@@ -98,11 +108,16 @@ export default function DetailQuestion() {
           updateQu={updateQuestion}
           isEdit={isEdit}
           setIsEdit={setIsEdit}
+          selectedAnswerId={selectedAnswerId}
+          setTimeStamp={setTimeStamp}
+          timeStamp={timeStamp}
         />
         <DetailAnswerInput
           quData={quData}
           id={quData.memberId}
           questionId={quData.questionId}
+          timeStamp={timeStamp}
+          setTimeStamp={setTimeStamp}
         />
       </StyledDetailPage>
     )

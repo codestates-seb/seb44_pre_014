@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import logo from '../../assets/mainlogo.png';
 import sublogo from '../../assets/sublogo.png';
 import styled from 'styled-components';
@@ -6,12 +6,15 @@ import { FaInbox, FaStackExchange } from 'react-icons/fa';
 import { BiSearch } from 'react-icons/bi';
 import { useNavigate } from 'react-router-dom';
 import { BsFillTrophyFill, BsFillQuestionCircleFill } from 'react-icons/bs';
+import { useUserStore } from 'store/user/store.user';
 
 const Header: React.FC = () => {
+  const { memberId, setMemberId } = useUserStore();
+  console.log(memberId);
+
   //나중에 로컬스토리지에서 받아오는 것으로 수정.
-  //const memberId = localStorage.getItem('memberId');
   const navigate = useNavigate();
-  const memberId = 1;
+  // const memberId = 1;
   const handleImgError = (e) => {
     e.target.src = 'https://i.ibb.co/gwgngJy/cutecat.jpg';
     //프로필이미지가 없을때 기본 프로필!
@@ -19,6 +22,26 @@ const Header: React.FC = () => {
   const moveToMain = () => {
     navigate('/');
   };
+  const moveMyProfile = () => {
+    navigate(`/profile/${memberId}`);
+  };
+
+  // 로그인 버튼 클릭했을 때
+  const handleLogin = () => {
+    navigate('/login');
+  };
+  // 로그아웃 버튼 클릭했을 때
+  const handleLogout = () => {
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('memberId');
+    setMemberId(null);
+  };
+
+  // 회원가입 버튼 클릭했을 때
+  const handleSignup = () => {
+    navigate('/signup');
+  };
+
   return (
     <StyledWrapper>
       <HeaderContainer>
@@ -32,7 +55,7 @@ const Header: React.FC = () => {
           <SerachBar placeholder="Search.." />
         </SerachWrapper>
         {memberId ? (
-          <MyPageIcon>
+          <MyPageIcon onClick={moveMyProfile}>
             <img
               className="header-mypage"
               src={`http://teamdev.shop/members/${memberId}/files`}
@@ -57,8 +80,15 @@ const Header: React.FC = () => {
           </Icon>
         </IconWrapper>
         <LoginWrapper>
-          {!memberId && <LoginLinkButton>Login</LoginLinkButton>}
-          {memberId && <LogoutLinkButton>Log out</LogoutLinkButton>}
+          {!memberId && (
+            <ButtonWrapper>
+              <LoginLinkButton onClick={handleLogin}>Login</LoginLinkButton>
+              <SignupLinkButton onClick={handleSignup}>Signup</SignupLinkButton>
+            </ButtonWrapper>
+          )}
+          {memberId && (
+            <LogoutLinkButton onClick={handleLogout}>Log out</LogoutLinkButton>
+          )}
         </LoginWrapper>
       </HeaderContainer>
     </StyledWrapper>
@@ -206,6 +236,12 @@ const LoginWrapper = styled.div`
   width: 150px;
 `;
 
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 const LoginLinkButton = styled.button`
   width: 50px;
   height: 30px;
@@ -222,6 +258,25 @@ const LoginLinkButton = styled.button`
   margin-bottom: 10px;
   :hover {
     background-color: var(--blue-200);
+  }
+`;
+
+const SignupLinkButton = styled.button`
+  width: 50px;
+  height: 30px;
+  border: 1px solid var(--powder-700);
+  border-radius: 4px;
+  background-color: var(--blue-500);
+  padding-left: 3px;
+  padding-right: 3px;
+  color: var(--white);
+  margin: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  :hover {
+    background-color: var(--blue-700);
   }
 `;
 

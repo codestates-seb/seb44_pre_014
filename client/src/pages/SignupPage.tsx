@@ -7,10 +7,12 @@ import styled from 'styled-components';
 const SignupPage = () => {
   return (
     <StyledSignupPage>
-      <Community />
-      <div>
-        <Oauth />
-        <SignupForm />
+      <div className="signup-page-box">
+        <Community />
+        <div className="signup-page-box-right">
+          <Oauth />
+          <SignupForm />
+        </div>
       </div>
     </StyledSignupPage>
   );
@@ -19,8 +21,24 @@ const SignupPage = () => {
 export default SignupPage;
 
 const StyledSignupPage = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 24px;
+  position: absolute;
+  left: 0;
+  width: 100vw;
+  height: 100%;
+  min-height: 1024px;
+  background-color: var(--black-050);
+
+  .signup-page-box {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 1264px;
+    padding: 24px;
+
+    .signup-page-box-right {
+    }
+  }
 `;
