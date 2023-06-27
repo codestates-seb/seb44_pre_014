@@ -1,0 +1,68 @@
+spring:
+    # h2:
+    #     console:
+    #         enabled: true
+    #         path: /h2
+    #         settings:
+    #             web-allow-others: true
+    # datasource:
+    #     driver-class-name: org.h2.Driver
+    #     url: jdbc:h2:mem:test
+    #     username: sa
+    #     password:
+    datasource:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: ${SQL_URL}
+        username: ${SQL_USERNAME}
+        password: ${SQL_PASSWORD}
+    jpa:
+        # show-sql: true
+        # generate-ddl: true
+        hibernate:
+            ddl-auto: create-drop
+        # properties:
+                # hibernate:
+                    # show_sql: true
+                    # format_sql: true
+                    # highlight_sql: true
+                    # use_sql_comments: true
+        # defer-datasource-initialization: true
+    # sql:
+    #     init:
+    #         mode: always
+    security:
+        oauth2:
+            client:
+                registration:
+                    google:
+                        clientId: 665056397916-c7bf8852rg8tpsrssnf5nbqv8q5v10va.apps.googleusercontent.com
+                        clientSecret: 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
+                        scope:
+                            - email
+                            - profile
+                    github:
+                        client-id: 3b218709b42b9884ccb4
+                        client-secret: f3c5fdf75b4fa5ac4efd2f1c2347be85411bae24
+                        scope:
+                            - email
+                            - profile
+                    facebook:
+                        client-id: 598703078760141
+                        client-secret: 8016796228f00b0ba18d9bf98cfa208f
+                        scope:
+                            - email
+                            - public_profile
+server:
+    ssl:
+        key-store: classpath:aws.p12
+        key-store-type: PKCS12
+        key-store-password: ${KEY_STORE_PASSWORD}
+jwt:
+    key: ${JWT_SECRET_KEY}
+    access-token-expiration-seconds: 86400000
+    refresh-token-expiration-seconds: 86400000
+kakao:
+    redirect-url: ${REDIRECT_URL}
+    api-key: ${API_KEY}
+upload:
+    path: ${SAVE_PATH}
