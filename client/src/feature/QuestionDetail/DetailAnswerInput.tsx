@@ -41,9 +41,10 @@ const DetailAnswerInput: React.FC<Tprops> = ({
           url: API_ANSWER,
           data: { content: enteredText, memberId: id, questionId: questionId },
         });
+        if (res.status !== 201) throw res;
+
         setTimeStamp(timeStamp + 1);
         textInputRef.current.value = '';
-        if (res.status !== 200) throw res;
 
         console.log('전송완료');
       } catch (err) {
