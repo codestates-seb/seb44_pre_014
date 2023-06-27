@@ -104,7 +104,7 @@
 
 
 
-### API 명세서
+### 📍API 명세서
 [pre_project_team014_API_Spec.pdf](https://github.com/codestates-seb/seb44_pre_014/files/11880691/pre_project_team014_API_Spec.pdf)
 
 
