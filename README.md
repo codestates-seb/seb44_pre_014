@@ -9,18 +9,18 @@
 ## 🧑‍🤝‍🧑 Team members
 | 정희창<br>(FE Leader) | 김진아<br>(FE) | 현채은<br>(FE) | 백승효<br>(FE) | 이수희<br>(BE) | 어수현<br>(BE) | 박세빈<br>(BE) |
 |:--------:| :--------: | :--------: | :--------: | :--------: | :--------: |  :--------: |
-| <img src="https://cdn.discordapp.com/attachments/1118367734628106240/1123066695720915076/8e377549fbae0dc1e368d88a917aae12.png" alt="정희창" width="80" height="80">| <img src="https://i.pinimg.com/474x/01/8d/b1/018db1078388eb17b58114d62eab17c4.jpg" alt="김진아" width="80" height="80"> | <img src="https://i.pinimg.com/564x/f4/aa/16/f4aa165e0eda10362ca67a0504e6f077.jpg" alt="현채은" width="80" height="80"> | <img src="https://i.pinimg.com/236x/44/87/a0/4487a01ba0ccb9181a76797690ac2e6e.jpg" alt="백승효" width="80" height="80"> | <img src="" alt="이수희" width="80" height="80"> | <img src="" alt="어수현" width="80" height="80"> |<img src="" alt="박세빈" width="80" height="80"> |
-|[@HEECHANG96](https://github.com/HEECHANG96) | [@wlsdk7245](https://github.com/wlsdk7245) | [@chen4023](https://github.com/chen4023) | [@hyo-4](https://github.com/hyo-4) | [@4](https://github.com/LEE2302) | [@5](https://github.com/JHJFE) | [@6](https://github.com/lyssoi) |
+| <img src="https://cdn.discordapp.com/attachments/1118367734628106240/1123066695720915076/8e377549fbae0dc1e368d88a917aae12.png" alt="정희창" width="80" height="80">| <img src="https://i.pinimg.com/474x/01/8d/b1/018db1078388eb17b58114d62eab17c4.jpg" alt="김진아" width="80" height="80"> | <img src="https://i.pinimg.com/564x/f4/aa/16/f4aa165e0eda10362ca67a0504e6f077.jpg" alt="현채은" width="80" height="80"> | <img src="https://i.pinimg.com/236x/44/87/a0/4487a01ba0ccb9181a76797690ac2e6e.jpg" alt="백승효" width="80" height="80"> | <img src="" alt="이수희" width="80" height="80"> | <img src="" alt="어수현" width="80" height="80"> |<img src="https://github.com/codestates-seb/seb44_pre_014/assets/121378893/885634b1-edba-4803-aba9-cac49a42d0eb" alt="박세빈" width="65" height="80"> |
+|[@HEECHANG96](https://github.com/HEECHANG96) | [@wlsdk7245](https://github.com/wlsdk7245) | [@chen4023](https://github.com/chen4023) | [@hyo-4](https://github.com/hyo-4) | [@4](https://github.com/LEE2302) | [@5](https://github.com/JHJFE) | [@parks3bin](https://github.com/parks3bin) |
 
 
 </br>
 
-## BE // 채워주세영
+## BE
 
-| 어수현 | MyPage - 회원정보 수정, 이미지 업로드, 다운로드 / Answer - CRUD  / AnswerAnswer - CRUD / AnswerVote - CRUD |
+| 어수현 | MyPage - 회원정보 수정, 이미지 업로드, 다운로드 / Answer - CRUD  / AnswerAnswer - CRUD / AnswerVote - CRUD / Spring Security (JWT, OAuth) |
 |:--------:| :--------: |
-| 이수희 | Member - CRUD / QuestionVote - CRUD / Member, MyPage, Answer, AnswerAnswer, QuestionVote, AnswerVote - ControllerTest |
-| 박세빈 |  Spring Security (JWT, OAuth) / Question - CRUD , 검색 (제목), 조회수 (쿠키 사용), 댓글, Test / Answer - 투표 / Tag - Data set (csv) 제작, 검색 (제목), Test / AWS 배포 환경 구축 및 배포 |
+| 이수희 | Member - CRUD / QuestionVote - CRUD / Member, MyPage, Answer, AnswerAnswer, QuestionVote, AnswerVote - ControllerTest / AWS 배포 환경 구축 및 배포 |
+| 박세빈 | Question - CRUD , 검색 (제목), 조회수 (쿠키 사용), 댓글, Test / Answer - 투표 / Tag - Data set (csv) 제작, 검색 (제목), Test |
 
 </br>
 
@@ -55,7 +55,7 @@
 </br>
 
 ## 💻 Stacks Used
-### Back-end //안쓰는건 빼주세용
+### Back-end
 |   Java   |   Spring   |   Spring Boot   |   Spring Security   |   MySQL   |   AWS   |
 | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
 | <div style="display: flex; align-items: flex-start;"><img src="https://techstack-generator.vercel.app/java-icon.svg" alt="icon" width="65" height="65" /></div> | <img alt="spring logo" src="https://www.vectorlogo.zone/logos/springio/springio-icon.svg" height="50" width="50" > | <img alt="spring-boot logo" src="https://t1.daumcdn.net/cfile/tistory/27034D4F58E660F616" width="65" height="65" > |  <img alt="spring-security logo" width="60px" src="https://camo.githubusercontent.com/923e99a57f8a456fdade5f65b35ada254be277612ddc991afb702d8dfd880d4f/68747470733a2f2f63646e2e73696d706c6569636f6e732e6f72672f737072696e677365637572697479" width="85" height=auto > | <div style="display: flex; align-items: flex-start;"><img src="https://techstack-generator.vercel.app/mysql-icon.svg" alt="icon" width="65" height="65" /></div> | <div style="display: flex; align-items: flex-start;"><img src="https://techstack-generator.vercel.app/aws-icon.svg" alt="icon" width="65" height="65" /></div> |
