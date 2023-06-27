@@ -19,6 +19,7 @@ const StyledLoginPage = styled.div`
   width: 100vw;
   position: absolute;
   left: 0;
+  min-height: 600px;
   background-color: var(--black-050);
   height: 100%;
   display: flex;
