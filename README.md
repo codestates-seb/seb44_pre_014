@@ -83,3 +83,14 @@
 ### 사용자 요구사항 정의서
 
 ### 화면 정의서
+
+### ERD
+![014_erd](https://github.com/codestates-seb/seb44_pre_014/assets/124702162/c71feb29-0f9b-4975-ab97-914dc9c4aac3)
+
+### DB 테이블 명세서
+[pre_project_team014_DataBaseTable_Spec.pdf](https://github.com/codestates-seb/seb44_pre_014/files/11877132/pre_project_team014_DataBaseTable_Spec.pdf)
+
+
+### API 명세서
+[pre_project_team014_API_Spec.pdf](https://github.com/codestates-seb/seb44_pre_014/files/11877133/pre_project_team014_API_Spec.pdf)
+
