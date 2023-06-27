@@ -88,9 +88,14 @@
 ![014_erd](https://github.com/codestates-seb/seb44_pre_014/assets/124702162/c71feb29-0f9b-4975-ab97-914dc9c4aac3)
 
 ### DB 테이블 명세서
-[pre_project_team014_DataBaseTable_Spec.pdf](https://github.com/codestates-seb/seb44_pre_014/files/11877132/pre_project_team014_DataBaseTable_Spec.pdf)
+![pre_project_team014_DataBaseTable_Spec1](https://github.com/codestates-seb/seb44_pre_014/assets/124702162/910ebc0f-a76d-458d-9785-582d35fd51a6)
+![pre_project_team014_DataBaseTable_Spec2](https://github.com/codestates-seb/seb44_pre_014/assets/124702162/3ae87a00-8cb5-4394-a479-bf0ac1f7b81a)
+![pre_project_team014_DataBaseTable_Spec3](https://github.com/codestates-seb/seb44_pre_014/assets/124702162/dd3a2ddd-c21a-4694-96cc-966fa695a975)
+
+
 
 
 ### API 명세서
-[pre_project_team014_API_Spec.pdf](https://github.com/codestates-seb/seb44_pre_014/files/11877133/pre_project_team014_API_Spec.pdf)
+![pre_project_team014_API_Spec1](https://github.com/codestates-seb/seb44_pre_014/assets/124702162/499866be-0315-4853-834a-1bc3c88fedb8)
+![pre_project_team014_API_Spec2](https://github.com/codestates-seb/seb44_pre_014/assets/124702162/fe21be38-561a-4278-bb06-065303e500f3)
 
