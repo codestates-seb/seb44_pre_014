@@ -19,7 +19,7 @@
 
 | 어수현 | Member - CRUD / Spring Security (JWT, OAuth2.0) / API - Spec, DB Table - Spec, ERD 작성 |
 |:--------:| :--------: |
-| 이수희 | Question - CRUD / Answer - CRUD / Comment - CRUD / Vote / Tag / AWS 배포 환경 구축 및 배포 / 키워드 검색 / 태그 검색, 자동완성 / 페이징 / 파일 업로드, 조회 |
+| 이수희 | Question - CRUD / Answer - CRUD / Comment - CRUD / Vote / Tag / AWS 자동 배포 환경 구축 / 서버 ssl 적용 / 키워드 검색 / 태그 검색, 자동완성 / 페이징 / 파일 업로드, 조회 |
 | 박세빈 | Question - CRUD |
 
 </br>
