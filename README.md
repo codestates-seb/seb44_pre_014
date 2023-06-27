@@ -9,7 +9,7 @@
 ## 🧑‍🤝‍🧑 Team members
 | 정희창<br>(FE Leader) | 김진아<br>(FE) | 현채은<br>(FE) | 백승효<br>(FE) | 이수희<br>(BE) | 어수현<br>(BE) | 박세빈<br>(BE) |
 |:--------:| :--------: | :--------: | :--------: | :--------: | :--------: |  :--------: |
-| <img src="https://cdn.discordapp.com/attachments/1118367734628106240/1123065571588702218/0f2262886a10e4618607cb9e7462d8a8.png" alt="정희창" width="80" height="80">| <img src="https://i.pinimg.com/474x/01/8d/b1/018db1078388eb17b58114d62eab17c4.jpg" alt="김진아" width="80" height="80"> | <img src="https://i.pinimg.com/564x/f4/aa/16/f4aa165e0eda10362ca67a0504e6f077.jpg" alt="현채은" width="80" height="80"> | <img src="https://i.pinimg.com/236x/44/87/a0/4487a01ba0ccb9181a76797690ac2e6e.jpg" alt="백승효" width="80" height="80"> | <img src="https://github.com/codestates-seb/seb44_pre_014/assets/120231876/1a8f3cd9-45db-462e-b75c-105b2f048046" alt="이수희" width="80" height="80"> | <img src="" alt="어수현" width="80" height="80"> |<img src="https://github.com/codestates-seb/seb44_pre_014/assets/121378893/65f759ef-189e-4fb7-b4cc-cf0eb6e91a4e)" alt="박세빈" width="65" height="80"> |
+| <img src="https://cdn.discordapp.com/attachments/1118367734628106240/1123065571588702218/0f2262886a10e4618607cb9e7462d8a8.png" alt="정희창" width="80" height="80">| <img src="https://i.pinimg.com/474x/01/8d/b1/018db1078388eb17b58114d62eab17c4.jpg" alt="김진아" width="80" height="80"> | <img src="https://i.pinimg.com/564x/f4/aa/16/f4aa165e0eda10362ca67a0504e6f077.jpg" alt="현채은" width="80" height="80"> | <img src="https://i.pinimg.com/236x/44/87/a0/4487a01ba0ccb9181a76797690ac2e6e.jpg" alt="백승효" width="80" height="80"> | <img src="https://github.com/codestates-seb/seb44_pre_014/assets/120231876/1a8f3cd9-45db-462e-b75c-105b2f048046" alt="이수희" width="80" height="80"> | <img src="https://github.com/codestates-seb/seb44_pre_014/assets/124702162/7d4980ed-ad84-46c2-a6fa-30835804d51d" alt="어수현" width="80" height="80"> |<img src="" alt="박세빈" width="65" height="80"> |
 |[@HEECHANG96](https://github.com/HEECHANG96) | [@wlsdk7245](https://github.com/wlsdk7245) | [@chen4023](https://github.com/chen4023) | [@hyo-4](https://github.com/hyo-4) | [@lsh4711](https://github.com/lsh4711) | [@SuHyeonEo]() | [@parks3bin](https://github.com/parks3bin) |
 
 
@@ -95,7 +95,8 @@
 
 
 ### 📍ERD
-[ERD(개발의민족)](https://github.com/codestates-seb/seb44_pre_014/assets/124702162/c71feb29-0f9b-4975-ab97-914dc9c4aac3)
+![014_erd](https://github.com/codestates-seb/seb44_pre_014/assets/124702162/e8da4cd1-1bdc-49cf-8ee3-f821a18d4ffe)
+
 
 
 
