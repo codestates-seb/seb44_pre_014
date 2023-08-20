@@ -1,19 +1,17 @@
 import { Profile } from 'feature/Profile/Myinfo_top';
-import React, { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useState } from 'react';
-import API from '../../services/api/index';
-import styled from 'styled-components';
 import { API_MEMBER_EDIT, API_MEMBER_FILE } from 'services/api/type';
+import styled from 'styled-components';
+import API from '../../services/api/index';
 
 const Edit_main = ({ userData }) => {
   const { id } = useParams();
   const [display, setDisplay] = useState(userData.username);
   const [about, setAbout] = useState(userData.content);
   const navigate = useNavigate();
-  const [imageUrl, setImageUrl] = useState(
-    `https://teamdev.shop/members/${id}/files`
-  );
+  const serverUrl = process.env.REACT_APP_SERVER_URL;
+  const [imageUrl, setImageUrl] = useState(`${serverUrl}/members/${id}/files`);
   const [imageFile, setImageFile] = useState();
 
   useEffect(() => {

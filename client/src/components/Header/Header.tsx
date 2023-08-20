@@ -1,12 +1,12 @@
 import React from 'react';
+import { BiSearch } from 'react-icons/bi';
+import { BsFillQuestionCircleFill, BsFillTrophyFill } from 'react-icons/bs';
+import { FaInbox, FaStackExchange } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
+import { useUserStore } from 'store/user/store.user';
+import styled from 'styled-components';
 import logo from '../../assets/mainlogo.png';
 import sublogo from '../../assets/sublogo.png';
-import styled from 'styled-components';
-import { FaInbox, FaStackExchange } from 'react-icons/fa';
-import { BiSearch } from 'react-icons/bi';
-import { useNavigate } from 'react-router-dom';
-import { BsFillTrophyFill, BsFillQuestionCircleFill } from 'react-icons/bs';
-import { useUserStore } from 'store/user/store.user';
 
 const Header: React.FC = () => {
   const { memberId, setMemberId } = useUserStore();
@@ -42,6 +42,8 @@ const Header: React.FC = () => {
     navigate('/signup');
   };
 
+  const serverUrl = process.env.REACT_APP_SERVER_URL;
+
   return (
     <StyledWrapper>
       <HeaderContainer>
@@ -58,7 +60,7 @@ const Header: React.FC = () => {
           <MyPageIcon onClick={moveMyProfile}>
             <img
               className="header-mypage"
-              src={`http://teamdev.shop/members/${memberId}/files`}
+              src={`${serverUrl}/members/${memberId}/files`}
               onError={handleImgError}
               width={30}
               height={30}

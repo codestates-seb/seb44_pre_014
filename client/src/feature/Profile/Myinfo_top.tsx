@@ -1,4 +1,3 @@
-import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useUserStore } from 'store/user/store.user';
 import styled from 'styled-components';
@@ -46,11 +45,13 @@ const Myinfo_top = ({ userData }) => {
     //프로필이미지가 없을때 기본 프로필!
   };
 
+  const serverUrl = process.env.REACT_APP_SERVER_URL;
+
   return (
     <ProfileContainer>
       <Profile className="profile-img">
         <img
-          src={`https://teamdev.shop/members/${id}/files`}
+          src={`${serverUrl}/members/${id}/files`}
           onError={handleImgError}
         />
       </Profile>

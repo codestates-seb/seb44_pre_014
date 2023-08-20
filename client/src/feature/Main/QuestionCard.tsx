@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import moment from 'moment';
 import Tag from 'components/Tag/Tag';
+import moment from 'moment';
+import styled from 'styled-components';
 import { TQuestion } from 'utils/type';
 
 type TProps = {
@@ -25,6 +25,8 @@ const QuestionCard: React.FC<TProps> = ({ questionData }) => {
     e.target.src = 'https://i.ibb.co/gwgngJy/cutecat.jpg';
     //프로필이미지가 없을때 기본 프로필!
   };
+
+  const serverUrl = process.env.REACT_APP_SERVER_URL;
 
   return (
     <StyledQuestionCard>
@@ -61,7 +63,7 @@ const QuestionCard: React.FC<TProps> = ({ questionData }) => {
               <img
                 onError={handleImgError}
                 className="user-card-link--avatar"
-                src={`http://teamdev.shop/members/${memberId}/files`}
+                src={`${serverUrl}/members/${memberId}/files`}
               />
               <span className="user-card-link--name">{writer}</span>
             </a>

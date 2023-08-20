@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const axiosClient = axios.create({
-  baseURL: process.env.NODE_ENV === 'development' ? '' : 'https://teamdev.shop',
+  baseURL: process.env.REACT_APP_SERVER_URL,
 });
 
 axiosClient.defaults.withCredentials = true;

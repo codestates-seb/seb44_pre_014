@@ -1,10 +1,10 @@
 import DetailButton from 'components/Button/DetailButton';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
-import UserInfo from './UserInfo';
-import { TQuestion } from 'utils/type';
 import { useUserStore } from 'store/user/store.user';
+import styled from 'styled-components';
+import { TQuestion } from 'utils/type';
+import UserInfo from './UserInfo';
 
 type Tprops = {
   quData: TQuestion;
@@ -32,6 +32,8 @@ const LabelContainer: React.FC<Tprops> = ({
     deleteQu(id, type);
   };
 
+  const serverUrl = process.env.REACT_APP_SERVER_URL;
+
   return (
     quData && (
       <Label>
@@ -45,7 +47,7 @@ const LabelContainer: React.FC<Tprops> = ({
           )}
         </ButtonContainer>
         <UserInfo
-          img={`http://teamdev.shop/members/${quData.memberId}/files`}
+          img={`${serverUrl}/members/${quData.memberId}/files`}
           site={`/profile/${quData.memberId}`}
           name={quData.writer}
           createdAt={quData.createdAt}
